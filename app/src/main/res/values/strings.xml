@@ -1,0 +1,641 @@
+<resources>
+    <string name="app_name">X mall</string>
+    <string name="version_current">version 1.1</string>
+
+    <string name="email">Email</string>
+    <string name="passowrd">Password</string>
+    <string name="login">Login</string>
+    <string name="show_pwd">Show Password</string>
+    <string name="hide_pwd">Hide Password</string>
+    <string name="forgot">Forgot password?</string>
+    <string name="closebutton">Close Button for Activity</string>
+    <string name="newUser">New User ? Signup</string>
+    <string name="fullName">Full Name</string>
+    <string name="mobileNumber">Mobile Number</string>
+    <string name="location">Location</string>
+    <string name="confirmPassword">Confirm Password</string>
+    <string name="terms_conditions">I Agree all Terms and Conditions.</string>
+    <string name="signUp">singup</string>
+    <string name="already_user">Already register ? Login</string>
+    <string name="registered_emailid">Please enter your Registered Email Id below:</string>
+    <string name="submit">SUBMIT</string>
+    <string name="back">BACK</string>
+    <string name="property_rentals">Property Rentals</string>
+    <string name="property_for_sale">Property for Sale</string>
+
+    <string name="api_map_key">AIzaSyCecWn2Ty5icj0ZwDl9DROgT4kGmrG6r3U</string>
+    <string name="action_settings">Settings</string>
+
+    <!-- Button text -->
+    <string name="btn_logout_from_google">Logout from Google</string>
+    <string name="btn_revoke_access">Revoke Access</string>
+    <string name="loading">Loading...</string>
+    <string name="facebook_app_id">160268414713255</string>
+    <string name="fb_login_protocol_scheme">fb316357288833005</string>
+    <!--<string name="facebook_app_id">548888862168747</string>
+    <string name="fb_login_protocol_scheme">fb548888862168747</string>-->
+    <string name="my_facebook_app_id">AIzaSyBXm6aFkWBcEd-6bzVrPJRj4SjV82Rb4tI</string>
+
+    <string name="skip">Skip</string>
+
+    <string name="autocomplete_hint">Search a Place</string>
+
+    <string name="latitude_label">Latitude</string>
+    <string name="longitude_label">Longitude</string>
+    <string name="last_update_time_label">Last location update time</string>
+
+    <string name="permission_rationale">Location permission is needed for core functionality</string>
+    <string name="permission_denied_explanation">Permission was denied, but is needed for core
+        functionality.</string>
+    <string name="settings">Settings</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+
+    <!-- Left drawer-->
+    <string name="film_genres">Film genres</string>
+    <string-array name="film_genre">
+        <item>Personal</item>
+        <item>Housing</item>
+        <item>For sale</item>
+        <item>Jobs</item>
+        <item>Services</item>
+        <item>Live Audio</item>
+        <item>Chat</item>
+    </string-array>
+
+
+    <string-array name="actionFilms">
+        <item>Dr. No (1962)</item>
+        <item>Goldfinger (1964)</item>
+        <item>Thunderball (1965)</item>
+        <item>Live and Let Die (1973)</item>
+        <item>Moonraker (1979)</item>
+        <item>For Your Eyes Only (1981)</item>
+        <item>Octopussy (1983)</item>
+        <item>A View to a Kill (1985)</item>
+        <item>Licence to Kill (1989)</item>
+        <item>GoldenEye (1995)</item>
+    </string-array>
+
+    <string-array name="musicals">
+        <item>Naughty Marietta (1935)</item>
+        <item>Rose Marie (1936)</item>
+        <item>Maytime (1937)</item>
+        <item>Sweethearts (1938)</item>
+        <item>Bitter Sweet (1940)</item>
+        <item>New Moon (1940)</item>
+        <item>I Married an Angel (1942)</item>
+        <item>Lady Be Good (1941)</item>
+        <item>Ship Ahoy (1942)</item>
+        <item>Sensations of 1945 (1944)</item>
+    </string-array>
+
+    <string-array name="dramas">
+        <item>Home of the Brave (1949)</item>
+        <item>The Accused (1949)</item>
+        <item>12 Angry Men (1957)</item>
+        <item>Compulsion (1959)</item>
+        <item>Inherit the Wind (1960)</item>
+        <item>To Kill a Mockingbird (1962)</item>
+        <item>Mrs. Miniver (1942)</item>
+        <item>Since You Went Away (1944)</item>
+        <item>The Champ (1931)</item>
+        <item>Nashville (1975)</item>
+    </string-array>
+
+    <string-array name="thrillers">
+        <item>Alien (1979)</item>
+        <item>The French Connection (1971)</item>
+        <item>High Noon (1952)</item>
+        <item>Double Indemnity (1944)</item>
+        <item>Safety Last (1923)</item>
+        <item>The Lady From Shanghai (1948)</item>
+        <item>The Third Man (1949)</item>
+        <item>Rear Window (1954)</item>
+        <item>The 39 Steps (1935)</item>
+        <item>Shadow of a Doubt (1943)</item>
+    </string-array>
+
+    <string-array name="comedies">
+        <item>Safety Last (1923)</item>
+        <item>Duck Soup (1933)</item>
+        <item>Cat Ballou (1965)</item>
+        <item>What\'s Up, Tiger Lily? (1966)</item>
+        <item>Blazing Saddles (1974)</item>
+        <item>Play It Again, Sam (1972)</item>
+        <item>The Cheap Detective (1978)</item>
+        <item>The Naked Gun (1988)</item>
+        <item>The Freshman (1990)</item>
+        <item>Waiting for Guffman (1996) </item>
+    </string-array>
+    <!--*************-->
+
+
+    <string name="camera_permission_confirmation">This app demonstrates the usage of CameraView. In order to do that, it needs permission to access camera.</string>
+    <string name="camera_permission_not_granted">Camera app cannot do anything without camera permission.</string>
+    <string name="picture_taken">Picture taken</string>
+    <string name="jobs">Jobs</string>
+    <string name="house_rentals">House Rentals</string>
+    <string name="for_sale">For Sale</string>
+    <string name="services">Business Services</string>
+    <string name="personals">Personals</string>
+    <string name="community">Community</string>
+    <string name="showcase">Showcase</string>
+    <string name="event_calender">Event Calender</string>
+
+
+    <!-- privacy string -->
+    <string name="privacy">privacy</string>
+    <string-array name="privacy_arrays">
+        <item>Select</item>
+        <item>Phone</item>
+        <item>Video</item>
+        <item>Chat</item>
+    </string-array>
+
+    <!-- privacy string -->
+    <string name="language">Language :</string>
+    <string-array name="language_arrays">
+        <item>Select</item>
+        <item>English</item>
+        <item>French</item>
+        <item>Spanish</item>
+
+    </string-array>
+
+
+    <string name="gender">gender</string>
+    <string name="cancel">cancel</string>
+    <string name="update">update</string>
+    <string name="phone_no">Phone Number :</string>
+    <string name="education">education</string>
+    <string name="interest">interest</string>
+    <string name="Workplace">Workplace</string>
+    <string name="Occupation">Occupation</string>
+    <string name="date_of_birth">Date of birth</string>
+    <string name="past_link_here">Past link here</string>
+    <string name="Sociallink">Social Link</string>
+
+    <string-array name="gender_arrays">
+        <item>Select</item>
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
+
+
+    <string-array name="job_type_arrays">
+        <item>Select</item>
+        <item>Part Time</item>
+        <item>Full time</item>
+    </string-array>
+
+    <string-array name="do_have_any_pet_arrays">
+        <item>Select</item>
+        <item>Yes</item>
+        <item>No</item>
+    </string-array>
+
+    <string-array name="how_many_renters_will_live_here">
+        <item>Select</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+    </string-array>
+
+
+    <string-array name="WeekdayName">
+        <item>Monday</item>
+        <item>Tuesday</item>
+        <item>Wednesday</item>
+        <item>Thursday</item>
+        <item>Friday</item>
+        <item>Saturday</item>
+        <item>Sunday</item>
+    </string-array>
+
+    <string-array name="Time_in_Am">
+
+        <item>1 AM</item>
+        <item>2 AM</item>
+        <item>3 AM</item>
+        <item>4 AM</item>
+        <item>5 AM</item>
+        <item>6 AM</item>
+        <item>7 AM</item>
+        <item>8 AM</item>
+        <item>9 AM</item>
+        <item>10 AM</item>
+        <item>11 AM</item>
+        <item>12 AM</item>
+    </string-array>
+
+    <string-array name="Time_in_Pm">
+        <item>1 PM</item>
+        <item>2 PM</item>
+        <item>3 PM</item>
+        <item>4 PM</item>
+        <item>5 PM</item>
+        <item>6 PM</item>
+        <item>7 PM</item>
+        <item>8 PM</item>
+        <item>9 PM</item>
+        <item>10 PM</item>
+        <item>11 PM</item>
+        <item>12 PM</item>
+    </string-array>
+
+    <string-array name="Salary_as_per">
+        <item>Select</item>
+        <item>/ Hour</item>
+        <item>/ Day</item>
+        <item>/ Week</item>
+        <item>/ Month</item>
+        <item>/ Year</item>
+
+    </string-array>
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="you_city">You city</string>
+    <string name="all_categeries">All categeries</string>
+    <string name="phone_number">Phone number</string>
+    <string name="categories">Categories</string>
+    <string name="buy_now">Buy Now</string>
+    <string name="view_profile">View Profile</string>
+    <string name="apply_for_job">Apply for job</string>
+    <string name="job_description">Job Description</string>
+    <string name="full_name">Full Name :</string>
+    <string name="about_me">About Me :</string>
+    <string name="education_head">Education </string>
+    <string name="title1"> 1) Qualification :</string>
+    <string name="title2"> 2) Qualification :</string>
+    <string name="title3"> 3) Qualification :</string>
+    <string name="school_collage">School / College</string>
+    <string name="address_location">Address / Location</string>
+
+    <string name="from">From</string>
+    <string name="to">To</string>
+    <string name="duration">Duration :</string>
+    <string name="skills">Skills :</string>
+    <string name="add_something_else">Add Something Else :</string>
+    <string name="your_city">your city</string>
+    <string name="post_your_ad">Post Your Ad</string>
+    <string name="business_company_name">Business /Company Name :</string>
+    <string name="your_company_name">your company name</string>
+    <string name="about_business">About Business:</string>
+    <string name="description_of_services">Description of Services :</string>
+    <string name="social_media_link">Social Media Link :</string>
+    <string name="website">Website :</string>
+    <string name="category">Category :</string>
+
+    <string name="customer_reviews">Customer Reviews</string>
+    <string name="review">Review</string>
+    <string name="safe_payment_online_credit_card_needed">Safe payment online. Credit card needed.</string>
+    <string name="credit_card_number">CREDIT CARD NUMBER</string>
+    <string name="cvv_code">CVV CODE</string>
+    <string name="expiry_date">Expiry Date</string>
+    <string name="name_on_card">NAME ON CARD</string>
+
+    <!--hint string-->
+    <string name="em_hint_account">your Account </string>
+    <string name="em_hint_dont_have_account">New User ?</string>
+    <string name="em_hint_already_have_account">Already have an account!</string>
+    <string name="em_hint_input_not_null">The input must not be empty</string>
+    <string name="em_hint_loading">Loading……</string>
+    <string name="em_hint_password">Password</string>
+    <string name="em_hint_sign_in">Input your account sign in, Account can not contain \'\@\'!</string>
+    <string name="em_hint_sign_up">Enter the account you want to register, the account can make the phone number,
+        or any length of the string should be all lowercase letters or numbers,
+        in addition to (.) (_) (-) can not contain other special characters,
+        can not be e-mail Account</string>
+
+    <!--call-->
+    <string name="em_call_voice">Voice call</string>
+    <string name="em_call_video">Video call</string>
+    <string name="em_call_accepted">Call is connected</string>
+    <string name="em_call_busy">The other side is busy</string>
+    <string name="em_call_cancel">Call canceled</string>
+    <string name="em_call_cancel_is_incoming">Call canceled</string>
+    <string name="em_call_connecting">Calling</string>
+    <string name="em_call_connected">Waiting for the other party to answer</string>
+    <string name="em_call_connected_is_incoming">The other party to apply for a call with you</string>
+    <string name="em_call_connection_fail">Call connection failed</string>
+    <string name="em_call_disconnected">The call has ended</string>
+    <string name="em_call_duration_time">Call time</string>
+    <string name="em_call_no_data">No call data</string>
+    <string name="em_call_not_answer">The other party not answer</string>
+    <string name="em_call_no_response">The other party no response</string>
+    <string name="em_call_offline">The other party offline</string>
+    <string name="em_call_network_unstable">Network unstable</string>
+    <string name="em_call_network_normal">Network normal</string>
+    <string name="em_call_reject">The other party rejected</string>
+    <string name="em_call_reject_is_incoming">Rejected</string>
+    <string name="em_call_local_sdk_version_outdated">Local sdk version outdated</string>
+    <string name="em_call_remote_sdk_version_outdated">Remote sdk version outdated</string>
+    <string name="em_call_sdk_version_different">Both sdk version different</string>
+    <string name="em_call_video_pause">Video streaming pause</string>
+    <string name="em_call_video_resume">Video streaming resume</string>
+    <string name="em_call_voice_pause">Voice transfer pause</string>
+    <string name="em_call_voice_resume">Voice transfer resume</string>
+    <string name="em_call_voice_calling">Voice calling</string>
+    <string name="em_call_video_calling">Video calling</string>
+    <string name="em_call_info_resolution">Resolution</string>
+    <string name="em_call_info_time_latency">Time Latency</string>
+    <string name="em_call_info_frame_rate">Frame Rate</string>
+    <string name="em_call_info_lost_rate">Lost Rate</string>
+    <string name="em_call_info_local_bitrate">Local Bitrate</string>
+    <string name="em_call_info_remote_bitrate">Remote Bitrate</string>
+
+    <!--sign-->
+    <string name="em_sign_in">Sign in</string>
+    <string name="em_sign_out">Sign out</string>
+    <string name="em_sign_up">Sign up</string>
+    <string name="em_sign_up_begin">Account is begin sign up</string>
+    <string name="em_sign_in_begin">Account is begin sign in</string>
+
+    <!--Error-->
+    <string name="em_error_invalid_password">Invalid password</string>
+    <string name="em_error_invalid_username">Invalid username</string>
+    <string name="em_error_network_error">Network error</string>
+    <string name="em_error_illegal_argument">Illegal argument</string>
+    <string name="em_error_server_busy">Server busy</string>
+    <string name="em_error_server_timeout">Server timeout</string>
+    <string name="em_error_sign_in_failed">Sign in failed</string>
+    <string name="em_error_sign_up_failed">Sign up failed</string>
+    <string name="em_error_unknown_error">Unknown error</string>
+    <string name="em_error_user_already_exit">User already exit</string>
+    <string name="em_error_user_authentication_failed">User authentication failed</string>
+    <string name="em_error_user_not_found">User not found</string>
+
+    <!--Contacts-->
+    <string name="em_contacts_add">Add contacts</string>
+    <string name="em_delete_contact">Delete contact</string>
+    <string name="em_contacts_apply_send_success">Contacts apply for sent successfully</string>
+    <string name="em_contacts_apply_send_failed">Contacts apply for failed to send</string>
+    <string name="em_contacts_apply">Notifications</string>
+    <string name="em_contacts_apply_agree">Agree</string>
+    <string name="em_contacts_apply_reject">Reject</string>
+    <string name="em_wait">Wait...</string>
+    <string name="em_agreed">Agreed</string>
+    <string name="em_rejected">Rejected</string>
+
+    <string name="em_add_to_blacklist">Add To Blacklist</string>
+    <string name="em_blacklist">Black List</string>
+    <string name="em_blacklist_unblock">Unblock</string>
+
+    <string name="em_contact_invite">INVITE</string>
+    <string name="em_contact_next">NEXT</string>
+    <string name="em_contact_selected">Members selected</string>
+
+    <!--Setting Preference-->
+    <string name="em_pref_key_about">em_pref_about</string>
+    <string name="em_pref_key_notification">em_pref_notification</string>
+    <string name="em_pref_key_notification_sound">em_pref_notification_sound</string>
+    <string name="em_pref_key_notification_vibrate">em_pref_notification_vibrate</string>
+    <string name="em_pref_key_notification_display_name">em_pref_notification_name</string>
+    <string name="em_pref_key_accept_group_invite_automatically">em_pref_accept_group_invite_automatically</string>
+    <string name="em_pref_key_adaptive_video_bitrate">em_pref_adaptive_video_bitrate</string>
+    <!--Status-->
+    <string name="em_pref_on">On</string>
+    <string name="em_pref_off">Off</string>
+
+    <!--About-->
+    <string name="em_pref_about">About</string>
+    <string name="em_pref_about_version">SDK Version</string>
+
+    <!--Notification-->
+    <string name="em_pref_notification">Notification</string>
+    <string name="em_pref_notification_switch">Notification Switch</string>
+    <string name="em_pref_notification_summary">Set push notification</string>
+    <string name="em_pref_notification_sound">Notification Sound</string>
+    <string name="em_pref_notification_vibration">Notification vibration</string>
+    <string name="em_pref_notification_display_name">Display name</string>
+
+    <string name="em_pref_chat_call">Chat And Call</string>
+    <string name="em_pref_chat_call_summary">Setting chat and call info</string>
+    <string name="em_pref_group_invites">Group invites</string>
+    <string name="em_pref_group_invites_summary">accept group invites automatically</string>
+    <string name="em_pref_adaptive_video_bitrate">Adaptive video bitrate</string>
+    <string name="em_pref_blocked_users">Blocked Users</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="groups">Groups</string>
+
+    <!--group-->
+    <string name="em_groups">Groups</string>
+    <string name="em_group">group</string>
+    <string name="em_group_id">Group ID</string>
+    <string name="em_exit_group">exit group</string>
+    <string name="em_ok">ok</string>
+    <string name="em_cancel">cancel</string>
+    <string name="em_leave_group">leave group</string>
+    <string name="em_waiting">waiting...</string>
+    <string name="em_delete_group">delete group</string>
+    <string name="em_group_info">Group Info</string>
+    <string name="em_enable">Enabled</string>
+    <string name="em_disabled">Disabled</string>
+    <string name="em_push_notification">Push Notification</string>
+    <string name="em_public">Public</string>
+    <string name="em_private">Private</string>
+    <string name="em_delete">Delete</string>
+    <string name="em_group_members">Members</string>
+    <string name="em_group_member">member</string>
+    <string name="em_group_delete_member">delete member</string>
+    <string name="em_new_group">New Group</string>
+    <string name="em_create">CREATE</string>
+    <string name="em_creating">creating group</string>
+    <string name="em_appear_in_group_search">Appear in group search</string>
+    <string name="em_allow">Allow members to invite</string>
+    <string name="em_freely">Join the group freely</string>
+    <string name="em_public_group">Public Groups</string>
+    <string name="em_invite_members">Invite Members</string>
+    <string name="em_load_public_group">load public group</string>
+    <string name="em_join">JOIN</string>
+    <string name="em_group_block_group_message">Block group message</string>
+    <string name="em_group_unblock_group_message">Unblock group message</string>
+    <string name="em_group_block_group_push">Block group push notification</string>
+    <string name="em_group_unblock_group_push">Unblock group push notification</string>
+
+    <!--chatroom-->
+    <string name="em_chatrooms">Chatrooms</string>
+    <string name="em_chatroom_info">ChatRoom Info</string>
+    <string name="em_chatroom_members">ChatRoom Members</string>
+    <string name="em_chatroom_id">ChatRoom ID</string>
+    <string name="em_chatroom_members_size">%1$d Members</string>
+    <string name="em_chatroom_blacklist">ChatRoom Blacklist</string>
+    <string name="em_chatroom_change_name">Change ChatRoom name</string>
+    <string name="em_chatroom_change_description">Change ChatRoom description</string>
+    <string name="em_chatroom_destroy">Destroy ChatRoom</string>
+    <string name="em_chatroom_destroy_sure">Are you sure you want to destroy ChatRoom?</string>
+
+    <!-- group detail menu -->
+    <string name="em_group_transfer_owner">Transfer owner</string>
+    <string name="em_group_clear_conversation">Clear conversation</string>
+    <string name="em_group_change_group_name">Change group name</string>
+    <string name="em_group_change_group_desc">Change group description</string>
+    <string name="em_group_admin_list">Admin list</string>
+    <string name="em_group_black_list">Black list</string>
+    <string name="em_group_mute_list">Mute list</string>
+
+    <!-- group detail menu -->
+    <string name="em_group_members_add">Add members</string>
+    <string name="em_group_admin_save">Save</string>
+    <string name="em_group_transfer_owner_save">Save</string>
+
+    <!-- group member item alert menu -->
+    <string name="em_group_member_alert_item_add_mute">mute</string>
+    <string name="em_group_member_alert_item_add_black">add to black list</string>
+    <string name="em_group_member_alert_item_remove">remove</string>
+
+    <!-- chat -->
+    <string name="chat_voice_call">Voice call</string>
+    <string name="chat_video_call">Video call</string>
+    <string name="chat_expand_more">More</string>
+    <string name="sd_card_does_not_exist">"SD card does not exist, can't take pictures"</string>
+    <string name="unable_to_get_location">Unable to get to your location information!</string>
+    <string name="hint_search">Search</string>
+    <string name="delete_conversation">Delete conversation</string>
+    <string name="delete_message">Delete message</string>
+    <string name="chat_send">Send</string>
+    <string name="not_connect_to_server">Not connect to server, please try again later</string>
+
+    <!-- account -->
+    <string name="account_item_name_id">Hyphenate ID</string>
+    <string name="account_item_name_nick">Nickname</string>
+    <string name="account_title_upload_photo">Upload Photo</string>
+    <string name="account_msg_local_upload">Upload photo</string>
+    <string name="account_msg_take_photo">Take Photo</string>
+    <string name="account_update_nick">Update nickname</string>
+    <string name="account_update_photo">Update photo</string>
+    <string name="account_waiting">Waiting...</string>
+    <string name="account_set_nickname">Set Nickname</string>
+    <string name="toast_nick_not_isnull">Nickname cannot be empty!</string>
+    <string name="toast_update_photo_success">Update photo success!</string>
+    <string name="toast_update_photo_fail">Update photo fail!</string>
+    <string name="toast_updatenick_success">update nickname success!</string>
+    <string name="toast_updatenick_fail">update nickname fail!</string>
+    <string name="move_into_blacklist_success">Move into blacklist success</string>
+    <string name="move_into_blacklist_failure">Move into blacklist failure</string>
+    <string name="be_removing">Be removing</string>
+    <string name="removed_from_blacklist_fail">Removed fail</string>
+
+    <!-- commons-->
+    <string name="Logoff_notification">Logoff notification</string>
+    <string name="connect_conflict">The same account was logged in other device</string>
+    <string name="can_not_connect_chat_server_connection">Cannot connect to server</string>
+    <string name="current_network_unavailable">The current network is not available, please check the network Settings</string>
+    <string name="unable_to_connect">Unable to connect to the server</string>
+    <string name="common_cancel">Cancel</string>
+    <string name="common_ok">Ok</string>
+    <string name="title_contacts">Contacts</string>
+    <string name="title_chats">Chats</string>
+    <string name="title_settings">Settings</string>
+    <string name="em_clear_all_message">Clear all message</string>
+    <string name="em_clear_all_message_sure">Are you sure you want to clear all messages? It is irrevocable after confirming operation!</string>
+
+    <string name="text_ack_msg">Read</string>
+    <string name="text_delivered_msg">Delivered</string>
+    <string name="location_recv">[%1$s location]</string>
+    <string name="location_message">The location information</string>
+    <string name="recording_video">Record video</string>
+    <string name="location_prefix">[My location]</string>
+    <string name="voice">Voice</string>
+    <string name="picture">[Picture]</string>
+    <string name="video">[Video]</string>
+    <string name="file">[File]</string>
+    <string name="dynamic_expression">[Dynamic expression]</string>
+    <string name="voice_prefix">[Voice]</string>
+    <string name="voice_call">[Voice call]</string>
+    <string name="video_call">[Video call]</string>
+    <string name="send_fail">Send failed</string>
+    <string name="error_send_invalid_content">The message content is not allowed to be sent!</string>
+    <string name="error_send_not_in_the_group">You already were not in the group</string>
+    <string name="connect_failuer_toast">Please check the network or try again later</string>
+    <string name="network_unavailable">The network connection is not available, please check the network</string>
+    <string name="chat_edit_hint">Write a message</string>
+    <string name="not_download">Not download:</string>
+    <string name="Have_downloaded">Downloaded</string>
+    <string name="is_down_please_wait">Downloading video, please wait a moment</string>
+    <string name="Did_not_download">Not downloaded</string>
+    <string name="downwaiting">Downloading the file, please wait a moment</string>
+    <string name="Failed_to_download_file">Failed to download file:</string>
+    <string name="Download_the_pictures">Download the pictures: 0%</string>
+    <string name="Download_the_pictures_new">Download the pictures:</string>
+    <string name="cant_find_pictures">"Can't find pictures"</string>
+    <string name="File_does_not_exist">File does not exist</string>
+    <string name="The_file_is_not_greater_than_10_m">The file can not be larger than 10M</string>
+    <string name="Is_download_voice_click_later">Downloading the voice message, click later</string>
+    <string name="send_failure_please">Send failure, please test whether the server connection</string>
+    <string name="record_no_permission">Recording without permission</string>
+    <string name="record_recording_time_is_too_short">The recording time is too short</string>
+    <string name="record_need_sdcard_support">Send voice need sdcard support</string>
+    <string name="record_failed">Record voice failed! </string>
+    <string name="record_tap_to_record">Tap and hold to record</string>
+    <string name="record_move_up_to_cancel">Release to send, swipe up to cancel</string>
+    <string name="record_release_to_cancel">Release to cancel</string>
+    <string name="record_recoding_fail">The recording failure, please try again！</string>
+    <string name="attach_smile">Emoticon</string>
+    <string name="attach_picture">Image</string>
+    <string name="attach_take_pic">Capture</string>
+    <string name="attach_location">Location</string>
+    <string name="attach_video">Video</string>
+    <string name="attach_file">File</string>
+    <string name="attach_voice_call">Voice call</string>
+    <string name="attach_video_call">Video call</string>
+    <string name="dummy_data">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</string>
+    <string name="next">Next</string>
+    <string name="extension">Extension :</string>
+    <string name="contact_name">Contact Name :</string>
+    <string name="post_title">Post Title :</string>
+    <string name="price">Price :</string>
+    <string name="description">Course Description : </string>
+    <string name="address">Address :</string>
+    <string name="type_message">Type Message</string>
+    <string name="wrogan_man_gray_printed_slim">Wrogan man gray printed slim</string>
+    <string name="_4_1_reviews">4.1 reviews</string>
+    <string name="duties_responsibilities">Duties/ Responsibilities</string>
+    <string name="job_title1">1) Job Title</string>
+    <string name="job_title2">2) Job Title</string>
+    <string name="job_title3">3) Job Title</string>
+    <string name="employer">Employer</string>
+
+
+    <string name="rental_resume">Rental Resume</string>
+    <string name="when_can_you_move_in">When can you move in ?</string>
+    <string name="how_many_renters_will_live_here">How many renters will live here ?</string>
+    <string name="do_you_have_any_pets">Do you have any pets ?</string>
+    <string name="are_you_a_smoker">Are you a smoker ?</string>
+    <string name="what_s_thbe_income_for_all_tenants_combined">What is your combined income ?</string>
+    <string name="what_your_credit_range">What is your credit score ?</string>
+    <string name="where_are_you_moving_from">Where are you moving from</string>
+    <string name="where_do_you_work">Where do you work ?</string>
+    <string name="what_is_your_job_title">What is your job title ?</string>
+    <string name="request_info">Request Info</string>
+    <string name="always_send_my_resume_rental">Always send my resume rental</string>
+
+    <string name="purchase_resume">Purchase Application</string>
+    <string name="when_you_plan">How soon do you plan to purchase ?</string>
+    <string name="use_property">How will you use your new property : Primary Residence or Vacation Residence or Investment Property ?</string>
+    <string name="do_you_have_real_estate">Do you have a real estate agent ?</string>
+    <string name="down_payment">How much do you have as a down payment ?</string>
+    <string name="bankruptcy">Have you had a bankruptcy, foreclosure or short sale in the last 7 years ? </string>
+    <string name="always_send_my_resume_purchase">Always send my Purchase Application</string>
+    <string name="view">View</string>
+    <string name="apply_now">Apply Now</string>
+    <string name="_4_1_user_review">4.1 user review</string>
+    <string name="experience">Experience :</string>
+    <string name="page4">4of7</string>
+    <string name="already_apply">Already Applied</string>
+    <string name="property_desc">Property Description</string>
+    <string name="send_app">Send Application</string>
+    <string name="about_the_business">About the Business :</string>
+    <string name="other_category">Other Category</string>
+    <string name="enter_category_name">Enter Category Name</string>
+
+</resources>

@@ -1,0 +1,658 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/loginbackground"
+    tools:context="com.mindinfo.xchangemall.xchangemall.activities.showcaseActivities.CreateShowCase">
+
+    <RelativeLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_alignParentTop="true"
+        android:background="@color/toolbar_black">
+
+        <ImageView
+            android:id="@+id/cancel_btn"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:padding="8dp"
+            android:src="@drawable/ic_close_white_24px" />
+
+        <TextView
+            android:id="@+id/titleTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:fontFamily="@font/estre"
+            android:text="Post your showcase"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/pageNo_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:layout_marginRight="10dp"
+            android:fontFamily="@font/estre"
+            android:textColor="@color/white" />
+    </RelativeLayout>
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/footer"
+        android:layout_below="@id/header"
+        android:layout_margin="@dimen/size_10"
+        android:background="@drawable/shadow_bg"
+        android:fillViewport="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/logo_img"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:paddingTop="30dp"
+                android:src="@drawable/showcase_s" />
+
+            <TextView
+                android:id="@+id/headtv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/logo_img"
+                android:fontFamily="@font/estre"
+                android:gravity="center"
+                android:text="@string/showcase"
+                android:textColor="@color/black"
+                android:textSize="28sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:id="@+id/first_page"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/headtv"
+                android:orientation="vertical"
+                android:visibility="visible">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/size_10">
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="40dp"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:id="@+id/livestreamvdo_headTV"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="7"
+                        android:checkMark="@drawable/checkmark_blue"
+                        android:fontFamily="@font/estre"
+                        android:gravity="center_vertical"
+                        android:paddingEnd="1dp"
+                        android:paddingRight="1dp"
+                        android:paddingStart="15dp"
+                        android:text="Live Streaming  Video"
+                        android:textColor="@color/black"
+                        android:textSize="17sp" />
+
+                    <RadioButton
+                        android:layout_width="0dp"
+                        android:layout_height="40dp"
+                        android:layout_weight="1"
+                        android:button="@null"
+                        android:drawableRight="@drawable/radio_button_selector" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/size_10">
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="40dp"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:id="@+id/recordVdo_headTV"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="7"
+                        android:checkMark="@drawable/checkmark_blue"
+                        android:fontFamily="@font/estre"
+                        android:gravity="center_vertical"
+                        android:paddingEnd="1dp"
+                        android:paddingLeft="15dp"
+                        android:paddingRight="1dp"
+                        android:paddingStart="15dp"
+                        android:text="Recorded  Video"
+                        android:textColor="@color/black"
+                        android:textSize="17sp" />
+
+                    <RadioButton
+                        android:layout_width="0dp"
+                        android:layout_height="40dp"
+                        android:layout_weight="1"
+                        android:button="@null"
+                        android:drawableRight="@drawable/radio_button_selector" />
+                </LinearLayout>
+
+                <LinearLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/size_10">
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="40dp"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:id="@+id/livestreamaudio_headTV"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="7"
+                        android:checkMark="@drawable/checkmark_blue"
+                        android:fontFamily="@font/estre"
+                        android:gravity="center_vertical"
+                        android:paddingEnd="1dp"
+                        android:paddingLeft="15dp"
+                        android:paddingRight="1dp"
+                        android:paddingStart="15dp"
+                        android:text="Live Streaming  Audio"
+                        android:textColor="@color/black"
+                        android:textSize="17sp" />
+
+                    <RadioButton
+                        android:layout_width="0dp"
+                        android:layout_height="40dp"
+                        android:layout_weight="1"
+                        android:button="@null"
+                        android:drawableRight="@drawable/radio_button_selector" />
+                </LinearLayout>
+
+                <LinearLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/size_10">
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="40dp"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:id="@+id/upcomingTV"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="7"
+                        android:checkMark="@drawable/checkmark_blue"
+                        android:fontFamily="@font/estre"
+                        android:gravity="center_vertical"
+                        android:paddingEnd="1dp"
+                        android:paddingStart="15dp"
+                        android:text="Upcoming"
+                        android:textColor="@color/black"
+                        android:textSize="17sp" />
+
+                    <RadioButton
+                        android:layout_width="0dp"
+                        android:layout_height="40dp"
+                        android:layout_weight="1"
+                        android:button="@null"
+                        android:drawableRight="@drawable/radio_button_selector" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/size_10">
+
+                    <ImageView
+                        android:id="@+id/item_image"
+                        android:layout_width="0dp"
+                        android:layout_height="40dp"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:id="@+id/recordAudio_headTV"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="7"
+                        android:checkMark="@drawable/checkmark_blue"
+                        android:fontFamily="@font/estre"
+                        android:gravity="center_vertical"
+                        android:paddingEnd="1dp"
+                        android:paddingStart="15dp"
+                        android:text="Recorded  Audio"
+                        android:textColor="@color/black"
+                        android:textSize="17sp" />
+
+                    <RadioButton
+                        android:layout_width="0dp"
+                        android:layout_height="40dp"
+                        android:layout_weight="1"
+                        android:button="@null"
+                        android:drawableRight="@drawable/radio_button_selector" />
+                </LinearLayout>
+
+                <!--<ListView-->
+                <!--android:choiceMode="singleChoice"-->
+                <!--android:layout_marginTop="20dp"-->
+                <!--android:scrollbars="none"-->
+                <!--android:padding="@dimen/size_10"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:id="@+id/itemList">-->
+
+                <!--</ListView>-->
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/second_page"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/headtv"
+                android:orientation="vertical"
+                android:padding="20dp"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="40dp"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:id="@+id/item_headTV"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="7"
+                        android:checkMark="@drawable/checkmark_blue"
+                        android:fontFamily="@font/estre"
+                        android:gravity="center_vertical"
+                        android:paddingEnd="1dp"
+                        android:paddingStart="15dp"
+                        android:text="Recorded  Video"
+                        android:textColor="@color/black"
+                        android:textSize="17sp" />
+
+                    <RadioButton
+                        android:layout_width="0dp"
+                        android:layout_height="40dp"
+                        android:layout_weight="1"
+                        android:button="@null"
+                        android:checked="true"
+                        android:drawableRight="@drawable/radio_button_selector" />
+                </LinearLayout>
+
+
+                <TextView
+                    android:id="@+id/postTitle_headTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/size_10"
+                    android:fontFamily="@font/estre"
+                    android:text="@string/post_title"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
+
+                <EditText
+                    android:id="@+id/postTitleET"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/black"
+                    android:fontFamily="@font/estre"
+                    android:hint="loren Ipsum is Best"
+                    android:inputType="text"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/cat_headTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/size_10"
+                    android:fontFamily="@font/estre"
+                    android:text="Category :"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/catTV"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableRight="@drawable/drop_down"
+                    android:fontFamily="@font/estre"
+                    android:text="Select Category"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/startDate_headTV"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/size_10"
+                            android:fontFamily="@font/estre"
+                            android:text="Start Date"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+
+                        <EditText
+                            android:id="@+id/startDateET"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="@color/black"
+                            android:fontFamily="@font/estre"
+                            android:hint="12/05/2018"
+                            android:inputType="date"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/gray"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/startTime_headTV"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/size_10"
+                            android:fontFamily="@font/estre"
+                            android:text="Start Time"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+
+                        <EditText
+                            android:id="@+id/startTimeET"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="@color/black_shade"
+                            android:fontFamily="@font/estre"
+                            android:hint="01:00 PM"
+                            android:inputType="time"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/gray"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/endDate_headTV"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/size_10"
+                            android:fontFamily="@font/estre"
+                            android:text="End Date"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+
+                        <EditText
+                            android:id="@+id/endDateET"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="@color/black"
+                            android:fontFamily="@font/estre"
+                            android:hint="12/05/2018"
+                            android:inputType="date"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/gray"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/endTime_headTV"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/size_10"
+                            android:fontFamily="@font/estre"
+                            android:text="Start Time"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+
+                        <EditText
+                            android:id="@+id/endTimeET"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="@color/black_shade"
+                            android:fontFamily="@font/estre"
+                            android:hint="01:00 PM"
+                            android:inputType="time"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/gray"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/privacy_headTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/size_10"
+                    android:fontFamily="@font/estre"
+                    android:text="Privacy :"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/privacyTV"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableRight="@drawable/drop_down"
+                    android:fontFamily="@font/estre"
+                    android:text="Phone"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/phoneNumber_headTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/size_10"
+                    android:fontFamily="@font/estre"
+                    android:text="@string/phone_no"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
+
+                <EditText
+                    android:id="@+id/phoneET"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/black"
+                    android:fontFamily="@font/estre"
+                    android:hint="9876541230"
+                    android:inputType="phone"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/ext_headTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/size_10"
+                    android:fontFamily="@font/estre"
+                    android:text="@string/extension"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
+
+                <EditText
+                    android:id="@+id/extET"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/black_shade"
+                    android:fontFamily="@font/estre"
+                    android:hint="+91"
+                    android:inputType="phone"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/name_headTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/size_10"
+                    android:fontFamily="@font/estre"
+                    android:text="@string/contact_name"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
+
+                <EditText
+                    android:id="@+id/nameET"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/black"
+                    android:fontFamily="@font/estre"
+                    android:hint="9876541230"
+                    android:inputType="phone"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/lang_headTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/size_10"
+                    android:fontFamily="@font/estre"
+                    android:text="@string/language"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/langTV"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableRight="@drawable/drop_down"
+                    android:fontFamily="@font/estre"
+                    android:text="English"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/postDesc_headTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/size_10"
+                    android:fontFamily="@font/estre"
+                    android:text="@string/post_title"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
+
+                <EditText
+                    android:id="@+id/postDescET"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/black_shade"
+                    android:fontFamily="@font/estre"
+                    android:hint="loren Ipsum is Best"
+                    android:inputType="text"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black"
+                    android:textSize="15sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/third_page"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone">
+                <VideoView
+                    android:id="@+id/vdo_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+    <RelativeLayout
+        android:id="@+id/footer"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/toolbar_black">
+        <ImageView
+            android:id="@+id/back_btn"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:padding="8dp"
+            android:src="@drawable/ic_arrow_back_white_24px" />
+
+
+        <Button
+            android:id="@+id/next_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_margin="8dp"
+            android:background="@drawable/next_btn_shape"
+            android:fontFamily="@font/estre"
+            android:text="@string/next"
+            android:textColor="@color/black" />
+
+
+    </RelativeLayout>
+</RelativeLayout>

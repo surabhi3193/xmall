@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<RelativeLayout
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/snackbarPosition"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/loginbackground"
+    android:clickable="true"
+    android:focusable="true"
+    android:orientation="vertical">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:visibility="gone">
+
+    </android.support.v7.widget.Toolbar>
+    <LinearLayout
+        android:id="@+id/scrollLay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true">
+        <include
+            layout="@layout/property_rental_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/scrollLay"
+        android:layout_marginTop="5dp">
+        <com.baoyz.widget.PullRefreshLayout
+            android:id="@+id/refreshLay"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+
+        <GridView
+            android:id="@+id/recyclerViewItem"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:columnWidth="90dp"
+            android:gravity="center"
+            android:numColumns="2"
+            android:scrollbars="none"
+            android:splitMotionEvents="false"
+            android:stretchMode="columnWidth" />
+        </com.baoyz.widget.PullRefreshLayout>
+        <TextView
+            android:id="@+id/noPostTv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            android:layout_marginTop="50dp"
+            android:fontFamily="sans-serif-condensed"
+            android:gravity="center_horizontal"
+            android:text="No Posts Available"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:visibility="gone"/>
+
+        <LinearLayout
+            android:id="@+id/postImageLay"
+            android:layout_width="match_parent"
+            android:layout_height="225dp"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/loginbackground"
+            android:orientation="vertical"
+            android:padding="5dp"
+            android:visibility="gone">
+            <TextView
+                android:id="@+id/addimageheader"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@color/white"
+                android:gravity="center"
+                android:text="Add Image"
+                android:textColor="@color/black"
+                android:textStyle="bold"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:background="@color/gray"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:gravity="center"
+                android:padding="30dp">
+                <TextView
+                    android:id="@+id/cameraIV"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:drawableTop="@drawable/cam_select"
+                    android:gravity="center_horizontal|bottom"
+                    android:padding="5dp"
+                    android:src="@drawable/cam_select"
+                    android:text="camera"
+                    android:textColor="@color/black"
+                    android:textSize="13sp"/>
+                <View
+                    android:layout_width="20dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/white"/>
+                <TextView
+                    android:id="@+id/gallerIV"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:drawableTop="@drawable/gal_select"
+                    android:gravity="center_horizontal|bottom"
+                    android:padding="5dp"
+                    android:src="@drawable/cam_select"
+                    android:text="gallery"
+                    android:textColor="@color/black"
+                    android:textSize="13sp"/>
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:background="@color/gray"/>
+            <TextView
+                android:id="@+id/cancel_btnIV"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@color/white"
+                android:gravity="center"
+                android:text="Cancel"
+                android:textColor="@color/gray"
+                android:textStyle="bold">
+
+            </TextView>
+
+        </LinearLayout>
+    </RelativeLayout>
+    <RelativeLayout
+
+        android:id="@+id/catlog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white_greyish"
+        android:clickable="true"
+        android:scrollbars="none"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:id="@+id/cardView"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+                <TextView
+                    android:id="@+id/title_cat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:paddingLeft="20dp"
+                    android:text="Property Rental"
+                    android:textColor="@color/DarkBlue"
+                    android:textSize="18sp"
+                    android:textStyle="bold"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/cardView2"
+            android:layout_width="match_parent"
+            android:layout_height="360dp"
+            android:layout_below="@+id/cardView"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:background="@color/white">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <ListView
+                    android:id="@+id/cat_sub_list_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:background="@color/white_greyish"
+                    android:choiceMode="multipleChoiceModal"
+                    android:dividerHeight="1dp"
+                    android:scrollbars="none">
+
+                </ListView>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:background="@color/white"
+
+                    android:orientation="horizontal">
+                    <Button
+                        android:id="@+id/cancel_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/custom_item_layout"
+                        android:padding="5dp"
+                        android:text="CANCEL"
+                        android:textColor="@color/button_selectorcolor" />
+
+                    <Button
+                        android:id="@+id/confirm_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/custom_item_layout"
+                        android:backgroundTint="@color/action_bar_colour"
+                        android:text="Confirm"
+                        android:textAllCaps="true"
+                        android:textColor="@color/white" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>
+</RelativeLayout>

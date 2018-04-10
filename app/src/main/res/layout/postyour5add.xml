@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/loginbackground"
+    android:clickable="true"
+    android:focusable="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/btn_lay"
+        android:layout_gravity="center|top"
+        android:layout_marginTop="5dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center|top"
+            android:background="@drawable/item_shadow_bg"
+            android:orientation="vertical"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp">
+
+            <android.support.v4.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:scrollbars="none">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp">
+
+                    <TextView
+                        android:id="@+id/headercategory"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center|left"
+                        android:text="For Sale"
+                        android:textColor="@color/action_bar_colour"
+                        android:textSize="20dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="10dp"
+                        android:text="Contact By" />
+
+                    <TextView
+                        android:id="@+id/contactByTv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Select"
+                        android:padding="@dimen/size_10"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/black" />
+
+                    <android.support.v7.widget.AppCompatSpinner
+                        android:id="@+id/spinnerPrivacy"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:entries="@array/privacy_arrays"
+                        android:prompt="@string/privacy"
+                        android:visibility="gone">
+
+                    </android.support.v7.widget.AppCompatSpinner>
+
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="5dp"
+                        android:backgroundTint="@color/black">
+
+                        <EditText
+                            android:id="@+id/phoneNumberEditText"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:backgroundTint="@color/black"
+                            android:gravity="center_vertical"
+                            android:hint="Phone Number:"
+                            android:imeOptions="actionNext"
+                            android:inputType="phone"
+                            android:paddingLeft="10dp"
+                            android:singleLine="true"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/black"
+                            android:textSize="13sp" />
+
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="5dp">
+
+                        <EditText
+                            android:id="@+id/ExtensionEditText"
+
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:backgroundTint="@color/black"
+                            android:gravity="center_vertical"
+                            android:hint="Extension"
+                            android:imeOptions="actionNext"
+                            android:inputType="number"
+                            android:paddingLeft="10dp"
+                            android:singleLine="true"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/black"
+                            android:textSize="13sp" />
+
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="5dp">
+
+                        <EditText
+                            android:id="@+id/contactNameEditText"
+
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:backgroundTint="@color/black"
+                            android:gravity="center_vertical"
+                            android:hint="Contact Name:"
+                            android:imeOptions="actionDone"
+                            android:paddingLeft="10dp"
+                            android:singleLine="true"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/black"
+                            android:textSize="13sp" />
+
+                    </android.support.design.widget.TextInputLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="10dp"
+                        android:text="Language:" />
+
+                    <android.support.v7.widget.AppCompatSpinner
+                        android:id="@+id/spinnerLanguage"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:entries="@array/language_arrays"
+                        android:prompt="@string/language">
+
+                    </android.support.v7.widget.AppCompatSpinner>
+
+                </LinearLayout>
+
+
+            </android.support.v4.widget.NestedScrollView>
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/btn_lay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom">
+
+        <include layout="@layout/postyou345addbuttom" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/contact_lay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/dark_trans"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center_horizontal"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:background="@color/white"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="Select contact type"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
+            <LinearLayout
+                android:id="@+id/call_lay"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/size_10"
+                android:paddingRight="@dimen/size_10">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/call_new" />
+
+                <CheckedTextView
+                    android:id="@+id/callTV"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:checkMark="@drawable/checkmark_blue"
+                    android:gravity="center_vertical"
+                    android:padding="10dp"
+                    android:text="Call"
+                    android:textColor="@color/DarkBlue" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/vdo_lay"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/size_10"
+                android:paddingRight="@dimen/size_10">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/video_new" />
+
+                <CheckedTextView
+                    android:id="@+id/vdoTV"
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:checkMark="@drawable/checkmark_blue"
+                    android:gravity="center_vertical"
+                    android:padding="10dp"
+                    android:text="Video"
+                    android:textColor="@color/DarkBlue" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/chat_lay"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/size_10"
+                android:paddingRight="@dimen/size_10">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/chat_new" />
+
+                <CheckedTextView
+                    android:id="@+id/chatTV"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:checkMark="@drawable/checkmark_blue"
+                    android:gravity="center_vertical"
+                    android:padding="10dp"
+                    android:text="Chat"
+                    android:textColor="@color/DarkBlue" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/text_lay"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/size_10"
+                android:paddingRight="@dimen/size_10">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/msg_new" />
+
+                <CheckedTextView
+                    android:id="@+id/textTV"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:checkMark="@drawable/checkmark_blue"
+                    android:gravity="center_vertical"
+                    android:padding="10dp"
+                    android:text="Text"
+                    android:textColor="@color/DarkBlue" />
+            </LinearLayout>
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:paddingLeft="@dimen/size_10"
+    android:paddingRight="@dimen/size_10">
+
+    <Button
+        android:id="@+id/cancel_btn"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@drawable/gray_btn"
+        android:text="Cancel"
+        android:textAllCaps="false"
+        android:textColor="@color/black" />
+    <View
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.05"/>
+
+    <Button
+        android:id="@+id/ok_btn"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_margin="5dp"
+        android:layout_weight="1"
+        android:background="@drawable/blue_btn"
+        android:text="OK"
+        android:textAllCaps="false"
+        android:textColor="@color/white" />
+</LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+
+</RelativeLayout>

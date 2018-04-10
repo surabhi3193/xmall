@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/textLay"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:paddingBottom="5dp"
+    android:paddingRight="10dp"
+    android:paddingTop="5dp">
+
+    <CheckedTextView
+        android:id="@+id/sub_list_text"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginTop="5dp"
+        android:checkMark="@drawable/checkmark_blue"
+        android:gravity="center_vertical"
+        android:paddingEnd="1dp"
+        android:paddingStart="15dp"
+        android:textColor="@color/black"
+        android:textSize="15sp" />
+
+</LinearLayout>

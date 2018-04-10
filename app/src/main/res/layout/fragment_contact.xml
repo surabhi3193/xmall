@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" android:background="@drawable/loginbackground"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="130dp"
+        android:background="@drawable/item_shadow_bg"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp">
+
+        <TextView
+            android:id="@+id/groupTV"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:fontFamily="@font/estre"
+            android:gravity="center_vertical"
+            android:text="   New Group Call"
+            android:textColor="@color/DarkBlue"
+            android:textSize="18sp"/>
+
+        <TextView
+            android:id="@+id/inviteTV"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/size_10"
+            android:layout_weight="1"
+            android:fontFamily="@font/estre"
+            android:gravity="center_vertical"
+            android:text="   Invite Friends"
+            android:textColor="@color/DarkBlue"
+            android:textSize="18sp"/>
+
+    </LinearLayout>
+
+ <ListView
+     android:id="@+id/listview"
+     android:layout_width="match_parent"
+     android:layout_height="match_parent">
+
+ </ListView>
+</LinearLayout>

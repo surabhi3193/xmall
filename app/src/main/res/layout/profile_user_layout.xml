@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:scrollbars="none">
+
+    <RelativeLayout
+            android:id="@+id/relativeLayout1"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:background="#333333">
+
+            <ImageView
+                android:id="@+id/back_arrowImage"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:padding="@dimen/size_10"
+                android:src="@drawable/ic_arrow_back_white_24px" />
+
+            <TextView
+                android:id="@+id/textView7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="23dp"
+                android:layout_marginStart="23dp"
+                android:layout_toEndOf="@+id/back_arrowImage"
+                android:layout_toRightOf="@+id/back_arrowImage"
+                android:text="Profile"
+                android:textColor="@color/white_greyish" />
+        <TextView
+            android:id="@+id/logout_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:text="Logout"
+            android:textColor="@color/white"/>
+        </RelativeLayout>
+
+      <android.support.v4.view.ViewPager
+          android:id="@+id/viewPager"
+          android:layout_width="wrap_content"
+          android:layout_height="160dp"
+          android:layout_below="@+id/relativeLayout1"
+          android:background="@drawable/profile_bg"
+           />
+
+      <RelativeLayout
+          android:id="@+id/relativeLayout"
+          android:layout_width="match_parent"
+          android:layout_height="60dp"
+          android:layout_alignParentLeft="true"
+          android:layout_alignParentStart="true"
+          android:layout_below="@+id/viewPager"
+          android:background="@color/white_greyish">
+
+      </RelativeLayout>
+
+      <TextView
+          android:id="@+id/textViewEditName"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_alignParentEnd="true"
+          android:layout_alignParentRight="true"
+          android:layout_below="@+id/viewPager"
+          android:layout_marginEnd="20dp"
+          android:layout_marginRight="20dp"
+          android:layout_marginTop="16dp"
+          android:text="Edit"
+          android:textColor="#2B80DA" />
+
+      <de.hdodenhof.circleimageview.CircleImageView
+          android:id="@+id/profile_image"
+          android:layout_width="80dp"
+          android:layout_height="80dp"
+          android:layout_alignBottom="@+id/UserProfileName"
+          android:layout_marginLeft="10dp"
+          android:background="@drawable/roundshadow"
+          android:src="@drawable/profile"
+
+          />
+
+    <TextView
+        android:id="@+id/UserProfileName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/textViewEditName"
+        android:layout_marginStart="20dp"
+        android:layout_toEndOf="@+id/profile_image"
+        android:text="Profile Name"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+
+
+</RelativeLayout>
+

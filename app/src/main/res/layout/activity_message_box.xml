@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/loginbackground"
+    android:orientation="vertical"
+    tools:context="com.mindinfo.xchangemall.xchangemall.activities.communityActivities.MessageBoxActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/toolbar_black"
+        android:padding="8dp">
+        <ImageView
+            android:id="@+id/back_btn"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="5dp"
+            android:src="@drawable/ic_arrow_back_white_24px"/>
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/prodile_pic"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/profile_bg"/>
+        <TextView
+            android:id="@+id/nameTV"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:singleLine="true"
+            android:text="Alisha"
+            android:textColor="@color/white"/>
+
+        <ImageView
+            android:id="@+id/vdo_btn"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.8"
+            android:padding="5dp"
+            android:src="@drawable/video_new"/>
+
+        <ImageView
+            android:id="@+id/call_btn"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.8"
+            android:padding="5dp"
+            android:src="@drawable/call_new"/>
+
+        <ImageView
+            android:id="@+id/menu_btn"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="5dp"
+            android:src="@drawable/ic_menu_vert_white_24px"/>
+    </LinearLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="20"
+            android:padding="10dp"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <include
+                    layout="@layout/send_msg_box"/>
+
+                <include
+                    layout="@layout/incoming_msg_box"/>
+
+                <include
+                    layout="@layout/send_msg_box"/>
+
+                <include
+                    layout="@layout/incoming_msg_box"/>
+            </LinearLayout>
+
+        </ScrollView>
+
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_margin="@dimen/size_10"
+        android:background="@drawable/gray_btn"
+        android:gravity="bottom"
+        android:orientation="horizontal">
+        <EditText
+            android:id="@+id/msg_ET"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="10dp"
+            android:layout_toLeftOf="@id/camera_attach"
+            android:backgroundTint="@null"
+            android:fontFamily="@font/estre"
+            android:hint="@string/type_message"
+            android:textColor="@color/black"
+            android:textColorHint="@color/gray"
+            android:textCursorDrawable="@color/green_shade"
+            android:textSize="14sp"/>
+
+        <ImageView
+            android:id="@+id/camera_attach"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginRight="@dimen/size_10"
+            android:layout_toLeftOf="@+id/voice_recorder"
+            android:padding="8dp"
+  />
+
+        <ImageView
+
+            android:id="@+id/voice_recorder"
+            android:layout_width="35dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+/>
+    </RelativeLayout>
+</LinearLayout>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:background="@drawable/gray_btn"
+    android:gravity="bottom"
+            android:orientation="horizontal">
+            <EditText
+                android:id="@+id/msg_ET"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="10dp"
+                android:layout_toLeftOf="@id/camera_attach"
+                android:backgroundTint="@null"
+                android:fontFamily="@font/estre"
+                android:hint="@string/type_message"
+                android:textColor="@color/black"
+                android:textColorHint="@color/gray"
+                android:textCursorDrawable="@color/green_shade"
+                android:textSize="14sp"/>
+
+            <ImageView
+                android:id="@+id/camera_attach"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginRight="@dimen/size_10"
+                android:layout_toLeftOf="@+id/voice_recorder"
+                android:padding="8dp"
+           />
+            <ImageView
+
+                android:id="@+id/voice_recorder"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentRight="true"
+               />
+        </RelativeLayout>

@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scrollview"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/loginbackground"
+    android:fillViewport="true"
+    android:scrollbars="none">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar_back" />
+
+        <LinearLayout
+            android:focusable="true"
+            android:id="@+id/formLay"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/toolbar"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="50dp"
+            android:background="@color/white"
+            android:orientation="vertical"
+            android:padding="30dp">
+
+            <TextView
+                android:id="@+id/fullname_header"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/estre"
+                android:text="@string/full_name"
+                android:textColor="@color/black"
+                android:textSize="17sp" />
+
+            <EditText
+                android:id="@+id/fullnameEt"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:imeOptions="actionNext"
+                android:singleLine="true" />
+
+            <TextView
+                android:id="@+id/phone_header"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Phone Number :"
+                android:textColor="@color/black"
+                android:textSize="17sp" />
+
+            <EditText
+                android:id="@+id/phoneET"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:imeOptions="actionNext"
+                android:inputType="phone"
+                android:singleLine="true" />
+
+            <TextView
+                android:id="@+id/email_header"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Email :"
+                android:textColor="@color/black"
+                android:textSize="17sp" />
+
+            <EditText
+                android:id="@+id/emailET"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:imeOptions="actionNext"
+                android:inputType="textEmailSubject"
+                android:singleLine="true" />
+
+
+            <TextView
+                android:id="@+id/rental_header"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/purchase_resume"
+                android:textColor="@color/DarkBlue"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginTop="8dp"
+                android:background="@color/gray"/>
+            <TextView
+                android:id="@+id/TVmovein"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_25"
+                android:text="@string/when_you_plan"
+                android:textColor="@color/black"/>
+            <EditText
+                android:id="@+id/Etmovein"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:imeOptions="actionNext"
+                android:singleLine="true"
+                android:textColor="@color/black"/>
+
+            <TextView
+                android:id="@+id/Tvrenter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_8"
+                android:text="@string/use_property"
+                android:textColor="@color/black"/>
+            <EditText
+                android:id="@+id/Etrenter"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="Primary Residence/Vacation Residence/Investment Property"
+                android:imeOptions="actionNext"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:textSize="12sp"/>
+
+            <TextView
+                android:id="@+id/TVpets"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_8"
+                android:text="@string/do_you_have_real_estate"
+                android:textColor="@color/black"/>
+            <EditText
+                android:id="@+id/Etpets"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:imeOptions="actionNext"
+                android:singleLine="true"
+                android:textColor="@color/black"/>
+
+            <TextView
+                android:id="@+id/TVsmokers"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_8"
+                android:text="@string/down_payment"
+                android:textColor="@color/black"/>
+            <EditText
+                android:id="@+id/Etsmokers"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:imeOptions="actionNext"
+                android:singleLine="true"
+                android:textColor="@color/black"/>
+
+            <TextView
+                android:id="@+id/Tvincome"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_8"
+                android:text="@string/what_s_thbe_income_for_all_tenants_combined"
+                android:textColor="@color/black"/>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:backgroundTint="@color/black"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/size_10"
+                android:paddingRight="@dimen/size_10">
+
+                <TextView
+
+                    android:id="@+id/currencyTV"
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="bottom"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="1.3"
+                    android:background="@drawable/box"
+                    android:drawableTint="@color/black"
+                    android:fontFamily="@font/estre"
+                    android:gravity="center"
+                    android:hint="USD $"
+                    android:textColorHint="@color/black"
+                    android:textSize="13sp"/>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="5.5"
+                    android:paddingLeft="@dimen/size_10"
+                    android:paddingRight="@dimen/size_10">
+
+                    <EditText
+                        android:id="@+id/Etincome"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:imeOptions="actionNext"
+                        android:singleLine="true"
+                        android:textColor="@color/black"/>
+
+                </android.support.design.widget.TextInputLayout>
+            </LinearLayout>
+            <TextView
+                android:id="@+id/TVcredit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_8"
+                android:text="@string/what_your_credit_range"
+                android:textColor="@color/black"/>
+            <EditText
+                android:id="@+id/Etcredit"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:imeOptions="actionNext"
+                android:singleLine="true"
+                android:textColor="@color/black"/>
+
+            <TextView
+                android:id="@+id/TVmoingfrom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_8"
+                android:text="@string/bankruptcy"
+                android:textColor="@color/black"/>
+            <EditText
+                android:id="@+id/Etmovingfrom"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:imeOptions="actionNext"
+                android:singleLine="true"
+                android:textColor="@color/black"/>
+
+            <TextView
+                android:id="@+id/TVworkplace"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_8"
+                android:text="@string/where_do_you_work"
+                android:textColor="@color/black"/>
+            <EditText
+                android:id="@+id/Etworkplace"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:imeOptions="actionNext"
+                android:singleLine="true"
+                android:textColor="@color/black"/>
+
+            <TextView
+                android:id="@+id/TVjobtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_8"
+                android:text="@string/what_is_your_job_title"
+                android:textColor="@color/black"/>
+            <EditText
+                android:id="@+id/Etjobtitle"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:imeOptions="actionDone"
+                android:singleLine="true"
+                android:textColor="@color/black"/>
+
+            <TextView
+                android:id="@+id/setting_header"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Share Setting"
+                android:textColor="@color/DarkBlue"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginTop="8dp"
+                android:background="@color/gray"/>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/alwaystv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:ellipsize="end"
+                    android:maxWidth="250dp"
+                    android:text="@string/always_send_my_resume_purchase"
+                    android:textColor="@color/DarkBlue"
+                    android:textSize="15sp"/>
+
+                <android.support.v7.widget.SwitchCompat
+                    android:id="@+id/switchButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerInParent="true"
+                    android:checked="true"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:theme="@style/ColorSwitchStyle"
+
+                    />
+            </RelativeLayout>
+
+
+
+            <Button
+                android:id="@+id/send_Request_btn"
+                android:layout_width="130dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="20dp"
+                android:background="@color/DarkBlue"
+                android:drawableLeft="@drawable/apply_job"
+                android:paddingLeft="10dp"
+                android:text="@string/request_info"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="13sp" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/toolbar"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/roundlayoutshape"
+            android:src="@drawable/property_rental_from_icon" />
+    </RelativeLayout>
+</ScrollView>

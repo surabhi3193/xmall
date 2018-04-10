@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/msgbox1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="40dp"
+        android:background="@drawable/rect_rounded"
+        android:fontFamily="@font/estre"
+        android:maxWidth="230dp"
+        android:minHeight="40dp"
+        android:minWidth="100dp"
+        android:padding="@dimen/size_10"
+        android:text="hello"
+        android:textColorHint="@color/black"
+        android:textSize="14sp" />
+
+    <ImageView
+        android:id="@+id/image_arrow"
+        android:layout_width="20dp"
+        android:layout_height="35dp"
+        android:layout_below="@+id/msgbox1"
+        android:layout_marginLeft="@dimen/size_10"
+        android:layout_toRightOf="@+id/img"
+        android:src="@drawable/outgoing_msg" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/img"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/msgbox1"
+        android:layout_marginLeft="@dimen/size_10"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/lodon_brige" />
+</RelativeLayout>

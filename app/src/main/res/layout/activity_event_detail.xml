@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/loginbackground"
+    android:fillViewport="true">
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.mindinfo.xchangemall.xchangemall.activities.showcaseActivities.EventDetailActivity">
+
+ <RelativeLayout
+     android:layout_width="match_parent"
+     android:layout_height="50dp"
+     android:background="@color/toolbar_black">
+     <ImageView
+         android:id="@+id/back_btn"
+         android:layout_width="50dp"
+         android:layout_height="50dp"
+         android:padding="@dimen/size_10"
+         android:src="@drawable/ic_arrow_back_white_24px"/>
+     <TextView
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_centerInParent="true"
+         android:fontFamily="@font/estre"
+         android:text="Emmanuael"
+         android:textColor="@color/white"
+         android:textSize="17sp"/>
+ </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/item_image"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:background="@drawable/live_sal1"
+            android:visibility="visible" />
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/on_air"/>
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="@dimen/size_10"
+            android:src="@drawable/play_btn"/>
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:background="@color/white"
+        android:padding="@dimen/size_10"
+        android:visibility="visible">
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/pro_img"
+            android:layout_width="40dp"
+            android:layout_height="45dp"
+            android:layout_alignParentLeft="true"
+            android:src="@drawable/profile"/>
+        <TextView
+            android:id="@+id/eventowner_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/size_10"
+            android:layout_toRightOf="@id/pro_img"
+            android:fontFamily="@font/estre"
+            android:text="Emmanuael"
+            android:textColor="@color/black"
+            android:textSize="20sp"/>
+
+        <TextView
+            android:id="@+id/viewscount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="@dimen/size_10"
+            android:fontFamily="@font/estre"
+            android:text="1000 views"
+            android:textColor="@color/black"
+            android:textSize="15sp"/>
+
+        <TextView
+            android:id="@+id/dateTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/eventowner_name"
+            android:layout_marginLeft="@dimen/size_10"
+            android:layout_toRightOf="@id/pro_img"
+            android:fontFamily="@font/estre"
+            android:text="Mar 30 at 7:11A.M- Mar 30,2018 at 8:11 A.M"
+            android:textColor="@color/black"
+            android:textSize="14sp"/>
+
+        <ImageView
+            android:id="@+id/drop_img"
+            android:layout_width="20dp"
+            android:layout_height="15dp"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/viewscount"
+            android:layout_marginLeft="@dimen/size_10"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@+id/dateTV"
+            android:src="@drawable/drop_down"/>
+
+        <ImageView
+            android:id="@+id/fav_img"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@id/dateTV"
+            android:layout_marginLeft="@dimen/size_10"
+            android:layout_marginTop="@dimen/size_10"
+            android:src="@drawable/favv"/>
+        <TextView
+            android:id="@+id/fav_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/dateTV"
+            android:layout_marginLeft="@dimen/size_10"
+            android:layout_marginTop="@dimen/size_10"
+            android:layout_toRightOf="@id/fav_img"
+            android:fontFamily="@font/estre"
+            android:text="1,164"
+            android:textColor="@color/black"
+            android:textSize="15sp"/>
+
+        <ImageView
+            android:id="@+id/msg_img"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_below="@id/dateTV"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="@dimen/size_10"
+            android:layout_toRightOf="@+id/fav_count"
+            android:src="@drawable/chat_new"/>
+        <TextView
+            android:id="@+id/chat_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/dateTV"
+            android:layout_marginLeft="@dimen/size_10"
+            android:layout_marginTop="@dimen/size_10"
+            android:layout_toRightOf="@+id/msg_img"
+            android:fontFamily="@font/estre"
+            android:text="1,164"
+            android:textColor="@color/black"
+            android:textSize="15sp"/>
+    </RelativeLayout>
+    <TextView
+        android:id="@+id/descTV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:fontFamily="@font/estre"
+        android:padding="10dp"
+        android:text="@string/dummy_data"
+        android:textColor="@color/black"
+        android:textSize="13sp"/>
+    <TextView
+        android:id="@+id/descTV2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:fontFamily="@font/estre"
+        android:padding="10dp"
+        android:text="@string/dummy_data"
+        android:textColor="@color/black"
+        android:textSize="13sp"/>
+
+</LinearLayout>
+</ScrollView>

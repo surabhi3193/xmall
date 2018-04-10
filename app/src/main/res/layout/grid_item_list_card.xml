@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/mainLay"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/item_shadow_bg"
+    android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:padding="4dp">
+
+
+            <ImageView
+                android:id="@+id/itemImageView"
+                android:layout_width="match_parent"
+                android:layout_height="90dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/profile_bg" />
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/size_10"
+            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
+            android:orientation="vertical"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp">
+
+            <TextView
+                android:id="@+id/ItemPriceText_head"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="10dp"
+                android:text="@string/price"
+                android:textColor="@color/black"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+            <TextView
+                android:id="@+id/ItemPriceText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_toRightOf="@+id/ItemPriceText_head"
+                android:text="$ 100"
+                android:textColor="@color/PaleVioletRed"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:id="@+id/share_btn"
+                android:layout_width="30dp"
+                android:layout_height="20dp"
+                android:layout_below="@id/ItemTitleText"
+                android:layout_marginTop="10dp"
+                android:layout_toLeftOf="@+id/ImageView_fav"
+                android:gravity="center">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+
+                    android:layout_width="20dp"
+
+                    android:layout_height="20dp"
+                    android:background="@drawable/ic_share">
+
+                </de.hdodenhof.circleimageview.CircleImageView>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/ImageView_fav"
+                android:layout_width="30dp"
+                android:layout_height="20dp"
+                android:layout_below="@id/ItemTitleText"
+                android:layout_marginTop="10dp"
+                android:layout_toLeftOf="@+id/ImageView_report"
+                android:gravity="center">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/fav_img"
+                    android:layout_width="20dp"
+                    android:layout_height="25dp"
+                    android:src="@drawable/favv">
+                </de.hdodenhof.circleimageview.CircleImageView>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/ImageView_report"
+                android:layout_width="30dp"
+                android:layout_height="20dp"
+                android:layout_alignParentRight="true"
+                android:layout_below="@id/ItemTitleText"
+                android:layout_marginTop="10dp"
+                android:gravity="center">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/report_img"
+                    android:layout_width="20dp"
+                    android:layout_height="25dp"
+                    android:src="@drawable/flag_red">
+                </de.hdodenhof.circleimageview.CircleImageView>
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/Item_Address_head"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ItemPriceText"
+                android:layout_marginTop="8dp"
+                android:text="@string/address"
+                android:textColor="@color/black"
+                android:textSize="13sp"
+                android:textStyle="bold"  />
+            <TextView
+                android:id="@+id/Item_Address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ItemPriceText"
+                android:layout_gravity="center"
+                android:layout_marginTop="8dp"
+                android:layout_toRightOf="@+id/ItemTitleText_head"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                />
+
+            <TextView
+                android:id="@+id/ItemTitleText_head"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/Item_Address_head"
+                android:layout_marginTop="8dp"
+                android:text="@string/description"
+                android:textColor="@color/black"
+                android:textSize="13sp"
+                android:textStyle="bold"  />
+            <TextView
+                android:id="@+id/ItemTitleText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/Item_Address_head"
+                android:layout_gravity="center"
+                android:layout_marginTop="8dp"
+                android:layout_toRightOf="@+id/ItemTitleText_head"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:text="Wrogan man gray printed slim"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                />
+
+
+
+
+
+
+
+
+
+
+          <!--  // not used-->
+
+            <TextView
+                android:id="@+id/ItemSubTitleText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ratingBar"
+                android:text="4.1 reviews"
+                android:textSize="9dp"
+                android:visibility="gone"/>
+
+
+            <RatingBar
+                android:id="@+id/ratingBar"
+                style="?android:attr/ratingBarStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ItemTitleText"
+                android:isIndicator="true"
+                android:numStars="5"
+                android:stepSize="1.0"
+                android:visibility="gone" />
+
+
+            <Button
+                android:id="@+id/buyNow"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_alignParentRight="true"
+                android:layout_below="@id/ImageView_fav"
+                android:layout_centerHorizontal="true"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/blue_btn"
+                android:text="Contact Seller"
+                android:textColor="@color/white"
+                android:textSize="10sp"
+                android:visibility="gone" />
+
+        </RelativeLayout>
+</LinearLayout>

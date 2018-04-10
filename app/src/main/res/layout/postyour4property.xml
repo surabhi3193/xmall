@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="utf-8"?><!--Image slider layout-->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/loginbackground"
+    android:clickable="true"
+    android:focusable="true">
+
+    <android.support.v4.widget.NestedScrollView
+        android:id="@+id/scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/btn_lay"
+        android:layout_gravity="center|top"
+        android:background="@drawable/item_shadow_bg"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            android:orientation="vertical"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/cat_TextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@color/action_bar_colour"
+                    android:paddingLeft="@dimen/size_10"
+                    android:paddingRight="@dimen/size_10"
+                    android:text="Property rent"
+                    android:textColor="@color/white" />
+            </LinearLayout>
+
+
+            <ScrollView
+
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="30dp"
+                android:scrollbars="none">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:paddingLeft="@dimen/size_10"
+                        android:paddingRight="@dimen/size_10"
+                        android:visibility="visible">
+
+                        <EditText
+                            android:id="@+id/propertyDescEditText"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="@color/black"
+                            android:gravity="center_vertical"
+                            android:hint="Property Description"
+                            android:imeOptions="actionNext"
+                            android:paddingLeft="10dp"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/black"
+                            android:textSize="13sp" />
+
+                    </android.support.design.widget.TextInputLayout>
+
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:paddingLeft="@dimen/size_10"
+                        android:paddingRight="@dimen/size_10">
+
+                        <EditText
+                            android:id="@+id/unitsEditText"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical"
+                            android:hint="Units/Rooms/BedRooms"
+                            android:imeOptions="actionNext"
+                            android:paddingLeft="10dp"
+                            android:singleLine="true"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/black"
+                            android:textSize="13sp" />
+
+                    </android.support.design.widget.TextInputLayout>
+
+                    <LinearLayout
+                        android:id="@+id/buttonBarLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="4dp"
+                        android:orientation="horizontal">
+
+
+                        <TextView
+                            android:id="@+id/currencyTV"
+                            android:layout_width="wrap_content"
+                            android:layout_height="30dp"
+                            android:layout_gravity="bottom"
+                            android:layout_marginTop="5dp"
+                            android:fontFamily="@font/estre"
+                            android:gravity="center_vertical"
+                            android:hint="USD $"
+                            android:textColorHint="@color/black"
+                            android:textSize="13sp"/>
+
+                        <EditText
+                            android:backgroundTint="@color/black"
+                            android:id="@+id/priceEditText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1.3"
+                            android:gravity="center"
+                            android:hint="Price"
+                            android:inputType="number"
+                            android:textSize="15sp" />
+
+
+                        <android.support.v7.widget.AppCompatSpinner
+                            android:visibility="gone"
+                            android:id="@+id/spinnerSalary"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:entries="@array/Salary_as_per"/>
+
+
+                    </LinearLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="5dp"
+                        android:paddingLeft="@dimen/size_10"
+                        android:paddingRight="@dimen/size_10">
+
+                        <EditText
+                            android:id="@+id/sizeEditText"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical"
+                            android:hint="Size/Dimensions:"
+                            android:imeOptions="actionNext"
+                            android:paddingLeft="10dp"
+                            android:singleLine="true"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/black"
+                            android:textSize="13sp" />
+
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="5dp"
+                        android:paddingLeft="@dimen/size_10"
+                        android:paddingRight="@dimen/size_10">
+
+                        <EditText
+                            android:id="@+id/bathroomEditText"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical"
+                            android:hint="Bathroom"
+                            android:imeOptions="actionDone"
+                            android:paddingLeft="10dp"
+                            android:singleLine="true"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/black"
+                            android:textSize="13sp" />
+
+                    </android.support.design.widget.TextInputLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingLeft="@dimen/size_10"
+                        android:paddingRight="@dimen/size_10">
+
+                        <TextView
+                            android:id="@+id/tvDogFriendly"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Dog friendly"
+                            android:textColor="@color/black" />
+
+
+                        <CheckBox
+                            android:id="@+id/dog_checked"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="@dimen/size_10"
+                            android:layout_weight="0.5"
+                            android:gravity="center"
+                            android:text="optional"
+                            android:textColor="@color/black" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingLeft="@dimen/size_10"
+                        android:paddingRight="@dimen/size_10">
+
+                        <TextView
+                            android:id="@+id/tvcatFriendlyFriendly"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Cat friendly"
+                            android:textColor="@color/black" />
+
+                        <CheckBox
+                            android:id="@+id/cat_checked"
+                            android:layout_width="0dp"
+                            android:layout_height="20dp"
+                            android:layout_marginRight="@dimen/size_10"
+                            android:layout_weight="0.5"
+                            android:gravity="center"
+                            android:text="optional"
+                            android:textColor="@color/black" />
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+            </ScrollView>
+
+
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+    <!--Buttom layout-->
+    <LinearLayout
+        android:id="@+id/btn_lay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom">
+
+        <include layout="@layout/postyou345addbuttom" />
+    </LinearLayout>
+</RelativeLayout>

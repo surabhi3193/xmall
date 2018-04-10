@@ -1,0 +1,15 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android" android:width="24dp"
+    android:height="24dp" android:viewportHeight="511.983" android:viewportWidth="511.983">
+    <path android:fillColor="#FF8C8A" android:pathData="M256,256m-256,0a256,256 0,1 1,512 0a256,256 0,1 1,-512 0"/>
+    <path android:fillColor="#FA7876" android:pathData="M274.3,511.3L104.2,341.2l61.9,-28.2l-63.5,-91.8l81,-45.7l86,90.4l20.8,-9.5l-7.2,-73.3l8.4,-56.9l18.9,1.3l81.3,82.7l32.9,-15l85.9,85.9C498.6,404.8 398.8,502.5 274.3,511.3z"/>
+    <path android:fillColor="#FAD55C" android:pathData="M117.3,216.5h179.7c10.1,0 18.3,8.2 18.3,18.3v93.6c0,10.1 -8.2,18.3 -18.3,18.3H117.3c-10.1,0 -18.3,-8.2 -18.3,-18.3v-93.6C99,224.8 107.2,216.5 117.3,216.5z"/>
+    <path android:fillColor="#68606E" android:pathData="M315.3,246.7l35.5,0l0,75.3l-35.5,0z"/>
+    <path android:fillColor="#68606E" android:pathData="M424.9,195.4l0,172.6l-74,-45.9l0,-75.3z"/>
+    <path android:fillColor="#58515E" android:pathData="M424.9,357.6l0,10.3l-74,-45.9l0,-9.9z"/>
+    <path android:fillColor="#F8F8F8" android:pathData="M255.5,99.5c-37.6,0 -68,30.5 -68,68c0,37.5 30.4,68 68,68s68,-30.5 68,-68C323.5,129.9 293.1,99.5 255.5,99.5z"/>
+    <path android:fillColor="#D9D9DD" android:pathData="M255.5,147.2c-11.2,0 -20.3,9.1 -20.3,20.3c0,11.2 9.1,20.3 20.3,20.3c11.2,0 20.3,-9.1 20.3,-20.3C275.8,156.2 266.7,147.2 255.5,147.2z"/>
+    <path android:fillColor="#F8F8F8" android:pathData="M136.8,138.9c-26.7,0 -48.3,21.6 -48.3,48.3c0,26.7 21.6,48.3 48.3,48.3s48.3,-21.6 48.3,-48.3C185,160.5 163.4,138.9 136.8,138.9z"/>
+    <path android:fillColor="#D9D9DD" android:pathData="M136.8,172.8c-8,0 -14.4,6.4 -14.4,14.4s6.4,14.4 14.4,14.4s14.4,-6.5 14.4,-14.4S144.7,172.8 136.8,172.8z"/>
+    <path android:fillColor="#58515E" android:pathData="M315.3,310.1l35.5,0l0,11.9l-35.5,0z"/>
+    <path android:fillColor="#E3C04D" android:pathData="M315.3,314.8v13.6c0,10.1 -8.2,18.3 -18.3,18.3H117.3c-10.1,0 -18.3,-8.2 -18.3,-18.3v-13.6c0,10.1 8.2,18.3 18.3,18.3h179.7C307.1,333.1 315.3,324.9 315.3,314.8z"/>
+</vector>
