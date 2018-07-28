@@ -5,6 +5,7 @@ import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.WindowManager;
@@ -16,6 +17,8 @@ import android.widget.TextView;
 import android.widget.VideoView;
 
 import com.mindinfo.xchangemall.xchangemall.R;
+
+import java.util.Objects;
 
 import static com.mindinfo.xchangemall.xchangemall.Fragments.categories.postADD.Postyour2Add.pageNo_textView;
 
@@ -88,8 +91,7 @@ int REQUEST_VIDEO_CAPTURE =01;
 
          else     pageNo_textView.setText("2 of 2 ");
 
-        Typeface face = Typeface.createFromAsset(getAssets(),
-                "fonts/estre.ttf");
+        Typeface face = ResourcesCompat.getFont(CreateShowCase.this, R.font.estre);
 
         pageNo_textView.setTypeface(face);
         headtv.setTypeface(face);

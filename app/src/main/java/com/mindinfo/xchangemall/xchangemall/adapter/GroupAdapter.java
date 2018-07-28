@@ -9,6 +9,7 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Rect;
 import android.graphics.Typeface;
+import android.support.v4.content.res.ResourcesCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +21,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.mindinfo.xchangemall.xchangemall.R;
-import com.mindinfo.xchangemall.xchangemall.activities.communityActivities.GroupChatScreen;
 import com.stfalcon.multiimageview.MultiImageView;
 
 
@@ -55,28 +55,24 @@ public class GroupAdapter extends BaseAdapter {
         View rowView = inflater.inflate(R.layout.grid_group, null, true);
         ViewHolder holder = new ViewHolder();
 
-        holder.buy_now_btn = (Button) rowView.findViewById(R.id.buyNow);
-        holder.ItemPriceText = (TextView) rowView.findViewById(R.id.ItemPriceText);
-        holder.ItemTitleText = (TextView) rowView.findViewById(R.id.ItemTitleText);
-        holder.ItemPriceText_head = (TextView) rowView.findViewById(R.id.ItemPriceText_head);
-        holder.Item_addess_head = (TextView) rowView.findViewById(R.id.Item_Address_head);
-        holder.ItemTitleText_head = (TextView) rowView.findViewById(R.id.ItemTitleText_head);
-        holder.Item_address = (TextView) rowView.findViewById(R.id.Item_Address);
-        holder.ImageView_fav = (LinearLayout) rowView.findViewById(R.id.ImageView_fav);
-        holder.mainLay = (RelativeLayout) rowView.findViewById(R.id.mainLay);
-//        holder.itemImageView = (ImageView) rowView.findViewById(R.id.itemImageView);
+        holder.buy_now_btn =rowView.findViewById(R.id.buyNow);
+        holder.ItemPriceText =rowView.findViewById(R.id.ItemPriceText);
+        holder.ItemTitleText =rowView.findViewById(R.id.ItemTitleText);
+        holder.ItemPriceText_head =rowView.findViewById(R.id.ItemPriceText_head);
+        holder.Item_addess_head =rowView.findViewById(R.id.Item_Address_head);
+        holder.ItemTitleText_head =rowView.findViewById(R.id.ItemTitleText_head);
+        holder.Item_address =rowView.findViewById(R.id.Item_Address);
+        holder.ImageView_fav =rowView.findViewById(R.id.ImageView_fav);
+        holder.mainLay =rowView.findViewById(R.id.mainLay);
 
-        final MultiImageView multiImageView = (MultiImageView)rowView.findViewById(R.id.itemImageView);
+        final MultiImageView multiImageView =rowView.findViewById(R.id.itemImageView);
 
         multiImageView.addImage(BitmapFactory.decodeResource(context.getResources(), R.drawable.profile_bg));
         multiImageView.addImage(BitmapFactory.decodeResource(context.getResources(), R.drawable.avatar2));
 
         multiImageView.setShape(MultiImageView.Shape.CIRCLE);
 
-        Typeface face = Typeface.createFromAsset(context.getAssets(),
-                "fonts/estre.ttf");
-
-
+        Typeface face = ResourcesCompat.getFont(context, R.font.estre);
 
         holder.ItemPriceText.setTypeface(face);
         holder.ItemTitleText.setTypeface(face);
@@ -85,22 +81,10 @@ public class GroupAdapter extends BaseAdapter {
         holder.ItemPriceText_head.setTypeface(face);
         holder.Item_address.setTypeface(face);
 
-        holder.mainLay.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {context.startActivity(new Intent(context, GroupChatScreen.class));}
+        holder.mainLay.setOnClickListener(view1 -> {
+//                context.startActivity(new Intent(context, GroupChatScreen.class));
         });
 
-//        Bitmap bitmap1 = BitmapFactory.decodeResource(context.getResources(), R.drawable.avatar2);
-//        Bitmap bitmap2 = BitmapFactory.decodeResource(context.getResources(), R.drawable.avatar3);
-//        Bitmap bitmap3 = BitmapFactory.decodeResource(context.getResources(), R.drawable.avatar1);
-//
-//
-//        Bitmap[] listBmp = {bitmap1, bitmap2,bitmap3};
-//
-//        Bitmap merged_img = mergeMultiple(listBmp);
-//      Bitmap circle_img= getRoundedShape(merged_img);
-//
-//        holder.itemImageView.setImageBitmap(circle_img);
 
         return rowView;
 

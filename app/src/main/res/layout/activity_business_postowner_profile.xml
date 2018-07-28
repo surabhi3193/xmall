@@ -3,8 +3,9 @@
     xmlns:custom="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:map="http://schemas.android.com/apk/res-auto"
+    android:clickable="true"
     android:background="@drawable/loginbackground">
-
     <RelativeLayout
         android:id="@+id/toolbar_lay"
         android:layout_width="match_parent"
@@ -41,26 +42,30 @@
         android:fillViewport="true">
 
         <RelativeLayout
+            android:focusable="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/trans">
 
             <LinearLayout
+                android:orientation="vertical"
                 android:id="@+id/image_lay"
                 android:layout_width="match_parent"
                 android:layout_height="170dp"
+                android:visibility="visible"
                 android:layout_alignParentTop="true"
                 android:background="@color/black">
 
+                <android.support.v4.view.ViewPager
+                    android:id="@+id/pager"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent" />
 
-                <com.daimajia.slider.library.SliderLayout
-                    android:id="@+id/slider"
+                <me.relex.circleindicator.CircleIndicator
+                    android:id="@+id/indicator"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    custom:auto_cycle="true"
-                    custom:indicator_visibility="visible"
-                    custom:pager_animation="Accordion"
-                    custom:pager_animation_span="1100" />
+                    android:layout_height="18dp"/>
+
 
             </LinearLayout>
 
@@ -90,7 +95,7 @@
                         android:layout_marginTop="10dp"
                         android:hint="Antu Patidar"
                         android:textColor="@color/black"
-                        android:textSize="15sp"
+                        android:textSize="18sp"
                         android:textStyle="bold" />
 
                     <TextView
@@ -108,7 +113,7 @@
                         android:id="@+id/business_name_header"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="60dp"
+                        android:layout_marginTop="70dp"
                         android:text="@string/business_company_name"
                         android:textColor="@color/DarkBlue"
                         android:textSize="20sp" />
@@ -119,12 +124,12 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:layout_marginStart="10dp"
-                        android:layout_marginTop="60dp"
+                        android:layout_marginTop="70dp"
                         android:layout_toEndOf="@id/business_name_header"
                         android:layout_toRightOf="@id/business_name_header"
                         android:text="Xchange The World"
                         android:textColor="@color/black"
-                        android:textSize="17sp" />
+                        android:textSize="20sp" />
 
                     <TextView
                         android:id="@+id/website_header"
@@ -142,11 +147,11 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/businessnameTV"
                         android:layout_marginLeft="10dp"
-                        android:layout_marginTop="12dp"
+                        android:layout_marginTop="10dp"
                         android:layout_toRightOf="@id/website_header"
                         android:text="www.xchange.world"
                         android:textColor="@color/black"
-                        android:textSize="17sp" />
+                        android:textSize="20sp" />
 
 
                     <TextView
@@ -165,11 +170,11 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/websiteTV"
                         android:layout_marginLeft="10dp"
-                        android:layout_marginTop="12dp"
+                        android:layout_marginTop="10dp"
                         android:layout_toRightOf="@id/category_header"
                         android:text="Account &amp; FInance"
                         android:textColor="@color/black"
-                        android:textSize="17sp" />
+                        android:textSize="20sp" />
                 </RelativeLayout>
 
                 <de.hdodenhof.circleimageview.CircleImageView
@@ -219,7 +224,6 @@
                         android:gravity="center">
 
                         <ImageView
-                            android:id="@+id/imageView"
                             android:layout_width="30dp"
                             android:layout_height="30dp"
                             android:background="@drawable/call_new" />
@@ -231,7 +235,6 @@
                         android:gravity="center">
 
                         <ImageView
-                            android:id="@+id/imageview5"
                             android:layout_width="30dp"
                             android:layout_height="30dp"
                             android:layout_marginRight="10dp"
@@ -252,12 +255,12 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/video_call"
                         android:layout_width="wrap_content"
                         android:layout_height="50dp"
                         android:gravity="center">
 
                         <ImageView
-                            android:id="@+id/imageView3"
                             android:layout_width="30dp"
                             android:layout_height="30dp"
                             android:background="@drawable/video_new" />
@@ -293,7 +296,7 @@
                     android:maxLines="3"
                     android:text="Loren ipsum is the best way Loren Ipsum is the best way Loren ipsum is the best way Loren Ipsum is the best way Loren ipsum is the best way Loren Ipsum is the best way "
                     android:textColor="@color/black"
-                    android:textSize="17sp" />
+                    android:textSize="20sp" />
 
 
                 <TextView
@@ -312,7 +315,7 @@
                     android:maxLines="3"
                     android:text="Loren ipsum is the best way Loren Ipsum is the best way Loren ipsum is the best way Loren Ipsum is the best way Loren ipsum is the best way Loren Ipsum is the best way "
                     android:textColor="@color/black"
-                    android:textSize="17sp" />
+                    android:textSize="20sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -328,7 +331,7 @@
                     android:layout_height="wrap_content"
                     android:maxLines="3"
                     android:textColor="@color/black"
-                    android:textSize="17sp" />
+                    android:textSize="20sp" />
 
             </LinearLayout>
 
@@ -352,16 +355,17 @@
                     android:textSize="20sp" />
 
 
-                <ListView
+                <android.support.v7.widget.RecyclerView
+                    android:layout_height="wrap_content"
                     android:id="@+id/hourList"
                     android:layout_width="match_parent"
-                    android:layout_height="150dp"
+                    android:divider="@color/white"
                     android:layout_marginTop="@dimen/size_10"
-                    android:divider="@color/trans"
+                    android:splitMotionEvents="false"
                     android:dividerHeight="3dp"
                     android:scrollbars="none"
-                    android:splitMotionEvents="false"></ListView>
-
+                    android:visibility="visible"
+                    custom:ignore="NestedScrolling" />
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -370,15 +374,14 @@
                     android:text="SEE ALL PHOTO"
                     android:textColor="@color/action_bar_colour"
                     android:textSize="20sp"
-                    android:visibility="gone" />
+                    android:visibility="visible" />
 
                 <android.support.v7.widget.RecyclerView
-                    android:id="@+id/recycler_view_vdo"
-
+                    android:id="@+id/recycler_view_photo"
+                    android:layout_marginTop="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="120dp"
-                    android:layout_marginTop="10dp"
-                    android:visibility="gone" />
+                    android:visibility="visible" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -387,23 +390,14 @@
                     android:paddingTop="10dp"
                     android:text="SEE BUSINESS VIDEOS"
                     android:textColor="@color/action_bar_colour"
-                    android:textSize="20sp"
-                    android:visibility="visible" />
+                    android:textSize="20sp" />
 
-                <RelativeLayout
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recycler_view_vdo"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/black">
-
-                    <com.mindinfo.xchangemall.xchangemall.other.StretchVideoView
-                        android:id="@+id/videoView"
-                        android:layout_width="match_parent"
-                        android:layout_height="150dp"
-                        android:layout_centerInParent="true"
-                        android:layout_marginBottom="@dimen/size_10"
-                        android:layout_marginTop="10dp"
-                        />
-                </RelativeLayout>
+                    android:layout_height="120dp"
+                    android:layout_marginTop="10dp"
+                    android:visibility="visible" />
             </LinearLayout>
 
             <RelativeLayout
@@ -425,7 +419,6 @@
                     android:textSize="20sp" />
 
                 <Button
-                    android:id="@+id/review_btn"
                     android:layout_width="75dp"
                     android:layout_height="20dp"
                     android:layout_alignParentRight="true"
@@ -434,20 +427,6 @@
                     android:text="@string/review"
                     android:textColor="@color/white"
                     android:textSize="12sp" />
-
-                <TextView
-                    android:id="@+id/rating_text"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/customer_review_header"
-                    android:layout_gravity="center"
-                    android:layout_marginBottom="5dp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_toRightOf="@+id/ratingBar"
-                    android:text="4.1 reviews"
-                    android:textSize="9dp" />
-
 
                 <RatingBar
                     android:id="@+id/ratingBar"
@@ -460,12 +439,20 @@
                     android:layout_marginTop="20dp"
                     android:isIndicator="true"
                     android:numStars="5"
-                    android:stepSize="1.0" />
+                    android:rating="4"
+                    android:stepSize="1.0"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/ratingBar"
+                    android:layout_gravity="center"
+                    android:text="4 .0 Stars"
+                    android:textSize="12sp" />
+
 
             </RelativeLayout>
 
             <LinearLayout
-                android:id="@+id/loc_lay"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/review_lay"
@@ -486,13 +473,11 @@
                         android:gravity="center_vertical">
 
                         <ImageView
-                            android:id="@+id/LocationPointerImageView"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:background="@drawable/location_pointer" />
 
                         <TextView
-                            android:id="@+id/TextViewMyLocationSet"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
@@ -504,11 +489,13 @@
                     </LinearLayout>
 
                     <fragment
+                        android:layout_below="@id/locationtextLay"
                         android:id="@+id/map"
                         class="com.google.android.gms.maps.SupportMapFragment"
                         android:layout_width="match_parent"
                         android:layout_height="170dp"
-                        android:layout_below="@id/locationtextLay" />
+                        map:liteMode="true"
+                       />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -530,7 +517,7 @@
                             android:gravity="center_vertical"
                             android:padding="5dp"
                             android:textColorHint="@color/black"
-                            android:textSize="17sp" />
+                            android:textSize="20sp" />
                     </LinearLayout>
 
                 </RelativeLayout>
@@ -545,8 +532,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/black"
-        android:clickable="true"
-        android:focusable="true"
         android:visibility="gone">
 
         <ImageView
@@ -573,14 +558,6 @@
                 android:padding="@dimen/size_10"
                 android:visibility="gone" />
 
-            <com.daimajia.slider.library.SliderLayout
-                android:id="@+id/slidefullr"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                custom:auto_cycle="true"
-                custom:indicator_visibility="gone"
-                custom:pager_animation="Accordion"
-                custom:pager_animation_span="1100" />
         </LinearLayout>
     </RelativeLayout>
 

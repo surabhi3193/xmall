@@ -1,7 +1,8 @@
 package com.mindinfo.xchangemall.xchangemall.Fragments.categories;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
-import android.graphics.Typeface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
@@ -16,6 +17,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mindinfo.xchangemall.xchangemall.R;
+import com.mindinfo.xchangemall.xchangemall.activities.main.MainActivity;
+import com.mindinfo.xchangemall.xchangemall.intefaces.OnBackPressed;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,10 +27,9 @@ import java.util.List;
  * Created by Mind Info- Android on 27-Dec-17.
  */
 
-public class CommunityFragment extends android.support.v4.app.Fragment implements View.OnClickListener {
+public class CommunityFragment extends android.support.v4.app.Fragment implements OnBackPressed {
 
     TabLayout tabLayout;
-    // The ViewPager is responsible for sliding pages (fragments) in and out upon user input
     private ViewPager mViewPager;
 
     static void makeToast(Context ctx, String s) {
@@ -38,18 +40,14 @@ public class CommunityFragment extends android.support.v4.app.Fragment implement
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_community, null);
 
-        mViewPager = (ViewPager) v.findViewById(R.id.viewpager);
+        mViewPager = v.findViewById(R.id.viewpager);
         mViewPager.setAdapter(new MyPagerAdapter(getFragmentManager()));
         createViewPager(mViewPager);
-
-        // Connect the tabs with the ViewPager (the setupWithViewPager method does this for us in
-        // both directions, i.e. when a new tab is selected, the ViewPager switches to this page,
-        // and when the ViewPager switches to a new page, the corresponding tab is selected)
-         tabLayout = (TabLayout) v.findViewById(R.id.tab_layout);
+        tabLayout = v.findViewById(R.id.tab_layout);
         tabLayout.setupWithViewPager(mViewPager);
 
-createTabIcons();
-    /* PagerAdapter for supplying the ViewPager with the pages (fragments) to display. */
+        createTabIcons();
+
 
         return v;
     }
@@ -64,32 +62,37 @@ createTabIcons();
     }
 
 
+    @SuppressLint("SetTextI18n")
     private void createTabIcons() {
 
-        Typeface face = Typeface.createFromAsset(getActivity().getApplicationContext().getAssets(),
-                "fonts/estre.ttf");
+        @SuppressLint("InflateParams") TextView tabThree = (TextView) LayoutInflater.from(getActivity()).inflate(R.layout.custom_tab, null);
+        tabThree.setText(R.string.chat);
+        tabThree.setTextColor(getActivity().getResources().getColor(R.color.white));
 
-        TextView tabThree = (TextView) LayoutInflater.from(getActivity().getApplicationContext()).inflate(R.layout.custom_tab, null);
-        tabThree.setText("Chat");
-        tabThree.setTypeface(face);
         tabLayout.getTabAt(0).setCustomView(tabThree);
-        TextView tabTwo = (TextView) LayoutInflater.from(getActivity().getApplicationContext()).inflate(R.layout.custom_tab, null);
-        tabTwo.setText("Call");
-        tabTwo.setTypeface(face);
+
+        @SuppressLint("InflateParams") TextView tabTwo = (TextView) LayoutInflater.from(getActivity()).inflate(R.layout.custom_tab, null);
+
+        tabTwo.setText(R.string.call);
+        tabTwo.setTextColor(getActivity().getResources().getColor(R.color.white));
         tabLayout.getTabAt(1).setCustomView(tabTwo);
 
-        TextView tabFour = (TextView) LayoutInflater.from(getActivity().getApplicationContext()).inflate(R.layout.custom_tab, null);
-        tabFour.setText("Group");
-        tabFour.setTypeface(face);
+        @SuppressLint("InflateParams") TextView tabFour = (TextView) LayoutInflater.from(getActivity()).inflate(R.layout.custom_tab, null);
+        tabFour.setText(R.string.group);
+        tabFour.setTextColor(getActivity().getResources().getColor(R.color.white));
         tabLayout.getTabAt(2).setCustomView(tabFour);
 
-        TextView tabFive = (TextView) LayoutInflater.from(getActivity().getApplicationContext()).inflate(R.layout.custom_tab, null);
-        tabFive.setText("Contacts");
-        tabFive.setTypeface(face);
+        @SuppressLint("InflateParams") TextView tabFive = (TextView) LayoutInflater.from(getActivity()).inflate(R.layout.custom_tab, null);
+        tabFive.setText(R.string.contacts);
+        tabFive.setTextColor(getActivity().getResources().getColor(R.color.white));
         tabLayout.getTabAt(3).setCustomView(tabFive);
     }
+
+
     @Override
-    public void onClick(View view) {
+    public void onBackPressed() {
+        startActivity(new Intent(getActivity(),
+                MainActivity.class).putExtra("EXIT", true));
     }
 
     public class MyPagerAdapter extends FragmentPagerAdapter {

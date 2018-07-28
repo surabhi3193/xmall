@@ -2,6 +2,7 @@ package com.mindinfo.xchangemall.xchangemall.adapter;
 
 import android.content.Context;
 import android.graphics.Typeface;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -37,8 +38,7 @@ public class Postyour3AddAdapter extends RecyclerView.Adapter<Postyour3AddAdapte
     @Override
     public void onBindViewHolder(final MyViewholder holder, int position) {
      final categories cat = arrayList.get(position);
-        Typeface face = Typeface.createFromAsset(context.getAssets(),
-                "fonts/estre.ttf");
+        Typeface face = ResourcesCompat.getFont(context, R.font.estre);
         holder.sub_list_text.setTypeface(face);
         holder.sub_list_text.setTypeface(face);
 

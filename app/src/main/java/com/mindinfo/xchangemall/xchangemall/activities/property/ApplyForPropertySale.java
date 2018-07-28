@@ -8,14 +8,12 @@ import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,7 +24,6 @@ import com.loopj.android.http.RequestParams;
 import com.mindinfo.xchangemall.xchangemall.R;
 import com.mindinfo.xchangemall.xchangemall.activities.main.MainActivity;
 import com.mynameismidori.currencypicker.CurrencyPicker;
-import com.mynameismidori.currencypicker.CurrencyPickerListener;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -38,7 +35,7 @@ import java.util.TimeZone;
 import cz.msebera.android.httpclient.Header;
 
 import static com.mindinfo.xchangemall.xchangemall.Constants.NetworkClass.isMatch;
-import static com.mindinfo.xchangemall.xchangemall.activities.main.BaseActivity.BASE_URL_NEW;
+import static com.mindinfo.xchangemall.xchangemall.activities.BaseActivity.BASE_URL_NEW;
 import static com.mindinfo.xchangemall.xchangemall.activities.main.SplashScreen.face;
 import static com.mindinfo.xchangemall.xchangemall.storage.MySharedPref.getData;
 import static com.mindinfo.xchangemall.xchangemall.storage.MySharedPref.saveData;
@@ -53,7 +50,6 @@ public class ApplyForPropertySale extends AppCompatActivity {
     private Button requesst_btn;
     private ImageView back_btn;
     private ScrollView scrollview;
-    private LinearLayout formLay;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,73 +63,49 @@ public class ApplyForPropertySale extends AppCompatActivity {
         initui();
         changefont();
 
-        requesst_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        requesst_btn.setOnClickListener(v -> {
 getEntereData();
-                validateForm();
-            }
+            validateForm();
         });
 
-        back_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
+        back_btn.setOnClickListener(v -> onBackPressed());
+
+        etjobtitle.setOnEditorActionListener((textView, actionId, keyEvent) -> {
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                System.out.println("=========== action done ==========");
+                InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(tvalways.getWindowToken(), 0);
+
+
+                scrollview.fullScroll(View.FOCUS_DOWN);
+
+                etjobtitle.setCursorVisible(false);
+                return true;
             }
+            return false;
         });
+        currencyTV.setOnClickListener(v -> {
+            final CurrencyPicker picker = CurrencyPicker.newInstance("Select Currency");  // dialog title
+            picker.setListener((name, mcode, symbol, flagDrawableResID) -> {
+                System.out.println("*************Selected currency is ******");
+                System.out.println(name + " name");
+                System.out.println(mcode + " code");
+                System.out.println(symbol + " symbol");
+                System.out.println(flagDrawableResID + " flag");
 
-        etjobtitle.setOnEditorActionListener(new EditText.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
-                if (actionId == EditorInfo.IME_ACTION_DONE) {
-                    System.out.println("=========== action done ==========");
-                    InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-                    imm.hideSoftInputFromWindow(tvalways.getWindowToken(), 0);
-
-
-                    scrollview.fullScroll(View.FOCUS_DOWN);
-
-                    etjobtitle.setCursorVisible(false);
-                    return true;
+                if (symbol.equals("0")) {
+                    symbol = "₹";
                 }
-                return false;
-            }
 
-        });
-        currencyTV.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final CurrencyPicker picker = CurrencyPicker.newInstance("Select Currency");  // dialog title
-                picker.setListener(new CurrencyPickerListener() {
-                    @Override
-                    public void onSelectCurrency(String name, String mcode, String symbol, int flagDrawableResID) {
-                        System.out.println("*************Selected currency is ******");
-                        System.out.println(name + " name");
-                        System.out.println(mcode + " code");
-                        System.out.println(symbol + " symbol");
-                        System.out.println(flagDrawableResID + " flag");
+                currencyTV.setText(mcode + symbol);
 
-                        if (symbol.equals("0")) {
-                            symbol = "₹";
-                        }
-
-                        currencyTV.setText(mcode + symbol);
-
-                        picker.dismiss();
-                    }
-                });
-                picker.show(getSupportFragmentManager(), "CURRENCY_PICKER");
-            }
+                picker.dismiss();
+            });
+            picker.show(getSupportFragmentManager(), "CURRENCY_PICKER");
         });
 
 
-        rightTV.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                saveAppliation();
-
-            }
-        });
+        rightTV.setOnClickListener(v -> saveAppliation());
         savedApp = getData(getApplicationContext(), "saved_rental_application", "");
         System.out.println("=================== saved data ==============");
         System.out.println(savedApp);
@@ -144,42 +116,42 @@ getEntereData();
 
 
     private void initui() {
-        formLay = (LinearLayout)findViewById(R.id.formLay);
-        currencyTV = (TextView)findViewById(R.id.currencyTV);
-        rightTV = (TextView) findViewById(R.id.rightTV);
+        
+        currencyTV =findViewById(R.id.currencyTV);
+        rightTV = findViewById(R.id.rightTV);
 
-        tvfullname = (TextView) findViewById(R.id.fullname_header);
-        tvphone = (TextView) findViewById(R.id.phone_header);
-        tvemail = (TextView) findViewById(R.id.email_header);
-        tvrenatlhead = (TextView) findViewById(R.id.rental_header);
-        tvmovein = (TextView) findViewById(R.id.TVmovein);
-        tvrenters = (TextView) findViewById(R.id.Tvrenter);
-        tvpets = (TextView) findViewById(R.id.TVpets);
-        tvsmokers = (TextView) findViewById(R.id.TVsmokers);
-        tvincome = (TextView) findViewById(R.id.Tvincome);
-        tvcredit = (TextView) findViewById(R.id.TVcredit);
-        tvmovingFrom = (TextView) findViewById(R.id.TVmoingfrom);
-        tvworkplace = (TextView) findViewById(R.id.TVworkplace);
-        tvjobtitle = (TextView) findViewById(R.id.TVjobtitle);
-        tvsettinghead = (TextView) findViewById(R.id.setting_header);
-        tvalways = (TextView) findViewById(R.id.alwaystv);
-        TextView   pageTitleTV = (TextView) findViewById(R.id.pageTitleTV);
+        tvfullname = findViewById(R.id.fullname_header);
+        tvphone = findViewById(R.id.phone_header);
+        tvemail = findViewById(R.id.email_header);
+        tvrenatlhead = findViewById(R.id.rental_header);
+        tvmovein = findViewById(R.id.TVmovein);
+        tvrenters = findViewById(R.id.Tvrenter);
+        tvpets = findViewById(R.id.TVpets);
+        tvsmokers = findViewById(R.id.TVsmokers);
+        tvincome = findViewById(R.id.Tvincome);
+        tvcredit = findViewById(R.id.TVcredit);
+        tvmovingFrom = findViewById(R.id.TVmoingfrom);
+        tvworkplace = findViewById(R.id.TVworkplace);
+        tvjobtitle = findViewById(R.id.TVjobtitle);
+        tvsettinghead = findViewById(R.id.setting_header);
+        tvalways = findViewById(R.id.alwaystv);
+        TextView   pageTitleTV = findViewById(R.id.pageTitleTV);
 
-        etfullname = (EditText) findViewById(R.id.fullnameEt);
-        etphone = (EditText) findViewById(R.id.phoneET);
-        etemail = (EditText) findViewById(R.id.emailET);
-        etmovein = (EditText) findViewById(R.id.Etmovein);
-        etrenters = (EditText) findViewById(R.id.Etrenter);
-        etpets = (EditText) findViewById(R.id.Etpets);
-        etincome = (EditText) findViewById(R.id.Etincome);
-        etcredit = (EditText) findViewById(R.id.Etcredit);
-        etsmokers = (EditText) findViewById(R.id.Etsmokers);
-        etworkplace = (EditText) findViewById(R.id.Etworkplace);
-        etjobtitle = (EditText) findViewById(R.id.Etjobtitle);
-        etmovingFrom = (EditText) findViewById(R.id.Etmovingfrom);
-        requesst_btn = (Button) findViewById(R.id.send_Request_btn);
-        back_btn = (ImageView) findViewById(R.id.back_btn);
-        scrollview=(ScrollView)findViewById(R.id.scrollview);
+        etfullname =findViewById(R.id.fullnameEt);
+        etphone =findViewById(R.id.phoneET);
+        etemail =findViewById(R.id.emailET);
+        etmovein =findViewById(R.id.Etmovein);
+        etrenters =findViewById(R.id.Etrenter);
+        etpets =findViewById(R.id.Etpets);
+        etincome =findViewById(R.id.Etincome);
+        etcredit =findViewById(R.id.Etcredit);
+        etsmokers =findViewById(R.id.Etsmokers);
+        etworkplace =findViewById(R.id.Etworkplace);
+        etjobtitle =findViewById(R.id.Etjobtitle);
+        etmovingFrom =findViewById(R.id.Etmovingfrom);
+        requesst_btn =findViewById(R.id.send_Request_btn);
+        back_btn =findViewById(R.id.back_btn);
+        scrollview=findViewById(R.id.scrollview);
 
 
         pageTitleTV.setText("Application Form");
@@ -435,11 +407,9 @@ getEntereData();
     private void getSavedData(String savedApp) {
         try {
             JSONObject resumeObj = new JSONObject(savedApp);
-
             fullname = resumeObj.getString("fullname");
             phone = resumeObj.getString("phone");
             email = resumeObj.getString("email");
-
             movein = resumeObj.getString("email");
             renters = resumeObj.getString("renters");
             pets = resumeObj.getString("pets");
@@ -449,12 +419,10 @@ getEntereData();
             movingFrom = resumeObj.getString("movingFrom");
             workplace = resumeObj.getString("workplace");
             jobtitle = resumeObj.getString("jobtitle");
-
             setSavedData();
 
 
         } catch (JSONException e) {
-
             System.out.println("********* error on get json saved ******** ");
             e.printStackTrace();
         }
@@ -479,20 +447,4 @@ getEntereData();
 
 
     }
-
-
-//    private void getEntereData() {
-//        saveDatatoLocal("rental_fullname",etfullname,getApplicationContext());
-//        saveDatatoLocal("rental_number",etphone,getApplicationContext());
-//        saveDatatoLocal("rental_email",etemail,getApplicationContext());
-//        saveDatatoLocal("rental_movein",etmovein,getApplicationContext());
-//        saveDatatoLocal("rental_count",etrenters,getApplicationContext());
-//        saveDatatoLocal("pets",etpets,getApplicationContext());
-//        saveDatatoLocal("smoking",etsmokers,getApplicationContext());
-//        saveDatatoLocal("income",etincome,getApplicationContext());
-//        saveDatatoLocal("credit_range",etcredit,getApplicationContext());
-//        saveDatatoLocal("rental_movingfrom",etmovingFrom,getApplicationContext());
-//        saveDatatoLocal("rental_workplace",etworkplace,getApplicationContext());
-//        saveDatatoLocal("rental_jobtitle",etjobtitle,getApplicationContext());
-//    }
 }

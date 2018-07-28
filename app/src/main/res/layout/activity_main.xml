@@ -1,459 +1,333 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/loginbackground">
 
-    <RelativeLayout
+    <include
         android:id="@+id/toolbar_main"
+        layout="@layout/main_topbar_header"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_alignParentTop="true"
-        android:background="#333333"
-        android:gravity="center_vertical"
-        android:paddingRight="10dp">
-        <LinearLayout
-            android:id="@+id/openLeftNav"
-            android:layout_width="30dp"
-            android:layout_height="50dp"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            android:gravity="center">
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/ic_menu_white_36px" />
-        </LinearLayout>
+        android:layout_alignParentTop="true" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar_main">
 
         <LinearLayout
-            android:id="@+id/location_lay"
-            android:layout_width="70dp"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="10dp"
-            android:layout_toRightOf="@id/openLeftNav"
-            android:gravity="center_vertical"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/location_Textview"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:layout_marginTop="2dp"
-                android:ellipsize="end"
-                android:singleLine="true"
-                android:text="@string/your_city"
-                android:textColor="@color/white" />
-
-        </LinearLayout>
-
-        <ImageView
-            android:layout_width="30dp"
-       android:layout_height="30dp"
-            android:layout_marginTop="14dp"
-            android:layout_toRightOf="@+id/location_lay"
-            android:background="@drawable/splace_screen_image"
-            android:visibility="gone" />
-        <LinearLayout
-            android:id="@+id/openRightNav"
-            android:layout_width="30dp"
-            android:layout_height="match_parent"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:gravity="center">
-
-            <ImageView
-                android:layout_width="5dp"
-                android:layout_height="18dp"
-                android:background="@drawable/right_nav_btn" />
-
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/cctvLay"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toLeftOf="@id/openRightNav"
+            android:layout_width="match_parent"
             android:gravity="center"
-            android:orientation="horizontal"
+            android:orientation="vertical"
+            android:layout_height="wrap_content"
             android:paddingBottom="10dp"
-            android:paddingRight="10dp"
             android:paddingTop="10dp">
 
             <LinearLayout
-                android:id="@+id/share_btn"
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_weight="1.5"
-                android:gravity="center">
-
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:background="@drawable/share_new" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_marginLeft="10dp"
-                android:layout_weight="1.5"
-                android:gravity="center">
-
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:background="@drawable/msg_new" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_marginLeft="10dp"
-                android:layout_weight="1.5"
-                android:gravity="center">
-
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:background="@drawable/chat_new" />
-            </LinearLayout>
-            <LinearLayout
-                android:id="@+id/vdo_cl"
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_marginLeft="10dp"
-                android:layout_weight="1.5"
-                android:gravity="center">
-
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:background="@drawable/video_new" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_marginLeft="10dp"
-                android:layout_weight="1.5"
-                android:gravity="center">
-
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/circleImageView"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:background="@drawable/call_new" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_marginLeft="10dp"
-                android:layout_weight="1.5"
-                android:gravity="center">
-
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/search_ImageView"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:background="@drawable/search" />
-            </LinearLayout>
-        </LinearLayout>
-
-
-    </RelativeLayout>
-    <FrameLayout
-
-        android:id="@+id/allCategeries"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/toolbar_main">
-
-<ScrollView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <LinearLayout
-        android:id="@+id/main_lay"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:orientation="vertical">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:gravity="center">
-
-            <LinearLayout
-                android:id="@+id/imageViewJobS"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <de.hdodenhof.circleimageview.CircleImageView
-
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:elevation="6dp"
-                    android:src="@drawable/jobs_new"
-                    android:translationZ="6dp" />
-
-                <TextView
-                    android:id="@+id/jobs_text"
-                    android:layout_width="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+                <LinearLayout
+                    android:id="@+id/community_image_lay"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="top|center"
-                    android:text="@string/jobs"
-                    android:textColor="@color/white" />
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+                    <ImageView
+                        android:layout_width="125dp"
+                        android:layout_height="85dp"
+                        android:src="@drawable/ic_community"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="top|center"
+                        android:fontFamily="@font/estre"
+                        android:gravity="center"
+                        android:text="@string/community"
+                        android:textColor="@color/white" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+                    <ImageView
+                        android:layout_width="125dp"
+                        android:layout_height="85dp"
+                        android:src="@drawable/ic_buddies"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="top|center"
+                        android:fontFamily="@font/estre"
+                        android:gravity="center"
+                        android:text="@string/buddies"
+                        android:textColor="@color/white" />
+                </LinearLayout>
 
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/For_sele_imageView"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
                 android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <de.hdodenhof.circleimageview.CircleImageView
-
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:elevation="6dp"
-                    android:src="@drawable/for_sale_new"
-                    android:translationZ="6dp" />
-
-                <TextView
-                    android:id="@+id/for_sele_text"
-                    android:layout_width="wrap_content"
+                android:paddingBottom="5dp"
+                android:paddingTop="5dp">
+                <LinearLayout
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="top|center"
-                    android:text="@string/for_sale"
-                    android:textColor="@color/white" />
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+                    <ImageView
+                        android:layout_width="125dp"
+                        android:layout_height="85dp"
+                        android:src="@drawable/ic_event"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="top|center"
+                        android:fontFamily="@font/estre"
+                        android:gravity="center"
+                        android:text="@string/events"
+                        android:textColor="@color/white" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/servicesImageView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+                    <ImageView
+                        android:layout_width="125dp"
+                        android:layout_height="85dp"
+                        android:src="@drawable/ic_services"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="top|center"
+                        android:fontFamily="@font/estre"
+                        android:gravity="center"
+                        android:text="@string/services"
+                        android:textColor="@color/white" />
+                </LinearLayout>
 
             </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:paddingBottom="5dp"
+                android:paddingTop="5dp">
 
-        </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/personalImageView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+                    <ImageView
+                        android:layout_width="125dp"
+                        android:layout_height="85dp"
+                        android:src="@drawable/ic_social"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="top|center"
+                        android:fontFamily="@font/estre"
+                        android:gravity="center"
+                        android:text="Social"
+                        android:textColor="@color/white" />
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/ShowcaseImageView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+                    <ImageView
+                        android:layout_width="125dp"
+                        android:layout_height="85dp"
+                        android:src="@drawable/ic_showcase"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/estre"
+                        android:gravity="center"
+                        android:text="@string/showcase"
+                        android:textColor="@color/white" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1">
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:paddingBottom="5dp"
+                android:paddingTop="5dp">
+                <LinearLayout
+                    android:id="@+id/newsLay"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+                    <ImageView
+                        android:layout_width="125dp"
+                        android:layout_height="85dp"
+                        android:src="@drawable/ic_news"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/estre"
+                        android:gravity="center"
+                        android:text="@string/news"
+                        android:textColor="@color/white" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/gamesLay"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+                    <ImageView
+                        android:layout_width="125dp"
+                        android:layout_height="85dp"
+                        android:src="@drawable/ic_game"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="top|center"
+                        android:fontFamily="@font/estre"
+                        android:gravity="center"
+                        android:text="@string/games"
+                        android:textColor="@color/white" />
+                </LinearLayout>
+
+            </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/ShowcaseImageView"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
                 android:layout_weight="1"
-                android:gravity="center|top"
-                android:orientation="vertical">
-
-                <de.hdodenhof.circleimageview.CircleImageView
-
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:elevation="6dp"
-                    android:src="@drawable/showcase_new"
-                    android:translationZ="6dp" />
-
-                <TextView
-                    android:id="@+id/showcaseTextView"
-                    android:layout_width="wrap_content"
+                android:paddingBottom="5dp"
+                android:paddingTop="5dp">
+                <LinearLayout
+                    android:id="@+id/For_sele_imageView"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="top|center"
-                    android:text="@string/showcase"
-                    android:textColor="@color/white" />
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+                    <ImageView
+                        android:layout_width="125dp"
+                        android:layout_height="85dp"
+                        android:src="@drawable/ic_for_sale"/>
 
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/estre"
+                        android:gravity="center_horizontal"
+                        android:text="@string/for_sale"
+                        android:textColor="@color/white" />
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/imageViewJobS"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+                    <ImageView
+                        android:layout_width="125dp"
+                        android:layout_height="85dp"
+                        android:src="@drawable/ic_job"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="top|center"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/estre"
+                        android:gravity="center"
+                        android:text="@string/jobs"
+                        android:textColor="@color/white" />
+                </LinearLayout>
             </LinearLayout>
-
             <LinearLayout
-                android:id="@+id/servicesImageView"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
                 android:layout_weight="1"
-                android:gravity="center|top"
-                android:orientation="vertical">
-
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:elevation="6dp"
-                    android:src="@drawable/services_new"
-                    android:translationZ="6dp" />
-
-                <TextView
-                    android:id="@+id/services_textView"
-                    android:layout_width="wrap_content"
+                android:paddingBottom="5dp"
+                android:paddingTop="5dp">
+                <LinearLayout
+                    android:id="@+id/HouseSaleImageView"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="top|center"
-                    android:text="@string/services"
-                    android:textColor="@color/white" />
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+                    <ImageView
+                        android:layout_width="125dp"
+                        android:layout_height="85dp"
+                        android:src="@drawable/ic_property_for_sale"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="top|center"
+                        android:fontFamily="@font/estre"
+                        android:gravity="center"
+                        android:text="@string/property_for_sale"
+                        android:textColor="@color/white" />
 
-            </LinearLayout>
+                </LinearLayout>
 
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1">
-
-            <LinearLayout
-                android:id="@+id/personalImageView"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center|top"
-                android:orientation="vertical">
-
-                <de.hdodenhof.circleimageview.CircleImageView
-
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:elevation="6dp"
-                    android:src="@drawable/social_new"
-                    android:translationZ="6dp" />
-
-                <TextView
-                    android:id="@+id/personalTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="top|center"
-                    android:text="Social"
-                    android:textColor="@color/white" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/community_image_lay"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center|top"
-                android:orientation="vertical">
-
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:elevation="6dp"
-                    android:src="@drawable/community_new"
-                    android:translationZ="6dp" />
-
-                <TextView
-                    android:id="@+id/comm_textView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="top|center"
-                    android:text="@string/community"
-                    android:textColor="@color/white" />
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1">
 
             <LinearLayout
                 android:id="@+id/houseRentalImageView"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:gravity="center|top"
+                android:gravity="center_horizontal"
+                android:layout_width="0dp"
                 android:orientation="vertical">
-
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:elevation="6dp"
-                    android:src="@drawable/property_rent_new"
-                    android:translationZ="6dp" />
-
+                <ImageView
+                    android:layout_width="125dp"
+                    android:layout_height="85dp"
+                    android:src="@drawable/ic_property_for_rent"/>
                 <TextView
-                    android:id="@+id/houseRentalTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="top|center"
+                    android:fontFamily="@font/estre"
+                    android:gravity="center"
                     android:text="@string/property_rentals"
                     android:textColor="@color/white" />
-
             </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/HouseSaleImageView"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center|top"
-                android:orientation="vertical">
-
-                <de.hdodenhof.circleimageview.CircleImageView
-
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:elevation="6dp"
-                    android:src="@drawable/house_sale_new"
-                    android:translationZ="6dp" />
-
-                <TextView
-                    android:id="@+id/HouseSaleTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="top|center"
-                    android:text="@string/property_for_sale"
-                    android:textColor="@color/white" />
-
             </LinearLayout>
-
         </LinearLayout>
-
-    </LinearLayout>
-</ScrollView>
-    </FrameLayout>
-    <LinearLayout
-        android:id="@+id/SearchPercentLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="?attr/actionBarSize"
-        android:background="#333333"
-        android:visibility="gone">
-
-        <TextView
-            android:id="@+id/autocomplete_search_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="#40FFFFFF"
-            android:singleLine="true"
-            android:textColor="@color/white"/>
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/ic_search_icon" />
-
-        <ImageView
-            android:id="@+id/close_searchBoxImageView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:background="@drawable/ic_close_icon" />
-
-
-    </LinearLayout>
-
-
-
+    </ScrollView>
+    <FrameLayout
+        android:id="@+id/allCategeries"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/toolbar_main" />
     <RelativeLayout
         android:id="@+id/right_nav"
         android:layout_width="match_parent"
@@ -470,13 +344,12 @@
             android:layout_marginLeft="160dp"
             android:background="@color/white"
             android:orientation="vertical">
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:background="#99333333">
-
-                <de.hdodenhof.circleimageview.CircleImageView
-                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
                     android:id="@+id/profile_image"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
@@ -484,14 +357,14 @@
                     android:layout_gravity="center"
                     android:src="@drawable/profile"
                     app:civ_border_color="#FFFFFFFF"
-                    app:civ_border_width="2dp"/>
+                    app:civ_border_width="2dp" />
 
                 <TextView
-                    android:layout_alignParentLeft="true"
                     android:id="@+id/user_nameTV"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
+                    android:layout_alignParentLeft="true"
                     android:layout_gravity="center"
                     android:layout_marginTop="5dp"
                     android:gravity="center"
@@ -499,73 +372,69 @@
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                     android:textColor="#FFFFFFFF"
                     android:textColorHint="#ffff" />
+
                 <LinearLayout
-                    android:layout_above="@+id/user_nameTV"
                     android:id="@+id/log_out"
                     android:layout_width="30dp"
-                  android:layout_height="30dp"
+                    android:layout_height="30dp"
+                    android:layout_above="@+id/user_nameTV"
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="10dp"
                     android:gravity="center">
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:layout_width="15dp"
-                    android:layout_height="15dp"
-                    android:background="@drawable/logout_icon"
-                    /></LinearLayout>
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:background="@drawable/logout_icon" />
+                </LinearLayout>
 
 
             </RelativeLayout>
+
             <ListView
                 android:id="@+id/rightnav_listview"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:dividerHeight="1dp">
-
             </ListView>
         </LinearLayout>
 
     </RelativeLayout>
-
     <LinearLayout
         android:id="@+id/left_nav_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentTop="true"
-        android:layout_toEndOf="@+id/SearchPercentLayout"
-        android:layout_toRightOf="@+id/SearchPercentLayout"
         android:background="@color/white"
         android:orientation="vertical"
         android:visibility="gone">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="@color/black">
-
             <LinearLayout
                 android:id="@+id/close_left_nav"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:gravity="center">
+
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/ic_arrow_back_white_24px"/>
-
+                    android:background="@drawable/ic_arrow_back_white_24px" />
             </LinearLayout>
-
             <TextView
                 android:id="@+id/category_head_list"
-
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:text="Categories"
                 android:textColor="@color/white"
-                android:textSize="20sp"/>
+                android:textSize="20sp" />
 
         </LinearLayout>
-
 
         <ExpandableListView
             android:id="@+id/nav_categories_lisview"
@@ -573,78 +442,7 @@
             android:layout_height="match_parent"
             android:background="@color/white"
             android:dividerHeight="1dp"
-            android:groupIndicator="@null"/>
+            android:groupIndicator="@null" />
     </LinearLayout>
-    <LinearLayout
-        android:id="@+id/postImageLay"
-        android:layout_width="match_parent"
-        android:layout_height="225dp"
-        android:layout_alignParentBottom="true"
-        android:background="@drawable/loginbackground"
-        android:orientation="vertical"
-        android:padding="5dp"
-        android:visibility="gone">
-        <TextView
-            android:id="@+id/addimageheader"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@color/white"
-            android:gravity="center"
-            android:text="Add Image"
-            android:textColor="@color/black"
-            android:textStyle="bold"/>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.1dp"
-            android:background="@color/gray"/>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:gravity="center"
-            android:padding="30dp">
-            <TextView
-                android:id="@+id/cameraIV"
-                android:layout_width="80dp"
-                android:layout_height="wrap_content"
-                android:drawableTop="@drawable/cam_select"
-                android:gravity="center_horizontal|bottom"
-                android:padding="5dp"
-                android:src="@drawable/cam_select"
-                android:text="camera"
-                android:textColor="@color/black"
-                android:textSize="13sp"/>
-            <View
-                android:layout_width="20dp"
-                android:layout_height="match_parent"
-                android:background="@color/white"/>
-            <TextView
-                android:id="@+id/gallerIV"
-                android:layout_width="80dp"
-                android:layout_height="wrap_content"
-                android:drawableTop="@drawable/gal_select"
-                android:gravity="center_horizontal|bottom"
-                android:padding="5dp"
-                android:src="@drawable/cam_select"
-                android:text="gallery"
-                android:textColor="@color/black"
-                android:textSize="13sp"/>
-        </LinearLayout>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.1dp"
-            android:background="@color/gray"/>
-        <TextView
-            android:id="@+id/cancel_btnIV"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@color/white"
-            android:gravity="center"
-            android:text="Cancel"
-            android:textColor="@color/gray"
-            android:textStyle="bold">
-
-        </TextView>
-    </LinearLayout>
 </RelativeLayout>

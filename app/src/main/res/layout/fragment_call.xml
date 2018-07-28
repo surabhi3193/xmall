@@ -49,7 +49,7 @@
                 android:fontFamily="@font/estre"
                 android:text="Johne Loren Ipsum"
                 android:textColor="@color/black"
-                android:textSize="15sp"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -64,10 +64,9 @@
                 android:singleLine="true"
                 android:text="  2 days ago"
                 android:textColor="@color/black"
-                android:textSize="17sp" />
+                android:textSize="20sp" />
 
             <ImageView
-                android:id="@+id/time_TV8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
@@ -113,11 +112,10 @@
                 android:fontFamily="@font/estre"
                 android:text="Johne Loren Ipsum"
                 android:textColor="@color/black"
-                android:textSize="15sp"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/ItemTitleText1"
                 android:layout_width="180dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/ItemPriceText1"
@@ -128,7 +126,7 @@
                 android:singleLine="true"
                 android:text="  1 days ago"
                 android:textColor="@color/black"
-                android:textSize="17sp" />
+                android:textSize="20sp" />
 
             <ImageView
                 android:id="@+id/time_TV"
@@ -153,7 +151,6 @@
             android:padding="4dp">
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/itemImageView0"
                 android:layout_width="80dp"
                 android:layout_height="70dp"
                 android:scaleType="centerCrop"
@@ -177,12 +174,11 @@
                 android:fontFamily="@font/estre"
                 android:text="Johne Loren Ipsum"
                 android:textColor="@color/black"
-                android:textSize="15sp"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
             <TextView
 
-                android:id="@+id/ItemTitleText2"
                 android:layout_width="180dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/ItemPriceText2"
@@ -193,10 +189,9 @@
                 android:singleLine="true"
                 android:text="  Just Now"
                 android:textColor="@color/black"
-                android:textSize="17sp" />
+                android:textSize="20sp" />
 
             <ImageView
-                android:id="@+id/time_TV2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
@@ -218,7 +213,6 @@
             android:padding="4dp">
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/itemImageView9"
                 android:layout_width="80dp"
                 android:layout_height="70dp"
                 android:scaleType="centerCrop"
@@ -242,11 +236,10 @@
                 android:fontFamily="@font/estre"
                 android:text="Johne Loren Ipsum"
                 android:textColor="@color/black"
-                android:textSize="15sp"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/ItemTitleText4"
                 android:layout_width="180dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/ItemPriceText4"
@@ -257,10 +250,9 @@
                 android:singleLine="true"
                 android:text="  2 days ago"
                 android:textColor="@color/black"
-                android:textSize="17sp" />
+                android:textSize="20sp" />
 
             <ImageView
-                android:id="@+id/time_TV4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
@@ -282,7 +274,6 @@
             android:padding="4dp">
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/itemImageView5"
                 android:layout_width="80dp"
                 android:layout_height="70dp"
                 android:scaleType="centerCrop"
@@ -306,11 +297,10 @@
                 android:fontFamily="@font/estre"
                 android:text="Johne Loren Ipsum"
                 android:textColor="@color/black"
-                android:textSize="15sp"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/ItemTitleText5"
                 android:layout_width="180dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/ItemPriceText5"
@@ -321,10 +311,9 @@
                 android:singleLine="true"
                 android:text="  Just Now"
                 android:textColor="@color/black"
-                android:textSize="17sp" />
+                android:textSize="20sp" />
 
             <ImageView
-                android:id="@+id/time_TV5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
@@ -346,7 +335,6 @@
             android:padding="4dp">
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/itemImageView6"
                 android:layout_width="80dp"
                 android:layout_height="70dp"
                 android:scaleType="centerCrop"
@@ -370,11 +358,10 @@
                 android:fontFamily="@font/estre"
                 android:text="Johne Loren Ipsum"
                 android:textColor="@color/black"
-                android:textSize="15sp"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/ItemTitleText6"
                 android:layout_width="180dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/ItemPriceText6"
@@ -385,10 +372,9 @@
                 android:singleLine="true"
                 android:text="  1 days ago"
                 android:textColor="@color/black"
-                android:textSize="17sp" />
+                android:textSize="20sp" />
 
             <ImageView
-                android:id="@+id/time_TV7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
@@ -434,11 +420,10 @@
                 android:fontFamily="@font/estre"
                 android:text="Johne Loren Ipsum"
                 android:textColor="@color/black"
-                android:textSize="15sp"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/ItemTitleText89"
                 android:layout_width="180dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/ItemPriceText89"
@@ -450,10 +435,9 @@
                 android:text="  1 days ago"
 
                 android:textColor="@color/black"
-                android:textSize="17sp" />
+                android:textSize="20sp" />
 
             <ImageView
-                android:id="@+id/time_TV6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"

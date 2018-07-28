@@ -3,9 +3,12 @@ package com.mindinfo.xchangemall.xchangemall.activities.job_Activities;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
+import android.support.v4.content.res.ResourcesCompat;
+import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -13,9 +16,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.daimajia.slider.library.SliderLayout;
-import com.daimajia.slider.library.SliderTypes.BaseSliderView;
-import com.daimajia.slider.library.SliderTypes.TextSliderView;
+import com.bumptech.glide.Glide;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -28,23 +29,20 @@ import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.mindinfo.xchangemall.xchangemall.R;
-import com.mindinfo.xchangemall.xchangemall.SinchActivity.CallScreenActivity;
 import com.mindinfo.xchangemall.xchangemall.activities.common.PostOwnerProfileActivity;
-import com.mindinfo.xchangemall.xchangemall.activities.main.BaseActivity;
+import com.mindinfo.xchangemall.xchangemall.activities.BaseActivity;
 import com.mindinfo.xchangemall.xchangemall.activities.property.ApplyForPropertySale;
 import com.mindinfo.xchangemall.xchangemall.activities.property.ApplyForRental;
-import com.mindinfo.xchangemall.xchangemall.services.SinchService;
-import com.sinch.android.rtc.calling.Call;
-import com.squareup.picasso.Picasso;
+import com.mindinfo.xchangemall.xchangemall.adapter.SliderAdapter2;
+
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
 
 import cz.msebera.android.httpclient.Header;
+import me.relex.circleindicator.CircleIndicator;
 
 import static com.mindinfo.xchangemall.xchangemall.Constants.NetworkClass.OpenWarning;
 import static com.mindinfo.xchangemall.xchangemall.Constants.NetworkClass.Send_fav;
@@ -52,12 +50,12 @@ import static com.mindinfo.xchangemall.xchangemall.Constants.NetworkClass.openRe
 import static com.mindinfo.xchangemall.xchangemall.other.GeocodingLocation.getAddressFromLatlng;
 import static com.mindinfo.xchangemall.xchangemall.storage.MySharedPref.getData;
 
-public class JobsCatDetailsActivity extends BaseActivity implements View.OnClickListener, OnMapReadyCallback, BaseSliderView.OnSliderClickListener {
+public class JobsCatDetailsActivity extends BaseActivity implements View.OnClickListener, OnMapReadyCallback {
 
     Typeface face;
     String response, fragment_name;
 
-    ArrayList<String> imageSet = new ArrayList<String>();
+    ArrayList<Uri> imageSet = new ArrayList<Uri>();
     GoogleMap map;
     Marker mapMarker;
     LatLng item_location = null;
@@ -69,23 +67,25 @@ public class JobsCatDetailsActivity extends BaseActivity implements View.OnClick
     private Button apply_job_btn;
 
     private JSONObject responseObj, OwnerDetailsObj = null;
-    private SliderLayout imageSlider;
     private TextView locationTV;
     private String user_id;
+
+    private ViewPager mPager;
+    private CircleIndicator indicator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_jobs_cat_details);
 
-        face = Typeface.createFromAsset(getAssets(),
-                "fonts/estre.ttf");
+        face = ResourcesCompat.getFont(JobsCatDetailsActivity.this, R.font.estre);
 
          user_id = getData(getApplicationContext(),"user_id","");
 
         init();
         chagnefont(face);
         Bundle bundle = getIntent().getExtras();
+
         if (bundle != null) {
             response = bundle.getString("productDetails");
             fragment_name = bundle.getString("fragment_name");
@@ -95,98 +95,73 @@ public class JobsCatDetailsActivity extends BaseActivity implements View.OnClick
             try {
                 responseObj = new JSONObject(response);
 
-                if (fragment_name.equals("job"))
+                switch (fragment_name) {
+                    case "job": {
+                        job_descheadTv.setText(R.string.job_description);
+                        String apply_status = responseObj.getString("apply_status");
+                        post_id = responseObj.getString("id");
+                        System.out.println(post_id + "////" + user_id + "****** is user's post ******");
+                        if (post_id.equals(user_id))
+                            apply_job_btn.setVisibility(View.GONE);
 
-                {
-                    job_descheadTv.setText(R.string.job_description);
-                    String apply_status = responseObj.getString("apply_status");
-                     post_id = responseObj.getString("id");
-                    System.out.println(post_id + "////" +user_id+ "****** is user's post ******");
-                    if (post_id.equals(user_id))
-                        apply_job_btn.setVisibility(View.GONE);
+                        if (apply_status.equals("1")) {
+                            apply_job_btn.setBackgroundColor(getResources().getColor(R.color.green));
+                            apply_job_btn.setText(R.string.already_apply);
 
-                    if (apply_status.equals("1")) {
-                        apply_job_btn.setBackgroundColor(getResources().getColor(R.color.green));
-                        apply_job_btn.setText(R.string.already_apply);
+                        } else {
+                            apply_job_btn.setText(R.string.apply_for_job);
+                            apply_job_btn.setOnClickListener(this);
 
-                    } else {
-                        apply_job_btn.setText(R.string.apply_for_job);
-                        apply_job_btn.setOnClickListener(this);
-
+                        }
+                        break;
                     }
-                }
+                    case "rental": {
+                        job_descheadTv.setText(R.string.property_desc);
 
-                else if (fragment_name.equals("rental"))
-                {
-                    job_descheadTv.setText(R.string.property_desc);
+                        String apply_status = responseObj.getString("rental_request");
+                        post_id = responseObj.getString("id");
 
-                    String apply_status = responseObj.getString("rental_request");
-                    post_id = responseObj.getString("id");
+                        System.out.println(post_id + "////" + user_id + "****** is user's post ******");
 
-                    System.out.println(post_id + "////" +user_id+ "****** is user's post ******");
+                        if (post_id.equals(user_id))
+                            apply_job_btn.setVisibility(View.GONE);
 
-                    if (post_id.equals(user_id))
-                        apply_job_btn.setVisibility(View.GONE);
+                        if (apply_status.equals("1")) {
+                            apply_job_btn.setBackgroundColor(getResources().getColor(R.color.green));
+                            apply_job_btn.setText(R.string.already_apply);
 
-                    if (apply_status.equals("1")) {
-                        apply_job_btn.setBackgroundColor(getResources().getColor(R.color.green));
-                        apply_job_btn.setText(R.string.already_apply);
-
-                    } else {
-                        apply_job_btn.setText(R.string.send_app);
-                        apply_job_btn.setOnClickListener(this);
+                        } else {
+                            apply_job_btn.setText(R.string.send_app);
+                            apply_job_btn.setOnClickListener(this);
+                        }
+                        break;
                     }
-                }
+                    case "property_sale": {
+                        job_descheadTv.setText(R.string.property_desc);
 
-                else if (fragment_name.equals("property_sale"))
-                {
-                    job_descheadTv.setText(R.string.property_desc);
+                        String apply_status = responseObj.getString("property_request");
+                        post_id = responseObj.getString("id");
 
-                    String apply_status = responseObj.getString("property_request");
-                    post_id = responseObj.getString("id");
+                        System.out.println(post_id + "////" + user_id + "****** is user's post ******");
 
-                    System.out.println(post_id + "////" +user_id+ "****** is user's post ******");
+                        if (post_id.equals(user_id))
+                            apply_job_btn.setVisibility(View.GONE);
 
-                    if (post_id.equals(user_id))
-                        apply_job_btn.setVisibility(View.GONE);
+                        if (apply_status.equals("1")) {
+                            apply_job_btn.setBackgroundColor(getResources().getColor(R.color.green));
+                            apply_job_btn.setText(R.string.already_apply);
 
-                    if (apply_status.equals("1")) {
-                        apply_job_btn.setBackgroundColor(getResources().getColor(R.color.green));
-                        apply_job_btn.setText(R.string.already_apply);
+                        } else {
+                            System.out.println("***** sale send *******");
 
-                    } else {
-                        System.out.println("***** sale send *******");
-
-                        apply_job_btn.setText(R.string.send_app);
-                        apply_job_btn.setOnClickListener(this);
+                            apply_job_btn.setText(R.string.send_app);
+                            apply_job_btn.setOnClickListener(this);
+                        }
+                        break;
                     }
                 }
                 setData(responseObj);
 
-                HashMap<String, String> url_maps = new HashMap<String, String>();
-
-                for (int i = 0; i < imageSet.size(); i++) {
-                    url_maps.put("image" + i, imageSet.get(i));
-
-                }
-                for (String name : url_maps.keySet()) {
-                    TextSliderView textSliderView = new TextSliderView(this);
-                    // initialize a SliderLayout
-                    textSliderView
-                            .description(name)
-                            .image(url_maps.get(name))
-                            .setScaleType(BaseSliderView.ScaleType.CenterInside)
-                            .setOnSliderClickListener(this);
-
-                    //add your extra information
-                    textSliderView.bundle(new Bundle());
-                    textSliderView.getBundle()
-                            .putString("extra", name);
-
-                    imageSlider.stopAutoCycle();
-                    imageSlider.clearAnimation();
-                    imageSlider.addSlider(textSliderView);
-                }
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -199,66 +174,59 @@ public class JobsCatDetailsActivity extends BaseActivity implements View.OnClick
 
     }
 
+
     private void forMapView() {
 
 
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
+       SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
+//        WorkaroundMapFragment  mapFragment = ((WorkaroundMapFragment) getSupportFragmentManager().findFragmentById(R.id.map));
 
 
-        mapFragment.getMapAsync(new OnMapReadyCallback() {
-            @Override
-            public void onMapReady(GoogleMap googleMap) {
-                map = googleMap;
-                if (mapMarker != null)
-                    mapMarker.remove();
-                LatLng post_loc;
-                if (post_lat != 0 && post_lng != 0) {
-                    post_loc = new LatLng(post_lat, post_lng);
-                }
-                else {
-                    post_loc = new LatLng(22.78965, 75.3652);
-
-                }
-                mapMarker = map.addMarker(new MarkerOptions().position(post_loc).title("Owner Location"));
-
-                CameraPosition cameraPosition = new CameraPosition.Builder()
-                        .target(post_loc).tilt(45).bearing(45).zoom((float) 18.5).build();
-                map.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
-                String address = getAddressFromLatlng(post_loc, getApplicationContext(), 1);
-                locationTV.setText(address);
+        mapFragment.getMapAsync(googleMap ->
+        {
+            map = googleMap;
+            if (mapMarker != null)
+                mapMarker.remove();
+            LatLng post_loc;
+            if (post_lat != 0 && post_lng != 0) {
+                post_loc = new LatLng(post_lat, post_lng);
+            }
+            else {
+                post_loc = new LatLng(0.0, 0.0);
 
             }
+            mapMarker = map.addMarker(new MarkerOptions().position(post_loc).title("Owner Location"));
+
+            CameraPosition cameraPosition = new CameraPosition.Builder()
+                    .target(post_loc).tilt(45).bearing(45).zoom((float) 18.5).build();
+            map.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+            String address = getAddressFromLatlng(post_loc, getApplicationContext(), 1);
+            locationTV.setText(address);
+
+            map.getUiSettings().setZoomControlsEnabled(true);
+
+//            ScrollView mScrollView =findViewById(R.id.mScrollView); //parent scrollview in xml, give your scrollview id value
+
+//            ((WorkaroundMapFragment) getSupportFragmentManager().findFragmentById(R.id.map))
+//                    .setListener(new WorkaroundMapFragment.OnTouchListener() {
+//                        @Override
+//                        public void onTouch() {
+//                            mScrollView.requestDisallowInterceptTouchEvent(true);
+//                        }
+//                    });
+
+
+
         });
 
 
     }
-
-
-    private void callButtonClicked(String user_id) {
-
-        user_id = "182";
-        System.out.println("userid ****** for calling " + user_id);
-        if (user_id.isEmpty()) {
-            Toast.makeText(this, "User Not Exist", Toast.LENGTH_LONG).show();
-            return;
-        }
-
-        Call call = getSinchServiceInterface().callUserVideo(user_id);
-        String callId = call.getCallId();
-
-        Intent callScreen = new Intent(this, CallScreenActivity.class);
-        callScreen.putExtra(SinchService.CALL_ID, callId);
-        startActivity(callScreen);
-    }
-
     @SuppressLint("SetTextI18n")
     private void setData(JSONObject responseObj) {
-
-
         try {
             post_lat = Double.parseDouble(responseObj.getString("latitude"));
             post_lng = Double.parseDouble(responseObj.getString("longitude"));
-            post_owner_name = responseObj.getString("contact_person");
+            post_owner_name = responseObj.getString("first_name");
             owner_id = responseObj.getString("user_id");
             owner_image = responseObj.getString("profile_photo");
             post_id = responseObj.getString("id");
@@ -321,38 +289,45 @@ public class JobsCatDetailsActivity extends BaseActivity implements View.OnClick
             job_nameTV.setText(job_name);
 
             if (fav_status.equals("1"))
-                Picasso.with(getApplicationContext()).load(R.drawable.fav).into(fav_btn);
+                Glide.with(getApplicationContext()).load(R.drawable.fav).into(fav_btn);
             else if (fav_status.equals("0"))
-                Picasso.with(getApplicationContext()).load(R.drawable.favv).into(fav_btn);
+                Glide.with(getApplicationContext()).load(R.drawable.favv).into(fav_btn);
 
             if (report_status.equals("1"))
-                Picasso.with(getApplicationContext()).load(R.drawable.flag_green).into(report_btn);
+                Glide.with(getApplicationContext()).load(R.drawable.flag_green).into(report_btn);
             else if (report_status.equals("0"))
-                Picasso.with(getApplicationContext()).load(R.drawable.flag_red).into(report_btn);
+                Glide.with(getApplicationContext()).load(R.drawable.flag_red).into(report_btn);
 
 
             if (owner_image.equals(DEFAULT_PATH))
-                Picasso.with(getApplicationContext()).load(R.drawable.profile).into(post_owner_image);
+                Glide.with(getApplicationContext()).load(R.drawable.profile).into(post_owner_image);
 
             else if (owner_image.length() < 1)
                 post_owner_image.setBackground(getResources().getDrawable(R.drawable.profile));
             else
-                Picasso.with(getApplicationContext()).load(owner_image).placeholder(R.drawable.profile).into(post_owner_image);
+                Glide.with(getApplicationContext()).load(owner_image).into(post_owner_image);
 
             PostedUserProfile(owner_id, post_id);
             String imageArray = responseObj.getString("featured_img");
             String[] uris = imageArray.split(",");
 
-            imageSet = new ArrayList<String>(Arrays.asList(uris));
 
+            if (imageSet.size() > 0)
+                imageSet.clear();
 
+            for (String uri : uris) {
+                imageSet.add(Uri.parse(uri));
+
+            }
+            mPager.setAdapter(new SliderAdapter2(JobsCatDetailsActivity.this, imageSet));
+
+            mPager.setBackgroundColor(getResources().getColor(R.color.black));
+            indicator.setViewPager(mPager);
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
     }
-
-
     private void PostedUserProfile(String post_user_id, String post_id) {
 
         final AsyncHttpClient client = new AsyncHttpClient();
@@ -371,7 +346,7 @@ public class JobsCatDetailsActivity extends BaseActivity implements View.OnClick
             public void onSuccess(int statusCode, cz.msebera.android.httpclient.Header[] headers,
                                   JSONObject response) {
                 try {
-                    if (response.getString("status").equals("1")) ;
+                    if (response.getString("status").equals("1"))
                     {
                         OwnerDetailsObj = response.getJSONObject("result");
                     }
@@ -397,35 +372,37 @@ public class JobsCatDetailsActivity extends BaseActivity implements View.OnClick
     }
     private void init() {
 
-        locationTV = (TextView) findViewById(R.id.address_tv);
-        imageSlider = (SliderLayout) findViewById(R.id.slider);
 
-        detail_headTV = (TextView) findViewById(R.id.title_TV);
-        owner_nameTV = (TextView) findViewById(R.id.post_owner_name);
-        post_timeTV = (TextView) findViewById(R.id.post_time);
-        view_profile_btn = (TextView) findViewById(R.id.view_profile_btn);
-        user_reviewTv = (TextView) findViewById(R.id.user_reviewTV);
-        job_descTv = (TextView) findViewById(R.id.job_descTV);
-        sizeTV = (TextView) findViewById(R.id.sizeTV);
-        dogTv = (TextView) findViewById(R.id.dogTv);
-        catTv = (TextView) findViewById(R.id.catTv);
-        job_dutiestv = (TextView) findViewById(R.id.job_dutiestv);
-        exptv = (TextView) findViewById(R.id.exptv);
+        mPager = findViewById(R.id.pager);
+        indicator = findViewById(R.id.indicator);
+        
+        locationTV =findViewById(R.id.address_tv);
+        detail_headTV =findViewById(R.id.title_TV);
+        owner_nameTV =findViewById(R.id.post_owner_name);
+        post_timeTV =findViewById(R.id.post_time);
+        view_profile_btn =findViewById(R.id.view_profile_btn);
+        user_reviewTv =findViewById(R.id.user_reviewTV);
+        job_descTv =findViewById(R.id.job_descTV);
+        sizeTV =findViewById(R.id.sizeTV);
+        dogTv =findViewById(R.id.dogTv);
+        catTv =findViewById(R.id.catTv);
+        job_dutiestv =findViewById(R.id.job_dutiestv);
+        exptv =findViewById(R.id.exptv);
 
-        job_descheadTv = (TextView) findViewById(R.id.job_desc_head);
-        address_headTV = (TextView) findViewById(R.id.address_head_tv);
-        salaryTv = (TextView) findViewById(R.id.salaryTv);
-        job_typeTV = (TextView) findViewById(R.id.job_typeTV);
-        job_nameTV = (TextView) findViewById(R.id.job_name);
-        post_owner_image = (ImageView) findViewById(R.id.profile_image);
-        share_btn = (ImageView) findViewById(R.id.share_btn);
-        fav_btn = (ImageView) findViewById(R.id.fav_btn);
-        report_btn = (ImageView) findViewById(R.id.report_btn);
-        call_btn = (ImageView) findViewById(R.id.call_btn);
-        vdo_btn = (ImageView) findViewById(R.id.vdo_btn);
-        chat_btn = (ImageView) findViewById(R.id.chat_btn);
-        back_btn = (ImageView) findViewById(R.id.back_arrowImage);
-        apply_job_btn = (Button) findViewById(R.id.apply_job_btn);
+        job_descheadTv =findViewById(R.id.job_desc_head);
+        address_headTV =findViewById(R.id.address_head_tv);
+        salaryTv =findViewById(R.id.salaryTv);
+        job_typeTV =findViewById(R.id.job_typeTV);
+        job_nameTV =findViewById(R.id.job_name);
+        post_owner_image =findViewById(R.id.profile_image);
+        share_btn =findViewById(R.id.share_btn);
+        fav_btn =findViewById(R.id.fav_btn);
+        report_btn =findViewById(R.id.report_btn);
+        call_btn =findViewById(R.id.call_btn);
+        vdo_btn =findViewById(R.id.vdo_btn);
+        chat_btn =findViewById(R.id.chat_btn);
+        back_btn =findViewById(R.id.back_arrowImage);
+        apply_job_btn =findViewById(R.id.apply_job_btn);
 
 
     }
@@ -457,7 +434,6 @@ public class JobsCatDetailsActivity extends BaseActivity implements View.OnClick
         switch (view.getId()) {
             case R.id.back_arrowImage:
                 onBackPressed();
-
                 finish();
                 break;
 
@@ -466,34 +442,32 @@ public class JobsCatDetailsActivity extends BaseActivity implements View.OnClick
                     OpenWarning(JobsCatDetailsActivity.this);
                 else {
 
-                    if (fragment_name.equals("rental")) {
-                        Intent applyjob = new Intent(getApplicationContext(), ApplyForRental.class);
-                        applyjob.putExtra("post_id", post_id);
-//                    userDetails.putExtra("ownerDetails", OwnerDetailsObj.toString());
-                        startActivity(applyjob);
-                    }
-                    else if (fragment_name.equals("job"))
-                    {
-                        Intent applyjob = new Intent(getApplicationContext(), ApplyJobActivity.class);
-                        applyjob.putExtra("post_id", post_id);
-//                    userDetails.putExtra("ownerDetails", OwnerDetailsObj.toString());
-                        startActivity(applyjob);
-                    }
-                    else if ( fragment_name.equals("property_sale")) {
-                        Intent applyjob = new Intent(getApplicationContext(), ApplyForPropertySale.class);
-                        applyjob.putExtra("post_id", post_id);
-//                    userDetails.putExtra("ownerDetails", OwnerDetailsObj.toString());
-                        startActivity(applyjob);
+                    switch (fragment_name) {
+                        case "rental": {
+                            Intent applyjob = new Intent(getApplicationContext(), ApplyForRental.class);
+                            applyjob.putExtra("post_id", post_id);
+                            startActivity(applyjob);
+                            break;
+                        }
+                        case "job": {
+                            Intent applyjob = new Intent(getApplicationContext(), ApplyJobActivity.class);
+                            applyjob.putExtra("post_id", post_id);
+                            startActivity(applyjob);
+                            break;
+                        }
+                        case "property_sale": {
+                            Intent applyjob = new Intent(getApplicationContext(), ApplyForPropertySale.class);
+                            applyjob.putExtra("post_id", post_id);
+                            startActivity(applyjob);
+                            break;
+                        }
                     }
                 }
                 break;
 
             case R.id.vdo_btn:
-
-//                callButtonClicked(owner_id);
                 break;
             case R.id.call_btn:
-//                AudiocallButtonClicked(owner_id);
                 break;
 
             case R.id.fav_btn:
@@ -532,27 +506,24 @@ public class JobsCatDetailsActivity extends BaseActivity implements View.OnClick
 
 
     private void openProfilePic(String owner_image) {
-        final RelativeLayout open = (RelativeLayout) findViewById(R.id.fullsliderlay);
-        final ImageView owner_fullIV = (ImageView) findViewById(R.id.owner_fullIV);
+        final RelativeLayout open =findViewById(R.id.fullsliderlay);
+        final ImageView owner_fullIV =findViewById(R.id.owner_fullIV);
 
-        ImageView close = (ImageView) findViewById(R.id.close_slider);
+        ImageView close =findViewById(R.id.close_slider);
         open.setVisibility(View.VISIBLE);
         owner_fullIV.setVisibility(View.VISIBLE);
 
         if (owner_image.equals(DEFAULT_PATH))
-            Picasso.with(getApplicationContext()).load(R.drawable.profile).into(owner_fullIV);
+            Glide.with(getApplicationContext()).load(R.drawable.profile).into(owner_fullIV);
 
         else if (owner_image.length() < 1)
             owner_fullIV.setBackground(getResources().getDrawable(R.drawable.profile));
         else
-            Picasso.with(getApplicationContext()).load(owner_image).placeholder(R.drawable.profile).into(owner_fullIV);
+            Glide.with(getApplicationContext()).load(owner_image).into(owner_fullIV);
 
-        close.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                open.setVisibility(View.GONE);
-                owner_fullIV.setVisibility(View.GONE);
-            }
+        close.setOnClickListener(view -> {
+            open.setVisibility(View.GONE);
+            owner_fullIV.setVisibility(View.GONE);
         });
 
     }
@@ -577,52 +548,6 @@ public class JobsCatDetailsActivity extends BaseActivity implements View.OnClick
                 .target(item_location).tilt(45).bearing(45).zoom((float) 12.5).build();
         map.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
     }
-
-    @Override
-    public void onSliderClick(BaseSliderView slider) {
-
-        System.out.println("************ slider clicked ************");
-        final RelativeLayout open = (RelativeLayout) findViewById(R.id.fullsliderlay);
-        final SliderLayout imageSlider = (SliderLayout) findViewById(R.id.slidefullr);
-
-        ImageView close = (ImageView) findViewById(R.id.close_slider);
-        open.setVisibility(View.VISIBLE);
-        imageSlider.setVisibility(View.VISIBLE);
-
-        HashMap<String, String> url_maps = new HashMap<String, String>();
-
-        for (int i = 0; i < imageSet.size(); i++) {
-            url_maps.put("image" + i, imageSet.get(i));
-
-        }
-        for (String name : url_maps.keySet()) {
-            TextSliderView textSliderView = new TextSliderView(this);
-            // initialize a SliderLayout
-            textSliderView
-                    .description(name)
-                    .image(url_maps.get(name))
-                    .setScaleType(BaseSliderView.ScaleType.CenterInside);
-
-            //add your extra information
-            textSliderView.bundle(new Bundle());
-            textSliderView.getBundle()
-                    .putString("extra", name);
-            imageSlider.addSlider(textSliderView);
-            imageSlider.stopAutoCycle();
-            imageSlider.clearAnimation();
-        }
-
-
-        close.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                open.setVisibility(View.GONE);
-                imageSlider.setVisibility(View.GONE);
-            }
-        });
-
-    }
-
     @Override
     protected void onResume() {
 

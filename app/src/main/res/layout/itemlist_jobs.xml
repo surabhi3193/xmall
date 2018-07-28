@@ -23,7 +23,7 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/no_img" />
+                android:src="@drawable/no_img_100" />
         </LinearLayout>
 
         <RelativeLayout
@@ -48,7 +48,7 @@
                 android:maxWidth="130dp"
                 android:singleLine="true"
                 android:textColor="@color/PaleVioletRed"
-                android:textSize="15sp"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
             <LinearLayout
@@ -127,7 +127,7 @@
                 android:maxWidth="160dp"
                 android:singleLine="true"
                 android:textColor="@color/black"
-                android:textSize="15sp"
+                android:textSize="16sp"
                 android:textStyle="bold"/>
             <TextView
                 android:id="@+id/ItemTitleText"
@@ -139,8 +139,9 @@
                 android:ellipsize="end"
                 android:maxWidth="160dp"
                 android:singleLine="true"
+                android:text="jhgdjgjhjs"
                 android:textColor="@color/black"
-                android:textSize="15sp"
+                android:textSize="16sp"
                 android:textStyle="bold"/>
 
             <TextView
@@ -164,9 +165,8 @@
                 android:layout_toRightOf="@id/jobtypeTv"
                 android:text="10$ per/hour"
                 android:textColor="@color/black"
-                android:textSize="15sp" />
+                android:textSize="16sp" />
             <TextView
-                android:id="@+id/ItemSubTitleText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
@@ -176,7 +176,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_toLeftOf="@+id/buyNow"
                 android:layout_toRightOf="@+id/ratingBar"
-                android:text="4.1 reviews"
+                android:text="4.0 reviews"
                 android:textSize="9dp" />
 
 
@@ -191,7 +191,7 @@
                 android:layout_marginTop="10dp"
                 android:isIndicator="true"
                 android:numStars="5"
-                android:stepSize="1.0" />
+                android:rating="4" android:stepSize="1.0"/>
 
             <Button
                 android:id="@+id/buyNow"

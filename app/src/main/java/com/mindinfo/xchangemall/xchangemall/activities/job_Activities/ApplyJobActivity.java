@@ -12,6 +12,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.RequiresApi;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -41,20 +42,18 @@ import cz.msebera.android.httpclient.Header;
 import static com.mindinfo.xchangemall.xchangemall.Constants.NetworkClass.getImageUri;
 import static com.mindinfo.xchangemall.xchangemall.Constants.NetworkClass.getRealPathFromURI;
 import static com.mindinfo.xchangemall.xchangemall.Constants.NetworkClass.isMatch;
-import static com.mindinfo.xchangemall.xchangemall.activities.main.BaseActivity.BASE_URL_NEW;
+import static com.mindinfo.xchangemall.xchangemall.activities.BaseActivity.BASE_URL_NEW;
 import static com.mindinfo.xchangemall.xchangemall.storage.MySharedPref.getData;
 import static com.mindinfo.xchangemall.xchangemall.storage.MySharedPref.saveData;
 
 public class ApplyJobActivity extends AppCompatActivity implements View.OnClickListener {
 
     Uri imageUri;
-    private Typeface face;
     private EditText fullnameEt, phoneEt, emailEt, aboutmeEt, titleET1, titleET2, titleET3, schoolET1, addressET1, fromET1, toET1, descrET1, schoolET2, addressET2, fromET2, toET2, descrET2, schoolET3, addressET3, fromET3, toET3, descrET3, skillET1, skillET2, skillET3, skillET4,
             skillET5, extranoteET,
             job_titleET1, job_titleET2, job_titleET3, job_schoolET1, job_addressET1, job_fromET1, job_toET1, job_descrET1, job_schoolET2, job_addressET2, job_fromET2, job_toET2, job_descrET2;
     private LinearLayout edu2, edu3, postImageLay, work_lay2;
-    private int educount = 1;
-    private int skillcount = 1;
+    private int educount = 1, skillcount = 1;
     private TextView fullnameheader, phone_header, email_header, aboutme_header, education_header, title_header1, title_header2, title_header3, school_header1, address_header1, duration_header1,
             from_TV1, to_TV1, descTV1, school_header2, address_header2, duration_header2,
             from_TV2, to_TV2, descTV2, school_header3, address_header3, duration_header3, from_TV3, to_TV3, descTV3, addeduTV, skill_head,
@@ -62,11 +61,10 @@ public class ApplyJobActivity extends AppCompatActivity implements View.OnClickL
             job_from_TV1, job_to_TV1, job_descTV1, job_school_header2, job_address_header2, job_duration_header2,
             job_from_TV2, job_to_TV2, job_descTV2, job_school_header3, job_address_header3, job_duration_header3, job_from_TV3, job_to_TV3, job_descTV3, add_work, remove_edu, remove_work, rightTV;
     private String post_id;
-    private int ATTACH_CV = 7;
+
     private File cvFile, idFile;
     private Button apply_job_btn;
     private ImageView back_btn;
-    private String PathHolder;
     private String fullname = "", phone = "", email = "", aboutme = "", title1 = "", title2 = "",
             title3 = "", school1 = "", address1 = "", from1 = "", to1 = "", descr1 = "", school2 = "",
             address2 = "", from2 = "", to2 = "", descr2 = "", school3 = "", address3 = "", from3 = "",
@@ -81,8 +79,7 @@ public class ApplyJobActivity extends AppCompatActivity implements View.OnClickL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_apply_job);
-        face = Typeface.createFromAsset(getAssets(),
-                "fonts/estre.ttf");
+        Typeface face = ResourcesCompat.getFont(ApplyJobActivity.this, R.font.estre);
         init();
         chagnefont(face);
         clickListners();
@@ -131,132 +128,130 @@ public class ApplyJobActivity extends AppCompatActivity implements View.OnClickL
     private void init() {
 
 
-        edu2 = (LinearLayout) findViewById(R.id.edu2);
-        edu3 = (LinearLayout) findViewById(R.id.edu3);
-        work_lay2 = (LinearLayout) findViewById(R.id.job_edu2);
-        postImageLay = (LinearLayout) findViewById(R.id.postImageLay);
+        edu2 =findViewById(R.id.edu2);
+        edu3 =findViewById(R.id.edu3);
+        work_lay2 =findViewById(R.id.job_edu2);
+        postImageLay =findViewById(R.id.postImageLay);
 
-        rightTV = (TextView) findViewById(R.id.rightTV);
-        fullnameheader = (TextView) findViewById(R.id.fullname_header);
-        phone_header = (TextView) findViewById(R.id.phone_header);
-        email_header = (TextView) findViewById(R.id.email_header);
-        aboutme_header = (TextView) findViewById(R.id.aboutme_header);
-        duration_header1 = (TextView) findViewById(R.id.duration_header1);
-        duration_header2 = (TextView) findViewById(R.id.duration_header2);
-        duration_header3 = (TextView) findViewById(R.id.duration_header3);
-        descTV1 = (TextView) findViewById(R.id.description_header1);
-        descTV2 = (TextView) findViewById(R.id.description_header2);
-        descTV3 = (TextView) findViewById(R.id.description_header3);
-        to_TV1 = (TextView) findViewById(R.id.to_header1);
-        to_TV2 = (TextView) findViewById(R.id.to_header2);
-        to_TV3 = (TextView) findViewById(R.id.to_header3);
-        from_TV1 = (TextView) findViewById(R.id.from_header1);
-        from_TV2 = (TextView) findViewById(R.id.from_header2);
-        from_TV3 = (TextView) findViewById(R.id.from_header3);
-        address_header1 = (TextView) findViewById(R.id.address_header1);
-        address_header2 = (TextView) findViewById(R.id.address_header2);
-        address_header3 = (TextView) findViewById(R.id.address_header3);
-        school_header1 = (TextView) findViewById(R.id.scool_header1);
-        school_header2 = (TextView) findViewById(R.id.scool_header2);
-        school_header3 = (TextView) findViewById(R.id.scool_header3);
-        title_header1 = (TextView) findViewById(R.id.title_header1);
-        title_header2 = (TextView) findViewById(R.id.title_header2);
-        title_header3 = (TextView) findViewById(R.id.title_header3);
-        education_header = (TextView) findViewById(R.id.education_header);
-        addeduTV = (TextView) findViewById(R.id.addEduTV);
-        remove_edu = (TextView) findViewById(R.id.removeedu);
-        remove_work = (TextView) findViewById(R.id.removeWork);
+        rightTV =findViewById(R.id.rightTV);
+        fullnameheader =findViewById(R.id.fullname_header);
+        phone_header =findViewById(R.id.phone_header);
+        email_header =findViewById(R.id.email_header);
+        aboutme_header =findViewById(R.id.aboutme_header);
+        duration_header1 =findViewById(R.id.duration_header1);
+        duration_header2 =findViewById(R.id.duration_header2);
+        duration_header3 =findViewById(R.id.duration_header3);
+        descTV1 =findViewById(R.id.description_header1);
+        descTV2 =findViewById(R.id.description_header2);
+        descTV3 =findViewById(R.id.description_header3);
+        to_TV1 =findViewById(R.id.to_header1);
+        to_TV2 =findViewById(R.id.to_header2);
+        to_TV3 =findViewById(R.id.to_header3);
+        from_TV1 =findViewById(R.id.from_header1);
+        from_TV2 =findViewById(R.id.from_header2);
+        from_TV3 =findViewById(R.id.from_header3);
+        address_header1 =findViewById(R.id.address_header1);
+        address_header2 =findViewById(R.id.address_header2);
+        address_header3 =findViewById(R.id.address_header3);
+        school_header1 =findViewById(R.id.scool_header1);
+        school_header2 =findViewById(R.id.scool_header2);
+        school_header3 =findViewById(R.id.scool_header3);
+        title_header1 =findViewById(R.id.title_header1);
+        title_header2 =findViewById(R.id.title_header2);
+        title_header3 =findViewById(R.id.title_header3);
+        education_header =findViewById(R.id.education_header);
+        addeduTV =findViewById(R.id.addEduTV);
+        remove_edu =findViewById(R.id.removeedu);
+        remove_work =findViewById(R.id.removeWork);
 
-        job_duration_header1 = (TextView) findViewById(R.id.job_duration_header1);
-        job_duration_header2 = (TextView) findViewById(R.id.job_duration_header2);
-        job_duration_header3 = (TextView) findViewById(R.id.job_duration_header3);
-        job_descTV1 = (TextView) findViewById(R.id.job_description_header1);
-        job_descTV2 = (TextView) findViewById(R.id.job_description_header2);
-        job_descTV3 = (TextView) findViewById(R.id.job_description_header3);
-        job_to_TV1 = (TextView) findViewById(R.id.job_to_header1);
-        job_to_TV2 = (TextView) findViewById(R.id.job_to_header2);
-        job_to_TV3 = (TextView) findViewById(R.id.job_to_header3);
-        job_from_TV1 = (TextView) findViewById(R.id.job_from_header1);
-        job_from_TV2 = (TextView) findViewById(R.id.job_from_header2);
-        job_from_TV3 = (TextView) findViewById(R.id.job_from_header3);
-        job_address_header1 = (TextView) findViewById(R.id.job_address_header1);
-        job_address_header2 = (TextView) findViewById(R.id.job_address_header2);
-        job_address_header3 = (TextView) findViewById(R.id.job_address_header3);
-        job_school_header1 = (TextView) findViewById(R.id.job_scool_header1);
-        job_school_header2 = (TextView) findViewById(R.id.job_scool_header2);
-        job_school_header3 = (TextView) findViewById(R.id.job_scool_header3);
-        job_title_header1 = (TextView) findViewById(R.id.job_title_header1);
-        job_title_header2 = (TextView) findViewById(R.id.job_title_header2);
-        job_title_header3 = (TextView) findViewById(R.id.job_title_header3);
-        add_work = (TextView) findViewById(R.id.addWork);
-
-
-        addskillTV = (TextView) findViewById(R.id.addSkillsTV);
-        skill_head = (TextView) findViewById(R.id.skills_header1);
-        addextraTV = (TextView) findViewById(R.id.extranoteHeader);
-        pageTitleTV = (TextView) findViewById(R.id.pageTitleTV);
-
-        attach_cvTV = (TextView) findViewById(R.id.attachCV);
-        attachIDTV = (TextView) findViewById(R.id.attachID);
-
-        fullnameEt = (EditText) findViewById(R.id.fullnameEt);
-        phoneEt = (EditText) findViewById(R.id.phoneET);
-        emailEt = (EditText) findViewById(R.id.emailET);
-        aboutmeEt = (EditText) findViewById(R.id.aboutmeET);
-
-        titleET1 = (EditText) findViewById(R.id.titleET1);
-        schoolET1 = (EditText) findViewById(R.id.schoolET1);
-        addressET1 = (EditText) findViewById(R.id.addressEt1);
-        fromET1 = (EditText) findViewById(R.id.fromET1);
-        toET1 = (EditText) findViewById(R.id.toET1);
-        descrET1 = (EditText) findViewById(R.id.descET1);
+        job_duration_header1 =findViewById(R.id.job_duration_header1);
+        job_duration_header2 =findViewById(R.id.job_duration_header2);
+        job_duration_header3 =findViewById(R.id.job_duration_header3);
+        job_descTV1 =findViewById(R.id.job_description_header1);
+        job_descTV2 =findViewById(R.id.job_description_header2);
+        job_descTV3 =findViewById(R.id.job_description_header3);
+        job_to_TV1 =findViewById(R.id.job_to_header1);
+        job_to_TV2 =findViewById(R.id.job_to_header2);
+        job_to_TV3 =findViewById(R.id.job_to_header3);
+        job_from_TV1 =findViewById(R.id.job_from_header1);
+        job_from_TV2 =findViewById(R.id.job_from_header2);
+        job_from_TV3 =findViewById(R.id.job_from_header3);
+        job_address_header1 =findViewById(R.id.job_address_header1);
+        job_address_header2 =findViewById(R.id.job_address_header2);
+        job_address_header3 =findViewById(R.id.job_address_header3);
+        job_school_header1 =findViewById(R.id.job_scool_header1);
+        job_school_header2 =findViewById(R.id.job_scool_header2);
+        job_school_header3 =findViewById(R.id.job_scool_header3);
+        job_title_header1 =findViewById(R.id.job_title_header1);
+        job_title_header2 =findViewById(R.id.job_title_header2);
+        job_title_header3 =findViewById(R.id.job_title_header3);
+        add_work =findViewById(R.id.addWork);
 
 
-        titleET2 = (EditText) findViewById(R.id.titleET2);
-        schoolET2 = (EditText) findViewById(R.id.schoolET2);
-        addressET2 = (EditText) findViewById(R.id.addressEt2);
-        fromET2 = (EditText) findViewById(R.id.fromET2);
-        toET2 = (EditText) findViewById(R.id.toET2);
-        descrET2 = (EditText) findViewById(R.id.descET2);
+        addskillTV =findViewById(R.id.addSkillsTV);
+        skill_head =findViewById(R.id.skills_header1);
+        addextraTV =findViewById(R.id.extranoteHeader);
+        pageTitleTV =findViewById(R.id.pageTitleTV);
+
+        attach_cvTV =findViewById(R.id.attachCV);
+        attachIDTV =findViewById(R.id.attachID);
+
+        fullnameEt =findViewById(R.id.fullnameEt);
+        phoneEt =findViewById(R.id.phoneET);
+        emailEt =findViewById(R.id.emailET);
+        aboutmeEt =findViewById(R.id.aboutmeET);
+
+        titleET1 =findViewById(R.id.titleET1);
+        schoolET1 =findViewById(R.id.schoolET1);
+        addressET1 =findViewById(R.id.addressEt1);
+        fromET1 =findViewById(R.id.fromET1);
+        toET1 =findViewById(R.id.toET1);
+        descrET1 =findViewById(R.id.descET1);
 
 
-        titleET3 = (EditText) findViewById(R.id.titleET3);
-        schoolET3 = (EditText) findViewById(R.id.schoolET3);
-        addressET3 = (EditText) findViewById(R.id.addressEt3);
-        fromET3 = (EditText) findViewById(R.id.fromET3);
-        toET3 = (EditText) findViewById(R.id.toET3);
-        descrET3 = (EditText) findViewById(R.id.descET3);
+        titleET2 =findViewById(R.id.titleET2);
+        schoolET2 =findViewById(R.id.schoolET2);
+        addressET2 =findViewById(R.id.addressEt2);
+        fromET2 =findViewById(R.id.fromET2);
+        toET2 =findViewById(R.id.toET2);
+        descrET2 =findViewById(R.id.descET2);
 
 
-        job_titleET1 = (EditText) findViewById(R.id.job_titleET1);
-        job_schoolET1 = (EditText) findViewById(R.id.job_schoolET1);
-        job_addressET1 = (EditText) findViewById(R.id.job_addressEt1);
-        job_fromET1 = (EditText) findViewById(R.id.job_fromET1);
-        job_toET1 = (EditText) findViewById(R.id.job_toET1);
-        job_descrET1 = (EditText) findViewById(R.id.job_descET1);
+        titleET3 =findViewById(R.id.titleET3);
+        schoolET3 =findViewById(R.id.schoolET3);
+        addressET3 =findViewById(R.id.addressEt3);
+        fromET3 =findViewById(R.id.fromET3);
+        toET3 =findViewById(R.id.toET3);
+        descrET3 =findViewById(R.id.descET3);
 
 
-        job_titleET2 = (EditText) findViewById(R.id.job_titleET2);
-        job_schoolET2 = (EditText) findViewById(R.id.job_schoolET2);
-        job_addressET2 = (EditText) findViewById(R.id.job_addressEt2);
-        job_fromET2 = (EditText) findViewById(R.id.job_fromET2);
-        job_toET2 = (EditText) findViewById(R.id.job_toET2);
-        job_descrET2 = (EditText) findViewById(R.id.job_descET2);
+        job_titleET1 =findViewById(R.id.job_titleET1);
+        job_schoolET1 =findViewById(R.id.job_schoolET1);
+        job_addressET1 =findViewById(R.id.job_addressEt1);
+        job_fromET1 =findViewById(R.id.job_fromET1);
+        job_toET1 =findViewById(R.id.job_toET1);
+        job_descrET1 =findViewById(R.id.job_descET1);
 
-        skillET1 = (EditText) findViewById(R.id.skillsTV1);
-        skillET2 = (EditText) findViewById(R.id.skillsTV2);
-        skillET4 = (EditText) findViewById(R.id.skillsTV4);
-        skillET3 = (EditText) findViewById(R.id.skillsTV3);
-        skillET5 = (EditText) findViewById(R.id.skillsTV5);
 
-        apply_job_btn = (Button) findViewById(R.id.apply_job_btn);
-        back_btn = (ImageView) findViewById(R.id.back_btn);
+        job_titleET2 =findViewById(R.id.job_titleET2);
+        job_schoolET2 =findViewById(R.id.job_schoolET2);
+        job_addressET2 =findViewById(R.id.job_addressEt2);
+        job_fromET2 =findViewById(R.id.job_fromET2);
+        job_toET2 =findViewById(R.id.job_toET2);
+        job_descrET2 =findViewById(R.id.job_descET2);
 
-        extranoteET = (EditText) findViewById(R.id.extranoteET);
+        skillET1 =findViewById(R.id.skillsTV1);
+        skillET2 =findViewById(R.id.skillsTV2);
+        skillET4 =findViewById(R.id.skillsTV4);
+        skillET3 =findViewById(R.id.skillsTV3);
+        skillET5 =findViewById(R.id.skillsTV5);
+
+        apply_job_btn =findViewById(R.id.apply_job_btn);
+        back_btn =findViewById(R.id.back_btn);
+
+        extranoteET =findViewById(R.id.extranoteET);
         postImageLay.setVisibility(View.GONE);
         rightTV.setVisibility(View.VISIBLE);
-
-
     }
 
     private void chagnefont(Typeface face) {
@@ -478,56 +473,34 @@ public class ApplyJobActivity extends AppCompatActivity implements View.OnClickL
     private void openCameraCLickOption() {
         postImageLay.setVisibility(View.VISIBLE);
 
-        TextView cancel_btn = (TextView) findViewById(R.id.cancel_btnIV);
-        TextView cameraIV = (TextView) findViewById(R.id.cameraIV);
-        TextView galleryIV = (TextView) findViewById(R.id.gallerIV);
+        TextView cancel_btn =findViewById(R.id.cancel_btnIV);
+        TextView cameraIV =findViewById(R.id.cameraIV);
+        TextView galleryIV =findViewById(R.id.gallerIV);
 
-        cancel_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                postImageLay.setVisibility(View.GONE);
-            }
+        cancel_btn.setOnClickListener(view -> postImageLay.setVisibility(View.GONE));
+
+        cameraIV.setOnClickListener(view -> {
+
+            String fileName = "Camera_Example.jpg";
+            ContentValues values = new ContentValues();
+
+            values.put(MediaStore.Images.Media.TITLE, fileName);
+
+            values.put(MediaStore.Images.Media.DESCRIPTION, "Image capture by camera");
+            imageUri = getContentResolver().insert(
+                    MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
+
+            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            startActivityForResult(intent, 1);
+
         });
 
-        cameraIV.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                String fileName = "Camera_Example.jpg";
-
-                // Create parameters for Intent with filename
-
-                ContentValues values = new ContentValues();
-
-                values.put(MediaStore.Images.Media.TITLE, fileName);
-
-                values.put(MediaStore.Images.Media.DESCRIPTION, "Image capture by camera");
-
-                // imageUri is the current activity attribute, define and save it for later usage
-
-                imageUri = getContentResolver().insert(
-                        MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
-
-                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(intent, 1);
-
-////
-//                Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-//                startActivityForResult(cameraIntent, 1);
-
-//              startCameraActivity();
-            }
-        });
-
-        galleryIV.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent();
-                intent.setType("image/*");
-                intent.setAction(Intent.ACTION_GET_CONTENT);//
-                intent.addCategory(Intent.CATEGORY_OPENABLE);
-                startActivityForResult(Intent.createChooser(intent, "Select Picture"), 8);
-            }
+        galleryIV.setOnClickListener(view -> {
+            Intent intent = new Intent();
+            intent.setType("image/*");
+            intent.setAction(Intent.ACTION_GET_CONTENT);//
+            intent.addCategory(Intent.CATEGORY_OPENABLE);
+            startActivityForResult(Intent.createChooser(intent, "Select Picture"), 8);
         });
     }
 
@@ -544,18 +517,18 @@ public class ApplyJobActivity extends AppCompatActivity implements View.OnClickL
 
                 if (resultCode == RESULT_OK) {
 
-                    PathHolder = data.getData().getPath();
+                    String pathHolder = data.getData().getPath();
                     System.out.println("********* file path before upgrade *********");
 
-                    if (PathHolder.startsWith("/document"))
-                        PathHolder = "content://com.android.providers.downloads.documents" + PathHolder;
+                    if (pathHolder.startsWith("/document"))
+                        pathHolder = "content://com.android.providers.downloads.documents" + pathHolder;
 
 
                     System.out.println("********* file path upgrade*********");
-                    System.out.println(PathHolder);
+                    System.out.println(pathHolder);
 
 
-                    cvFile = new java.io.File(PathHolder);
+                    cvFile = new java.io.File(pathHolder);
                     attach_cvTV.setText("  " + cvFile.getName());
                     attach_cvTV.setTextColor(getResources().getColor(R.color.green));
 //                    Toast.makeText(ApplyJobActivity.this, PathHolder, Toast.LENGTH_LONG).show();
@@ -579,7 +552,7 @@ public class ApplyJobActivity extends AppCompatActivity implements View.OnClickL
                             idFile = new File(path);
 
                             String imageName = idFile.getName();
-                            System.out.println("*********** "+imageName+"*******");
+                            System.out.println("*********** " + imageName + "*******");
 
                             attachIDTV.setText("  " + imageName);
                             attachIDTV.setTextColor(getResources().getColor(R.color.green));
@@ -600,8 +573,6 @@ public class ApplyJobActivity extends AppCompatActivity implements View.OnClickL
                 postImageLay.setVisibility(View.GONE);
                 if (data != null) {
                     try {
-//                        Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), data.getData());
-//                        Uri uri = getImageUri(getApplicationContext(), bitmap);
                         String path = getRealPathFromURI(imageUri, getApplicationContext());
                         System.out.println("*********** attached image from camera *******");
                         System.out.println(path);
@@ -609,7 +580,7 @@ public class ApplyJobActivity extends AppCompatActivity implements View.OnClickL
                         idFile = new File(path);
                         String imageName = idFile.getName();
 
-                        System.out.println("*********** "+imageName+"*******");
+                        System.out.println("*********** " + imageName + "*******");
 
                         attachIDTV.setText("  " + imageName);
                         attachIDTV.setTextColor(getResources().getColor(R.color.green));
@@ -761,7 +732,7 @@ public class ApplyJobActivity extends AppCompatActivity implements View.OnClickL
         getEntereData();
 
         String em = emailEt.getText().toString();
-        email=em;
+        email = em;
         String empatt = "^[a-zA-Z0-9_.]+@[a-zA-Z]+\\.[a-zA-Z]+$";
         boolean b4 = isMatch(em, empatt);
 
@@ -833,14 +804,6 @@ public class ApplyJobActivity extends AppCompatActivity implements View.OnClickL
             job_descrET1.requestFocus();
 
         }
-//        else if (cvFile==null)
-//        {
-//            Toast.makeText(getApplicationContext(),"attach your resume",Toast.LENGTH_SHORT).show();
-//
-//        } else if (idFile==null)
-//        {
-//            Toast.makeText(getApplicationContext(),"attach your id ",Toast.LENGTH_SHORT).show();
-//        }
         else {
             String user_id = getData(getApplicationContext(), "user_id", "");
 
@@ -906,68 +869,68 @@ public class ApplyJobActivity extends AppCompatActivity implements View.OnClickL
 
     private void saveAppliation() {
         Context context = getApplicationContext();
-getEntereData();
-        email=emailEt.getText().toString();
+        getEntereData();
+        email = emailEt.getText().toString();
 
-            JSONObject resumeObj = new JSONObject();
+        JSONObject resumeObj = new JSONObject();
 
-            try {
+        try {
 
-                resumeObj.put("fullname", fullname);
-                resumeObj.put("phone", phone);
-                resumeObj.put("email", email);
-                resumeObj.put("aboutme", aboutme);
-                resumeObj.put("title1", title1);
-                resumeObj.put("title2", title2);
-                resumeObj.put("title3", title3);
-                resumeObj.put("school1", school1);
+            resumeObj.put("fullname", fullname);
+            resumeObj.put("phone", phone);
+            resumeObj.put("email", email);
+            resumeObj.put("aboutme", aboutme);
+            resumeObj.put("title1", title1);
+            resumeObj.put("title2", title2);
+            resumeObj.put("title3", title3);
+            resumeObj.put("school1", school1);
 
-                resumeObj.put("address1", address1);
-                resumeObj.put("from1", from1);
-                resumeObj.put("to1", to1);
-                resumeObj.put("descr1", descr1);
-                resumeObj.put("school2", school2);
-                resumeObj.put("address2", address2);
-                resumeObj.put("from2", from2);
-                resumeObj.put("to2", to2);
-                resumeObj.put("descr2", descr2);
-                resumeObj.put("school3", school3);
-                resumeObj.put("address3", address3);
-                resumeObj.put("from3", from3);
-                resumeObj.put("to3", to3);
-                resumeObj.put("descr3", descr3);
-                resumeObj.put("skill1", skill1);
-                resumeObj.put("skill2", skill2);
-                resumeObj.put("skill3", skill3);
-                resumeObj.put("skill4", skill4);
-                resumeObj.put("skill5", skill5);
-                resumeObj.put("extranote", extranote);
-                resumeObj.put("job_title1", job_title1);
-                resumeObj.put("job_title2", job_title2);
-                resumeObj.put("job_title3", job_title3);
-                resumeObj.put("job_school1", job_school1);
-                resumeObj.put("job_address1", job_address1);
-                resumeObj.put("job_from1", job_from1);
-                resumeObj.put("job_to1", job_to1);
-                resumeObj.put("job_descr1", job_descr1);
-                resumeObj.put("job_school2", job_school2);
-                resumeObj.put("job_address2", job_address2);
-                resumeObj.put("job_from2", job_from2);
-                resumeObj.put("job_to2", job_to2);
-                resumeObj.put("job_descr2", job_descr2);
+            resumeObj.put("address1", address1);
+            resumeObj.put("from1", from1);
+            resumeObj.put("to1", to1);
+            resumeObj.put("descr1", descr1);
+            resumeObj.put("school2", school2);
+            resumeObj.put("address2", address2);
+            resumeObj.put("from2", from2);
+            resumeObj.put("to2", to2);
+            resumeObj.put("descr2", descr2);
+            resumeObj.put("school3", school3);
+            resumeObj.put("address3", address3);
+            resumeObj.put("from3", from3);
+            resumeObj.put("to3", to3);
+            resumeObj.put("descr3", descr3);
+            resumeObj.put("skill1", skill1);
+            resumeObj.put("skill2", skill2);
+            resumeObj.put("skill3", skill3);
+            resumeObj.put("skill4", skill4);
+            resumeObj.put("skill5", skill5);
+            resumeObj.put("extranote", extranote);
+            resumeObj.put("job_title1", job_title1);
+            resumeObj.put("job_title2", job_title2);
+            resumeObj.put("job_title3", job_title3);
+            resumeObj.put("job_school1", job_school1);
+            resumeObj.put("job_address1", job_address1);
+            resumeObj.put("job_from1", job_from1);
+            resumeObj.put("job_to1", job_to1);
+            resumeObj.put("job_descr1", job_descr1);
+            resumeObj.put("job_school2", job_school2);
+            resumeObj.put("job_address2", job_address2);
+            resumeObj.put("job_from2", job_from2);
+            resumeObj.put("job_to2", job_to2);
+            resumeObj.put("job_descr2", job_descr2);
 
-                System.out.println("********** saved application data *****");
-                System.out.println(resumeObj);
-                saveData(context, "saved_job_application", resumeObj.toString());
+            System.out.println("********** saved application data *****");
+            System.out.println(resumeObj);
+            saveData(context, "saved_job_application", resumeObj.toString());
 
-                Toast.makeText(getApplicationContext(),"Saved",Toast.LENGTH_SHORT).show();
-                rightTV.setTextColor(getResources().getColor(R.color.green_shade));
-                rightTV.setText("Save/Edit");
-            } catch (JSONException e) {
-                System.out.println("********** saved application data error  *****");
-                e.printStackTrace();
+            Toast.makeText(getApplicationContext(), "Saved", Toast.LENGTH_SHORT).show();
+            rightTV.setTextColor(getResources().getColor(R.color.green_shade));
+            rightTV.setText("Save/Edit");
+        } catch (JSONException e) {
+            System.out.println("********** saved application data error  *****");
+            e.printStackTrace();
 
-            }
+        }
 
     }
 
@@ -1030,18 +993,18 @@ getEntereData();
     private void setSavedData() {
         rightTV.setTextColor(getResources().getColor(R.color.green_shade));
         rightTV.setText("Save/Edit");
-        if (title2.length()>0)
+        if (title2.length() > 0)
             edu2.setVisibility(View.VISIBLE);
         else
             edu2.setVisibility(View.GONE);
 
-        if (title3.length()>0)
+        if (title3.length() > 0)
             edu3.setVisibility(View.VISIBLE);
         else
             edu3.setVisibility(View.GONE);
 
 
-        if (job_title2.length()>0)
+        if (job_title2.length() > 0)
             work_lay2.setVisibility(View.VISIBLE);
         else
             work_lay2.setVisibility(View.GONE);
@@ -1088,7 +1051,7 @@ getEntereData();
         skillET1.setText(skill1);
         skillET2.setText(skill2);
         skillET4.setText(skill3);
-         skillET4.setText(skill4);
+        skillET4.setText(skill4);
         skillET5.setText(skill5);
         extranoteET.setText(extranote);
 

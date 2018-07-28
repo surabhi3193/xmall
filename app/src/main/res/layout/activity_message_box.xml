@@ -4,8 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/loginbackground"
-    android:orientation="vertical"
-    tools:context="com.mindinfo.xchangemall.xchangemall.activities.communityActivities.MessageBoxActivity">
+    android:orientation="vertical" >
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -20,13 +20,13 @@
             android:src="@drawable/ic_arrow_back_white_24px"/>
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/prodile_pic"
+            android:id="@+id/iv_sender_pic"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:src="@drawable/profile_bg"/>
         <TextView
-            android:id="@+id/nameTV"
+            android:id="@+id/textview_sender_name"
             android:layout_width="100dp"
             android:layout_height="match_parent"
             android:layout_marginLeft="20dp"
@@ -60,50 +60,30 @@
             android:padding="5dp"
             android:src="@drawable/ic_menu_vert_white_24px"/>
     </LinearLayout>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view_msg"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="7">
 
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="20"
-            android:padding="10dp"
-            android:scrollbars="none">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-                <include
-                    layout="@layout/send_msg_box"/>
-
-                <include
-                    layout="@layout/incoming_msg_box"/>
-
-                <include
-                    layout="@layout/send_msg_box"/>
-
-                <include
-                    layout="@layout/incoming_msg_box"/>
-            </LinearLayout>
-
-        </ScrollView>
+    </android.support.v7.widget.RecyclerView>
 
     <RelativeLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:layout_margin="@dimen/size_10"
         android:background="@drawable/gray_btn"
-        android:gravity="bottom"
-        android:orientation="horizontal">
+        android:gravity="bottom">
         <EditText
-            android:id="@+id/msg_ET"
+            android:id="@+id/edittext_message"
+            android:layout_centerVertical="true"
+            android:background="@null"
+            android:padding="8dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="10dp"
             android:layout_toLeftOf="@id/camera_attach"
-            android:backgroundTint="@null"
             android:fontFamily="@font/estre"
             android:hint="@string/type_message"
             android:textColor="@color/black"
@@ -112,20 +92,74 @@
             android:textSize="14sp"/>
 
         <ImageView
+            android:visibility="gone"
             android:id="@+id/camera_attach"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginRight="@dimen/size_10"
             android:layout_toLeftOf="@+id/voice_recorder"
             android:padding="8dp"
-  />
+            />
 
         <ImageView
-
+            android:layout_toLeftOf="@+id/btn_send"
+            android:visibility="gone"
             android:id="@+id/voice_recorder"
             android:layout_width="35dp"
             android:layout_height="40dp"
+            />
+
+        <ImageView
+            android:id="@+id/btn_send"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginRight="3dp"
+            android:background="@drawable/clicked_rect_btn"
+            android:padding="10dp"
+            android:src="@drawable/ic_send_arrow"
             android:layout_alignParentRight="true"
-/>
+            />
     </RelativeLayout>
 </LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!--<ScrollView-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_weight="20"-->
+    <!--android:padding="10dp"-->
+    <!--android:scrollbars="none">-->
+
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:orientation="vertical">-->
+    <!--<include-->
+    <!--layout="@layout/send_msg_box"/>-->
+
+    <!--<include-->
+    <!--layout="@layout/incoming_msg_box"/>-->
+
+    <!--<include-->
+    <!--layout="@layout/send_msg_box"/>-->
+
+    <!--<include-->
+    <!--layout="@layout/incoming_msg_box"/>-->
+    <!--</LinearLayout>-->
+
+    <!--</ScrollView>-->

@@ -2,6 +2,7 @@ package com.mindinfo.xchangemall.xchangemall.activities.showcaseActivities;
 
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
@@ -33,8 +34,7 @@ private ListView recyclerViewItem;
         recyclerViewItem = (ListView)findViewById(R.id.event_list);
         back_btn = (ImageView) findViewById(R.id.back_btn);
 
-        Typeface face = Typeface.createFromAsset(getAssets(),
-                "fonts/estre.ttf");
+        Typeface face = ResourcesCompat.getFont(EventByCat.this, R.font.estre);
         title_TV.setTypeface(face);
         title_TV.setText(title);
         itemList = new ArrayList<>();

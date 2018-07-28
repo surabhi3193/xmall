@@ -117,7 +117,7 @@ android:id="@+id/gendertext"
                     android:gravity="center"
                     android:text="Add friend"
                     android:textColor="@color/white"
-                    android:textSize="15sp" />
+                    android:textSize="18sp" />
             </LinearLayout>
             <TextView
                 android:id="@+id/occText"

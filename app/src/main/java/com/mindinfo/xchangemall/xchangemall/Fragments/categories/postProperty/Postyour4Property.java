@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.AppCompatSpinner;
 import android.util.Log;
@@ -20,13 +21,9 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.daimajia.slider.library.SliderLayout;
-import com.daimajia.slider.library.SliderTypes.BaseSliderView;
-import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.mindinfo.xchangemall.xchangemall.Fragments.categories.postADD.Postyour5Add;
 import com.mindinfo.xchangemall.xchangemall.R;
 import com.mynameismidori.currencypicker.CurrencyPicker;
@@ -35,11 +32,10 @@ import com.mynameismidori.currencypicker.CurrencyPickerListener;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Currency;
-import java.util.HashMap;
 import java.util.Locale;
+import java.util.Objects;
 
 import static com.mindinfo.xchangemall.xchangemall.Constants.NetworkClass.OpenMainActivity;
 import static com.mindinfo.xchangemall.xchangemall.Constants.NetworkClass.checkData;
@@ -58,8 +54,8 @@ public class Postyour4Property extends Fragment implements View.OnClickListener 
     ArrayList<String> imageSet = new ArrayList<String>();
     ArrayList<String> categoryids = new ArrayList<String>();
     Context context;
-    private Button next_btn,cat_TextView;
-
+    String rent_ext = "";
+    private Button next_btn, cat_TextView;
     private TextView currencyTV;
     private ImageButton back_arrowImage;
     private EditText propertyDescEditText, unitsEditText, priceEditText, sizeEditText, bathroomEditText;
@@ -68,8 +64,7 @@ public class Postyour4Property extends Fragment implements View.OnClickListener 
     private String sub_cat_id = "", MainCatType;
     private CheckBox dog_check, cat_check;
     private AppCompatSpinner spinnerRent;
-    private String property_type="";
-    String rent_ext = "";
+    private String property_type = "";
 
     @Nullable
     @Override
@@ -78,16 +73,14 @@ public class Postyour4Property extends Fragment implements View.OnClickListener 
 
         View v = inflater.inflate(R.layout.postyour4property, null);
 
-        face = Typeface.createFromAsset(getActivity().getApplicationContext().getAssets(),
-                "fonts/estre.ttf");
+        face = ResourcesCompat.getFont(Objects.requireNonNull(getActivity()), R.font.estre);
         fm = getActivity().getSupportFragmentManager();
-        context = getActivity().getApplicationContext();
+        context = getActivity();
 
-        MainCatType = getData(getActivity().getApplicationContext(), "pcat_id", "");
+        MainCatType = getData(getActivity(), "pcat_id", "");
 
         Bundle bundle = this.getArguments();
-        if (bundle != null)
-        {
+        if (bundle != null) {
             sub_cat_id = bundle.getString("sub_cat_id");
             MainCatType = bundle.getString("MainCatType");
 
@@ -110,10 +103,7 @@ public class Postyour4Property extends Fragment implements View.OnClickListener 
         else if (MainCatType.equals("102")) {
             spinnerRent.setVisibility(View.VISIBLE);
             cat_TextView.setText(R.string.property_rentals);
-        }
-
-        else if (MainCatType.equals("272"))
-        {
+        } else if (MainCatType.equals("272")) {
             spinnerRent.setVisibility(View.GONE);
             cat_TextView.setText(R.string.property_for_sale);
         }
@@ -137,14 +127,14 @@ public class Postyour4Property extends Fragment implements View.OnClickListener 
         code = currency.getCurrencyCode();
         symbol = currency.getSymbol();
 
-        saveData(getActivity().getApplicationContext(), "currency_code", code);
-        saveData(getActivity().getApplicationContext(), "currency_symbol", symbol);
+        saveData(getActivity(), "currency_code", code);
+        saveData(getActivity(), "currency_symbol", symbol);
 
         currencyTV.setText(code + symbol);
 
-        if (getData(getActivity().getApplicationContext(), "first_entry", "") != null) {
+        if (getData(getActivity(), "first_entry", "") != null) {
 
-            if (getData(getActivity().getApplicationContext(), "first_entry", "").equals("false")) {
+            if (getData(getActivity(), "first_entry", "").equals("false")) {
 
 
                 checkData("title_data", propertyDescEditText, context);
@@ -252,8 +242,7 @@ public class Postyour4Property extends Fragment implements View.OnClickListener 
                     Toast.makeText(getActivity(), "Enter Washroom units", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if ((spinnerRent.getVisibility()==View.VISIBLE))
-                {
+                if ((spinnerRent.getVisibility() == View.VISIBLE)) {
                     rent_ext = spinnerRent.getSelectedItem().toString();
                     if (rent_ext.equalsIgnoreCase("select") || rent_ext.length() < 0) {
                         Toast.makeText(getActivity(), "Select rental type", Toast.LENGTH_SHORT).show();
@@ -261,7 +250,7 @@ public class Postyour4Property extends Fragment implements View.OnClickListener 
                     }
 
                 }
-                saveData(getActivity().getApplicationContext(), "first_entry", "false");
+                saveData(getActivity(), "first_entry", "false");
 
                 JSONObject propObj = new JSONObject();
                 try {
@@ -275,11 +264,11 @@ public class Postyour4Property extends Fragment implements View.OnClickListener 
                     propObj.put("rent_ext", rent_ext);
                     propObj.put("room_unit", unit);
                     propObj.put("property_desc", desc);
-                    propObj.put("property_price", price+rent_ext);
+                    propObj.put("property_price", price + rent_ext);
                     propObj.put("prop_size", size);
                     propObj.put("bathroom_unit", b_unit);
                     System.out.println("** prop obj in 4 frag *****" + propObj);
-                    saveData(getActivity().getApplicationContext(), "prop_obj", propObj.toString());
+                    saveData(getActivity(), "prop_obj", propObj.toString());
                 } catch (JSONException e) {
                     e.printStackTrace();
 
@@ -306,7 +295,7 @@ public class Postyour4Property extends Fragment implements View.OnClickListener 
 
 
                 setCheckBoxData();
-                saveData(getActivity().getApplicationContext(), "first_entry", "false");
+                saveData(getActivity(), "first_entry", "false");
 
                 saveValue();
                 getActivity().onBackPressed();
@@ -334,8 +323,8 @@ public class Postyour4Property extends Fragment implements View.OnClickListener 
 
                         currencyTV.setText(mcode + symbol);
 
-                        saveData(getActivity().getApplicationContext(), "currency_code", mcode);
-                        saveData(getActivity().getApplicationContext(), "currency_symbol", symbol);
+                        saveData(getActivity(), "currency_code", mcode);
+                        saveData(getActivity(), "currency_symbol", symbol);
 
 
                         picker.dismiss();
@@ -360,17 +349,13 @@ public class Postyour4Property extends Fragment implements View.OnClickListener 
         if (dog_check.isChecked()) {
             isdogChecked = true;
 
-        }
-        else
-        {
-            isdogChecked=false;
+        } else {
+            isdogChecked = false;
         }
         if (cat_check.isChecked()) {
             iscatChecked = true;
-        }
-        else
-        {
-            iscatChecked=false;
+        } else {
+            iscatChecked = false;
         }
     }
 

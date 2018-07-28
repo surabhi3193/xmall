@@ -4,14 +4,14 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
-import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.AppCompatSpinner;
 import android.support.v7.widget.DividerItemDecoration;
@@ -22,17 +22,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.VideoView;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlacePicker;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
@@ -43,7 +41,6 @@ import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.mindinfo.xchangemall.xchangemall.R;
 import com.mindinfo.xchangemall.xchangemall.adapter.HLVAdapter;
-import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -52,8 +49,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
-import java.util.HashMap;
 import java.util.Locale;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -61,9 +58,9 @@ import cz.msebera.android.httpclient.Header;
 
 import static com.mindinfo.xchangemall.xchangemall.activities.common.ProfileActivity.profile_image;
 import static com.mindinfo.xchangemall.xchangemall.activities.common.ProfileActivity.tvUserName;
-import static com.mindinfo.xchangemall.xchangemall.activities.main.BaseActivity.BASE_URL_NEW;
-import static com.mindinfo.xchangemall.xchangemall.activities.main.BaseActivity.DEFAULT_PATH;
-import static com.mindinfo.xchangemall.xchangemall.activities.main.BaseActivity.user_image;
+import static com.mindinfo.xchangemall.xchangemall.activities.BaseActivity.BASE_URL_NEW;
+import static com.mindinfo.xchangemall.xchangemall.activities.BaseActivity.DEFAULT_PATH;
+import static com.mindinfo.xchangemall.xchangemall.activities.BaseActivity.user_image;
 import static com.mindinfo.xchangemall.xchangemall.other.CheckInternetConnection.isNetworkAvailable;
 import static com.mindinfo.xchangemall.xchangemall.other.GeocodingLocation.getAddressFromLatlng;
 import static com.mindinfo.xchangemall.xchangemall.storage.MySharedPref.getData;
@@ -72,13 +69,10 @@ import static com.mindinfo.xchangemall.xchangemall.storage.MySharedPref.saveData
 
 public class ProfileFragment extends Fragment {
 
-    private static final int PLACE_PICKER_REQUEST =3 ;
-    private static View view;
+    private static final int PLACE_PICKER_REQUEST = 3;
     Marker mapMarker;
     ProgressDialog ringProgressDialog;
-    boolean started = false;
-    VideoView videos;
-    HashMap<String, String> user;
+
     RecyclerView mRecyclerView;
     RecyclerView mRecyclerView_vdo;
     RecyclerView.LayoutManager mLayoutManager;
@@ -88,21 +82,28 @@ public class ProfileFragment extends Fragment {
     ArrayList<String> alName;
     ArrayList<Integer> alImage;
     ArrayList<Integer> alImgVdo;
-    ArrayList<Uri> alvideo;
     String user_name;
-    String user_imgs_old;
-    String dob_staus="1",email_status= "1",mobile_staus = "1";
-    private TextView TextEdit, editAboutMe, TextViewLocationEdit, TextViewMyLocationSet;
+
+    String dob_staus = "1", email_status = "1", mobile_staus = "1";
+    private View view;
+    private TextView TextEdit, editAboutMe, TextViewLocationEdit;
     private String user_id;
     private GoogleMap mMap;
     private TextView GenderText, DateText, OccupationText, WorkPlaceText, InterestText, EducationText, phoneNumberText,
-            EmailText, AboutMeText, locationTV, socialTV,dob_statusTV,email_statustV,mobile_statusTV;
-    private String fname;
-    private String lname, email, gender, occupation, interrest, workplace, education, dob, phone, social_link,about_me;
+            EmailText, AboutMeText, locationTV, socialTV, dob_statusTV, email_statustV, mobile_statusTV;
+    private String gender;
+    private String occupation;
+    private String interrest;
+    private String workplace;
+    private String education;
+    private String dob;
+    private String phone;
+    private String social_link;
+    private String about_me;
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         if (view != null) {
             ViewGroup parent = (ViewGroup) view.getParent();
             if (parent != null)
@@ -111,25 +112,21 @@ public class ProfileFragment extends Fragment {
         try {
             view = inflater.inflate(R.layout.profileposted, container, false);
         } catch (InflateException e) {
-
+            e.printStackTrace();
         }
-        user_id = getData(getActivity().getApplicationContext(), "user_id", "");
+        user_id = getData(Objects.requireNonNull(getActivity()), "user_id", "");
 
         alName = new ArrayList<>(Arrays.asList("", "", "", "", ""));
         alImage = new ArrayList<>(Arrays.asList(R.drawable.image1, R.drawable.img2, R.drawable.img3, R.drawable.car_image, R.drawable.image1));
         alImgVdo = new ArrayList<>(Arrays.asList(R.drawable.youtube_dummy2, R.drawable.youtube_dummy1, R.drawable.youtube_dummy2));
 
-        user_name = getData(getActivity().getApplicationContext(), "user_name", "");
+        user_name = getData(getActivity(), "user_name", "");
 
         findItem(view);
-        setOnClick(view);
-        forMapView(view);
-
+        setOnClick();
+        forMapView();
 
         getUserProfile(user_id);
-
-
-
         return view;
     }
 
@@ -154,11 +151,11 @@ public class ProfileFragment extends Fragment {
                     System.out.println("response**********");
                     System.out.println(response);
                     if (response.getString("status").equals("0")) {
-                        Toast.makeText(getActivity().getApplicationContext(), response.getString("message"), Toast.LENGTH_LONG).show();
+                        Toast.makeText(getActivity(), response.getString("message"), Toast.LENGTH_LONG).show();
                     } else {
 
-                        saveData(getActivity().getApplicationContext(), "userData", response.getJSONObject("result").toString());
-                        String userDetail = getData(getActivity().getApplicationContext(), "userData", "");
+                        saveData(Objects.requireNonNull(getActivity()), "userData", response.getJSONObject("result").toString());
+                        String userDetail = getData(getActivity(), "userData", "");
                         try {
 
                             System.out.println(userDetail);
@@ -177,18 +174,15 @@ public class ProfileFragment extends Fragment {
             }
 
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-                Toast.makeText(getActivity().getApplicationContext(), "Server Error,Try Again ", Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), "Server Error,Try Again ", Toast.LENGTH_LONG).show();
                 ringProgressDialog.dismiss();
 
             }
-
-            public void onFailure(int statusCode, Header[] headers, String responseString) {
-                ringProgressDialog.dismiss();
-                System.out.println(responseString);}
         });
 
     }
 
+    @SuppressLint("SetTextI18n")
     private void addValues(String fname, String lname, String email, String gender,
                            String occupation, String interest, String workplace,
                            String education, String dob, String phone, String social_link,
@@ -207,9 +201,9 @@ public class ProfileFragment extends Fragment {
         socialTV.setText(social_link);
         tvUserName.setText(fname + " " + lname);
 
-        validate(dob_staus,dob_statusTV);
-        validate(email_status,email_statustV);
-        validate(mobile_staus,mobile_statusTV);
+        validate(dob_staus, dob_statusTV);
+        validate(email_status, email_statustV);
+        validate(mobile_staus, mobile_statusTV);
 
 
         AboutMeText.setText(aboutme);
@@ -229,116 +223,106 @@ public class ProfileFragment extends Fragment {
         userData.put("about_me", aboutme);
         userData.put("profile_photo", profile_photo);
         userData.put("email_hide_status", email_status);
-        userData.put("phone_hide_status",mobile_staus );
+        userData.put("phone_hide_status", mobile_staus);
         userData.put("dob_hide_status", dob_staus);
 
         System.out.println("********** user pic in profile fragment **************");
         System.out.println(profile_photo);
 
-saveData(getActivity().getApplicationContext(),"user_profile_pic",profile_photo);
-saveData(getActivity().getApplicationContext(),"user_name",fname);
-user_image = profile_photo;
-user_name = fname;
+        saveData(Objects.requireNonNull(getActivity()), "user_profile_pic", profile_photo);
+        saveData(getActivity(), "user_name", fname);
+        user_image = profile_photo;
+        user_name = fname;
 
         System.out.println("********** user pic in profile fragment before if  **************");
         System.out.println(profile_photo);
-        if(profile_photo.equals(DEFAULT_PATH))
-            Picasso.with(getActivity().getApplicationContext()).load(R.drawable.profile).into(profile_image);
+        if (profile_photo.equals(DEFAULT_PATH))
+            Glide.with(getActivity()).load(R.drawable.profile).into(profile_image);
 
         else
 
-            Picasso.with(getActivity().getApplicationContext()).load(profile_photo).into(profile_image);
+            Glide.with(getActivity()).load(profile_photo).into(profile_image);
 
-        saveData(getActivity().getApplicationContext(), "userData", userData.toString());
+        saveData(getActivity(), "userData", userData.toString());
 
     }
 
-    private void validate(String dob_staus, TextView dob_statusTV)
-    {
-        if (dob_staus.equals("1"))
-        {
+    @SuppressLint("SetTextI18n")
+    private void validate(String dob_staus, TextView dob_statusTV) {
+        if (dob_staus.equals("1")) {
             dob_statusTV.setText("Hide");
-            dob_statusTV.setTextColor(getActivity().getApplicationContext().getResources().getColor(R.color.light_red));
-        }
-        else if (dob_staus.equals("2"))
-        {
+            dob_statusTV.setTextColor(Objects.requireNonNull(getActivity()).getResources().getColor(R.color.light_red));
+        } else if (dob_staus.equals("2")) {
             dob_statusTV.setText("Show");
-            dob_statusTV.setTextColor(getActivity().getApplicationContext().getResources().getColor(R.color.green));
+            dob_statusTV.setTextColor(Objects.requireNonNull(getActivity()).getResources().getColor(R.color.green));
 
         }
     }
 
 
-    private void forMapView(View v) {
+    private void forMapView() {
 
 
         SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
 
 
-        mapFragment.getMapAsync(new OnMapReadyCallback() {
-            @Override
-            public void onMapReady(GoogleMap googleMap) {
-                mMap = googleMap;
-if (mapMarker !=null)
-    mapMarker.remove();
+        mapFragment.getMapAsync(googleMap -> {
+            mMap = googleMap;
+            if (mapMarker != null)
+                mapMarker.remove();
 
 
-                double lat = Double.parseDouble(getData(getActivity().getBaseContext(), "userLat", "0"));
-                double lng = Double.parseDouble(getData(getActivity().getBaseContext(), "userLong", "0"));
-                LatLng sydney = new LatLng(lat, lng);
+            double lat = Double.parseDouble(getData(Objects.requireNonNull(getActivity()).getBaseContext(), "userLat", "0"));
+            double lng = Double.parseDouble(getData(getActivity().getBaseContext(), "userLong", "0"));
+            LatLng sydney = new LatLng(lat, lng);
 
+            System.out.println("************ user current location  in profile frag *******");
+            System.out.println(lat);
+            System.out.println(lng);
 
-                System.out.println("************ user current location  in profile frag *******");
-                System.out.println(lat);
-                System.out.println(lng);
+            mapMarker = mMap.addMarker(new MarkerOptions().position(sydney).title("You're Location"));
 
-            mapMarker=    mMap.addMarker(new MarkerOptions().position(sydney).title("You're Location"));
+            CameraPosition cameraPosition = new CameraPosition.Builder()
+                    .target(sydney).tilt(45).bearing(45).zoom((float) 18.5).build();
+            mMap.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+            String address = getAddressFromLatlng(sydney, getActivity().getBaseContext(), 1);
+            System.out.println("-------- your location for tv ----- " + address);
+            locationTV.setText(address);
 
-                CameraPosition cameraPosition = new CameraPosition.Builder()
-                        .target(sydney).tilt(45).bearing(45).zoom((float) 18.5).build();
-                mMap.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
-                String address = getAddressFromLatlng(sydney, getActivity().getBaseContext(), 1);
-                locationTV.setText(address);
-
-            }
         });
-
-
     }
 
     //findItems
     @SuppressLint("ClickableViewAccessibility")
     private void findItem(View v) {
 
-        dob_statusTV = (TextView) v.findViewById(R.id.dob_statusTV);
-        mobile_statusTV = (TextView) v.findViewById(R.id.mobile_statusTV);
-        email_statustV = (TextView) v.findViewById(R.id.email_statusTV);
+        dob_statusTV = v.findViewById(R.id.dob_statusTV);
+        mobile_statusTV = v.findViewById(R.id.mobile_statusTV);
+        email_statustV = v.findViewById(R.id.email_statusTV);
 
-        TextEdit = (TextView) v.findViewById(R.id.TextEdit);
-        editAboutMe = (TextView) v.findViewById(R.id.editAboutMe);
-        TextViewLocationEdit = (TextView) v.findViewById(R.id.TextViewLocationEdit);
-        TextViewMyLocationSet = (TextView) v.findViewById(R.id.TextViewMyLocationSet);
+        TextEdit = v.findViewById(R.id.TextEdit);
+        editAboutMe = v.findViewById(R.id.editAboutMe);
+        TextViewLocationEdit = v.findViewById(R.id.TextViewLocationEdit);
 
-        GenderText = (TextView) v.findViewById(R.id.GenderText);
-        DateText = (TextView) v.findViewById(R.id.DateText);
-        OccupationText = (TextView) v.findViewById(R.id.OccupationText);
-        WorkPlaceText = (TextView) v.findViewById(R.id.WorkPlaceText);
-        InterestText = (TextView) v.findViewById(R.id.InterestText);
-        EducationText = (TextView) v.findViewById(R.id.EducationText);
-        phoneNumberText = (TextView) v.findViewById(R.id.phoneNumberText);
-        EmailText = (TextView) v.findViewById(R.id.EmailText);
-        AboutMeText = (TextView) v.findViewById(R.id.AboutMeText);
-        locationTV = (TextView) v.findViewById(R.id.locationName);
-        socialTV = (TextView) v.findViewById(R.id.socialTV);
-        mRecyclerView = (RecyclerView) v.findViewById(R.id.recycler_view);
-        mRecyclerView_vdo = (RecyclerView) v.findViewById(R.id.recycler_view_vdo);
+        GenderText = v.findViewById(R.id.GenderText);
+        DateText = v.findViewById(R.id.DateText);
+        OccupationText = v.findViewById(R.id.OccupationText);
+        WorkPlaceText = v.findViewById(R.id.WorkPlaceText);
+        InterestText = v.findViewById(R.id.InterestText);
+        EducationText = v.findViewById(R.id.EducationText);
+        phoneNumberText = v.findViewById(R.id.phoneNumberText);
+        EmailText = v.findViewById(R.id.EmailText);
+        AboutMeText = v.findViewById(R.id.AboutMeText);
+        locationTV = v.findViewById(R.id.locationName);
+        socialTV = v.findViewById(R.id.socialTV);
+        mRecyclerView = v.findViewById(R.id.recycler_view);
+        mRecyclerView_vdo = v.findViewById(R.id.recycler_view_vdo);
 
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView_vdo.setHasFixedSize(true);
 
 
-        Typeface face = Typeface.createFromAsset(getActivity().getApplicationContext().getAssets(),
-                "fonts/estre.ttf");
+        Typeface face = ResourcesCompat.getFont(Objects.requireNonNull(getActivity()), R.font.estre);
         GenderText.setTypeface(face);
         DateText.setTypeface(face);
         OccupationText.setTypeface(face);
@@ -353,82 +337,58 @@ if (mapMarker !=null)
 
 
         DividerItemDecoration divider = new DividerItemDecoration(mRecyclerView.getContext(), DividerItemDecoration.VERTICAL);
-        divider.setDrawable(ContextCompat.getDrawable(getActivity().getApplicationContext(), R.drawable.my_custom_divider));
+        divider.setDrawable(Objects.requireNonNull(ContextCompat.getDrawable(getActivity(), R.drawable.my_custom_divider)));
         mRecyclerView.addItemDecoration(divider);
         mRecyclerView_vdo.addItemDecoration(divider);
         // The number of Columns
-        mLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
+        mLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        mLayoutManager_vdo = new LinearLayoutManager(getActivity().getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
+        mLayoutManager_vdo = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         mRecyclerView_vdo.setLayoutManager(mLayoutManager_vdo);
 
-        mAdapter = new HLVAdapter(getActivity().getApplicationContext(), alName, alImage);
+        mAdapter = new HLVAdapter(getActivity(), alName, alImage);
         mRecyclerView.setAdapter(mAdapter);
 
-        mAdapter_vdo = new HLVAdapter(getActivity().getApplicationContext(), alName, alImgVdo);
+        mAdapter_vdo = new HLVAdapter(getActivity(), alName, alImgVdo);
         mRecyclerView_vdo.setAdapter(mAdapter_vdo);
-
-
     }
 
-    private void setOnClick(View v) {
-        TextEdit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ShowDialog();
-            }
+    private void setOnClick() {
+        TextEdit.setOnClickListener(v -> ShowDialog());
+
+        editAboutMe.setOnClickListener(v -> ShowDialogAbout());
+
+        dob_statusTV.setOnClickListener(view -> {
+
+            String status = checkstatus(dob_staus);
+            PostUserUpdatedDetailToServer(user_id, "", "", "",
+                    "", "", "", "", "", "", "", "", status, email_status, mobile_staus);
         });
 
-        editAboutMe.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ShowDialogAbout();
-            }
-        });
+        email_statustV.setOnClickListener(view -> {
+            String status = checkstatus(email_status);
 
-        dob_statusTV.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                String status = checkstatus(dob_staus);
-                PostUserUpdatedDetailToServer(user_id,"","","",
-                        "", "","","","","","","",status,email_status,mobile_staus);
-            }
-        });
-
-        email_statustV.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String status = checkstatus(email_status);
-
-                PostUserUpdatedDetailToServer(user_id,"","","",
-                        "", "","","","","","","",dob_staus,status,mobile_staus);
-            }
+            PostUserUpdatedDetailToServer(user_id, "", "", "",
+                    "", "", "", "", "", "", "", "", dob_staus, status, mobile_staus);
         });
 
 
-        mobile_statusTV.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String status = checkstatus(mobile_staus);
+        mobile_statusTV.setOnClickListener(view -> {
+            String status = checkstatus(mobile_staus);
 
-                PostUserUpdatedDetailToServer(user_id,"","","",
-                        "", "","","","","","","",dob_staus,email_status,status);
-            }
+            PostUserUpdatedDetailToServer(user_id, "", "", "",
+                    "", "", "", "", "", "", "", "", dob_staus, email_status, status);
         });
 
 
-        TextViewLocationEdit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
+        TextViewLocationEdit.setOnClickListener(view -> {
+            PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
 
-                try {
-                    startActivityForResult(builder.build(getActivity()), PLACE_PICKER_REQUEST);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+            try {
+                startActivityForResult(builder.build(Objects.requireNonNull(getActivity())), PLACE_PICKER_REQUEST);
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         });
 
@@ -436,68 +396,64 @@ if (mapMarker !=null)
 
     private String checkstatus(String staus) {
         if (staus.equals("1"))
-            staus="2";
+            staus = "2";
 
         else if (staus.equals("2"))
-            staus="1";
+            staus = "1";
 
         return staus;
     }
 
     private void ShowDialogAbout() {
-        AlertDialog.Builder ab = new AlertDialog.Builder(getActivity());
+        AlertDialog.Builder ab = new AlertDialog.Builder(Objects.requireNonNull(getActivity()));
         final AlertDialog alert;
         alert = ab.create();
         LayoutInflater inflater = getActivity().getLayoutInflater();
-        View v = inflater.inflate(R.layout.alertdialogprofileupdateaboutme, null);
+        @SuppressLint("InflateParams") View v = inflater.inflate(R.layout.alertdialogprofileupdateaboutme, null);
 
-        final EditText EditTextAboutMe = (EditText) v.findViewById(R.id.EditTextAboutMe);
-        Button cancel_button = (Button) v.findViewById(R.id.cancel_button);
-        Button update_button = (Button) v.findViewById(R.id.update_button);
+        final EditText EditTextAboutMe = v.findViewById(R.id.EditTextAboutMe);
+        Button cancel_button = v.findViewById(R.id.cancel_button);
+        Button update_button = v.findViewById(R.id.update_button);
 
         EditTextAboutMe.setText(about_me);
-        cancel_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                alert.dismiss();
-                alert.cancel();
-            }
+        cancel_button.setOnClickListener(v1 -> {
+            alert.dismiss();
+            alert.cancel();
         });
 
-        update_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String data = EditTextAboutMe.getText().toString();
+        update_button.setOnClickListener(v12 -> {
+            String data = EditTextAboutMe.getText().toString();
 
-                PostUserUpdatedDetailToServer(user_id,"","","",
-                        "", "","","","","","",data,dob_staus,email_status,mobile_staus);
-                alert.dismiss();
-            }
+            PostUserUpdatedDetailToServer(user_id, "", "", "",
+                    "", "", "", "", "", "", "", data, dob_staus, email_status, mobile_staus);
+            alert.dismiss();
         });
 
         alert.setView(v);
         alert.show();
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         if (requestCode == PLACE_PICKER_REQUEST) {
             if (resultCode == Activity.RESULT_OK) {
 
-                Place place = PlacePicker.getPlace(data, getActivity());
+                Place place = PlacePicker.getPlace(data, Objects.requireNonNull(getActivity()));
                 LatLng location = place.getLatLng();
 
-if (mapMarker!=null)
-    mapMarker.remove();
+                if (mapMarker != null)
+                    mapMarker.remove();
 //                String toastMsg = String.format("Place: %s", place.getName());
 
-                String new_location = getAddressFromLatlng(location, getActivity().getApplicationContext(),1);
+                String new_location = getAddressFromLatlng(location, getActivity(), 1);
                 locationTV.setText("  " + new_location);
-                mapMarker=   mMap.addMarker(new MarkerOptions().position
-                        (new LatLng(location.latitude,location.longitude)));
+                System.out.println("-------- your location for tv ----- " + new_location);
+                mapMarker = mMap.addMarker(new MarkerOptions().position
+                        (new LatLng(location.latitude, location.longitude)));
                 CameraPosition cameraPosition = new CameraPosition.Builder()
-                        .target(new LatLng(location.latitude,location.longitude)).tilt(45).bearing(45).zoom((float) 18.5).build();
+                        .target(new LatLng(location.latitude, location.longitude)).tilt(45).bearing(45).zoom((float) 18.5).build();
                 mMap.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
 
 
@@ -507,31 +463,32 @@ if (mapMarker!=null)
 
 
     private void ShowDialog() {
-        AlertDialog.Builder ab = new AlertDialog.Builder(getActivity());
+        AlertDialog.Builder ab = new AlertDialog.Builder(Objects.requireNonNull(getActivity()));
         final AlertDialog alert;
         alert = ab.create();
         LayoutInflater inflater = getActivity().getLayoutInflater();
-        View v = inflater.inflate(R.layout.alertdialogprofileupdategender, null);
+        @SuppressLint("InflateParams") View v = inflater.inflate(R.layout.alertdialogprofileupdategender, null);
 
-        final AppCompatSpinner genderSpinner = (AppCompatSpinner) v.findViewById(R.id.genderSpinner);
-        final EditText dobEditText = (EditText) v.findViewById(R.id.dobEditText);
-        final EditText occEditText = (EditText) v.findViewById(R.id.occEditText);
-        final EditText WorkPlaceEditText = (EditText) v.findViewById(R.id.WorkPlaceEditText);
-        final EditText InterestEditText = (EditText) v.findViewById(R.id.InterestEditText);
-        final EditText EducationEditText = (EditText) v.findViewById(R.id.EducationEditText);
-        final EditText phoneNumberEditText = (EditText) v.findViewById(R.id.phoneNumberEditText);
-        final EditText SocialLinkEditText = (EditText) v.findViewById(R.id.SocialLinkEditText);
+        final AppCompatSpinner genderSpinner = v.findViewById(R.id.genderSpinner);
+        final EditText dobEditText = v.findViewById(R.id.dobEditText);
+        final EditText occEditText = v.findViewById(R.id.occEditText);
+        final EditText WorkPlaceEditText = v.findViewById(R.id.WorkPlaceEditText);
+        final EditText InterestEditText = v.findViewById(R.id.InterestEditText);
+        final EditText EducationEditText = v.findViewById(R.id.EducationEditText);
+        final EditText phoneNumberEditText = v.findViewById(R.id.phoneNumberEditText);
+        final EditText SocialLinkEditText = v.findViewById(R.id.SocialLinkEditText);
 
-        if (gender.equals("Female"))
-     genderSpinner.setSelection(2);
-
-        else if (gender.equals("Male"))
-            genderSpinner.setSelection(1);
-
-        else
-            genderSpinner.setSelection(0);
-
-
+        switch (gender) {
+            case "Female":
+                genderSpinner.setSelection(2);
+                break;
+            case "Male":
+                genderSpinner.setSelection(1);
+                break;
+            default:
+                genderSpinner.setSelection(0);
+                break;
+        }
         dobEditText.setText(dob);
         occEditText.setText(occupation);
         WorkPlaceEditText.setText(workplace);
@@ -540,77 +497,62 @@ if (mapMarker!=null)
         phoneNumberEditText.setText(phone);
         SocialLinkEditText.setText(social_link);
 
-        Button cancel_button = (Button) v.findViewById(R.id.cancel_button);
-        Button update_button = (Button) v.findViewById(R.id.update_button);
+        Button cancel_button = v.findViewById(R.id.cancel_button);
+        Button update_button = v.findViewById(R.id.update_button);
         final Calendar myCalendar = Calendar.getInstance();
 
-        final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
-
-            @Override
-            public void onDateSet(DatePicker view, int year, int monthOfYear,
-                                  int dayOfMonth) {
-                // TODO Auto-generated method stub
-                myCalendar.set(Calendar.YEAR, year);
-                myCalendar.set(Calendar.MONTH, monthOfYear);
-                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                updateLabel(dobEditText, myCalendar);
-            }
-
+        final DatePickerDialog.OnDateSetListener date = (view, year, monthOfYear, dayOfMonth) -> {
+            // TODO Auto-generated method stub
+            myCalendar.set(Calendar.YEAR, year);
+            myCalendar.set(Calendar.MONTH, monthOfYear);
+            myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+            updateLabel(dobEditText, myCalendar);
         };
 
-        dobEditText.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                // TODO Auto-generated method stub
-                new DatePickerDialog(getActivity(), date, myCalendar
-                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
-                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
-            }
+        dobEditText.setOnClickListener(v1 -> {
+            // TODO Auto-generated method stub
+            new DatePickerDialog(getActivity(), date, myCalendar
+                    .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                    myCalendar.get(Calendar.DAY_OF_MONTH)).show();
         });
-        cancel_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        cancel_button.setOnClickListener(v12 -> {
+            alert.dismiss();
+            alert.cancel();
+        });
+        update_button.setOnClickListener(v13 -> {
+
+            String dob = dobEditText.getText().toString();
+            String mobileno = phoneNumberEditText.getText().toString();
+            String occ = occEditText.getText().toString();
+            String educ = EducationEditText.getText().toString();
+            String work = WorkPlaceEditText.getText().toString();
+            String interest = InterestEditText.getText().toString();
+
+            String sociallink = SocialLinkEditText.getText().toString();
+
+            if (isNetworkAvailable(getActivity())) {
+                String mob = phoneNumberEditText.getText().toString();
+                String mpatt = "[0-9]{10,10}";
+
+                if (mob.length() > 0) {
+                    boolean b3 = isMatch(mob, mpatt);
+                    if (!b3) {
+                        Toast.makeText(getActivity(), "please enter valid mobile no", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                }
+                PostUserUpdatedDetailToServer(user_id, "", "", genderSpinner.getSelectedItem().toString(),
+                        dob, occ, work, interest, educ, mobileno, sociallink, "", dob_staus, email_status, mobile_staus);
+
                 alert.dismiss();
                 alert.cancel();
+            } else {
+                AlertDialog.Builder ab2 = new AlertDialog.Builder(getActivity(), R.style.MyAlertDialogStyle1);
+                ab2.setTitle("Internet connected");
+                ab2.setPositiveButton("Ok", (dialog, which) -> dialog.dismiss());
+                ab2.show();
             }
-        });
-        update_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-                String dob = dobEditText.getText().toString();
-                String mobileno = phoneNumberEditText.getText().toString();
-                String occ = occEditText.getText().toString();
-                String educ = EducationEditText.getText().toString();
-                String work = WorkPlaceEditText.getText().toString();
-                String interest = InterestEditText.getText().toString();
-
-                String sociallink = SocialLinkEditText.getText().toString();
-
-                if (isNetworkAvailable(getActivity().getApplicationContext()))
-                {
-                    String mob = phoneNumberEditText.getText().toString();
-                    String mpatt = "[0-9]{10,10}";
-
-                    if (mob.length()>0) {
-                        boolean b3 = isMatch(mob, mpatt);
-                        if (!b3) {
-                            ShowToastMessage("please enter valid mobile no");
-                            // phoneNumberEditText.setError("Mobile no.is invalid");
-                            return;
-                        }
-                    }
-                    PostUserUpdatedDetailToServer(user_id,"","",genderSpinner.getSelectedItem().toString(),
-                           dob, occ,work,interest,educ,mobileno,sociallink,"",dob_staus,email_status,mobile_staus);
-
-                    alert.dismiss();
-                    alert.cancel();
-                } else {
-                    ShowAlertDialog("Internet connected", "");
-                }
-
-            }
         });
 
         alert.setView(v);
@@ -619,14 +561,13 @@ if (mapMarker!=null)
     }
 
 
-    public  void PostUserUpdatedDetailToServer(final  String user_id,final String name,final String profile_pic, final String gender, final String
-            dob, final String occupation,final  String workplace,final  String interest,final
-    String edu,final  String phone,final  String social_link,final  String about_me, String dob_staus,String email_status,String mobile_staus){
+    public void PostUserUpdatedDetailToServer(final String user_id, final String name, final String profile_pic, final String gender, final String
+            dob, final String occupation, final String workplace, final String interest, final
+                                              String edu, final String phone, final String social_link, final String about_me, String dob_staus,
+                                              String email_status, String mobile_staus) {
 
         ringProgressDialog = ProgressDialog.show(getActivity(), "Please wait ...", "Updating", true);
         ringProgressDialog.setCancelable(false);
-
-
         final AsyncHttpClient client = new AsyncHttpClient();
         final RequestParams params = new RequestParams();
 
@@ -641,115 +582,74 @@ if (mapMarker!=null)
         params.put("social_link", social_link);
         params.put("about_me", about_me);
         params.put("education", edu);
-        params.put("profile_photo",profile_pic );
-
-        params.put("dob_hide_status",dob_staus );
-        params.put("email_hide_status",email_status );
-        params.put("phone_hide_status",mobile_staus );
+        params.put("profile_photo", profile_pic);
+        params.put("dob_hide_status", dob_staus);
+        params.put("email_hide_status", email_status);
+        params.put("phone_hide_status", mobile_staus);
         System.out.println(params);
-
         client.post(BASE_URL_NEW + "update_profile", params, new JsonHttpResponseHandler() {
+                    public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                        try {
+                            ringProgressDialog.dismiss();
+                            System.out.println("response**********");
+                            System.out.println(response);
+                            if (response.getString("status").equals("0")) {
+                                Toast.makeText(getActivity(), response.getString("message"), Toast.LENGTH_LONG).show();
+                            } else {
+                                JSONObject jsonObject = response.getJSONObject("result");
+                                getUserData(jsonObject);
 
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                try {
-                    ringProgressDialog.dismiss();
-                    System.out.println("response**********");
-                    System.out.println(response);
-                    if (response.getString("status").equals("0")) {
-                        Toast.makeText(getActivity().getApplicationContext(), response.getString("message"), Toast.LENGTH_LONG).show();
-                    } else {
-                        JSONObject jsonObject = response.getJSONObject("result");
-                        String Id = jsonObject.getString("id");
-                        getUserData(jsonObject);
+                            }
+                        } catch (Exception e) {
+                            ringProgressDialog.dismiss();
+
+                            e.printStackTrace();
+                        }
+                    }
+
+                    public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                        Toast.makeText(getActivity(), "Server Error,Try Again ", Toast.LENGTH_LONG).show();
+                        ringProgressDialog.dismiss();
 
                     }
-                } catch (Exception e) {
-                    ringProgressDialog.dismiss();
 
-                    e.printStackTrace();
                 }
-            }
-
-            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-                Toast.makeText(getActivity().getApplicationContext(), "Server Error,Try Again ", Toast.LENGTH_LONG).show();
-                ringProgressDialog.dismiss();
-
-            }
-
-            public void onFailure(int statusCode, Header[] headers, String responseString) {
-ringProgressDialog.dismiss();
-                System.out.println(responseString);}
-        });
+        );
     }
-
-
-
     private void getUserData(JSONObject jsonObject) {
         try {
-             fname = jsonObject.getString("first_name");
-             lname = "";
-             email = jsonObject.getString("user_email");
-             gender = jsonObject.getString("gender");
-             occupation = jsonObject.getString("occupation");
-             interrest = jsonObject.getString("interest");
-             workplace = jsonObject.getString("work_place");
-             education = jsonObject.getString("education");
-             phone = jsonObject.getString("user_phone");
+            String fname = jsonObject.getString("first_name");
+            String lname = "";
+            String email = jsonObject.getString("user_email");
+            gender = jsonObject.getString("gender");
+            occupation = jsonObject.getString("occupation");
+            interrest = jsonObject.getString("interest");
+            workplace = jsonObject.getString("work_place");
+            education = jsonObject.getString("education");
+            phone = jsonObject.getString("user_phone");
             social_link = jsonObject.getString("social_link");
-
             dob_staus = jsonObject.getString("dob_hide_status");
             email_status = jsonObject.getString("email_hide_status");
             mobile_staus = jsonObject.getString("phone_hide_status");
-
-
-
-        String    profile_photo = jsonObject.getString("profile_photo");
-
-
-
-              about_me = jsonObject.getString("desc");
+            String profile_photo = jsonObject.getString("profile_photo");
+            about_me = jsonObject.getString("desc");
             dob = jsonObject.getString("dob");
 
-            addValues(fname, lname, email, gender, occupation, interrest, workplace, education, dob, phone, social_link,profile_photo,about_me,dob_staus,email_status,mobile_staus);
+            addValues(fname, lname, email, gender, occupation, interrest, workplace, education, dob, phone, social_link, profile_photo, about_me, dob_staus, email_status, mobile_staus);
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
     }
-
     private void updateLabel(EditText textEdit, Calendar myCalendar) {
-        String myFormat = "yyyy-MM-dd"; //In which you need put here
+        String myFormat = "yyyy-MM-dd";
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
-
         textEdit.setText(sdf.format(myCalendar.getTime()));
-    }
-
-
-    private void SetEditWithLoginResponse(EditText editText, String str_edit) {
-        if (str_edit.equals("null")) editText.setText("");
-        else editText.setText(str_edit);
     }
 
     boolean isMatch(String s, String patt) {
         Pattern pat = Pattern.compile(patt);
         Matcher m = pat.matcher(s);
         return m.matches();
-    }
-
-    private void ShowToastMessage(String str_mess) {
-        Toast.makeText(getActivity(), str_mess, Toast.LENGTH_SHORT).show();
-    }
-
-    private void ShowAlertDialog(String str_title, String str_mess) {
-        AlertDialog.Builder ab = new AlertDialog.Builder(getActivity(), R.style.MyAlertDialogStyle1);
-        ab.setTitle(str_title);
-        ab.setMessage(str_mess);
-        ab.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        });
-        ab.show();
     }
 }

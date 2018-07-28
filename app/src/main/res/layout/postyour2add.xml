@@ -24,20 +24,24 @@
         android:background="@drawable/loginbackground">
 
         <LinearLayout
+
             android:id="@+id/sliderLay"
             android:layout_width="match_parent"
             android:layout_height="175dp"
             android:background="@color/black"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
-            <com.daimajia.slider.library.SliderLayout
-                android:id="@+id/slider"
+
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/pager"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent" />
+
+            <me.relex.circleindicator.CircleIndicator
+                android:id="@+id/indicator"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                custom:auto_cycle="true"
-                custom:indicator_visibility="visible"
-                custom:pager_animation="Accordion"
-                custom:pager_animation_span="5000" />
+                android:layout_height="18dp" />
 
         </LinearLayout>
 
@@ -59,7 +63,6 @@
                 <LinearLayout
                     android:layout_weight="1"
                     android:paddingTop="@dimen/size_10"
-                    android:id="@+id/lay1"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:gravity="center"
@@ -75,7 +78,7 @@
                         <de.hdodenhof.circleimageview.CircleImageView
                             android:layout_width="70dp"
                             android:layout_height="70dp"
-                            android:background="@drawable/jobs_new"
+                            android:background="@drawable/ic_job"
                            />
 
                         <TextView
@@ -101,7 +104,7 @@
                             android:layout_alignParentLeft="true"
                             android:layout_alignParentStart="true"
                             android:layout_centerVertical="true"
-                            android:background="@drawable/for_sale_new"
+                            android:background="@drawable/ic_for_sale"
                             android:elevation="16dp"
                             android:translationZ="16dp" />
 
@@ -127,7 +130,7 @@
                             android:layout_width="70dp"
                             android:layout_height="70dp"
                             android:layout_centerVertical="true"
-                            android:background="@drawable/services_new"
+                            android:background="@drawable/ic_services"
                             android:elevation="16dp"
                             android:translationZ="16dp" />
 
@@ -146,7 +149,6 @@
 
                 <LinearLayout
                     android:layout_weight="1"
-                    android:id="@+id/lay2"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:gravity="center"
@@ -162,7 +164,7 @@
                         <de.hdodenhof.circleimageview.CircleImageView
                             android:layout_width="70dp"
                             android:layout_height="70dp"
-                            android:background="@drawable/showcase_new" />
+                            android:background="@drawable/ic_showcase" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -187,7 +189,7 @@
                             android:layout_width="70dp"
                             android:layout_height="70dp"
                             android:layout_centerVertical="true"
-                            android:background="@drawable/social_new"
+                            android:background="@drawable/ic_social"
                             android:elevation="16dp"
                             android:translationZ="16dp" />
 
@@ -215,7 +217,7 @@
                             android:layout_width="70dp"
                             android:layout_height="70dp"
                             android:layout_centerVertical="true"
-                            android:background="@drawable/community_new"
+                            android:background="@drawable/ic_community"
                             android:elevation="16dp"
                             android:translationZ="16dp" />
 
@@ -233,7 +235,6 @@
 
                 <LinearLayout
                     android:layout_weight="1"
-                    android:id="@+id/lay3"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:gravity="center"
@@ -252,7 +253,7 @@
                             android:layout_width="70dp"
                             android:layout_height="70dp"
                             android:layout_centerVertical="true"
-                            android:background="@drawable/property_rent_new"
+                            android:background="@drawable/ic_property_for_rent"
                             android:elevation="16dp"
                             android:translationZ="16dp" />
 
@@ -281,7 +282,7 @@
                         <de.hdodenhof.circleimageview.CircleImageView
                             android:layout_width="70dp"
                             android:layout_height="70dp"
-                            android:background="@drawable/house_sale_new" />
+                            android:background="@drawable/ic_property_for_sale" />
 
                         <TextView
                             android:layout_width="70dp"
@@ -297,7 +298,6 @@
                 <!--Buttom layout-->
                 <LinearLayout
                     android:layout_weight="0.5"
-                    android:id="@+id/_fragment_bottom"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_marginTop="12dp">
@@ -313,38 +313,4 @@
 
     </RelativeLayout>
 
-
-    <RelativeLayout
-
-        android:id="@+id/fullsliderlay"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/black"
-        android:visibility="gone">
-
-        <ImageView
-            android:id="@+id/close_slider"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="10dp"
-            android:padding="@dimen/size_10"
-            android:src="@drawable/ic_close_white_24px" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@+id/close_slider">
-
-            <com.daimajia.slider.library.SliderLayout
-                android:id="@+id/slidefullr"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                custom:auto_cycle="true"
-                custom:indicator_visibility="visible"
-                custom:pager_animation="Accordion"
-                custom:pager_animation_span="1100" />
-        </LinearLayout>
-    </RelativeLayout>
 </RelativeLayout>

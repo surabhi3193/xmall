@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/scrollView2"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:map="http://schemas.android.com/apk/res-auto"
     android:background="@color/trans"
     android:fillViewport="true"
     android:scrollbars="none">
@@ -29,7 +29,6 @@
             android:src="@drawable/ic_arrow_back_white_24px" />
 
         <TextView
-            android:id="@+id/job_name_header"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
@@ -46,7 +45,6 @@
         android:background="@color/gray_light">
 
         <ImageView
-            android:id="@+id/cover_pic"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_alignParentTop="true"
@@ -69,7 +67,7 @@
                     android:layout_marginLeft="100dp"
                     android:text="Antu Patidar"
                     android:textColor="@color/black"
-                    android:textSize="17sp"
+                    android:textSize="20sp"
                     android:textStyle="bold" />
 
             </RelativeLayout>
@@ -100,7 +98,7 @@
                             android:text="Contact BY"
                             android:textAllCaps="true"
                             android:textColor="@color/action_bar_colour"
-                            android:textSize="15sp" />
+                            android:textSize="18sp" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -115,7 +113,6 @@
                                 android:gravity="center">
 
                                 <ImageView
-                                    android:id="@+id/imageView"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:background="@drawable/call_new" />
@@ -139,7 +136,6 @@
                                 android:gravity="center">
 
                                 <ImageView
-                                    android:id="@+id/imageView3"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:background="@drawable/video_new" />
@@ -171,13 +167,12 @@
                             android:layout_below="@+id/TextEdit">
 
                             <TextView
-                                android:id="@+id/GenderTextView"
                                 android:layout_width="110dp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="10dp"
                                 android:text="Gender "
                                 android:textColor="@color/action_bar_colour"
-                                android:textSize="15sp"
+                                android:textSize="18sp"
                                 android:textStyle="bold" />
 
                             <TextView
@@ -189,7 +184,7 @@
                                 android:hint="male"
                                 android:textColor="@color/colorHeader"
                                 android:textColorHint="@color/gray_light"
-                                android:textSize="15sp" />
+                                android:textSize="18sp" />
 
 
                         </LinearLayout>
@@ -202,13 +197,12 @@
                             android:layout_marginTop="10dp">
 
                             <TextView
-                                android:id="@+id/TextViewDate"
                                 android:layout_width="110dp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="10dp"
                                 android:text="Date of birth"
                                 android:textColor="@color/action_bar_colour"
-                                android:textSize="15sp"
+                                android:textSize="18sp"
                                 android:textStyle="bold" />
 
                             <TextView
@@ -220,7 +214,7 @@
                                 android:hint="Eg. 09/08/1980"
                                 android:textColor="@color/colorHeader"
                                 android:textColorHint="@color/gray_light"
-                                android:textSize="15sp" />
+                                android:textSize="18sp" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -231,14 +225,13 @@
                             android:layout_marginTop="10dp">
 
                             <TextView
-                                android:id="@+id/OccupationTextView"
                                 android:layout_width="110dp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="10dp"
                                 android:layout_marginStart="10dp"
                                 android:text="Occupation "
                                 android:textColor="@color/action_bar_colour"
-                                android:textSize="15sp"
+                                android:textSize="18sp"
                                 android:textStyle="bold" />
 
                             <TextView
@@ -250,7 +243,7 @@
                                 android:hint="Eg. Doctor"
                                 android:textColor="@color/colorHeader"
                                 android:textColorHint="@color/gray_light"
-                                android:textSize="15sp" />
+                                android:textSize="18sp" />
 
 
                         </LinearLayout>
@@ -263,14 +256,13 @@
                             android:layout_marginTop="10dp">
 
                             <TextView
-                                android:id="@+id/WorkPlaceTextView"
                                 android:layout_width="110dp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="10dp"
                                 android:layout_marginStart="10dp"
                                 android:text="Work place"
                                 android:textColor="@color/action_bar_colour"
-                                android:textSize="15sp"
+                                android:textSize="18sp"
                                 android:textStyle="bold" />
 
                             <TextView
@@ -282,7 +274,7 @@
                                 android:hint="Eg. Mumbai"
                                 android:textColor="@color/colorHeader"
                                 android:textColorHint="@color/gray_light"
-                                android:textSize="15sp" />
+                                android:textSize="18sp" />
 
                         </LinearLayout>
 
@@ -294,14 +286,13 @@
                             android:layout_marginTop="10dp">
 
                             <TextView
-                                android:id="@+id/InterestTextView"
                                 android:layout_width="110dp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="10dp"
                                 android:layout_marginStart="10dp"
                                 android:text="Interest"
                                 android:textColor="@color/action_bar_colour"
-                                android:textSize="15sp"
+                                android:textSize="18sp"
                                 android:textStyle="bold" />
 
                             <TextView
@@ -314,7 +305,7 @@
                                 android:hint="Eg.Male"
                                 android:textColor="@color/colorHeader"
                                 android:textColorHint="@color/gray_light"
-                                android:textSize="15sp" />
+                                android:textSize="18sp" />
 
                         </LinearLayout>
 
@@ -326,14 +317,13 @@
                             android:layout_marginTop="10dp">
 
                             <TextView
-                                android:id="@+id/EducationTextView"
                                 android:layout_width="110dp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="10dp"
                                 android:layout_marginStart="10dp"
                                 android:text="Education"
                                 android:textColor="@color/action_bar_colour"
-                                android:textSize="15sp"
+                                android:textSize="18sp"
                                 android:textStyle="bold" />
 
                             <TextView
@@ -345,7 +335,7 @@
                                 android:hint="Eg. MD"
                                 android:textColor="@color/colorHeader"
                                 android:textColorHint="@color/gray_light"
-                                android:textSize="15sp" />
+                                android:textSize="18sp" />
 
 
                         </LinearLayout>
@@ -365,7 +355,7 @@
                                 android:layout_marginStart="10dp"
                                 android:text="@string/phone_number"
                                 android:textColor="@color/action_bar_colour"
-                                android:textSize="15sp"
+                                android:textSize="18sp"
                                 android:textStyle="bold" />
 
                             <TextView
@@ -378,7 +368,7 @@
                                 android:inputType="number"
                                 android:textColor="@color/colorHeader"
                                 android:textColorHint="@color/gray_light"
-                                android:textSize="15sp" />
+                                android:textSize="18sp" />
 
                         </LinearLayout>
 
@@ -390,14 +380,13 @@
                             android:layout_marginTop="10dp">
 
                             <TextView
-                                android:id="@+id/txtEmail"
                                 android:layout_width="110dp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="10dp"
                                 android:layout_marginStart="10dp"
                                 android:text="Email"
                                 android:textColor="@color/action_bar_colour"
-                                android:textSize="15sp"
+                                android:textSize="18sp"
                                 android:textStyle="bold" />
 
                             <TextView
@@ -409,7 +398,7 @@
                                 android:hint="Eg.abc@xyz.com0"
                                 android:textColor="@color/colorHeader"
                                 android:textColorHint="@color/gray_light"
-                                android:textSize="15sp" />
+                                android:textSize="18sp" />
 
                             <TextView
                                 android:layout_width="match_parent"
@@ -424,7 +413,6 @@
                         </LinearLayout>
 
                         <LinearLayout
-                            android:id="@+id/socialLay"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/emailLay"
@@ -432,14 +420,13 @@
                             android:orientation="vertical">
 
                             <TextView
-                                android:id="@+id/SocialLogin"
                                 android:layout_width="110dp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="10dp"
                                 android:layout_marginStart="10dp"
                                 android:text="Social Login"
                                 android:textColor="@color/action_bar_colour"
-                                android:textSize="15sp"
+                                android:textSize="18sp"
                                 android:textStyle="bold" />
 
                             <TextView
@@ -454,7 +441,7 @@
                                 android:hint="Your Social Media Links"
                                 android:padding="5dp"
                                 android:textColorHint="@color/gray"
-                                android:textSize="15sp" />
+                                android:textSize="18sp" />
                         </LinearLayout>
 
                     </RelativeLayout>
@@ -546,7 +533,6 @@
                    </HorizontalScrollView>-->
 
                 <LinearLayout
-                    android:id="@+id/recyler_lay"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
@@ -629,19 +615,17 @@
                             android:gravity="center_vertical">
 
                             <ImageView
-                                android:id="@+id/LocationPointerImageView"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:background="@drawable/location_pointer" />
 
                             <TextView
-                                android:id="@+id/TextViewMyLocationSet"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="5dp"
                                 android:text="Map and Address"
                                 android:textColor="@color/action_bar_colour"
-                                android:textSize="15sp"
+                                android:textSize="18sp"
                                 android:textStyle="bold" />
 
                             <TextView
@@ -661,7 +645,7 @@
                             class="com.google.android.gms.maps.SupportMapFragment"
                             android:layout_width="match_parent"
                             android:layout_height="200dp"
-                            android:layout_below="@id/locationtextLay" />
+                            android:layout_below="@id/locationtextLay" map:liteMode="true"/>
 
 
                         <LinearLayout

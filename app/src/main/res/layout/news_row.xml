@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/mainLay"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/item_shadow_bg"
+    android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:padding="4dp">
+            <ImageView
+                android:id="@+id/itemImageView"
+                android:layout_width="120dp"
+                android:layout_height="100dp"
+                android:contentDescription="image"
+                android:scaleType="centerCrop"
+                android:src="@drawable/img" />
+
+        </LinearLayout>
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
+            android:layout_weight="2"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/titleTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:text="Anthony Joshua v Deontay Wilder: Eddie Hearn tells Wilder 'show us the money'"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/descTv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/titleTv"
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp"
+                android:ellipsize="end"
+                android:text="Anthony Joshua wants to see the money before agreeing to Deontay Wilder's $50m (£35.9m) unification fight offer, says promoter Eddie Hearn. American heavyweight Wilder posted a video on Twitter showing WBO, IBF and WBA titles holder Joshua, 28, saying he would accept the fight for $50m."
+                android:textColor="@color/black"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/readmoreTv"
+                android:layout_width="80dp"
+                android:layout_height="25dp"
+                android:layout_below="@+id/descTv"
+                android:layout_gravity="center"
+                android:layout_marginBottom="5dp"
+                android:gravity="center"
+                android:padding="2dp"
+                android:text="Read More"
+                android:textAllCaps="true"
+                android:textColor="@color/Red"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+    </LinearLayout>
+
+
+
+
+
+
+

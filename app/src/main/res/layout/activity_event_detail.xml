@@ -30,7 +30,7 @@
          android:fontFamily="@font/estre"
          android:text="Emmanuael"
          android:textColor="@color/white"
-         android:textSize="17sp"/>
+         android:textSize="20sp"/>
  </RelativeLayout>
     <RelativeLayout
         android:layout_width="match_parent"
@@ -88,7 +88,7 @@
             android:fontFamily="@font/estre"
             android:text="1000 views"
             android:textColor="@color/black"
-            android:textSize="15sp"/>
+            android:textSize="18sp"/>
 
         <TextView
             android:id="@+id/dateTV"
@@ -133,7 +133,7 @@
             android:fontFamily="@font/estre"
             android:text="1,164"
             android:textColor="@color/black"
-            android:textSize="15sp"/>
+            android:textSize="18sp"/>
 
         <ImageView
             android:id="@+id/msg_img"
@@ -155,7 +155,7 @@
             android:fontFamily="@font/estre"
             android:text="1,164"
             android:textColor="@color/black"
-            android:textSize="15sp"/>
+            android:textSize="18sp"/>
     </RelativeLayout>
     <TextView
         android:id="@+id/descTV"
@@ -166,9 +166,8 @@
         android:padding="10dp"
         android:text="@string/dummy_data"
         android:textColor="@color/black"
-        android:textSize="13sp"/>
+        android:textSize="16sp"/>
     <TextView
-        android:id="@+id/descTV2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
@@ -176,7 +175,7 @@
         android:padding="10dp"
         android:text="@string/dummy_data"
         android:textColor="@color/black"
-        android:textSize="13sp"/>
+        android:textSize="16sp"/>
 
 </LinearLayout>
 </ScrollView>

@@ -22,6 +22,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -30,7 +31,7 @@ import com.mindinfo.xchangemall.xchangemall.activities.main.EnterLogin;
 import com.mindinfo.xchangemall.xchangemall.activities.main.MainActivity;
 import com.mindinfo.xchangemall.xchangemall.beans.categories;
 import com.mindinfo.xchangemall.xchangemall.storage.MySharedPref;
-import com.squareup.picasso.Picasso;
+
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -46,7 +47,7 @@ import java.util.regex.Pattern;
 
 import cz.msebera.android.httpclient.Header;
 
-import static com.mindinfo.xchangemall.xchangemall.activities.main.BaseActivity.BASE_URL_NEW;
+import static com.mindinfo.xchangemall.xchangemall.activities.BaseActivity.BASE_URL_NEW;
 import static com.mindinfo.xchangemall.xchangemall.activities.main.MainActivity.iscatChecked;
 import static com.mindinfo.xchangemall.xchangemall.activities.main.MainActivity.isdogChecked;
 import static com.mindinfo.xchangemall.xchangemall.storage.MySharedPref.NullData;
@@ -73,9 +74,11 @@ public class NetworkClass extends AppCompatActivity {
                 if (pcat.equals(str)) {
                     System.out.println("******* respose list cat ***");
                     System.out.println(jsonObject1);
-                    for (int j = 0; j < jsonObject1.length(); j++) {
-                        String count = String.valueOf(j);
-                        JSONObject joboj = jsonObject1.getJSONObject(count);
+
+                    JSONArray newjArray = jsonObject1.getJSONArray("data");
+                    for (int j = 0; j < newjArray.length(); j++)
+                    {
+                        JSONObject joboj = newjArray.getJSONObject(j);
                         String title = joboj.getString("title");
                         String id = joboj.getString("id");
                         categories cat = new categories(id, title);
@@ -119,10 +122,10 @@ public class NetworkClass extends AppCompatActivity {
                     int response_fav = response.getInt("status");
 
                     if (response_fav==1)
-                        Picasso.with(context).load(R.drawable.flag_green).into(holder);
+                        Glide.with(context).load(R.drawable.flag_green).into(holder);
 
                     else
-                        Picasso.with(context).load(R.drawable.flag_red).into(holder);
+                        Glide.with(context).load(R.drawable.flag_red).into(holder);
 
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -175,9 +178,9 @@ public class NetworkClass extends AppCompatActivity {
                 try {
                     String response_fav = response.getString("status");
                     if (response_fav.equals("1"))
-                        Picasso.with(context).load(R.drawable.fav).into(holder);
+                        Glide.with(context).load(R.drawable.fav).into(holder);
                     else if (response_fav.equals("0"))
-                        Picasso.with(context).load(R.drawable.favv).into(holder);
+                        Glide.with(context).load(R.drawable.favv).into(holder);
 
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -509,12 +512,6 @@ public class NetworkClass extends AppCompatActivity {
         params.put("timezone", timezone.getID());
         params.put("currency_code", currency_code);
 
-
-//        System.out.println("******* edtails for job post ***** ");
-//        System.out.println(experience_skills);
-//        System.out.println(job_responsibilities);
-//        System.out.println(title);
-//        System.out.println(job_salary);
         System.out.println("*************** featured image data in jobs***********");
 
         try {
@@ -704,6 +701,8 @@ public class NetworkClass extends AppCompatActivity {
         client.setTimeout(60 * 1000);
         client.setConnectTimeout(60 * 1000);
         client.setResponseTimeout(60 * 1000);
+
+        System.out.println("------ > job detail params ---------- > " + params);
         client.post(BASE_URL_NEW + "get_post_details", params, new JsonHttpResponseHandler() {
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 responseDEtailsOBJ = response;

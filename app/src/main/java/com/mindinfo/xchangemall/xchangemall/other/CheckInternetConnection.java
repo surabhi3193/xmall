@@ -27,10 +27,10 @@ import static com.mindinfo.xchangemall.xchangemall.storage.MySharedPref.saveData
 
 public class CheckInternetConnection extends Activity implements LocationListener
 {
-    private static final int MY_PERMISSIONS_REQUEST_LOCATION = 2;
-    static boolean grantLOc;
-    static String provider;
-    private static LocationManager locationManager;
+    private  final int MY_PERMISSIONS_REQUEST_LOCATION = 2;
+     boolean grantLOc;
+     String provider;
+    private  LocationManager locationManager;
 
     public static boolean isNetworkAvailable(Context context) {
 
@@ -45,52 +45,52 @@ public class CheckInternetConnection extends Activity implements LocationListene
 
 
 
-    public static  boolean checkLocationPermission(final Activity act) {
-        locationManager = (LocationManager)act.getSystemService(Context.LOCATION_SERVICE);
-
-        provider = locationManager.getBestProvider(new Criteria(), false);
-        if (ContextCompat.checkSelfPermission(act,
-                Manifest.permission.ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED)
-
-        {
-            grantLOc =false;
-            // Should we show an explanation?
-            if (ActivityCompat.shouldShowRequestPermissionRationale(act,
-                    Manifest.permission.ACCESS_FINE_LOCATION)) {
-
-                // Show an explanation to the user *asynchronously* -- don't block
-                // this thread waiting for the user's response! After the user
-                // sees the explanation, try again to request the permission.
-                new AlertDialog.Builder(act)
-                        .setTitle("Location")
-                        .setMessage("Please turn on your location ")
-                        .setPositiveButton("ok", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                //Prompt the user once explanation has been shown
-                                ActivityCompat.requestPermissions(act,
-                                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                                        MY_PERMISSIONS_REQUEST_LOCATION);
-                            }
-                        })
-                        .create()
-                        .show();
-
-
-            } else {
-                // No explanation needed, we can request the permission.
-                ActivityCompat.requestPermissions(act,
-                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                        MY_PERMISSIONS_REQUEST_LOCATION);
-            }
-            return grantLOc;
-        }
-
-        else {
-            return grantLOc;
-        }
-    }
+//    public static  boolean checkLocationPermission(final Activity act) {
+//        locationManager = (LocationManager)act.getSystemService(Context.LOCATION_SERVICE);
+//
+//        provider = locationManager.getBestProvider(new Criteria(), false);
+//        if (ContextCompat.checkSelfPermission(act,
+//                Manifest.permission.ACCESS_FINE_LOCATION)
+//                != PackageManager.PERMISSION_GRANTED)
+//
+//        {
+//            grantLOc =false;
+//            // Should we show an explanation?
+//            if (ActivityCompat.shouldShowRequestPermissionRationale(act,
+//                    Manifest.permission.ACCESS_FINE_LOCATION)) {
+//
+//                // Show an explanation to the user *asynchronously* -- don't block
+//                // this thread waiting for the user's response! After the user
+//                // sees the explanation, try again to request the permission.
+//                new AlertDialog.Builder(act)
+//                        .setTitle("Location")
+//                        .setMessage("Please turn on your location ")
+//                        .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialogInterface, int i) {
+//                                //Prompt the user once explanation has been shown
+//                                ActivityCompat.requestPermissions(act,
+//                                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+//                                        MY_PERMISSIONS_REQUEST_LOCATION);
+//                            }
+//                        })
+//                        .create()
+//                        .show();
+//
+//
+//            } else {
+//                // No explanation needed, we can request the permission.
+//                ActivityCompat.requestPermissions(act,
+//                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+//                        MY_PERMISSIONS_REQUEST_LOCATION);
+//            }
+//            return grantLOc;
+//        }
+//
+//        else {
+//            return grantLOc;
+//        }
+//    }
 
     @Override
     public void onRequestPermissionsResult(int requestCode,

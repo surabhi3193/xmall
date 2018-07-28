@@ -3,6 +3,7 @@ package com.mindinfo.xchangemall.xchangemall.activities.common;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -22,27 +23,26 @@ public class PaymentActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment);
-        ImageView back_arrowImage =(ImageView) findViewById(R.id.back_arrowImage);
+        ImageView back_arrowImage =findViewById(R.id.back_arrowImage);
 
-        TextView cvvHEaderTV = (TextView) findViewById(R.id.cvv_header);
-        TextView details_headerTV = (TextView) findViewById(R.id.details_header);
-        TextView paypal_headerTV = (TextView) findViewById(R.id.paypal_header);
+        TextView cvvHEaderTV =findViewById(R.id.cvv_header);
+        TextView details_headerTV =findViewById(R.id.details_header);
+        TextView paypal_headerTV =findViewById(R.id.paypal_header);
 
-        TextView accept_headerTV = (TextView) findViewById(R.id.accept_header);
-        TextView number_headertv = (TextView) findViewById(R.id.number_header);
-        TextView expiryHEaderTV = (TextView) findViewById(R.id.expiry_header);
-        TextView nameHeaderTV = (TextView) findViewById(R.id.name_header);
+        TextView accept_headerTV =findViewById(R.id.accept_header);
+        TextView number_headertv =findViewById(R.id.number_header);
+        TextView expiryHEaderTV =findViewById(R.id.expiry_header);
+        TextView nameHeaderTV =findViewById(R.id.name_header);
 
-        EditText  cvvEt = (EditText) findViewById(R.id.cvvET);
-        EditText  numberET = (EditText) findViewById(R.id.cardnumberET);
-        EditText  expiryET = (EditText) findViewById(R.id.expiryET);
-        EditText  nameET = (EditText) findViewById(R.id.nameET);
+        EditText  cvvEt =findViewById(R.id.cvvET);
+        EditText  numberET =findViewById(R.id.cardnumberET);
+        EditText  expiryET =findViewById(R.id.expiryET);
+        EditText  nameET =findViewById(R.id.nameET);
 
 
-       Button pay_btn = (Button) findViewById(R.id.pay_btn);
+       Button pay_btn =findViewById(R.id.pay_btn);
 
-        Typeface face = Typeface.createFromAsset(getApplicationContext().getAssets(),
-                "fonts/estre.ttf");
+        Typeface face = ResourcesCompat.getFont(PaymentActivity.this, R.font.estre);
         details_headerTV.setTypeface(face);
         paypal_headerTV.setTypeface(face);
         accept_headerTV.setTypeface(face);
@@ -56,22 +56,16 @@ public class PaymentActivity extends AppCompatActivity {
         numberET.setTypeface(face);
         expiryET.setTypeface(face);
         nameET.setTypeface(face);
-
-
-        pay_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getApplicationContext()," Payment Done ! " ,Toast.LENGTH_LONG).show();
-                startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                finish();
-            }
+        
+        pay_btn.setOnClickListener(view -> {
+            Toast.makeText(getApplicationContext()," Payment Done ! " ,Toast.LENGTH_LONG).show();
+            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            finish();
         });
-        back_arrowImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onBackPressed();
-                finish();
-            }
+
+        back_arrowImage.setOnClickListener(view -> {
+            onBackPressed();
+            finish();
         });
     }
 }

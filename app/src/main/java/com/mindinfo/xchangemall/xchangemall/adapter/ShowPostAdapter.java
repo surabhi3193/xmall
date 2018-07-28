@@ -2,6 +2,7 @@ package com.mindinfo.xchangemall.xchangemall.adapter;
 
 import android.content.Context;
 import android.graphics.Typeface;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -60,8 +61,7 @@ public class ShowPostAdapter extends BaseAdapter {
         viewHolder.nameTV.setText(alName.get(i));
         viewHolder.imgThumbnail.setImageResource(alImage.get(i));
 
-        Typeface face  = Typeface.createFromAsset(context.getAssets(),
-                "fonts/estre.ttf");
+        Typeface face  = ResourcesCompat.getFont(context, R.font.estre);
         viewHolder.nameTV.setTypeface(face);
 
 //        viewHolder.nameTV.setOnClickListener(new View.OnClickListener() {

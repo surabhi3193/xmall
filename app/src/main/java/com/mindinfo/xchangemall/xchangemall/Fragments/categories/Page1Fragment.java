@@ -6,6 +6,7 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -20,6 +21,7 @@ import com.mindinfo.xchangemall.xchangemall.adapter.EventHLVAdapter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Objects;
 
 public class Page1Fragment extends Fragment implements View.OnClickListener {
 
@@ -41,13 +43,13 @@ public class Page1Fragment extends Fragment implements View.OnClickListener {
         mRecyclerView.setHasFixedSize(true);
 
         DividerItemDecoration divider = new DividerItemDecoration(mRecyclerView.getContext(), DividerItemDecoration.VERTICAL);
-        divider.setDrawable(ContextCompat.getDrawable(getActivity().getApplicationContext(), R.drawable.my_custom_divider));
+        divider.setDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.my_custom_divider));
 
         mRecyclerView.addItemDecoration(divider);
-        mLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
+        mLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        mAdapter = new EventHLVAdapter(getActivity().getApplicationContext(), alName, alImage);
+        mAdapter = new EventHLVAdapter(getActivity(), alName, alImage);
         mRecyclerView.setAdapter(mAdapter);
 
         return v;
@@ -65,8 +67,7 @@ public class Page1Fragment extends Fragment implements View.OnClickListener {
         newsTV = (TextView) v.findViewById(R.id.newsTV);
         musicTV = (TextView) v.findViewById(R.id.musicTV);
 
-        Typeface face = Typeface.createFromAsset(getActivity().getApplicationContext().getAssets(),
-                "fonts/estre.ttf");
+        Typeface face = ResourcesCompat.getFont(Objects.requireNonNull(getActivity()), R.font.estre);
         event_owner_nameTV.setTypeface(face);
         viewsTv.setTypeface(face);
         dateTV.setTypeface(face);
@@ -86,24 +87,24 @@ public class Page1Fragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        Context context = getActivity().getApplicationContext();
+        Context context = getActivity();
         switch (v.getId()) {
             case R.id.poptv:
 
-               context.startActivity(new Intent(getActivity().getApplicationContext(),
+               context.startActivity(new Intent(getActivity(),
                         EventByCat.class).putExtra("title_name", "Popular")
                         .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
                 getActivity().overridePendingTransition(R.anim.push_up_in, R.anim.push_up_in);
                 break;
             case R.id.newsTV:
 
-                getActivity().getApplicationContext().startActivity(new Intent(getActivity().getApplicationContext(),
+                getActivity().startActivity(new Intent(getActivity(),
                         EventByCat.class).putExtra("title_name", "News")
                         .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
                 getActivity().overridePendingTransition(R.anim.push_up_in, R.anim.push_up_in);
                 break;
             case R.id.musicTV:
-                getActivity().getApplicationContext().startActivity(new Intent(getActivity().getApplicationContext(),
+                getActivity().startActivity(new Intent(getActivity(),
                         EventByCat.class).putExtra("title_name", "Music")
                         .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
                 getActivity().overridePendingTransition(R.anim.push_up_in, R.anim.push_up_in);

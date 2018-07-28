@@ -10,7 +10,6 @@ import android.widget.Toast;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
-import com.mindinfo.xchangemall.xchangemall.SinchActivity.IncomingCallScreenActivity;
 import com.sinch.android.rtc.AudioController;
 import com.sinch.android.rtc.ClientRegistration;
 import com.sinch.android.rtc.Sinch;
@@ -26,16 +25,15 @@ import org.json.JSONObject;
 
 import cz.msebera.android.httpclient.Header;
 
-import static com.mindinfo.xchangemall.xchangemall.activities.main.BaseActivity.BASE_URL_NEW;
+import static com.mindinfo.xchangemall.xchangemall.activities.BaseActivity.BASE_URL_NEW;
 
 public class SinchService extends Service {
 
 
-    public static final String CALL_ID = "CALL_ID";
+
     static final String TAG = SinchService.class.getSimpleName();
     public static String APP_KEY = "ee0bc80f-cec7-48ab-b8e0-0c203976ee86";
     public static String APP_SECRET = "0/6uOx1yA0yb3wNc56W3ug==";
-    private static String ENVIRONMENT = "sandbox.sinch.com";
     private SinchServiceInterface mSinchServiceInterface = new SinchServiceInterface();
     private SinchClient mSinchClient;
     private String mUserId;
@@ -65,6 +63,7 @@ public class SinchService extends Service {
     private void start(String userName) {
         if (mSinchClient == null) {
             mUserId = userName;
+            String ENVIRONMENT = "sandbox.sinch.com";
             mSinchClient = Sinch.getSinchClientBuilder().context(getApplicationContext()).userId(userName)
                     .applicationKey(APP_KEY)
                     .applicationSecret(APP_SECRET)
@@ -115,11 +114,11 @@ public class SinchService extends Service {
                     } else {
 
                         username = responseobj.getJSONObject("result").getString("first_name");
-                        Intent intent = new Intent(SinchService.this, IncomingCallScreenActivity.class);
-                        intent.putExtra(CALL_ID, call.getCallId());
-                        intent.putExtra("CALLER_NAME", username);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        SinchService.this.startActivity(intent);
+//                        Intent intent = new Intent(SinchService.this, IncomingCallScreenActivity.class);
+//                        intent.putExtra(CALL_ID, call.getCallId());
+//                        intent.putExtra("CALLER_NAME", username);
+//                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                        SinchService.this.startActivity(intent);
 
                     }
                 } catch (Exception e) {
@@ -250,7 +249,4 @@ public class SinchService extends Service {
 
         }
     }
-
-
-
 }

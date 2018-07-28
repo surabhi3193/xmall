@@ -1,24 +1,23 @@
 package com.mindinfo.xchangemall.xchangemall.adapter;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Typeface;
-import android.support.v4.app.FragmentManager;
+import android.support.annotation.NonNull;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.LinearLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.mindinfo.xchangemall.xchangemall.R;
-import com.mindinfo.xchangemall.xchangemall.activities.communityActivities.MessageBoxActivity;
-import com.mindinfo.xchangemall.xchangemall.beans.ItemsMain;
+import com.mindinfo.xchangemall.xchangemall.activities.main.MessageBoxActivity;
+import com.mindinfo.xchangemall.xchangemall.beans.Call;
+import com.mindinfo.xchangemall.xchangemall.beans.Chat;
 
-import org.json.JSONArray;
-
-import java.util.List;
+import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -27,29 +26,49 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * Created by Mind Info- Android on 09-Nov-17.
  */
 
-public class CallAdapter extends BaseAdapter {
+public class CallAdapter extends RecyclerView.Adapter<CallAdapter.ViewHolder> {
 
-    FragmentManager fm;
-    String user_id;
     private Activity context;
+    private String act_name;
+    private ArrayList<Call> dataSet;
 
-    public CallAdapter(Activity context, List<ItemsMain> albumList, JSONArray jobj, String fragment_name) {
+    public CallAdapter(ArrayList<Call> data, Activity context) {
+        this.dataSet = data;
         this.context = context;
     }
 
+    @NonNull
+    @Override
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View itemView = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.itemlist_call, parent, false);
 
-    public CallAdapter(Activity context) {
-        this.context = context;
+        return new ViewHolder(itemView);
     }
 
     @Override
-    public int getCount() {
-        return 6;
-    }
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        final Call call = dataSet.get(position);
 
-    @Override
-    public Object getItem(int i) {
-        return null;
+        holder.textview_sender_name.setText(call.getSender_name());
+        holder.textview_time.setText(call.getdate());
+
+        Glide.with(context).load(call.getsender_pic()).apply(RequestOptions
+                .placeholderOf(R.drawable.profile_bg)).into(holder.iv_pic);
+
+        if (call.isAudio())
+            holder.iv_call.setImageResource(R.drawable.ic_audio);
+        else if (!call.isAudio())
+            holder.iv_call.setImageResource(R.drawable.ic_video);
+
+
+//        holder.itemView.setOnClickListener(view1 -> {
+//            Intent i =new Intent(context, MessageBoxActivity.class);
+//            i.putExtra("sender_name",call.getSender_name());
+//            i.putExtra("sender_pic",call.getsender_pic());
+//            context.startActivity(i);
+//
+//        });
     }
 
     @Override
@@ -57,69 +76,25 @@ public class CallAdapter extends BaseAdapter {
         return 0;
     }
 
-    @SuppressLint("ResourceAsColor")
     @Override
-    public View getView(int position, View view, ViewGroup parent) {
-        LayoutInflater inflater = context.getLayoutInflater();
-        @SuppressLint("ViewHolder") View rowView = inflater.inflate(R.layout.itemlist_call, null, true);
-        final ViewHolder holder = new ViewHolder();
-
-
-        holder.ItemPriceText = (TextView) rowView.findViewById(R.id.ItemPriceText);
-        holder.ItemTitleText = (TextView) rowView.findViewById(R.id.ItemTitleText);
-        holder.time_TV = (TextView) rowView.findViewById(R.id.time_TV);
-        holder.itemImageView = (CircleImageView) rowView.findViewById(R.id.itemImageView);
-        holder.mainLay = (LinearLayout) rowView.findViewById(R.id.mainLay);
-
-
-        Typeface face = Typeface.createFromAsset(context.getAssets(),
-                "fonts/estre.ttf");
-        holder.ItemPriceText.setTypeface(face);
-        holder.ItemTitleText.setTypeface(face);
-        holder.time_TV.setTypeface(face);
-//        String address = "";
-//        try {
-//            double lat = Double.parseDouble(responseobj.getString("latitude"));
-//            double lng = Double.parseDouble(responseobj.getString("longitude"));
-//
-//            address = getAddressFromLatlng(new LatLng(lat, lng), context, 0);
-//
-//            String jobtype = responseobj.getString("job_type");
-//            String salary = responseobj.getString("salary_as_per");
-//            String job_cat = responseobj.getString("category_name");
-//
-//            holder.ItemPriceText.setText(address);
-//            holder.ItemTitleText.setText(job_cat);
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//        }
-//
-//        String[] image_array = album.getItem_image().split("~");
-//        System.out.println("********* item image *******");
-//        System.out.println(image_array[0]);
-//
-//        Picasso.with(context)
-//                .load(image_array[0])
-//                .placeholder(R.drawable.no_img)
-//                .into(holder.itemImageView);
-
-
-        holder.mainLay.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                context.startActivity(new Intent(context, MessageBoxActivity.class));
-
-            }
-        });
-
-        return rowView;
+    public int getItemCount() {
+        return dataSet.size();
     }
 
+    class ViewHolder extends RecyclerView.ViewHolder {
+        public TextView textview_sender_name, textview_time;
+        public CircleImageView iv_pic;
+        public ImageView iv_call;
 
-    class ViewHolder {
-        public TextView ItemPriceText, ItemTitleText, time_TV;
-        public CircleImageView itemImageView;
-        LinearLayout mainLay;
+
+        public ViewHolder(View rowView) {
+            super(rowView);
+            textview_sender_name = rowView.findViewById(R.id.textview_sender_name);
+            iv_call = rowView.findViewById(R.id.iv_call);
+            textview_time = rowView.findViewById(R.id.textview_time);
+            iv_pic = rowView.findViewById(R.id.iv_pic);
+
+        }
     }
 
 }

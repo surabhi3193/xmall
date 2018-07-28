@@ -41,7 +41,6 @@
 
     </RelativeLayout>
 <ScrollView
-    android:id="@+id/scrolview"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_below="@+id/toolbar"
@@ -83,7 +82,7 @@
                 android:layout_weight="5"
                 android:text="@string/safe_payment_online_credit_card_needed"
                 android:textColor="@color/black"
-                android:textSize="13sp"/>
+                android:textSize="16sp"/>
             
             <ImageView
                 android:layout_width="0dp"
@@ -105,7 +104,7 @@
                 android:text="We Accept"
                 android:textAllCaps="true"
                 android:textColor="@color/black"
-                android:textSize="13sp"/>
+                android:textSize="16sp"/>
 
             <ImageView
                 android:layout_width="0dp"
@@ -121,7 +120,7 @@
             android:layout_margin="10dp"
             android:text="@string/credit_card_number"
             android:textColor="@color/black"
-            android:textSize="15sp" />
+            android:textSize="18sp" />
 
         <EditText
             android:id="@+id/cardnumberET"
@@ -132,7 +131,7 @@
             android:inputType="number"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
-            android:textSize="13sp" />
+            android:textSize="16sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -151,7 +150,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/cvv_code"
                     android:textColor="@color/black"
-                    android:textSize="15sp"/>
+                    android:textSize="18sp"/>
                 <EditText
                     android:id="@+id/cvvET"
                     android:layout_width="match_parent"
@@ -179,7 +178,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/expiry_date"
                     android:textColor="@color/black"
-                    android:textSize="15sp"/>
+                    android:textSize="18sp"/>
                 <EditText
                     android:id="@+id/expiryET"
                     android:layout_width="match_parent"
@@ -194,7 +193,7 @@
             android:layout_margin="10dp"
             android:text="@string/name_on_card"
             android:textColor="@color/black"
-            android:textSize="15sp" />
+            android:textSize="18sp" />
 
         <EditText
             android:id="@+id/nameET"
@@ -205,7 +204,7 @@
             android:inputType="number"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
-            android:textSize="13sp" />
+            android:textSize="16sp" />
 
     </LinearLayout>
 </ScrollView>

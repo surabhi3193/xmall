@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.content.res.ResourcesCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,23 +16,18 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.daimajia.slider.library.SliderLayout;
-import com.daimajia.slider.library.SliderTypes.BaseSliderView;
-import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.mindinfo.xchangemall.xchangemall.R;
 import com.mindinfo.xchangemall.xchangemall.activities.main.MainActivity;
 import com.mynameismidori.currencypicker.CurrencyPicker;
 import com.mynameismidori.currencypicker.CurrencyPickerListener;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Currency;
-import java.util.HashMap;
 import java.util.Locale;
+import java.util.Objects;
 
 import static com.mindinfo.xchangemall.xchangemall.Constants.NetworkClass.checkData;
 import static com.mindinfo.xchangemall.xchangemall.Constants.NetworkClass.saveDatatoLocal;
@@ -41,14 +37,14 @@ import static com.mindinfo.xchangemall.xchangemall.storage.MySharedPref.getData;
 import static com.mindinfo.xchangemall.xchangemall.storage.MySharedPref.saveData;
 
 
-public class Postyour4Add extends Fragment implements View.OnClickListener{
+public class Postyour4Add extends Fragment implements View.OnClickListener {
 
     public static Typeface face;
     ArrayList<String> imageSet = new ArrayList<String>();
     ArrayList<String> categoryids = new ArrayList<String>();
     Context context;
     private Button next_btn;
-    private TextView  currencyTV;
+    private TextView currencyTV;
     private ImageButton back_arrowImage;
     private EditText postTitleEditText, postDescriptionEditText, priceEditText, sizeEditText, conditionEditText;
     //Fragment Manager
@@ -62,11 +58,10 @@ public class Postyour4Add extends Fragment implements View.OnClickListener{
 
         View v = inflater.inflate(R.layout.postyour4add, null);
 
-        face = Typeface.createFromAsset(getActivity().getApplicationContext().getAssets(),
-                "fonts/estre.ttf");
+        face = ResourcesCompat.getFont(Objects.requireNonNull(getActivity()), R.font.estre);
         fm = getActivity().getSupportFragmentManager();
 
-        context = getActivity().getApplicationContext();
+        context = getActivity();
         findItem(v);
         onClickOnItem(v);
 
@@ -80,7 +75,7 @@ public class Postyour4Add extends Fragment implements View.OnClickListener{
 
 
         }
-        MainCatType=getData(getActivity().getApplicationContext(),"pcat_id","");
+        MainCatType = getData(getActivity(), "pcat_id", "");
         return v;
     }
 
@@ -108,7 +103,7 @@ public class Postyour4Add extends Fragment implements View.OnClickListener{
 
 
         Locale locale = Locale.getDefault();
-        Log.d("IssuesEtc","the local is " + locale);
+        Log.d("IssuesEtc", "the local is " + locale);
 
         Currency currency = Currency.getInstance(locale);
 
@@ -116,19 +111,19 @@ public class Postyour4Add extends Fragment implements View.OnClickListener{
         System.out.println(currency.getCurrencyCode());
         System.out.println(currency.getSymbol());
 
-        String code,symbol;
-        code=currency.getCurrencyCode();
+        String code, symbol;
+        code = currency.getCurrencyCode();
         symbol = currency.getSymbol();
 
-        saveData(getActivity().getApplicationContext(),"currency_code",code);
-        saveData(getActivity().getApplicationContext(),"currency_symbol",symbol);
+        saveData(getActivity(), "currency_code", code);
+        saveData(getActivity(), "currency_symbol", symbol);
 
-        currencyTV.setText(code+symbol);
+        currencyTV.setText(code + symbol);
 
 
-        if (getData(getActivity().getApplicationContext(),"first_entry","")!=null) {
+        if (getData(getActivity(), "first_entry", "") != null) {
 
-            if (getData(getActivity().getApplicationContext(), "first_entry", "").equals("false")) {
+            if (getData(getActivity(), "first_entry", "").equals("false")) {
 
 
                 checkData("title_data", postTitleEditText, context);
@@ -172,8 +167,7 @@ public class Postyour4Add extends Fragment implements View.OnClickListener{
                 }
 
 
-                saveData(getActivity().getApplicationContext(),"first_entry","false");
-
+                saveData(getActivity(), "first_entry", "false");
                 Bundle bundle = new Bundle();
                 bundle.putStringArrayList("imageSet", imageSet);
                 bundle.putString("postTitle", postTitleEditText.getText().toString());
@@ -194,7 +188,7 @@ public class Postyour4Add extends Fragment implements View.OnClickListener{
 
             case R.id.back_arrowImage:
 
-                saveData(getActivity().getApplicationContext(),"first_entry","false");
+                saveData(getActivity(), "first_entry", "false");
 
                 saveValue();
                 getActivity().onBackPressed();
@@ -223,8 +217,8 @@ public class Postyour4Add extends Fragment implements View.OnClickListener{
 
                         currencyTV.setText(mcode + symbol);
 
-                        saveData(getActivity().getApplicationContext(),"currency_code",mcode);
-                        saveData(getActivity().getApplicationContext(),"currency_symbol",symbol);
+                        saveData(getActivity(), "currency_code", mcode);
+                        saveData(getActivity(), "currency_symbol", symbol);
 
 
                         picker.dismiss();
@@ -236,11 +230,11 @@ public class Postyour4Add extends Fragment implements View.OnClickListener{
     }
 
     private void saveValue() {
-        saveDatatoLocal("title_data", postTitleEditText,context);
-        saveDatatoLocal("desc_data", postDescriptionEditText,context);
-        saveDatatoLocal("price_data", priceEditText,context);
-        saveDatatoLocal("condition_data", conditionEditText,context);
-        saveDatatoLocal("size_data", sizeEditText,context);
+        saveDatatoLocal("title_data", postTitleEditText, context);
+        saveDatatoLocal("desc_data", postDescriptionEditText, context);
+        saveDatatoLocal("price_data", priceEditText, context);
+        saveDatatoLocal("condition_data", conditionEditText, context);
+        saveDatatoLocal("size_data", sizeEditText, context);
     }
 
     private void OpenMainActivity() {

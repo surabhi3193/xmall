@@ -29,7 +29,7 @@ public class SaveSearchFragment extends Fragment {
         View v = inflater.inflate(R.layout.savesearchfragment,null);
 
 
-        String user_id = getData(getActivity().getApplicationContext(),"user_id","");
+        String user_id = getData(getActivity(),"user_id","");
 //        getUserSav(user_id);
         adapter = new MyFavAdapter(getActivity(),itemList);
         rvMyFav = (ListView) v.findViewById(R.id.rvMyFav);

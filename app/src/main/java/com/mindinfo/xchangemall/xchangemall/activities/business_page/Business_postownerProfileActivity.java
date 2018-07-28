@@ -2,39 +2,50 @@ package com.mindinfo.xchangemall.xchangemall.activities.business_page;
 
 import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import android.media.MediaMetadataRetriever;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
-import android.support.v7.app.AppCompatActivity;
-import android.view.MotionEvent;
+import android.support.v4.view.ViewPager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ImageView;
-import android.widget.ListAdapter;
-import android.widget.ListView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
-import com.daimajia.slider.library.SliderLayout;
-import com.daimajia.slider.library.SliderTypes.BaseSliderView;
-import com.daimajia.slider.library.SliderTypes.TextSliderView;
+import com.bumptech.glide.Glide;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.mindinfo.xchangemall.xchangemall.R;
+import com.mindinfo.xchangemall.xchangemall.activities.BaseActivity;
+import com.mindinfo.xchangemall.xchangemall.adapter.HLVAdapter;
 import com.mindinfo.xchangemall.xchangemall.adapter.HoursAdapter;
-import com.mindinfo.xchangemall.xchangemall.other.StretchVideoView;
-import com.squareup.picasso.Picasso;
+import com.mindinfo.xchangemall.xchangemall.adapter.SliderAdapter2;
+import com.mindinfo.xchangemall.xchangemall.services.CallService;
+import com.mindinfo.xchangemall.xchangemall.webrtc.activities.CallActivity;
+import com.mindinfo.xchangemall.xchangemall.webrtc.classes.Toaster;
+import com.mindinfo.xchangemall.xchangemall.webrtc.classes.WebRtcSessionManager;
+import com.mindinfo.xchangemall.xchangemall.webrtc.classes.utils.CollectionsUtils;
+import com.quickblox.chat.QBChatService;
+import com.quickblox.chat.QBSignaling;
+import com.quickblox.chat.QBWebRTCSignaling;
+import com.quickblox.chat.listeners.QBVideoChatSignalingManagerListener;
+import com.quickblox.core.QBEntityCallback;
+import com.quickblox.core.exception.QBResponseException;
+import com.quickblox.users.model.QBUser;
+import com.quickblox.videochat.webrtc.QBRTCClient;
+import com.quickblox.videochat.webrtc.QBRTCSession;
+import com.quickblox.videochat.webrtc.QBRTCTypes;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -43,37 +54,20 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import me.relex.circleindicator.CircleIndicator;
 
-import static com.mindinfo.xchangemall.xchangemall.activities.main.BaseActivity.DEFAULT_PATH;
+import static com.quickblox.videochat.webrtc.QBRTCTypes.QBConferenceType.QB_CONFERENCE_TYPE_VIDEO;
 
-public class Business_postownerProfileActivity extends AppCompatActivity implements BaseSliderView.OnSliderClickListener {
-    ArrayList<String> imageSet = new ArrayList<String>();
-    GoogleMap map;
-    boolean isplaying = false;
+public class Business_postownerProfileActivity extends BaseActivity {
+    private static final String TAG = "BUSINESS PROFILE";
+    RecyclerView mRecyclerView;
+    private ArrayList<Uri> imageSet = new ArrayList<Uri>();
+    private GoogleMap map;
     private Marker marker;
-
-    public static void setListViewHeightBasedOnChildren(ListView listView) {
-        ListAdapter listAdapter = listView.getAdapter();
-        if (listAdapter == null)
-            return;
-
-        int desiredWidth = View.MeasureSpec.makeMeasureSpec(listView.getWidth(), View.MeasureSpec.UNSPECIFIED);
-        int totalHeight = 0;
-        View view = null;
-        for (int i = 0; i < listAdapter.getCount(); i++) {
-            view = listAdapter.getView(i, view, listView);
-            if (i == 0)
-                view.setLayoutParams(new ViewGroup.LayoutParams(desiredWidth, ViewGroup.LayoutParams.WRAP_CONTENT));
-
-            view.measure(desiredWidth, View.MeasureSpec.UNSPECIFIED);
-            totalHeight += view.getMeasuredHeight();
-        }
-        ViewGroup.LayoutParams params = listView.getLayoutParams();
-        params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
-        listView.setLayoutParams(params);
-    }
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @SuppressLint("ClickableViewAccessibility")
@@ -85,9 +79,10 @@ public class Business_postownerProfileActivity extends AppCompatActivity impleme
         this.getWindow().setSoftInputMode(WindowManager.
                 LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
-        ListView list = findViewById(R.id.hourList);
+        RecyclerView list = findViewById(R.id.hourList);
+        ViewPager mPager = findViewById(R.id.pager);
+        CircleIndicator indicator = findViewById(R.id.indicator);
 
-        SliderLayout imageSlider = findViewById(R.id.slider);
         TextView title_TV = findViewById(R.id.title_TV);
         TextView owner_nameTV = findViewById(R.id.owner_nameTV);
         TextView post_timeTV = findViewById(R.id.post_timeTV);
@@ -98,26 +93,34 @@ public class Business_postownerProfileActivity extends AppCompatActivity impleme
         TextView descTV = findViewById(R.id.descTV);
         TextView socialTV = findViewById(R.id.socialTV);
         TextView locationNameTV = findViewById(R.id.locationName);
-//        ScrollView scrollview = findViewById(R.id.scrollview);
-//        final StretchVideoView videoView = findViewById(R.id.videoView);
         CircleImageView profile_image = findViewById(R.id.profile_image);
+        mRecyclerView = findViewById(R.id.recycler_view_photo);
+        LinearLayout video_call = findViewById(R.id.video_call);
+        RecyclerView mRecyclerView_vdo = findViewById(R.id.recycler_view_vdo);
 
         ImageView back_arrowImage = findViewById(R.id.back_arrowImage);
-        back_arrowImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-                finish();
-            }
-        });
+        list.setFocusable(false);
+        list.setHasFixedSize(true);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(Business_postownerProfileActivity.this);
+        list.setLayoutManager(mLayoutManager);
 
-//        scrollview.setOnScrollChangeListener(new View.OnScrollChangeListener() {
-//            @Override
-//            public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
-//                videoView.pause();
-//                isplaying=false;
-//            }
-//        });
+        mLayoutManager = new LinearLayoutManager(Business_postownerProfileActivity.this, LinearLayoutManager.HORIZONTAL, false);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+
+        RecyclerView.LayoutManager mLayoutManager_vdo = new LinearLayoutManager(Business_postownerProfileActivity.this, LinearLayoutManager.HORIZONTAL, false);
+        mRecyclerView_vdo.setLayoutManager(mLayoutManager_vdo);
+
+        ArrayList<String> alName = new ArrayList<>(Arrays.asList("", "", "", "", ""));
+        ArrayList<Integer> alImgVdo = new ArrayList<>(Arrays.asList(R.drawable.youtube_dummy2, R.drawable.youtube_dummy1, R.drawable.youtube_dummy2));
+
+        RecyclerView.Adapter mAdapter_vdo = new HLVAdapter(Business_postownerProfileActivity.this, alName, alImgVdo);
+        mRecyclerView_vdo.setAdapter(mAdapter_vdo);
+
+
+        back_arrowImage.setOnClickListener(v -> {
+            onBackPressed();
+            finish();
+        });
         Bundle bundle = getIntent().getExtras();
 
         if (bundle != null) {
@@ -127,7 +130,6 @@ public class Business_postownerProfileActivity extends AppCompatActivity impleme
 
                 System.err.println("==== response for business services=========");
                 System.err.println(response);
-
                 String cat = responseObj.getString("category");
                 final String profile = responseObj.getString("profile_photo");
                 String ownername = responseObj.getString("first_name");
@@ -140,9 +142,9 @@ public class Business_postownerProfileActivity extends AppCompatActivity impleme
                 String locationName = responseObj.getString("address");
                 String imageArray = responseObj.getString("featured_img");
                 String video_url = responseObj.getString("video_url");
-                JSONArray operationArray = responseObj.getJSONArray("hours_of_operation");
                 double post_lat = Double.parseDouble(responseObj.getString("latitude"));
                 double post_lng = Double.parseDouble(responseObj.getString("longitude"));
+                JSONArray operationArray = responseObj.getJSONArray("hours_of_operation");
 
 //                videoView.setVideoPath(video_url);
 ////                Bitmap bm = setVideoThumbnail(video_url);
@@ -168,21 +170,14 @@ public class Business_postownerProfileActivity extends AppCompatActivity impleme
 //                });
 
 
-                String[] uris = imageArray.split(",");
-
-                if (imageSet.size() > 0)
-                    imageSet.clear();
-
-                imageSet = new ArrayList<String>(Arrays.asList(uris));
-
+                HoursAdapter adapter2 = new HoursAdapter(Business_postownerProfileActivity.this, operationArray);
+                list.setAdapter(adapter2);
 
                 if (profile.length() > 0 && profile != null) {
-                    Picasso.with(Business_postownerProfileActivity.this)
+                    Glide.with(Business_postownerProfileActivity.this)
                             .load(profile)
-                            .placeholder(R.drawable.profile)
                             .into(profile_image);
                 }
-
                 title_TV.setText(cat);
                 owner_nameTV.setText(ownername);
                 aboutTV.setText(about);
@@ -193,228 +188,209 @@ public class Business_postownerProfileActivity extends AppCompatActivity impleme
                 categoryTV.setText(cat);
                 websiteTV.setText(website_link);
                 post_timeTV.setText("Ad Posted At : " + posttime);
-
                 forMapView(post_lat, post_lng);
+                String[] uris = imageArray.split(",");
 
-                HashMap<String, String> url_maps = new HashMap<String, String>();
+                if (imageSet.size() > 0)
+                    imageSet.clear();
 
-                for (int i = 0; i < imageSet.size(); i++) {
-                    url_maps.put("image" + i, imageSet.get(i));
+                for (String uri : uris) {
+                    imageSet.add(Uri.parse(uri));
 
                 }
-                for (String name : url_maps.keySet()) {
-                    TextSliderView textSliderView = new TextSliderView(this);
-                    // initialize a SliderLayout
-                    textSliderView
-                            .description(name)
-                            .image(url_maps.get(name))
-                            .setScaleType(BaseSliderView.ScaleType.CenterInside)
-                            .setOnSliderClickListener(this);
+                mPager.setAdapter(new SliderAdapter2(Business_postownerProfileActivity.this, imageSet));
 
-                    //add your extra information
-                    textSliderView.bundle(new Bundle());
-                    textSliderView.getBundle()
-                            .putString("extra", name);
+                mPager.setBackgroundColor(getResources().getColor(R.color.black));
+                indicator.setViewPager(mPager);
 
-                    imageSlider.stopAutoCycle();
-                    imageSlider.clearAnimation();
-                    imageSlider.addSlider(textSliderView);
-                }
-
-                profile_image.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        openProfilePic(profile);
-                    }
-                });
-
-                if (operationArray.length() > 0) {
-                    ArrayList<String> daylist = new ArrayList<String>();
-                    ArrayList<String> startlist = new ArrayList<String>();
-                    ArrayList<String> endlist = new ArrayList<String>();
-
-                    for (int i = 0; i < operationArray.length(); i++) {
-                        System.err.println("==== obj ==== " + i);
-                        JSONObject json_data = operationArray.getJSONObject(i);
-
-                        daylist.add(json_data.getString("days")); //add to arraylist
-                        startlist.add(json_data.getString("open_time")); //add to arraylist
-                        endlist.add(json_data.getString("close_time")); //add to arraylist
-                    }
-
-                    String[] dayArray = daylist.toArray(new String[daylist.size()]);
-                    String[] startArray = startlist.toArray(new String[startlist.size()]);
-                    String[] endArray = endlist.toArray(new String[endlist.size()]);
-
-                    HoursAdapter adapter = new HoursAdapter(Business_postownerProfileActivity.this,
-                            dayArray, startArray, endArray);
-                    setListViewHeightBasedOnChildren(list);
-                    list.setAdapter(adapter);
-                }
-
-//
-//                list.setOnTouchListener(new ListView.OnTouchListener() {
-//                    @Override
-//                    public boolean onTouch(View v, MotionEvent event) {
-//                        int action = event.getAction();
-//                        switch (action) {
-//                            case MotionEvent.ACTION_DOWN:
-//                                // Disallow ScrollView to intercept touch events.
-//                                v.getParent().requestDisallowInterceptTouchEvent(true);
-//                                break;
-//
-//                            case MotionEvent.ACTION_UP:
-//                                // Allow ScrollView to intercept touch events.
-//                                v.getParent().requestDisallowInterceptTouchEvent(false);
-//                                break;
-//                        }
-//
-//                        // Handle ListView touch events.
-//                        v.onTouchEvent(event);
-//                        return true;
-//                    }
-//                });
-
+                profile_image.setOnClickListener(v -> openProfilePic(profile));
+                HLVAdapter mAdapter = new HLVAdapter(Business_postownerProfileActivity.this, imageSet, "business");
+                mRecyclerView.setAdapter(mAdapter);
+                mAdapter.notifyDataSetChanged();
 
             } catch (JSONException e) {
                 e.printStackTrace();
-            } catch (Throwable throwable) {
-
-
             }
         }
 
-    }
-
-    private Bitmap setVideoThumbnail(String video_url) throws Throwable{
-
-            Bitmap bitmap = null;
-            MediaMetadataRetriever mediaMetadataRetriever = null;
-            try
-            {
-                mediaMetadataRetriever = new MediaMetadataRetriever();
-                if (Build.VERSION.SDK_INT >= 14)
-                    mediaMetadataRetriever.setDataSource(video_url, new HashMap<String, String>());
-                else
-                    mediaMetadataRetriever.setDataSource(video_url);
-                //   mediaMetadataRetriever.setDataSource(videoPath);
-                bitmap = mediaMetadataRetriever.getFrameAtTime();
-            } catch (Exception e) {
-                e.printStackTrace();
-                throw new Throwable("Exception in retriveVideoFrameFromVideo(String videoPath)" + e.getMessage());
-
-            } finally {
-                if (mediaMetadataRetriever != null) {
-                    mediaMetadataRetriever.release();
-                }
-            }
-            return bitmap;
-
-    }
-
-    @Override
-    public void onSliderClick(BaseSliderView slider) {
-
-        System.out.println("************ slider clicked ************");
-        final RelativeLayout open = (RelativeLayout) findViewById(R.id.fullsliderlay);
-        final SliderLayout imageSlider2 = (SliderLayout) findViewById(R.id.slidefullr);
-
-        ImageView close = (ImageView) findViewById(R.id.close_slider);
-        open.setVisibility(View.VISIBLE);
-        imageSlider2.setVisibility(View.VISIBLE);
-
-        HashMap<String, String> url_maps = new HashMap<String, String>();
-
-        for (int i = 0; i < imageSet.size(); i++) {
-            url_maps.put("image" + i, imageSet.get(i));
-
-        }
-        for (String name : url_maps.keySet()) {
-            TextSliderView textSliderView = new TextSliderView(this);
-            // initialize a SliderLayout
-            textSliderView
-                    .description(name)
-                    .image(url_maps.get(name))
-                    .setScaleType(BaseSliderView.ScaleType.CenterInside);
-
-            //add your extra information
-            textSliderView.bundle(new Bundle());
-            textSliderView.getBundle()
-                    .putString("extra", name);
-            imageSlider2.addSlider(textSliderView);
-            imageSlider2.stopAutoCycle();
-            imageSlider2.clearAnimation();
-        }
-
-
-        close.setOnClickListener(new View.OnClickListener() {
+        video_call.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                open.setVisibility(View.GONE);
-                imageSlider2.setVisibility(View.GONE);
-                imageSet.clear();
+            public void onClick(View v) {
+
+                QBUser qbUser = new QBUser("testuser4","x6Bt0VDy5");
+                Log.d(TAG, " in user ------ " + qbUser.getLogin());
+                Log.d(TAG, " in user ------ " + qbUser.getPassword());
+                Log.d(TAG, " in user ------ " + qbUser.getId());
+
+                qbUser.setId(54633368);
+
+
+                QBChatService.getInstance().login(qbUser, new QBEntityCallback() {
+
+                    @Override
+                    public void onSuccess(Object o, Bundle bundle) {
+                        System.out.println("---------- login success to chat ");
+
+                    }
+
+                    @Override
+                    public void onError(QBResponseException errors) {
+                        System.out.println("---------- login fail to chat ");                    }
+                });
+
+//                if (isLoggedInChat()) {
+//                     qbUser =  QBChatService.getInstance().getUser();
+//                    Log.d(TAG, "Logged in user ------ " + qbUser.getLogin());
+//                    Log.d(TAG, "Logged in user ------ " + qbUser.getPassword());
+////                    startCall(true);
+//
+//                    QBRTCClient.getInstance(Business_postownerProfileActivity.this).addSessionCallbacksListener(new CallActivity());
+//                    QBRTCTypes.QBConferenceType qbConferenceType = QB_CONFERENCE_TYPE_VIDEO;
+//                    List<Integer> opponents = new ArrayList<Integer>();
+//                    opponents.add(54638796); //12345 - QBUser ID
+//                    //Set user information
+//                    Map<String, String> userInfo = new HashMap<>();
+//                    userInfo.put("key", "value");
+//                    //Init session
+//                    QBRTCSession session = QBRTCClient.getInstance(Business_postownerProfileActivity.this).createNewSessionWithOpponents(opponents, qbConferenceType);
+//                    //Start call
+//                    session.startCall(userInfo);
+//                }
+
             }
         });
 
     }
 
+
+
+
+    private void startCall(boolean isVideoCall) {
+
+        System.out.println("---------- startcall---------");
+        Log.d(TAG, "startCall()");
+//        ArrayList<Integer> opponentsList = CollectionsUtils.getIdsSelectedOpponents(opponentsAdapter.getSelectedItems());
+
+        ArrayList<Integer> opponentsList = new ArrayList<>();
+        opponentsList.add(54638796);
+
+        QBRTCTypes.QBConferenceType conferenceType = isVideoCall
+                ? QB_CONFERENCE_TYPE_VIDEO
+                : QBRTCTypes.QBConferenceType.QB_CONFERENCE_TYPE_AUDIO;
+
+        QBRTCClient qbrtcClient = QBRTCClient.getInstance(getApplicationContext());
+
+        System.out.println("---------- opponentsList---------");
+
+
+        Log.d(TAG, "opponentsList()" + opponentsList.toString());
+        QBRTCSession newQbRtcSession = qbrtcClient.createNewSessionWithOpponents(opponentsList, conferenceType);
+
+        WebRtcSessionManager.getInstance(this).setCurrentSession(newQbRtcSession);
+
+        CallActivity.start(this, false);
+        Log.d(TAG, "conferenceType = " + conferenceType);
+    }
+
+
+    private boolean isLoggedInChat() {
+        if (!QBChatService.getInstance().isLoggedIn()) {
+//            Toaster.shortToast(R.string.dlg_signal_error);
+            tryReLoginToChat();
+            return false;
+        }
+        return true;
+    }
+
+
+    private void tryReLoginToChat() {
+        if (sharedPrefsHelper.hasQbUser()) {
+            QBUser qbUser = sharedPrefsHelper.getQbUser();
+            Log.d(TAG, "hasqbuser in user ------ " + qbUser.getLogin());
+            Log.d(TAG, "hasqbuser in user ------ " + qbUser.getPassword());
+
+            CallService.start(this, qbUser);
+        }
+        else
+        {
+            QBUser qbUser = new QBUser("testuser4","x6Bt0VDy5");
+            Log.d(TAG, "reLogged in user ------ " + qbUser.getLogin());
+            Log.d(TAG, "reLogged in user ------ " + qbUser.getPassword());
+            Log.d(TAG, "reLogged in user ------ " + qbUser.getId());
+
+            qbUser.setId(54633368);
+            CallService.start(this, qbUser);
+        }
+    }
+
+    private Bitmap setVideoThumbnail(String video_url) throws Throwable {
+
+        Bitmap bitmap = null;
+        MediaMetadataRetriever mediaMetadataRetriever = null;
+        try {
+            mediaMetadataRetriever = new MediaMetadataRetriever();
+            if (Build.VERSION.SDK_INT >= 14)
+                mediaMetadataRetriever.setDataSource(video_url, new HashMap<String, String>());
+            else
+                mediaMetadataRetriever.setDataSource(video_url);
+            //   mediaMetadataRetriever.setDataSource(videoPath);
+            bitmap = mediaMetadataRetriever.getFrameAtTime();
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new Throwable("Exception in retriveVideoFrameFromVideo(String videoPath)" + e.getMessage());
+
+        } finally {
+            if (mediaMetadataRetriever != null) {
+                mediaMetadataRetriever.release();
+            }
+        }
+        return bitmap;
+    }
     private void forMapView(final double lat, final double lng) {
-
-
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
-
-
-        mapFragment.getMapAsync(new OnMapReadyCallback() {
-            @Override
-            public void onMapReady(GoogleMap googleMap) {
-                map = googleMap;
-                if (marker != null)
-                    marker.remove();
-                LatLng post_loc;
-                if (lat != 0 && lng != 0) {
-                    post_loc = new LatLng(lat, lng);
-                } else {
-                    post_loc = new LatLng(22.78965, 75.3652);
-
-                }
-                marker = map.addMarker(new MarkerOptions().position(post_loc).title("Owner Location"));
-
-                CameraPosition cameraPosition = new CameraPosition.Builder()
-                        .target(post_loc).tilt(45).bearing(45).zoom((float) 18.5).build();
-                map.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
-
+        mapFragment.getMapAsync(googleMap -> {
+            map = googleMap;
+            if (marker != null)
+                marker.remove();
+            LatLng post_loc;
+            if (lat != 0 && lng != 0) {
+                post_loc = new LatLng(lat, lng);
+            } else {
+                post_loc = new LatLng(0.0, 0.0);
 
             }
+            marker = map.addMarker(new MarkerOptions().position(post_loc).title("Owner Location"));
+
+            CameraPosition cameraPosition = new CameraPosition.Builder()
+                    .target(post_loc).tilt(45).bearing(45).zoom((float) 18.5).build();
+            map.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+
+
         });
-
-
     }
-
     private void openProfilePic(String owner_image) {
-        final RelativeLayout open = (RelativeLayout) findViewById(R.id.fullsliderlay);
-        final ImageView owner_fullIV = (ImageView) findViewById(R.id.owner_fullIV);
+        final RelativeLayout open = findViewById(R.id.fullsliderlay);
+        final ImageView owner_fullIV = findViewById(R.id.owner_fullIV);
 
-        ImageView close = (ImageView) findViewById(R.id.close_slider);
+        ImageView close = findViewById(R.id.close_slider);
         open.setVisibility(View.VISIBLE);
         owner_fullIV.setVisibility(View.VISIBLE);
 
         if (owner_image.equals(DEFAULT_PATH))
-            Picasso.with(getApplicationContext()).load(R.drawable.profile).into(owner_fullIV);
+            Glide.with(getApplicationContext()).load(R.drawable.profile).into(owner_fullIV);
 
         else if (owner_image.length() < 1)
             owner_fullIV.setBackground(getResources().getDrawable(R.drawable.profile));
         else
-            Picasso.with(getApplicationContext()).load(owner_image).placeholder(R.drawable.profile).into(owner_fullIV);
+            Glide.with(getApplicationContext()).load(owner_image).into(owner_fullIV);
 
-        close.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                open.setVisibility(View.GONE);
-                owner_fullIV.setVisibility(View.GONE);
-            }
+        close.setOnClickListener(view -> {
+            open.setVisibility(View.GONE);
+            owner_fullIV.setVisibility(View.GONE);
         });
 
     }
+
 
 }
  

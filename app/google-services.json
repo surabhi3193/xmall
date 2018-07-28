@@ -15,23 +15,19 @@
       },
       "oauth_client": [
         {
-          "client_id": "131370097452-ni4ua94sl9kn57c1q5o8dqikll1sqono.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.mindinfo.xchangemall.xchangemall",
-            "certificate_hash": "8cda8c907aa7880763431529bbc15764893926ba"
-          }
-        },
-        {
-          "client_id": "131370097452-7fpa1vq29pr76q9mgg2dapao6nr6aum7.apps.googleusercontent.com",
-          "client_type": 3
-        },
-        {
           "client_id": "131370097452-9165k5rf5hcdj9c9m1h12vhugcmjba91.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.mindinfo.xchangemall.xchangemall",
             "certificate_hash": "cdd81dfd74177c5925cc3a4e71698449e17c4edd"
+          }
+        },
+        {
+          "client_id": "131370097452-ni4ua94sl9kn57c1q5o8dqikll1sqono.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mindinfo.xchangemall.xchangemall",
+            "certificate_hash": "8cda8c907aa7880763431529bbc15764893926ba"
           }
         },
         {

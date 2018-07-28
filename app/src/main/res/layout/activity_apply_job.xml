@@ -33,7 +33,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/full_name"
                 android:textColor="@color/black"
-                android:textSize="17sp" />
+                android:textSize="20sp" />
 
             <EditText
                 android:id="@+id/fullnameEt"
@@ -49,7 +49,7 @@
                 android:layout_marginTop="10dp"
                 android:text="Phone Number :"
                 android:textColor="@color/black"
-                android:textSize="17sp" />
+                android:textSize="20sp" />
 
             <EditText
                 android:id="@+id/phoneET"
@@ -66,7 +66,7 @@
                 android:layout_marginTop="10dp"
                 android:text="Email :"
                 android:textColor="@color/black"
-                android:textSize="17sp" />
+                android:textSize="20sp" />
 
             <EditText
                 android:id="@+id/emailET"
@@ -110,7 +110,6 @@
                 android:background="@color/black" />
 
             <LinearLayout
-                android:id="@+id/edu1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
@@ -122,7 +121,7 @@
                     android:layout_marginTop="10dp"
                     android:text="@string/title1"
                     android:textColor="@color/black"
-                    android:textSize="17sp" />
+                    android:textSize="20sp" />
 
                 <EditText
                     android:id="@+id/titleET1"
@@ -139,7 +138,7 @@
                     android:layout_marginTop="10dp"
                     android:text="@string/school_collage"
                     android:textColor="@color/black"
-                    android:textSize="17sp" />
+                    android:textSize="20sp" />
 
                 <EditText
                     android:id="@+id/schoolET1"
@@ -156,7 +155,7 @@
                     android:layout_marginTop="10dp"
                     android:text="@string/address_location"
                     android:textColor="@color/black"
-                    android:textSize="17sp" />
+                    android:textSize="20sp" />
 
                 <EditText
                     android:id="@+id/addressEt1"
@@ -174,7 +173,7 @@
                     android:layout_marginTop="10dp"
                     android:text="@string/duration"
                     android:textColor="@color/black"
-                    android:textSize="17sp" />
+                    android:textSize="20sp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -228,7 +227,7 @@
                     android:layout_marginTop="10dp"
                     android:text="@string/description"
                     android:textColor="@color/black"
-                    android:textSize="17sp" />
+                    android:textSize="20sp" />
 
                 <EditText
                     android:id="@+id/descET1"
@@ -253,7 +252,7 @@
                     android:layout_marginTop="10dp"
                     android:text="@string/title2"
                     android:textColor="@color/black"
-                    android:textSize="17sp" />
+                    android:textSize="20sp" />
 
                 <EditText
                     android:id="@+id/titleET2"
@@ -271,7 +270,7 @@
                     android:layout_marginTop="10dp"
                     android:text="@string/school_collage"
                     android:textColor="@color/black"
-                    android:textSize="17sp" />
+                    android:textSize="20sp" />
 
                 <EditText
                     android:id="@+id/schoolET2"
@@ -289,7 +288,7 @@
                     android:layout_marginTop="10dp"
                     android:text="@string/address_location"
                     android:textColor="@color/black"
-                    android:textSize="17sp" />
+                    android:textSize="20sp" />
 
                 <EditText
                     android:id="@+id/addressEt2"
@@ -307,7 +306,7 @@
                     android:layout_marginTop="10dp"
                     android:text="@string/duration"
                     android:textColor="@color/black"
-                    android:textSize="17sp" />
+                    android:textSize="20sp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -360,7 +359,7 @@
                     android:layout_marginTop="10dp"
                     android:text="@string/description"
                     android:textColor="@color/black"
-                    android:textSize="17sp" />
+                    android:textSize="20sp" />
 
                 <EditText
                     android:id="@+id/descET2"
@@ -386,7 +385,7 @@
                     android:layout_marginTop="10dp"
                     android:text="@string/title3"
                     android:textColor="@color/black"
-                    android:textSize="17sp" />
+                    android:textSize="20sp" />
 
                 <EditText
                     android:id="@+id/titleET3"
@@ -404,7 +403,7 @@
                     android:layout_marginTop="10dp"
                     android:text="@string/school_collage"
                     android:textColor="@color/black"
-                    android:textSize="17sp" />
+                    android:textSize="20sp" />
 
                 <EditText
                     android:id="@+id/schoolET3"
@@ -421,7 +420,7 @@
                     android:layout_marginTop="10dp"
                     android:text="@string/address_location"
                     android:textColor="@color/black"
-                    android:textSize="17sp" />
+                    android:textSize="20sp" />
 
                 <EditText
                     android:id="@+id/addressEt3"
@@ -438,7 +437,7 @@
                     android:layout_marginTop="10dp"
                     android:text="@string/duration"
                     android:textColor="@color/black"
-                    android:textSize="17sp" />
+                    android:textSize="20sp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -489,7 +488,7 @@
                     android:layout_marginTop="10dp"
                     android:text="@string/description"
                     android:textColor="@color/black"
-                    android:textSize="17sp" />
+                    android:textSize="20sp" />
 
                 <EditText
                     android:id="@+id/descET3"
@@ -602,7 +601,6 @@
 
 
             <TextView
-                android:id="@+id/workExpHeader"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -618,7 +616,6 @@
                 android:background="@color/black" />
 
             <LinearLayout
-                android:id="@+id/work1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
@@ -630,7 +627,7 @@
                     android:layout_marginTop="10dp"
                     android:text="@string/job_title1"
                     android:textColor="@color/black"
-                    android:textSize="17sp" />
+                    android:textSize="20sp" />
 
                 <EditText
                     android:id="@+id/job_titleET1"
@@ -647,7 +644,7 @@
                     android:layout_marginTop="10dp"
                     android:text="@string/employer"
                     android:textColor="@color/black"
-                    android:textSize="17sp" />
+                    android:textSize="20sp" />
 
                 <EditText
                     android:id="@+id/job_schoolET1"
@@ -664,7 +661,7 @@
                     android:layout_marginTop="10dp"
                     android:text="@string/address_location"
                     android:textColor="@color/black"
-                    android:textSize="17sp" />
+                    android:textSize="20sp" />
 
                 <EditText
                     android:id="@+id/job_addressEt1"
@@ -682,7 +679,7 @@
                     android:layout_marginTop="10dp"
                     android:text="@string/duration"
                     android:textColor="@color/black"
-                    android:textSize="17sp" />
+                    android:textSize="20sp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -736,7 +733,7 @@
                     android:layout_marginTop="10dp"
                     android:text="@string/duties_responsibilities"
                     android:textColor="@color/black"
-                    android:textSize="17sp" />
+                    android:textSize="20sp" />
 
                 <EditText
                     android:id="@+id/job_descET1"
@@ -762,7 +759,7 @@
                     android:layout_marginTop="10dp"
                     android:text="@string/job_title2"
                     android:textColor="@color/black"
-                    android:textSize="17sp" />
+                    android:textSize="20sp" />
 
                 <EditText
                     android:id="@+id/job_titleET2"
@@ -780,7 +777,7 @@
                     android:layout_marginTop="10dp"
                     android:text="@string/employer"
                     android:textColor="@color/black"
-                    android:textSize="17sp" />
+                    android:textSize="20sp" />
 
                 <EditText
                     android:id="@+id/job_schoolET2"
@@ -798,7 +795,7 @@
                     android:layout_marginTop="10dp"
                     android:text="@string/address_location"
                     android:textColor="@color/black"
-                    android:textSize="17sp" />
+                    android:textSize="20sp" />
 
                 <EditText
                     android:id="@+id/job_addressEt2"
@@ -816,7 +813,7 @@
                     android:layout_marginTop="10dp"
                     android:text="@string/duration"
                     android:textColor="@color/black"
-                    android:textSize="17sp" />
+                    android:textSize="20sp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -869,7 +866,7 @@
                     android:layout_marginTop="10dp"
                     android:text="@string/duties_responsibilities"
                     android:textColor="@color/black"
-                    android:textSize="17sp" />
+                    android:textSize="20sp" />
 
                 <EditText
                     android:id="@+id/job_descET2"
@@ -882,7 +879,6 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/job_edu3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
@@ -895,10 +891,9 @@
                     android:layout_marginTop="10dp"
                     android:text="@string/job_title3"
                     android:textColor="@color/black"
-                    android:textSize="17sp" />
+                    android:textSize="20sp" />
 
                 <EditText
-                    android:id="@+id/job_titleET3"
 
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
@@ -913,10 +908,9 @@
                     android:layout_marginTop="10dp"
                     android:text="@string/employer"
                     android:textColor="@color/black"
-                    android:textSize="17sp" />
+                    android:textSize="20sp" />
 
                 <EditText
-                    android:id="@+id/job_schoolET3"
 
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
@@ -931,10 +925,9 @@
                     android:layout_marginTop="10dp"
                     android:text="@string/address_location"
                     android:textColor="@color/black"
-                    android:textSize="17sp" />
+                    android:textSize="20sp" />
 
                 <EditText
-                    android:id="@+id/job_addressEt3"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:imeOptions="actionNext"
@@ -948,7 +941,7 @@
                     android:layout_marginTop="10dp"
                     android:text="@string/duration"
                     android:textColor="@color/black"
-                    android:textSize="17sp" />
+                    android:textSize="20sp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -964,7 +957,6 @@
                         android:textSize="14sp" />
 
                     <EditText
-                        android:id="@+id/job_fromET3"
 
                         android:layout_width="0dp"
                         android:layout_height="40dp"
@@ -984,7 +976,6 @@
                         android:textSize="14sp" />
 
                     <EditText
-                        android:id="@+id/job_toET3"
 
                         android:layout_width="0dp"
                         android:layout_height="40dp"
@@ -1002,10 +993,9 @@
                     android:layout_marginTop="10dp"
                     android:text="@string/duties_responsibilities"
                     android:textColor="@color/black"
-                    android:textSize="17sp" />
+                    android:textSize="20sp" />
 
                 <EditText
-                    android:id="@+id/job_descET3"
 
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
@@ -1095,7 +1085,7 @@
                 android:text="@string/apply_for_job"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
-                android:textSize="13sp" />
+                android:textSize="16sp" />
 
 
         </LinearLayout>
@@ -1151,7 +1141,7 @@
                     android:src="@drawable/cam_select"
                     android:text="camera"
                     android:textColor="@color/black"
-                    android:textSize="15sp" />
+                    android:textSize="18sp" />
 
                 <View
                     android:layout_width="20dp"
@@ -1167,7 +1157,7 @@
                     android:src="@drawable/cam_select"
                     android:text="gallery"
                     android:textColor="@color/black"
-                    android:textSize="15sp" />
+                    android:textSize="18sp" />
             </LinearLayout>
 
             <View

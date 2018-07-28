@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/size_10">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/colorPrimary">
+
+        <TextView
+            android:id="@+id/cancel_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:gravity="center_vertical"
+            android:padding="10dp"
+            android:text="@string/cancel"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:gravity="center_vertical"
+            android:padding="10dp"
+            android:text="Add Favorites"
+            android:textColor="@color/white"
+            android:textSize="22sp"/>
+
+        <TextView
+            android:id="@+id/save_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:gravity="center_vertical"
+            android:padding="10dp"
+            android:text="@string/save"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fillViewport="true">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp">
+
+            <EditText
+                android:id="@+id/urlEt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/edit_text_style"
+                android:hint="Enter website url"
+                android:padding="8dp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/gray"/>
+
+            <android.support.v7.widget.AppCompatSpinner
+                android:id="@+id/newsCatSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="32dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/edit_text_style"
+                android:entries="@array/news_cat_array"
+                android:gravity="center"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:textColorHint="@color/gray"/>
+
+            <EditText
+                android:id="@+id/userCatEt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/edit_text_style"
+                android:hint="Enter your category name"
+                android:padding="8dp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/gray"
+                android:visibility="gone"/>
+            <CheckBox
+                android:id="@+id/CbCat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Create your own category"
+                android:textColor="@color/black"
+                />
+
+
+            <Button
+                android:id="@+id/add_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/size_10"
+                android:background="@drawable/blue_btn"
+                android:text="Add"
+                android:textColor="@color/white"/>
+        </LinearLayout>
+
+    </ScrollView>
+</LinearLayout>

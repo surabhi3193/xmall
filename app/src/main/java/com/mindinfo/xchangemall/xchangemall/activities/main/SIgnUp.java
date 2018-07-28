@@ -8,6 +8,8 @@ import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.support.annotation.NonNull;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -37,6 +39,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.oob.SignUp;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 import com.google.android.gms.iid.InstanceID;
 import com.google.android.gms.plus.Plus;
@@ -53,25 +56,18 @@ import java.util.regex.Pattern;
 import cz.msebera.android.httpclient.Header;
 
 import static com.mindinfo.xchangemall.xchangemall.Constants.NetworkClass.isMatch;
-import static com.mindinfo.xchangemall.xchangemall.activities.main.BaseActivity.BASE_URL_NEW;
+import static com.mindinfo.xchangemall.xchangemall.activities.BaseActivity.BASE_URL_NEW;
 import static com.mindinfo.xchangemall.xchangemall.other.CheckInternetConnection.isNetworkAvailable;
 import static com.mindinfo.xchangemall.xchangemall.storage.MySharedPref.saveData;
 
 public class SIgnUp extends AppCompatActivity implements View.OnClickListener, GoogleApiClient.OnConnectionFailedListener {
 
     protected static final String TAG = SIgnUp.class.getSimpleName();
-    String email_id;
     ProgressDialog ringProgressDialog;
-    String namefbuser = "", facebook_id;
-    String photo_str = "";
     String str_terms_conditions = "";
     String device_id="", device_token="";
     Typeface face;
-    // fb & gmail data
-    private LinearLayout fblogin, googlelogin;
     private LoginButton loginButton;
-    private SignInButton signInButton;
-    private GoogleSignInOptions gso;
     private GoogleApiClient mGoogleApiClient;
     private int SIGN_IN = 30;
 // form data
@@ -80,15 +76,10 @@ public class SIgnUp extends AppCompatActivity implements View.OnClickListener, G
     private ProfileTracker profileTracker;
     private Context context;
     private EditText fullName, userEmailId, password, confirmPassword, usernameET;
-    private Button signUpBtn, google_sing_btn;
     private CheckBox Check_terms_conditions;
-    private TextView already_userTextView;
     private FacebookCallback<LoginResult> callback = new FacebookCallback<LoginResult>() {
         @Override
         public void onSuccess(LoginResult loginResult) {
-
-            AccessToken accessToken = loginResult.getAccessToken();
-
             Profile profile = Profile.getCurrentProfile();
 
             displayMessage(profile);
@@ -122,7 +113,7 @@ public class SIgnUp extends AppCompatActivity implements View.OnClickListener, G
         super.onCreate(savedInstanceState);
         FacebookSdk.setApplicationId("160268414713255");
         FacebookSdk.sdkInitialize(this);
-        face = Typeface.createFromAsset(getAssets(),"fonts/estre.ttf");
+        face =  ResourcesCompat.getFont(SIgnUp.this, R.font.estre);
 
         setContentView(R.layout.activity_sign_up);
 
@@ -155,30 +146,25 @@ public class SIgnUp extends AppCompatActivity implements View.OnClickListener, G
 
             device_token= instanceID.getToken(getString(R.string.gcm_defaultSenderId),
                     GoogleCloudMessaging.INSTANCE_ID_SCOPE, null);
-
             Log.i(TAG, "GCM Registration Token: " + device_token);
-
         }catch (Exception e) {
             Log.d(TAG, "Failed to complete token refresh", e);
         }
-
         Log.i(TAG, "FCM Registration Token: " + device_token);
         Log.i(TAG, "FCM Registration ID: " + device_id);
         initui();
-
     }
 
     private void initui() {
 
         // google & fb dedinations
-        gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
                 .build();
-        signInButton = (SignInButton) findViewById(R.id.sign_in_button);
-        fblogin = (LinearLayout) findViewById(R.id.fblogin);
-        googlelogin = (LinearLayout) findViewById(R.id.google_login);
-        loginButton = (LoginButton) findViewById(R.id.loginbtn);
-
+        SignInButton signInButton = findViewById(R.id.sign_in_button);
+        LinearLayout fblogin = findViewById(R.id.fblogin);
+        LinearLayout googlelogin = findViewById(R.id.google_login);
+        loginButton =findViewById(R.id.loginbtn);
         signInButton.setSize(SignInButton.SIZE_WIDE);
         signInButton.setScopes(gso.getScopeArray());
         mGoogleApiClient = new GoogleApiClient.Builder(this)
@@ -186,12 +172,9 @@ public class SIgnUp extends AppCompatActivity implements View.OnClickListener, G
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                 .addApi(Plus.API)
                 .build();
-        signInButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
-                startActivityForResult(signInIntent, SIGN_IN);
-            }
+        signInButton.setOnClickListener(v -> {
+            Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
+            startActivityForResult(signInIntent, SIGN_IN);
         });
 
         fblogin.setOnClickListener(this);
@@ -199,18 +182,14 @@ public class SIgnUp extends AppCompatActivity implements View.OnClickListener, G
         loginButton.setReadPermissions("user_friends");
         loginButton.registerCallback(callbackManager, callback);
 
-
-        // signup forn definations
-
-
-        signUpBtn = (Button) findViewById(R.id.signUpBtn);
-        fullName = (EditText) findViewById(R.id.fullName);
-        usernameET = (EditText) findViewById(R.id.username);
-        userEmailId = (EditText) findViewById(R.id.userEmailId);
-        password = (EditText) findViewById(R.id.password);
-        confirmPassword = (EditText) findViewById(R.id.confirmPassword);
-        Check_terms_conditions = (CheckBox) findViewById(R.id.terms_conditions);
-        already_userTextView = (TextView) findViewById(R.id.already_user);
+        Button signUpBtn =findViewById(R.id.signUpBtn);
+        fullName =findViewById(R.id.fullName);
+        usernameET =findViewById(R.id.username);
+        userEmailId =findViewById(R.id.userEmailId);
+        password =findViewById(R.id.password);
+        confirmPassword =findViewById(R.id.confirmPassword);
+        Check_terms_conditions =findViewById(R.id.terms_conditions);
+        TextView already_userTextView = findViewById(R.id.already_user);
 
 
 
@@ -232,19 +211,14 @@ public class SIgnUp extends AppCompatActivity implements View.OnClickListener, G
 
     // Showing the status in Snackbar
     private void showSnack(boolean isConnected) {
-        String message;
-        int color;
+
         if (isConnected) {
             String unm = fullName.getText().toString();
-//            String nmpatt="^[a-zA-Z ]+$";
-
             if (unm.length() < 2) {
                 fullName.setError("Field Empty");
                 return;
             }
             String usernaem = usernameET.getText().toString();
-//            String nmpatt="^[a-zA-Z ]+$";
-
             if (usernaem.length() < 1) {
                 userEmailId.setError("Field Empty");
                 return;
@@ -267,8 +241,6 @@ public class SIgnUp extends AppCompatActivity implements View.OnClickListener, G
             }
 
             String con_pass = confirmPassword.getText().toString();
-//            boolean b3=isMatch(con_pass, pass);
-
             if (con_pass.length() == 0) {
                 confirmPassword.setError("Field Empty");
             }
@@ -368,8 +340,7 @@ public class SIgnUp extends AppCompatActivity implements View.OnClickListener, G
         if (isNetworkAvailable(context)) {
             switch (view.getId()) {
                 case R.id.login_btn:
-                    if (isNetworkAvailable(context)) {
-                    } else {
+                    if (!isNetworkAvailable(context)) {
                         Toast.makeText(getApplicationContext(), "Internet connection unavailable ", Toast.LENGTH_SHORT).show();
                     }
                     break;
@@ -439,6 +410,7 @@ public class SIgnUp extends AppCompatActivity implements View.OnClickListener, G
             if (result.isSuccess()) {
                 //Getting google account
                 GoogleSignInAccount acct = result.getSignInAccount();
+                assert acct != null;
                 String name = acct.getDisplayName();
                 String email = acct.getEmail();
                 String gmailId = acct.getId();
@@ -450,6 +422,7 @@ public class SIgnUp extends AppCompatActivity implements View.OnClickListener, G
                 Log.i("DisplayName", name);
                 Log.i("Email", email);
 
+                assert picUri != null;
                 login_with_social(email, name, picUri.toString(), social_id,"3");
                 Toast.makeText(SIgnUp.this, "Welcome " + name, Toast.LENGTH_LONG).show();
                 JSONObject nameobj = new JSONObject();
@@ -515,7 +488,7 @@ public class SIgnUp extends AppCompatActivity implements View.OnClickListener, G
                         saveData(context, "login_response", response.toString());
 //                        sinchLogin(user_id,"");
                         Intent i = new Intent(context, MainActivity.class);
-                        // Closing all the Activities
+                        LoginManager.getInstance().logOut();
                         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -548,19 +521,17 @@ public class SIgnUp extends AppCompatActivity implements View.OnClickListener, G
     public void onResume() {
         super.onResume();
         LoginManager.getInstance().logOut();
-//        Profile profile = Profile.getCurrentProfile();
-//        displayMessage(profile);
-
     }
 
     @Override
     public void onBackPressed() {
         startActivity(new Intent(SIgnUp.this,EnterLogin.class));
+        LoginManager.getInstance().logOut();
         finish();
     }
 
     @Override
-    public void onConnectionFailed(ConnectionResult connectionResult) {
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
     }
 
     private void checkConnection() {

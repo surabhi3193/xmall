@@ -6,6 +6,7 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.res.ResourcesCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,25 +14,22 @@ import android.widget.BaseAdapter;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.lorentzos.flingswipe.SwipeFlingAdapterView;
 import com.mindinfo.xchangemall.xchangemall.R;
 import com.mindinfo.xchangemall.xchangemall.other.Data;
 
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class SocialFragment extends Fragment implements View.OnClickListener {
     public static MyAppAdapter myAppAdapter;
     public static ViewHolder viewHolder;
     private ArrayList<Data> array;
     private SwipeFlingAdapterView flingContainer;
-
-    static void makeToast(Context ctx, String s) {
-        Toast.makeText(ctx, s, Toast.LENGTH_SHORT).show();
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -46,7 +44,7 @@ public class SocialFragment extends Fragment implements View.OnClickListener {
         array.add(new Data(R.drawable.avatar4, "Priyanka Chopra","female","Actress","37"));
         array.add(new Data(R.drawable.avatar1, "Deepika Padukone","female","Actress","37"));
         array.add(new Data(R.drawable.avatar2, "Aishwarya Rai","female","Actress","37"));
-        myAppAdapter = new MyAppAdapter(array, getActivity().getApplicationContext());
+        myAppAdapter = new MyAppAdapter(array, getActivity());
         flingContainer.setAdapter(myAppAdapter);
         flingContainer.setFlingListener(new SwipeFlingAdapterView.onFlingListener() {
             @Override
@@ -183,8 +181,7 @@ public class SocialFragment extends Fragment implements View.OnClickListener {
                 viewHolder.joindateTV = (TextView) rowView.findViewById(R.id.joindateTV);
                 viewHolder.locationTV = (TextView) rowView.findViewById(R.id.locationTV);
 
-              Typeface  face = Typeface.createFromAsset(getActivity().getApplicationContext().getAssets(),
-                        "fonts/estre.ttf");
+              Typeface  face = ResourcesCompat.getFont(Objects.requireNonNull(getActivity()), R.font.estre);
               viewHolder.genderText.setTypeface(face);
               viewHolder.DataText.setTypeface(face);
               viewHolder.occupationTExt.setTypeface(face);
@@ -202,9 +199,15 @@ public class SocialFragment extends Fragment implements View.OnClickListener {
             viewHolder.ageText.setText("Age : "+parkingList.get(position).getAge());
             viewHolder.genderText.setText("Gender : "+parkingList.get(position).getGender());
 
-            Glide.with(getActivity().getApplicationContext()).load(parkingList.get(position).getImagePath()).into(viewHolder.cardImage);
+//            Glide.with(getActivity()).load(parkingList.get(position).getImagePath())
+//                    .into(viewHolder.cardImage);
+
+            Glide.with(context)
+                    .load(parkingList.get(position).getImagePath())
+                    .into(viewHolder.cardImage);
 
             return rowView;
+
         }
     }
 }

@@ -94,7 +94,7 @@
                             android:singleLine="true"
                             android:textColor="@color/black"
                             android:textColorHint="@color/black"
-                            android:textSize="13sp" />
+                            android:textSize="16sp" />
 
                     </android.support.design.widget.TextInputLayout>
 
@@ -117,7 +117,7 @@
                             android:singleLine="true"
                             android:textColor="@color/black"
                             android:textColorHint="@color/black"
-                            android:textSize="13sp" />
+                            android:textSize="16sp" />
 
                     </android.support.design.widget.TextInputLayout>
 
@@ -139,7 +139,7 @@
                             android:singleLine="true"
                             android:textColor="@color/black"
                             android:textColorHint="@color/black"
-                            android:textSize="13sp" />
+                            android:textSize="16sp" />
 
                     </android.support.design.widget.TextInputLayout>
 
@@ -205,7 +205,6 @@
                 android:textSize="18sp" />
 
             <LinearLayout
-                android:id="@+id/call_lay"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:gravity="center_vertical"
@@ -229,7 +228,6 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/vdo_lay"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:gravity="center_vertical"
@@ -254,7 +252,6 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/chat_lay"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:gravity="center_vertical"
@@ -278,7 +275,6 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/text_lay"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:gravity="center_vertical"

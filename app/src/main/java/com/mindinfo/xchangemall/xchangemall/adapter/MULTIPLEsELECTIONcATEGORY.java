@@ -3,6 +3,7 @@ package com.mindinfo.xchangemall.xchangemall.adapter;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.graphics.Typeface;
+import android.support.v4.content.res.ResourcesCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import com.mindinfo.xchangemall.xchangemall.R;
 import com.mindinfo.xchangemall.xchangemall.beans.categories;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import static com.mindinfo.xchangemall.xchangemall.storage.MySharedPref.saveData;
 
@@ -54,8 +56,7 @@ public class MULTIPLEsELECTIONcATEGORY extends BaseAdapter
 
         holder.textLAy = (LinearLayout) rowView.findViewById(R.id.textLay);
         final categories cat = arrayList.get(position);
-        Typeface face = Typeface.createFromAsset(context.getAssets(),
-                "fonts/estre.ttf");
+        Typeface face = ResourcesCompat.getFont(context, R.font.estre);
         holder.sub_list_text.setTypeface(face);
         holder.sub_list_text.setTypeface(face);
 

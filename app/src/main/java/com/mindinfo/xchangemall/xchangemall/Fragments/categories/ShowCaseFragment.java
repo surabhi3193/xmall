@@ -9,6 +9,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +23,7 @@ import com.mindinfo.xchangemall.xchangemall.activities.showcaseActivities.Create
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class ShowCaseFragment extends android.support.v4.app.Fragment {
 
@@ -54,7 +56,7 @@ public class ShowCaseFragment extends android.support.v4.app.Fragment {
         live_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               Context context= getActivity().getApplicationContext();
+               Context context= getActivity();
                context.startActivity(new Intent(context, CreateShowCase.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
             }
         });
@@ -73,22 +75,21 @@ public class ShowCaseFragment extends android.support.v4.app.Fragment {
 
     private void createTabIcons() {
 
-        Typeface face = Typeface.createFromAsset(getActivity().getApplicationContext().getAssets(),
-                "fonts/estre.ttf");
+        Typeface face = ResourcesCompat.getFont(Objects.requireNonNull(getActivity()), R.font.estre);
 
-        TextView tabThree = (TextView) LayoutInflater.from(getActivity().getApplicationContext()).inflate(R.layout.custom_tab, null);
+        TextView tabThree = (TextView) LayoutInflater.from(getActivity()).inflate(R.layout.custom_tab, null);
         tabThree.setText("Live Streamed Video");
         tabThree.setTextColor(getActivity().getResources().getColor(R.color.business_port_text));
         tabThree.setTypeface(face);
         tabLayout.getTabAt(0).setCustomView(tabThree);
 
-        TextView tabTwo = (TextView) LayoutInflater.from(getActivity().getApplicationContext()).inflate(R.layout.custom_tab, null);
+        TextView tabTwo = (TextView) LayoutInflater.from(getActivity()).inflate(R.layout.custom_tab, null);
         tabTwo.setText("Live Streamed Audio");
         tabTwo.setTextColor(getActivity().getResources().getColor(R.color.logo_color));
         tabTwo.setTypeface(face);
         tabLayout.getTabAt(1).setCustomView(tabTwo);
 
-        TextView tabFour = (TextView) LayoutInflater.from(getActivity().getApplicationContext()).inflate(R.layout.custom_tab, null);
+        TextView tabFour = (TextView) LayoutInflater.from(getActivity()).inflate(R.layout.custom_tab, null);
         tabFour.setText("Upcoming");
         tabFour.setTextColor(getActivity().getResources().getColor(R.color.LimeGreen));
         tabFour.setTypeface(face);

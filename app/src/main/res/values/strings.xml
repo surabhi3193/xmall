@@ -1,143 +1,23 @@
 <resources>
     <string name="app_name">X mall</string>
-    <string name="version_current">version 1.1</string>
 
     <string name="email">Email</string>
-    <string name="passowrd">Password</string>
-    <string name="login">Login</string>
-    <string name="show_pwd">Show Password</string>
-    <string name="hide_pwd">Hide Password</string>
-    <string name="forgot">Forgot password?</string>
-    <string name="closebutton">Close Button for Activity</string>
-    <string name="newUser">New User ? Signup</string>
     <string name="fullName">Full Name</string>
-    <string name="mobileNumber">Mobile Number</string>
-    <string name="location">Location</string>
-    <string name="confirmPassword">Confirm Password</string>
-    <string name="terms_conditions">I Agree all Terms and Conditions.</string>
-    <string name="signUp">singup</string>
-    <string name="already_user">Already register ? Login</string>
-    <string name="registered_emailid">Please enter your Registered Email Id below:</string>
-    <string name="submit">SUBMIT</string>
-    <string name="back">BACK</string>
     <string name="property_rentals">Property Rentals</string>
     <string name="property_for_sale">Property for Sale</string>
 
     <string name="api_map_key">AIzaSyCecWn2Ty5icj0ZwDl9DROgT4kGmrG6r3U</string>
-    <string name="action_settings">Settings</string>
+    <!--<string name="api_map_key">AIzaSyAq-px5yMTp86MxVvj7CMFbx-Sg9hkRrl8</string>-->
 
     <!-- Button text -->
-    <string name="btn_logout_from_google">Logout from Google</string>
-    <string name="btn_revoke_access">Revoke Access</string>
-    <string name="loading">Loading...</string>
-    <string name="facebook_app_id">160268414713255</string>
-    <string name="fb_login_protocol_scheme">fb316357288833005</string>
     <!--<string name="facebook_app_id">548888862168747</string>
     <string name="fb_login_protocol_scheme">fb548888862168747</string>-->
-    <string name="my_facebook_app_id">AIzaSyBXm6aFkWBcEd-6bzVrPJRj4SjV82Rb4tI</string>
-
-    <string name="skip">Skip</string>
-
-    <string name="autocomplete_hint">Search a Place</string>
-
-    <string name="latitude_label">Latitude</string>
-    <string name="longitude_label">Longitude</string>
-    <string name="last_update_time_label">Last location update time</string>
-
-    <string name="permission_rationale">Location permission is needed for core functionality</string>
-    <string name="permission_denied_explanation">Permission was denied, but is needed for core
-        functionality.</string>
-    <string name="settings">Settings</string>
-
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
 
 
     <!-- Left drawer-->
-    <string name="film_genres">Film genres</string>
-    <string-array name="film_genre">
-        <item>Personal</item>
-        <item>Housing</item>
-        <item>For sale</item>
-        <item>Jobs</item>
-        <item>Services</item>
-        <item>Live Audio</item>
-        <item>Chat</item>
-    </string-array>
-
-
-    <string-array name="actionFilms">
-        <item>Dr. No (1962)</item>
-        <item>Goldfinger (1964)</item>
-        <item>Thunderball (1965)</item>
-        <item>Live and Let Die (1973)</item>
-        <item>Moonraker (1979)</item>
-        <item>For Your Eyes Only (1981)</item>
-        <item>Octopussy (1983)</item>
-        <item>A View to a Kill (1985)</item>
-        <item>Licence to Kill (1989)</item>
-        <item>GoldenEye (1995)</item>
-    </string-array>
-
-    <string-array name="musicals">
-        <item>Naughty Marietta (1935)</item>
-        <item>Rose Marie (1936)</item>
-        <item>Maytime (1937)</item>
-        <item>Sweethearts (1938)</item>
-        <item>Bitter Sweet (1940)</item>
-        <item>New Moon (1940)</item>
-        <item>I Married an Angel (1942)</item>
-        <item>Lady Be Good (1941)</item>
-        <item>Ship Ahoy (1942)</item>
-        <item>Sensations of 1945 (1944)</item>
-    </string-array>
-
-    <string-array name="dramas">
-        <item>Home of the Brave (1949)</item>
-        <item>The Accused (1949)</item>
-        <item>12 Angry Men (1957)</item>
-        <item>Compulsion (1959)</item>
-        <item>Inherit the Wind (1960)</item>
-        <item>To Kill a Mockingbird (1962)</item>
-        <item>Mrs. Miniver (1942)</item>
-        <item>Since You Went Away (1944)</item>
-        <item>The Champ (1931)</item>
-        <item>Nashville (1975)</item>
-    </string-array>
-
-    <string-array name="thrillers">
-        <item>Alien (1979)</item>
-        <item>The French Connection (1971)</item>
-        <item>High Noon (1952)</item>
-        <item>Double Indemnity (1944)</item>
-        <item>Safety Last (1923)</item>
-        <item>The Lady From Shanghai (1948)</item>
-        <item>The Third Man (1949)</item>
-        <item>Rear Window (1954)</item>
-        <item>The 39 Steps (1935)</item>
-        <item>Shadow of a Doubt (1943)</item>
-    </string-array>
-
-    <string-array name="comedies">
-        <item>Safety Last (1923)</item>
-        <item>Duck Soup (1933)</item>
-        <item>Cat Ballou (1965)</item>
-        <item>What\'s Up, Tiger Lily? (1966)</item>
-        <item>Blazing Saddles (1974)</item>
-        <item>Play It Again, Sam (1972)</item>
-        <item>The Cheap Detective (1978)</item>
-        <item>The Naked Gun (1988)</item>
-        <item>The Freshman (1990)</item>
-        <item>Waiting for Guffman (1996) </item>
-    </string-array>
     <!--*************-->
-
-
     <string name="camera_permission_confirmation">This app demonstrates the usage of CameraView. In order to do that, it needs permission to access camera.</string>
-    <string name="camera_permission_not_granted">Camera app cannot do anything without camera permission.</string>
-    <string name="picture_taken">Picture taken</string>
     <string name="jobs">Jobs</string>
-    <string name="house_rentals">House Rentals</string>
     <string name="for_sale">For Sale</string>
     <string name="services">Business Services</string>
     <string name="personals">Personals</string>
@@ -167,7 +47,7 @@
 
 
     <string name="gender">gender</string>
-    <string name="cancel">cancel</string>
+    <string name="cancel">Cancel</string>
     <string name="update">update</string>
     <string name="phone_no">Phone Number :</string>
     <string name="education">education</string>
@@ -191,25 +71,15 @@
         <item>Full time</item>
     </string-array>
 
-    <string-array name="do_have_any_pet_arrays">
-        <item>Select</item>
-        <item>Yes</item>
-        <item>No</item>
+    <string-array name="news_loc_array">
+        <item>Location</item>
+        <item>Under development </item>
     </string-array>
 
-    <string-array name="how_many_renters_will_live_here">
-        <item>Select</item>
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-        <item>4</item>
-        <item>5</item>
-        <item>6</item>
-        <item>7</item>
-        <item>8</item>
-        <item>9</item>
+    <string-array name="news_cat_array">
+        <item>Category</item>
+        <item>Under development </item>
     </string-array>
-
 
     <string-array name="WeekdayName">
         <item>Monday</item>
@@ -261,12 +131,7 @@
         <item>/ Year</item>
 
     </string-array>
-    <string name="title_activity_main2">Main2Activity</string>
-    <string name="you_city">You city</string>
-    <string name="all_categeries">All categeries</string>
     <string name="phone_number">Phone number</string>
-    <string name="categories">Categories</string>
-    <string name="buy_now">Buy Now</string>
     <string name="view_profile">View Profile</string>
     <string name="apply_for_job">Apply for job</string>
     <string name="job_description">Job Description</string>
@@ -303,291 +168,38 @@
     <string name="name_on_card">NAME ON CARD</string>
 
     <!--hint string-->
-    <string name="em_hint_account">your Account </string>
-    <string name="em_hint_dont_have_account">New User ?</string>
-    <string name="em_hint_already_have_account">Already have an account!</string>
-    <string name="em_hint_input_not_null">The input must not be empty</string>
-    <string name="em_hint_loading">Loading……</string>
-    <string name="em_hint_password">Password</string>
-    <string name="em_hint_sign_in">Input your account sign in, Account can not contain \'\@\'!</string>
-    <string name="em_hint_sign_up">Enter the account you want to register, the account can make the phone number,
-        or any length of the string should be all lowercase letters or numbers,
-        in addition to (.) (_) (-) can not contain other special characters,
-        can not be e-mail Account</string>
 
     <!--call-->
-    <string name="em_call_voice">Voice call</string>
-    <string name="em_call_video">Video call</string>
-    <string name="em_call_accepted">Call is connected</string>
-    <string name="em_call_busy">The other side is busy</string>
-    <string name="em_call_cancel">Call canceled</string>
-    <string name="em_call_cancel_is_incoming">Call canceled</string>
-    <string name="em_call_connecting">Calling</string>
-    <string name="em_call_connected">Waiting for the other party to answer</string>
-    <string name="em_call_connected_is_incoming">The other party to apply for a call with you</string>
-    <string name="em_call_connection_fail">Call connection failed</string>
-    <string name="em_call_disconnected">The call has ended</string>
-    <string name="em_call_duration_time">Call time</string>
-    <string name="em_call_no_data">No call data</string>
-    <string name="em_call_not_answer">The other party not answer</string>
-    <string name="em_call_no_response">The other party no response</string>
-    <string name="em_call_offline">The other party offline</string>
-    <string name="em_call_network_unstable">Network unstable</string>
-    <string name="em_call_network_normal">Network normal</string>
-    <string name="em_call_reject">The other party rejected</string>
-    <string name="em_call_reject_is_incoming">Rejected</string>
-    <string name="em_call_local_sdk_version_outdated">Local sdk version outdated</string>
-    <string name="em_call_remote_sdk_version_outdated">Remote sdk version outdated</string>
-    <string name="em_call_sdk_version_different">Both sdk version different</string>
-    <string name="em_call_video_pause">Video streaming pause</string>
-    <string name="em_call_video_resume">Video streaming resume</string>
-    <string name="em_call_voice_pause">Voice transfer pause</string>
-    <string name="em_call_voice_resume">Voice transfer resume</string>
-    <string name="em_call_voice_calling">Voice calling</string>
-    <string name="em_call_video_calling">Video calling</string>
-    <string name="em_call_info_resolution">Resolution</string>
-    <string name="em_call_info_time_latency">Time Latency</string>
-    <string name="em_call_info_frame_rate">Frame Rate</string>
-    <string name="em_call_info_lost_rate">Lost Rate</string>
-    <string name="em_call_info_local_bitrate">Local Bitrate</string>
-    <string name="em_call_info_remote_bitrate">Remote Bitrate</string>
 
     <!--sign-->
-    <string name="em_sign_in">Sign in</string>
-    <string name="em_sign_out">Sign out</string>
-    <string name="em_sign_up">Sign up</string>
-    <string name="em_sign_up_begin">Account is begin sign up</string>
-    <string name="em_sign_in_begin">Account is begin sign in</string>
 
     <!--Error-->
-    <string name="em_error_invalid_password">Invalid password</string>
-    <string name="em_error_invalid_username">Invalid username</string>
-    <string name="em_error_network_error">Network error</string>
-    <string name="em_error_illegal_argument">Illegal argument</string>
-    <string name="em_error_server_busy">Server busy</string>
-    <string name="em_error_server_timeout">Server timeout</string>
-    <string name="em_error_sign_in_failed">Sign in failed</string>
-    <string name="em_error_sign_up_failed">Sign up failed</string>
-    <string name="em_error_unknown_error">Unknown error</string>
-    <string name="em_error_user_already_exit">User already exit</string>
-    <string name="em_error_user_authentication_failed">User authentication failed</string>
-    <string name="em_error_user_not_found">User not found</string>
 
     <!--Contacts-->
-    <string name="em_contacts_add">Add contacts</string>
-    <string name="em_delete_contact">Delete contact</string>
-    <string name="em_contacts_apply_send_success">Contacts apply for sent successfully</string>
-    <string name="em_contacts_apply_send_failed">Contacts apply for failed to send</string>
-    <string name="em_contacts_apply">Notifications</string>
-    <string name="em_contacts_apply_agree">Agree</string>
-    <string name="em_contacts_apply_reject">Reject</string>
-    <string name="em_wait">Wait...</string>
-    <string name="em_agreed">Agreed</string>
-    <string name="em_rejected">Rejected</string>
-
-    <string name="em_add_to_blacklist">Add To Blacklist</string>
-    <string name="em_blacklist">Black List</string>
-    <string name="em_blacklist_unblock">Unblock</string>
-
-    <string name="em_contact_invite">INVITE</string>
-    <string name="em_contact_next">NEXT</string>
-    <string name="em_contact_selected">Members selected</string>
 
     <!--Setting Preference-->
-    <string name="em_pref_key_about">em_pref_about</string>
-    <string name="em_pref_key_notification">em_pref_notification</string>
-    <string name="em_pref_key_notification_sound">em_pref_notification_sound</string>
-    <string name="em_pref_key_notification_vibrate">em_pref_notification_vibrate</string>
-    <string name="em_pref_key_notification_display_name">em_pref_notification_name</string>
-    <string name="em_pref_key_accept_group_invite_automatically">em_pref_accept_group_invite_automatically</string>
-    <string name="em_pref_key_adaptive_video_bitrate">em_pref_adaptive_video_bitrate</string>
     <!--Status-->
-    <string name="em_pref_on">On</string>
-    <string name="em_pref_off">Off</string>
 
     <!--About-->
-    <string name="em_pref_about">About</string>
-    <string name="em_pref_about_version">SDK Version</string>
 
     <!--Notification-->
-    <string name="em_pref_notification">Notification</string>
-    <string name="em_pref_notification_switch">Notification Switch</string>
-    <string name="em_pref_notification_summary">Set push notification</string>
-    <string name="em_pref_notification_sound">Notification Sound</string>
-    <string name="em_pref_notification_vibration">Notification vibration</string>
-    <string name="em_pref_notification_display_name">Display name</string>
-
-    <string name="em_pref_chat_call">Chat And Call</string>
-    <string name="em_pref_chat_call_summary">Setting chat and call info</string>
-    <string name="em_pref_group_invites">Group invites</string>
-    <string name="em_pref_group_invites_summary">accept group invites automatically</string>
-    <string name="em_pref_adaptive_video_bitrate">Adaptive video bitrate</string>
-    <string name="em_pref_blocked_users">Blocked Users</string>
-
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="groups">Groups</string>
 
     <!--group-->
-    <string name="em_groups">Groups</string>
-    <string name="em_group">group</string>
-    <string name="em_group_id">Group ID</string>
-    <string name="em_exit_group">exit group</string>
-    <string name="em_ok">ok</string>
-    <string name="em_cancel">cancel</string>
-    <string name="em_leave_group">leave group</string>
-    <string name="em_waiting">waiting...</string>
-    <string name="em_delete_group">delete group</string>
-    <string name="em_group_info">Group Info</string>
-    <string name="em_enable">Enabled</string>
-    <string name="em_disabled">Disabled</string>
-    <string name="em_push_notification">Push Notification</string>
-    <string name="em_public">Public</string>
-    <string name="em_private">Private</string>
-    <string name="em_delete">Delete</string>
-    <string name="em_group_members">Members</string>
-    <string name="em_group_member">member</string>
-    <string name="em_group_delete_member">delete member</string>
-    <string name="em_new_group">New Group</string>
-    <string name="em_create">CREATE</string>
-    <string name="em_creating">creating group</string>
-    <string name="em_appear_in_group_search">Appear in group search</string>
-    <string name="em_allow">Allow members to invite</string>
-    <string name="em_freely">Join the group freely</string>
-    <string name="em_public_group">Public Groups</string>
-    <string name="em_invite_members">Invite Members</string>
-    <string name="em_load_public_group">load public group</string>
-    <string name="em_join">JOIN</string>
-    <string name="em_group_block_group_message">Block group message</string>
-    <string name="em_group_unblock_group_message">Unblock group message</string>
-    <string name="em_group_block_group_push">Block group push notification</string>
-    <string name="em_group_unblock_group_push">Unblock group push notification</string>
 
     <!--chatroom-->
-    <string name="em_chatrooms">Chatrooms</string>
-    <string name="em_chatroom_info">ChatRoom Info</string>
-    <string name="em_chatroom_members">ChatRoom Members</string>
-    <string name="em_chatroom_id">ChatRoom ID</string>
-    <string name="em_chatroom_members_size">%1$d Members</string>
-    <string name="em_chatroom_blacklist">ChatRoom Blacklist</string>
-    <string name="em_chatroom_change_name">Change ChatRoom name</string>
-    <string name="em_chatroom_change_description">Change ChatRoom description</string>
-    <string name="em_chatroom_destroy">Destroy ChatRoom</string>
-    <string name="em_chatroom_destroy_sure">Are you sure you want to destroy ChatRoom?</string>
 
     <!-- group detail menu -->
-    <string name="em_group_transfer_owner">Transfer owner</string>
-    <string name="em_group_clear_conversation">Clear conversation</string>
-    <string name="em_group_change_group_name">Change group name</string>
-    <string name="em_group_change_group_desc">Change group description</string>
-    <string name="em_group_admin_list">Admin list</string>
-    <string name="em_group_black_list">Black list</string>
-    <string name="em_group_mute_list">Mute list</string>
 
     <!-- group detail menu -->
-    <string name="em_group_members_add">Add members</string>
-    <string name="em_group_admin_save">Save</string>
-    <string name="em_group_transfer_owner_save">Save</string>
 
     <!-- group member item alert menu -->
-    <string name="em_group_member_alert_item_add_mute">mute</string>
-    <string name="em_group_member_alert_item_add_black">add to black list</string>
-    <string name="em_group_member_alert_item_remove">remove</string>
 
     <!-- chat -->
-    <string name="chat_voice_call">Voice call</string>
-    <string name="chat_video_call">Video call</string>
-    <string name="chat_expand_more">More</string>
-    <string name="sd_card_does_not_exist">"SD card does not exist, can't take pictures"</string>
-    <string name="unable_to_get_location">Unable to get to your location information!</string>
-    <string name="hint_search">Search</string>
-    <string name="delete_conversation">Delete conversation</string>
-    <string name="delete_message">Delete message</string>
-    <string name="chat_send">Send</string>
-    <string name="not_connect_to_server">Not connect to server, please try again later</string>
 
     <!-- account -->
-    <string name="account_item_name_id">Hyphenate ID</string>
-    <string name="account_item_name_nick">Nickname</string>
-    <string name="account_title_upload_photo">Upload Photo</string>
-    <string name="account_msg_local_upload">Upload photo</string>
-    <string name="account_msg_take_photo">Take Photo</string>
-    <string name="account_update_nick">Update nickname</string>
-    <string name="account_update_photo">Update photo</string>
-    <string name="account_waiting">Waiting...</string>
-    <string name="account_set_nickname">Set Nickname</string>
-    <string name="toast_nick_not_isnull">Nickname cannot be empty!</string>
-    <string name="toast_update_photo_success">Update photo success!</string>
-    <string name="toast_update_photo_fail">Update photo fail!</string>
-    <string name="toast_updatenick_success">update nickname success!</string>
-    <string name="toast_updatenick_fail">update nickname fail!</string>
-    <string name="move_into_blacklist_success">Move into blacklist success</string>
-    <string name="move_into_blacklist_failure">Move into blacklist failure</string>
-    <string name="be_removing">Be removing</string>
-    <string name="removed_from_blacklist_fail">Removed fail</string>
 
     <!-- commons-->
-    <string name="Logoff_notification">Logoff notification</string>
-    <string name="connect_conflict">The same account was logged in other device</string>
-    <string name="can_not_connect_chat_server_connection">Cannot connect to server</string>
-    <string name="current_network_unavailable">The current network is not available, please check the network Settings</string>
-    <string name="unable_to_connect">Unable to connect to the server</string>
-    <string name="common_cancel">Cancel</string>
-    <string name="common_ok">Ok</string>
-    <string name="title_contacts">Contacts</string>
-    <string name="title_chats">Chats</string>
-    <string name="title_settings">Settings</string>
-    <string name="em_clear_all_message">Clear all message</string>
-    <string name="em_clear_all_message_sure">Are you sure you want to clear all messages? It is irrevocable after confirming operation!</string>
 
-    <string name="text_ack_msg">Read</string>
-    <string name="text_delivered_msg">Delivered</string>
-    <string name="location_recv">[%1$s location]</string>
-    <string name="location_message">The location information</string>
-    <string name="recording_video">Record video</string>
-    <string name="location_prefix">[My location]</string>
-    <string name="voice">Voice</string>
-    <string name="picture">[Picture]</string>
-    <string name="video">[Video]</string>
-    <string name="file">[File]</string>
-    <string name="dynamic_expression">[Dynamic expression]</string>
-    <string name="voice_prefix">[Voice]</string>
-    <string name="voice_call">[Voice call]</string>
-    <string name="video_call">[Video call]</string>
-    <string name="send_fail">Send failed</string>
-    <string name="error_send_invalid_content">The message content is not allowed to be sent!</string>
-    <string name="error_send_not_in_the_group">You already were not in the group</string>
-    <string name="connect_failuer_toast">Please check the network or try again later</string>
-    <string name="network_unavailable">The network connection is not available, please check the network</string>
-    <string name="chat_edit_hint">Write a message</string>
-    <string name="not_download">Not download:</string>
-    <string name="Have_downloaded">Downloaded</string>
-    <string name="is_down_please_wait">Downloading video, please wait a moment</string>
-    <string name="Did_not_download">Not downloaded</string>
-    <string name="downwaiting">Downloading the file, please wait a moment</string>
-    <string name="Failed_to_download_file">Failed to download file:</string>
-    <string name="Download_the_pictures">Download the pictures: 0%</string>
-    <string name="Download_the_pictures_new">Download the pictures:</string>
-    <string name="cant_find_pictures">"Can't find pictures"</string>
-    <string name="File_does_not_exist">File does not exist</string>
-    <string name="The_file_is_not_greater_than_10_m">The file can not be larger than 10M</string>
-    <string name="Is_download_voice_click_later">Downloading the voice message, click later</string>
-    <string name="send_failure_please">Send failure, please test whether the server connection</string>
-    <string name="record_no_permission">Recording without permission</string>
-    <string name="record_recording_time_is_too_short">The recording time is too short</string>
-    <string name="record_need_sdcard_support">Send voice need sdcard support</string>
-    <string name="record_failed">Record voice failed! </string>
-    <string name="record_tap_to_record">Tap and hold to record</string>
-    <string name="record_move_up_to_cancel">Release to send, swipe up to cancel</string>
-    <string name="record_release_to_cancel">Release to cancel</string>
-    <string name="record_recoding_fail">The recording failure, please try again！</string>
-    <string name="attach_smile">Emoticon</string>
-    <string name="attach_picture">Image</string>
-    <string name="attach_take_pic">Capture</string>
-    <string name="attach_location">Location</string>
-    <string name="attach_video">Video</string>
-    <string name="attach_file">File</string>
-    <string name="attach_voice_call">Voice call</string>
-    <string name="attach_video_call">Video call</string>
     <string name="dummy_data">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</string>
     <string name="next">Next</string>
     <string name="extension">Extension :</string>
@@ -596,15 +208,13 @@
     <string name="price">Price :</string>
     <string name="description">Course Description : </string>
     <string name="address">Address :</string>
-    <string name="type_message">Type Message</string>
     <string name="wrogan_man_gray_printed_slim">Wrogan man gray printed slim</string>
-    <string name="_4_1_reviews">4.1 reviews</string>
+    <string name="_4_1_reviews">4.0 reviews</string>
     <string name="duties_responsibilities">Duties/ Responsibilities</string>
     <string name="job_title1">1) Job Title</string>
     <string name="job_title2">2) Job Title</string>
     <string name="job_title3">3) Job Title</string>
     <string name="employer">Employer</string>
-
 
     <string name="rental_resume">Rental Resume</string>
     <string name="when_can_you_move_in">When can you move in ?</string>
@@ -629,7 +239,6 @@
     <string name="view">View</string>
     <string name="apply_now">Apply Now</string>
     <string name="_4_1_user_review">4.1 user review</string>
-    <string name="experience">Experience :</string>
     <string name="page4">4of7</string>
     <string name="already_apply">Already Applied</string>
     <string name="property_desc">Property Description</string>
@@ -637,5 +246,263 @@
     <string name="about_the_business">About the Business :</string>
     <string name="other_category">Other Category</string>
     <string name="enter_category_name">Enter Category Name</string>
+    <string name="no_internet_connection">No internet connection</string>
+    <string name="dlg_error">Error</string>
 
+
+    <!-- Dialogs strings. -->
+
+
+    <!-- Errors strings. -->
+
+    <!--menu-->
+
+
+    <!--action bar-->
+
+
+    <!-- Settings strings. -->
+
+    <!--Call Settings-->
+
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="new_user_register">New User? Register</string>
+    <string name="name">Name</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="i_accept_terms_amp_conditions"><![CDATA[I accept terms & conditions]]></string>
+    <string name="already_registerd_login">Already Registerd ? Login</string>
+    <string name="forgot_password">Forgot Password ?</string>
+    <string name="news">News</string>
+    <string name="games">Games</string>
+    <string name="events">Events</string>
+    <string name="buddies">Buddies</string>
+    <string name="save">Save</string>
+    <string name="image">image</string>
+    <string name="monday">Monday</string>
+    <string name="closed">Closed</string>
+    <string name="opens">Open</string>
+    <string name="_9_00_am">9:00 AM</string>
+    <string name="_5_00_pm">5:00 PM</string>
+    <string name="tuesday">Tuesday</string>
+    <string name="add_open_hours">+ Add open hours</string>
+    <string name="wednesday">Wednesday</string>
+    <string name="hours">Hours</string>
+    <string name="stop_share">Stop</string>
+    <string name="title_video_category">Video</string>
+    <string name="title_call_settings_category">Call Settings</string>
+    <string name="connection_was_lost">Connection Lost</string>
+    <string name="subtitle_text_logged_in_as">Logged in as %s</string>
+
+
+    <string name="pref_default_value">Default</string>
+    <integer name="pref_default_int_value">0</integer>
+
+    <string name="pref_default_camera_key">default_camera_preference</string>
+    <string name="pref_default_camera_title">Default Camera</string>
+    <string name="pref_default_camera_dlg">Select default camera</string>
+    <string name="pref_default_camera_default">0</string>
+
+    <string name="pref_frame_rate_key">frame_rate</string>
+    <string name="pref_frame_rate_title">Frame Rate (0&#8211;30)</string>
+    <string name="pref_frame_rate_default">0</string>
+    <integer name="pref_frame_rate_min_value">0</integer>
+    <integer name="pref_frame_rate_max_value">30</integer>
+    <integer name="pref_frame_rate_stepSize">5</integer>
+
+    <string name="pref_resolution_key">resolution_preference</string>
+    <string name="pref_resolution_title">Video Format</string>
+    <string name="pref_resolution_dlg">Enter RTC local video resolution</string>
+    <string name="pref_resolution_default">-1</string>
+
+    <string name="pref_startbitrate_key">startbitrate_preference</string>
+    <string name="pref_startbitrate_title">Start bitrate setting</string>
+    <string name="pref_startbitrate_dlg">Start bitrate setting</string>
+    <string name="pref_startbitrate_default">Default</string>
+
+    <string name="pref_startbitratevalue_key">startbitratevalue_preference</string>
+    <string name="pref_startbitratevalue_title">Bandwidth (0&#8211;2000)</string>
+    <string name="pref_startbitratevalue_default">0</string>
+    <integer name="pref_startbitratevalue_min_value">0</integer>
+    <integer name="pref_startbitratevalue_max_value">2000</integer>
+    <integer name="pref_startbitratevalue_step_size">100</integer>
+
+    <string name="pref_disable_built_in_aec_key">disable_built_in_aec_preference</string>
+    <string name="pref_disable_built_in_aec_title">Disable built-in AEC</string>
+    <string name="pref_disable_built_in_aec_dlg">Disable built-in AEC</string>
+    <string name="pref_disable_built_in_aec_default">false</string>
+    <string name="pref_built_in_aec_not_available">Built-in AEC is not available</string>
+
+    <string name="pref_opensles_key">opensles_preference</string>
+    <string name="pref_opensles_title">Use OpenSL ES for audio playback</string>
+    <string name="pref_opensles_dlg">Use OpenSL ES for audio playback</string>
+    <string name="pref_opensles_default">false</string>
+
+    <string name="pref_noaudioprocessing_key">audioprocessing_preference</string>
+    <string name="pref_noaudioprocessing_title">Disable audio processing</string>
+    <string name="pref_noaudioprocessing_dlg">Disable audio processing pipeline</string>
+    <string name="pref_noaudioprocessing_default">false</string>
+
+    <string name="pref_manage_speakerphone_by_proximity_key">manage_speakerphone_by_proximity_preference</string>
+    <string name="pref_manage_speakerphone_by_proximity_title">Manage Speaker Phone by Proximity Sensor</string>
+    <string name="pref_manage_speakerphone_by_proximity_dlg">Manage Speaker Phone by Proximity Sensor</string>
+    <string name="pref_manage_speakerphone_by_proximity_summary">Enables managing of Speaker Phone by Proximity Sensor for Audio calls</string>
+    <string name="pref_manage_speakerphone_by_proximity_default">false</string>
+
+    <!--Call Settings-->
+
+    <string name="pref_answer_time_interval_key">answer_time_interval</string>
+    <string name="pref_answer_time_interval_title">Answer Time Interval (15&#8211;90s)</string>
+    <string name="pref_answer_time_interval_default_value">60</string>
+    <integer name="pref_answer_time_interval_min_value">15</integer>
+    <integer name="pref_answer_time_interval_max_value">90</integer>
+    <integer name="pref_answer_time_interval_step_size">5</integer>
+
+    <string name="pref_disconnect_time_interval_key">disconnect_time_interval</string>
+    <string name="pref_disconnect_time_interval_title">Disconnect Time Interval (10&#8211;90s)</string>
+    <string name="pref_disconnect_time_interval_default_value">10</string>
+    <integer name="pref_disconnect_time_interval_min_value">10</integer>
+    <integer name="pref_disconnect_time_interval_max_value">90</integer>
+    <integer name="pref_disconnect_time_interval_step_size">5</integer>
+
+    <string name="pref_dialing_time_interval_key">Dialing_time_interval</string>
+    <string name="pref_dialing_time_interval_title">Dialing Time Interval (3&#8211;10s)</string>
+    <string name="pref_dialing_time_interval_default_value">5</string>
+    <integer name="pref_dialing_time_interval_min_value">3</integer>
+    <integer name="pref_dialing_time_interval_max_value">10</integer>
+    <integer name="pref_dialing_time_interval_step_size">1</integer>
+
+    <string name="pref_videocodec_key">videocodec_preference</string>
+    <string name="pref_videocodec_title">Default video codec</string>
+    <string name="pref_videocodec_dlg">Select default video codec</string>
+    <string name="pref_videocodec_default">0</string>
+
+    <string name="pref_hwcodec_key">hwcodec_preference</string>
+    <string name="pref_hwcodec_title">Video codec hardware acceleration</string>
+    <string name="pref_hwcodec_default">true</string>
+
+    <string name="pref_value_enabled">Enabled</string>
+    <string name="pref_value_disabled">Disabled</string>
+
+    <string name="pref_room_server_url_key">room_server_url_preference</string>
+    <string name="pref_room_server_url_title">Room server URL.</string>
+    <string name="pref_room_server_url_dlg">Enter a room server URL.</string>
+    <string name="pref_room_server_url_default" translatable="false">https://apprtc.appspot.com</string>
+
+    <string name="pref_displayhud_key">displayhud_preference</string>
+    <string name="pref_displayhud_title">Display call statistics.</string>
+    <string name="pref_displayhud_dlg">Display call statistics.</string>
+    <string name="pref_displayhud_default" translatable="false">false</string>
+    <string name="pref_audiocodec_key">pref_audio_codec</string>
+    <string name="pref_audiocodec_title">Default audio codec</string>
+    <string name="pref_audiocodec_def">ISAC</string>
+    <string name="pref_audiocodec_dlg">Select default audio codec</string>
+    <string name="dlg_signal_error">Disconnected… Please check your Internet connection!</string>
+    <string name="permission_unavailable">Permission Unavailable</string>
+    <string name="text_status_hang_up">Hang Up</string>
+
+
+    <string name="splash_app_title">Video &amp; Audio \nChat Sample</string>
+    <string name="splash_create_session_error">Create session errors:</string>
+
+
+    <!-- Dialogs strings. -->
+    <string name="dlg_login">Login…</string>
+    <string name="dlg_sign_in">Sign In…</string>
+    <string name="dlg_updating_user">Updating user…</string>
+    <string name="dlg_creating_new_user">Creating new user…</string>
+    <string name="dlg_logout">Logout…</string>
+    <string name="dlg_loading_opponents">Loading opponents…</string>
+
+
+    <!-- Errors strings. -->
+    <string name="error_max_opponents_count">You can select up to %d opponents</string>
+    <string name="sign_up_error">Error creating new user, please try again</string>
+    <string name="sign_in_error_with_error">Sign In error. Error</string>
+    <string name="sign_in_error_without_error">Sign In error</string>
+    <string name="logout_user_with_error">Logout user error. Error</string>
+
+    <string name="error_empty_login">Login can not be empty</string>
+    <string name="error_empty_chat_room_name">Chat room name can not be empty</string>
+
+    <string name="login_chat_login_error">Login Chat error. Please relogin. Error</string>
+    <string name="update_user_error">Update user error. Error</string>
+    <string name="loading_users_error">Loading users error. Error</string>
+
+
+    <string name="field_name_user_name">User name</string>
+    <string name="field_name_chat_room_name">Chat room name</string>
+
+    <string name="error_name_must_not_contain_special_characters_from_app">%1$s must contain 3 &#8212; %2$s alphanumeric Latin characters without space, the first char must be a letter</string>
+
+    <!--menu-->
+    <string name="action_start_login">Done</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_screen_share">Screen share</string>
+    <string name="action_update_opponens_list">Update opponents list</string>
+    <string name="action_logout">Logout</string>
+    <string name="action_start_video_call">Video call</string>
+    <string name="action_start_audio_call">Audio call</string>
+
+
+    <!--action bar-->
+    <string name="actionbar_title_settings">Settings</string>
+    <string name="title_login_activity">Enter to chat</string>
+
+    <string name="title_one_user_selected">%s user selected</string>
+    <string name="tile_many_users_selected">%s users selected</string>
+
+
+    <string name="incoming_call">Incoming Call</string>
+    <string name="also_on_call">Also on call:</string>
+    <string name="edit_opponents_list">Edit opponents list</string>
+    <string name="incoming_audio_call">Incoming Audio Call</string>
+    <string name="incoming_video_call">Incoming Video Call</string>
+    <string name="outgoing_audio_video_call_title">%s\n\nRinging</string>
+    <string name="user_list_on_call">User 1, User 2, User 3, User 4, User 5, User 6</string>
+
+
+    <string name="opponent_pending">Pending</string>
+    <string name="opponent_closed">Closed</string>
+    <string name="text_incoming_audio_call">Incoming Audio Call</string>
+    <string name="text_incoming_video_call">Incoming Video Call</string>
+    <string name="text_status_connect">Connect…</string>
+    <string name="text_status_checking">Checking…</string>
+    <string name="text_status_connected">Connected</string>
+    <string name="text_status_disconnected">Disconnected</string>
+
+    <string name="text_status_rejected">Rejected</string>
+    <string name="text_status_no_answer">No answer</string>
+    <string name="text_status_closed">Closed</string>
+    <string name="text_status_time_out">Time Out</string>
+    <string name="text_status_failed">Failed</string>
+
+    <string name="text_welcoming_message">Please enter username and chat room name. \nYou can join existed chat room.</string>
+    <string name="hint_user_name">User name</string>
+    <string name="hint_chat_room_name">Chat room name</string>
+
+    <string name="text_select_user_to_call">Select users you want to call</string>
+
+    <string name="call_was_stopped_connection_lost">Call was stopped because connection was lost</string>
+    <string name="connection_lost">Connection lost</string>
+
+    <string name="text_push_notification_message">"%s is calling you"</string>
+
+
+    <string name="pref_version">QuickBlox WebRTC\nBuild version 1.12</string>
+    <string name="btn_screen_capture">screenShot</string>
+    <string name="accepted">Accepted</string>
+
+
+    <string name="opponents">and %s other</string>
+    <string name="opponent">and %s </string>
+    <string name="ringing">Ringing</string>
+    <string name="camera_swicth_failed">\"Failed switch camera\"</string>
+
+    <string name="sender_id">761750217637</string>
+    <string name="chat">Chat</string>
+    <string name="call">Call</string>
+    <string name="group">Group</string>
+    <string name="contacts">Contacts</string>
+    <string name="type_message">Type message</string>
 </resources>

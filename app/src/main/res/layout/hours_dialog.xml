@@ -1,0 +1,1685 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/colorPrimary">
+
+        <TextView
+            android:id="@+id/cancel_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:gravity="center_vertical"
+            android:padding="10dp"
+            android:text="@string/cancel"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:gravity="center_vertical"
+            android:padding="10dp"
+            android:text="@string/hours"
+            android:textColor="@color/white"
+            android:textSize="22sp"/>
+
+        <TextView
+            android:id="@+id/save_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:gravity="center_vertical"
+            android:padding="10dp"
+            android:text="@string/save"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fillViewport="true">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1.2dp"
+                    android:background="@color/gray_light"/>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:padding="@dimen/size_10">
+                    <ImageView
+                        android:id="@+id/img1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:contentDescription="@string/image"
+                        android:src="@drawable/clock" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toEndOf="@+id/img1"
+                        android:layout_toRightOf="@+id/img1"
+                        android:padding="5dp"
+                        android:text="@string/monday"
+                        android:textColor="@color/colorAccent"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toLeftOf="@+id/switchMonday"
+                        android:layout_toStartOf="@+id/switchMonday"
+                        android:padding="5dp"
+                        android:text="@string/closed"
+                        android:textColor="@color/Red"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        android:visibility="gone" />
+
+                    <android.support.v7.widget.SwitchCompat
+                        android:id="@+id/switchMonday"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:checked="true"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textColor="@color/Red"
+                        android:theme="@style/ColorSwitchStyle"/>
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:id="@+id/monday_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginStart="30dp"
+                    android:orientation="vertical">
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1.2dp"
+                        android:background="@color/gray_light"/>
+
+                    <TableLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TableRow
+                            android:id="@+id/monday_row1">
+
+                            <LinearLayout
+                                android:id="@+id/monday_open1"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical"
+                                android:padding="5dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:gravity="center_vertical"
+                                    android:singleLine="true"
+                                    android:text="@string/opens"
+                                    android:textColor="@color/black"
+                                    android:textSize="14sp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:id="@+id/monday_openTV1"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/_9_00_am"
+                                    android:textColor="@color/black" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/monday_close1"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical"
+                                android:padding="5dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:gravity="center_vertical"
+                                    android:singleLine="true"
+                                    android:text="@string/closed"
+                                    android:textColor="@color/black"
+                                    android:textSize="14sp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:id="@+id/monday_closeTv1"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/_5_00_pm"
+                                    android:textColor="@color/black" />
+
+                            </LinearLayout>
+
+                            <ImageView
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:padding="10dp"
+                                android:src="@drawable/close"
+                                android:visibility="invisible"
+                                />
+
+                        </TableRow>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1.2dp"
+                            android:background="@color/gray_light"/>
+                        <TableRow
+                            android:id="@+id/monday_row2"
+                            android:visibility="gone">
+
+                            <LinearLayout
+                                android:id="@+id/monday_open2"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical"
+                                android:padding="5dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:gravity="center_vertical"
+                                    android:singleLine="true"
+                                    android:text="@string/opens"
+                                    android:textColor="@color/black"
+                                    android:textSize="14sp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:id="@+id/monday_openTv2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/_9_00_am"
+                                    android:textColor="@color/black" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/monday_close2"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical"
+                                android:padding="5dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:gravity="center_vertical"
+                                    android:singleLine="true"
+                                    android:text="@string/closed"
+                                    android:textColor="@color/black"
+                                    android:textSize="14sp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:id="@+id/monday_closeTv2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/_5_00_pm"
+                                    android:textColor="@color/black" />
+
+                            </LinearLayout>
+
+                            <ImageView
+                                android:id="@+id/monday_close"
+                                android:layout_width="0dp"
+                                android:layout_height="50dp"
+                                android:layout_weight="0.3"
+                                android:padding="10dp"
+                                android:src="@drawable/close"
+                                />
+
+                        </TableRow>
+
+
+                    </TableLayout>
+
+                    <TextView
+                        android:id="@+id/add1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:padding="5dp"
+                        android:text="@string/add_open_hours"
+                        android:textColor="@color/logo_color"/>
+                </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1.2dp"
+                    android:background="@color/gray_light"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1.2dp"
+                    android:background="@color/gray_light"/>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:padding="@dimen/size_10">
+                    <ImageView
+                        android:id="@+id/img2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/clock" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toEndOf="@+id/img2"
+                        android:layout_toRightOf="@+id/img2"
+                        android:padding="5dp"
+                        android:text="@string/tuesday"
+                        android:textColor="@color/colorAccent"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toLeftOf="@+id/switchTuesday"
+                        android:padding="5dp"
+                        android:text="@string/closed"
+                        android:textColor="@color/Red"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        android:visibility="gone"/>
+
+                    <android.support.v7.widget.SwitchCompat
+                        android:id="@+id/switchTuesday"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:checked="true"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textColor="@color/Red"
+                        android:textOff="@string/closed"
+                        android:theme="@style/ColorSwitchStyle" />
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:id="@+id/tuesday_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginStart="30dp"
+                    android:orientation="vertical">
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1.2dp"
+                        android:background="@color/gray_light"/>
+
+                    <TableLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <TableRow>
+
+                            <LinearLayout
+                                android:id="@+id/tuesday_open1"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical"
+                                android:padding="5dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:gravity="center_vertical"
+                                    android:singleLine="true"
+                                    android:text="@string/opens"
+                                    android:textColor="@color/black"
+                                    android:textSize="14sp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:id="@+id/tuesday_openTV1"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/_9_00_am"
+                                    android:textColor="@color/black" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/tuesday_close1"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical"
+                                android:padding="5dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:gravity="center_vertical"
+                                    android:singleLine="true"
+                                    android:text="@string/closed"
+                                    android:textColor="@color/black"
+                                    android:textSize="14sp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:id="@+id/tuesday_closeTv1"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/_5_00_pm"
+                                    android:textColor="@color/black" />
+
+                            </LinearLayout>
+
+                            <ImageView
+                                android:layout_width="0dp"
+                                android:layout_height="50dp"
+                                android:layout_weight="0.3"
+                                android:padding="10dp"
+                                android:src="@drawable/close"
+                                android:visibility="invisible"
+                                />
+
+                        </TableRow>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1.2dp"
+                            android:background="@color/gray_light"/>
+                        <TableRow
+                            android:id="@+id/tuesday_row2"
+                            android:visibility="gone">
+
+                            <LinearLayout
+                                android:id="@+id/tuesday_open2"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical"
+                                android:padding="5dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:gravity="center_vertical"
+                                    android:singleLine="true"
+                                    android:text="@string/opens"
+                                    android:textColor="@color/black"
+                                    android:textSize="14sp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:id="@+id/tuesday_openTv2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/_9_00_am"
+                                    android:textColor="@color/black" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/tuesday_close2"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical"
+                                android:padding="5dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:gravity="center_vertical"
+                                    android:singleLine="true"
+                                    android:text="@string/closed"
+                                    android:textColor="@color/black"
+                                    android:textSize="14sp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:id="@+id/tuesday_closeTv2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/_5_00_pm"
+                                    android:textColor="@color/black" />
+
+                            </LinearLayout>
+
+                            <ImageView
+                                android:id="@+id/tuesday_close"
+                                android:layout_width="0dp"
+                                android:layout_height="50dp"
+                                android:layout_weight="0.3"
+                                android:padding="10dp"
+                                android:src="@drawable/close"
+                                />
+
+                        </TableRow>
+
+
+                    </TableLayout>
+
+                    <TextView
+                        android:id="@+id/add2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:padding="5dp"
+                        android:text="@string/add_open_hours"
+                        android:textColor="@color/logo_color"/>
+                </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1.2dp"
+                    android:background="@color/gray_light"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1.2dp"
+                    android:background="@color/gray_light"/>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:padding="@dimen/size_10">
+                    <ImageView
+                        android:id="@+id/img3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/clock" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toEndOf="@+id/img3"
+                        android:layout_toRightOf="@+id/img3"
+                        android:padding="5dp"
+                        android:text="@string/wednesday"
+                        android:textColor="@color/colorAccent"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toLeftOf="@+id/switchWed"
+                        android:layout_toStartOf="@+id/switchWed"
+                        android:padding="5dp"
+                        android:text="@string/closed"
+                        android:textColor="@color/Red"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        android:visibility="gone" />
+
+                    <android.support.v7.widget.SwitchCompat
+                        android:id="@+id/switchWed"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:checked="true"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textColor="@color/Red"
+                        android:textOff="@string/closed"
+                        android:theme="@style/ColorSwitchStyle" />
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:id="@+id/wed_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginStart="30dp"
+                    android:orientation="vertical">
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1.2dp"
+                        android:background="@color/gray_light"/>
+
+                    <TableLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <TableRow>
+
+                            <LinearLayout
+                                android:id="@+id/wed_open1"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical"
+                                android:padding="5dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:gravity="center_vertical"
+                                    android:singleLine="true"
+                                    android:text="@string/opens"
+                                    android:textColor="@color/black"
+                                    android:textSize="14sp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:id="@+id/wed_openTV1"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/_9_00_am"
+                                    android:textColor="@color/black" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/wed_close1"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical"
+                                android:padding="5dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:gravity="center_vertical"
+                                    android:singleLine="true"
+                                    android:text="@string/closed"
+                                    android:textColor="@color/black"
+                                    android:textSize="14sp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:id="@+id/wed_closeTv1"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/_5_00_pm"
+                                    android:textColor="@color/black" />
+
+                            </LinearLayout>
+
+                            <ImageView
+                                android:layout_width="0dp"
+                                android:layout_height="50dp"
+                                android:layout_weight="0.3"
+                                android:padding="10dp"
+                                android:src="@drawable/close"
+                                android:visibility="invisible"
+                                />
+
+                        </TableRow>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1.2dp"
+                            android:background="@color/gray_light"/>
+                        <TableRow
+                            android:id="@+id/wed_row2"
+                            android:visibility="gone">
+
+                            <LinearLayout
+                                android:id="@+id/wed_open2"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical"
+                                android:padding="5dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:gravity="center_vertical"
+                                    android:singleLine="true"
+                                    android:text="@string/opens"
+                                    android:textColor="@color/black"
+                                    android:textSize="14sp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:id="@+id/wed_openTv2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/_9_00_am"
+                                    android:textColor="@color/black" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/wed_close2"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical"
+                                android:padding="5dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:gravity="center_vertical"
+                                    android:singleLine="true"
+                                    android:text="@string/closed"
+                                    android:textColor="@color/black"
+                                    android:textSize="14sp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:id="@+id/wed_closeTv2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/_5_00_pm"
+                                    android:textColor="@color/black" />
+
+                            </LinearLayout>
+
+                            <ImageView
+                                android:id="@+id/wed_close"
+                                android:layout_width="0dp"
+                                android:layout_height="50dp"
+                                android:layout_weight="0.3"
+                                android:padding="10dp"
+                                android:src="@drawable/close"
+                                />
+
+                        </TableRow>
+
+
+                    </TableLayout>
+
+                    <TextView
+                        android:id="@+id/add3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:padding="5dp"
+                        android:text="@string/add_open_hours"
+                        android:textColor="@color/logo_color"/>
+                </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1.2dp"
+                    android:background="@color/gray_light"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1.2dp"
+                    android:background="@color/gray_light"/>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:padding="@dimen/size_10">
+                    <ImageView
+                        android:id="@+id/img4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/clock"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@+id/img4"
+                        android:padding="5dp"
+                        android:text="Thursday"
+                        android:textColor="@color/colorAccent"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:id="@+id/tv4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toLeftOf="@+id/switchThur"
+                        android:padding="5dp"
+                        android:text="closed"
+                        android:textColor="@color/Red"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        android:visibility="gone"/>
+
+                    <android.support.v7.widget.SwitchCompat
+                        android:id="@+id/switchThur"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:checked="true"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textColor="@color/Red"
+                        android:textOff="@string/closed"
+                        android:theme="@style/ColorSwitchStyle"/>
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:id="@+id/thur_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:orientation="vertical">
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1.2dp"
+                        android:background="@color/gray_light"/>
+
+                    <TableLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <TableRow>
+
+                            <LinearLayout
+                                android:id="@+id/thur_open1"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical"
+                                android:padding="5dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:gravity="center_vertical"
+                                    android:singleLine="true"
+                                    android:text="@string/opens"
+                                    android:textColor="@color/black"
+                                    android:textSize="14sp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:id="@+id/thur_openTV1"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/_9_00_am"
+                                    android:textColor="@color/black" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/thur_close1"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical"
+                                android:padding="5dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:gravity="center_vertical"
+                                    android:singleLine="true"
+                                    android:text="@string/closed"
+                                    android:textColor="@color/black"
+                                    android:textSize="14sp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:id="@+id/thur_closeTv1"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/_5_00_pm"
+                                    android:textColor="@color/black" />
+
+                            </LinearLayout>
+
+                            <ImageView
+                                android:layout_width="0dp"
+                                android:layout_height="50dp"
+                                android:layout_weight="0.3"
+                                android:padding="10dp"
+                                android:src="@drawable/close"
+                                android:visibility="invisible"
+                                />
+
+                        </TableRow>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1.2dp"
+                            android:background="@color/gray_light"/>
+                        <TableRow
+                            android:id="@+id/thur_row2"
+                            android:visibility="gone">
+
+                            <LinearLayout
+                                android:id="@+id/thur_open2"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical"
+                                android:padding="5dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:gravity="center_vertical"
+                                    android:singleLine="true"
+                                    android:text="@string/opens"
+                                    android:textColor="@color/black"
+                                    android:textSize="14sp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:id="@+id/thur_openTv2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/_9_00_am"
+                                    android:textColor="@color/black" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/thur_close2"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical"
+                                android:padding="5dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:gravity="center_vertical"
+                                    android:singleLine="true"
+                                    android:text="@string/closed"
+                                    android:textColor="@color/black"
+                                    android:textSize="14sp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:id="@+id/thur_closeTv2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/_5_00_pm"
+                                    android:textColor="@color/black" />
+
+                            </LinearLayout>
+
+                            <ImageView
+                                android:id="@+id/thur_close"
+                                android:layout_width="0dp"
+                                android:layout_height="50dp"
+                                android:layout_weight="0.3"
+                                android:padding="10dp"
+                                android:src="@drawable/close"
+                                />
+
+                        </TableRow>
+
+
+                    </TableLayout>
+
+                    <TextView
+                        android:id="@+id/add4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:padding="5dp"
+                        android:text="@string/add_open_hours"
+                        android:textColor="@color/logo_color"/>
+                </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1.2dp"
+                    android:background="@color/gray_light"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1.2dp"
+                    android:background="@color/gray_light"/>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:padding="@dimen/size_10">
+                    <ImageView
+                        android:id="@+id/img5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/clock"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@+id/img5"
+                        android:padding="5dp"
+                        android:text="Friday"
+                        android:textColor="@color/colorAccent"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:id="@+id/tv5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toLeftOf="@+id/switchFriday"
+                        android:padding="5dp"
+                        android:text="closed"
+                        android:textColor="@color/Red"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        android:visibility="gone"/>
+
+                    <android.support.v7.widget.SwitchCompat
+                        android:id="@+id/switchFriday"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:checked="true"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textColor="@color/Red"
+                        android:textOff="@string/closed"
+                        android:theme="@style/ColorSwitchStyle"/>
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:id="@+id/friday_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:orientation="vertical">
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1.2dp"
+                        android:background="@color/gray_light"/>
+
+                    <TableLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <TableRow>
+
+                            <LinearLayout
+                                android:id="@+id/friday_open1"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical"
+                                android:padding="5dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:gravity="center_vertical"
+                                    android:singleLine="true"
+                                    android:text="@string/opens"
+                                    android:textColor="@color/black"
+                                    android:textSize="14sp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:id="@+id/friday_openTV1"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/_9_00_am"
+                                    android:textColor="@color/black" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/friday_close1"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical"
+                                android:padding="5dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:gravity="center_vertical"
+                                    android:singleLine="true"
+                                    android:text="@string/closed"
+                                    android:textColor="@color/black"
+                                    android:textSize="14sp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:id="@+id/friday_closeTv1"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/_5_00_pm"
+                                    android:textColor="@color/black" />
+
+                            </LinearLayout>
+
+                            <ImageView
+                                android:layout_width="0dp"
+                                android:layout_height="50dp"
+                                android:layout_weight="0.3"
+                                android:padding="10dp"
+                                android:src="@drawable/close"
+                                android:visibility="invisible"
+                                />
+
+                        </TableRow>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1.2dp"
+                            android:background="@color/gray_light"/>
+                        <TableRow
+                            android:id="@+id/friday_row2"
+                            android:visibility="gone">
+
+                            <LinearLayout
+                                android:id="@+id/friday_open2"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical"
+                                android:padding="5dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:gravity="center_vertical"
+                                    android:singleLine="true"
+                                    android:text="@string/opens"
+                                    android:textColor="@color/black"
+                                    android:textSize="14sp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:id="@+id/friday_openTv2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/_9_00_am"
+                                    android:textColor="@color/black" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/friday_close2"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical"
+                                android:padding="5dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:gravity="center_vertical"
+                                    android:singleLine="true"
+                                    android:text="@string/closed"
+                                    android:textColor="@color/black"
+                                    android:textSize="14sp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:id="@+id/friday_closeTv2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/_5_00_pm"
+                                    android:textColor="@color/black" />
+
+                            </LinearLayout>
+
+                            <ImageView
+                                android:id="@+id/friday_close"
+                                android:layout_width="0dp"
+                                android:layout_height="50dp"
+                                android:layout_weight="0.3"
+                                android:padding="10dp"
+                                android:src="@drawable/close"
+                                />
+
+                        </TableRow>
+
+
+                    </TableLayout>
+
+                    <TextView
+                        android:id="@+id/add5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:padding="5dp"
+                        android:text="@string/add_open_hours"
+                        android:textColor="@color/logo_color"/>
+                </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1.2dp"
+                    android:background="@color/gray_light"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1.2dp"
+                    android:background="@color/gray_light"/>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:padding="@dimen/size_10">
+                    <ImageView
+                        android:id="@+id/img6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/clock"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@+id/img6"
+                        android:padding="5dp"
+                        android:text="Saturday"
+                        android:textColor="@color/colorAccent"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:id="@+id/tv6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toLeftOf="@+id/switchSat"
+                        android:padding="5dp"
+                        android:text="closed"
+                        android:textColor="@color/Red"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        android:visibility="gone"/>
+
+                    <android.support.v7.widget.SwitchCompat
+                        android:id="@+id/switchSat"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:checked="true"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textColor="@color/Red"
+                        android:textOff="@string/closed"
+                        android:theme="@style/ColorSwitchStyle"/>
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:id="@+id/sat_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:orientation="vertical">
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1.2dp"
+                        android:background="@color/gray_light"/>
+
+                    <TableLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <TableRow>
+
+                            <LinearLayout
+                                android:id="@+id/sat_open1"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical"
+                                android:padding="5dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:gravity="center_vertical"
+                                    android:singleLine="true"
+                                    android:text="@string/opens"
+                                    android:textColor="@color/black"
+                                    android:textSize="14sp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:id="@+id/sat_openTV1"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/_9_00_am"
+                                    android:textColor="@color/black" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/sat_close1"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical"
+                                android:padding="5dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:gravity="center_vertical"
+                                    android:singleLine="true"
+                                    android:text="@string/closed"
+                                    android:textColor="@color/black"
+                                    android:textSize="14sp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:id="@+id/sat_closeTv1"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/_5_00_pm"
+                                    android:textColor="@color/black" />
+
+                            </LinearLayout>
+
+                            <ImageView
+                                android:layout_width="0dp"
+                                android:layout_height="50dp"
+                                android:layout_weight="0.3"
+                                android:padding="10dp"
+                                android:src="@drawable/close"
+                                android:visibility="invisible"
+                                />
+
+                        </TableRow>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1.2dp"
+                            android:background="@color/gray_light"/>
+                        <TableRow
+                            android:id="@+id/sat_row2"
+                            android:visibility="gone">
+
+                            <LinearLayout
+                                android:id="@+id/sat_open2"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical"
+                                android:padding="5dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:gravity="center_vertical"
+                                    android:singleLine="true"
+                                    android:text="@string/opens"
+                                    android:textColor="@color/black"
+                                    android:textSize="14sp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:id="@+id/sat_openTv2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/_9_00_am"
+                                    android:textColor="@color/black" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/sat_close2"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical"
+                                android:padding="5dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:gravity="center_vertical"
+                                    android:singleLine="true"
+                                    android:text="@string/closed"
+                                    android:textColor="@color/black"
+                                    android:textSize="14sp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:id="@+id/sat_closeTv2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/_5_00_pm"
+                                    android:textColor="@color/black" />
+
+                            </LinearLayout>
+
+                            <ImageView
+                                android:id="@+id/sat_close"
+                                android:layout_width="0dp"
+                                android:layout_height="50dp"
+                                android:layout_weight="0.3"
+                                android:padding="10dp"
+                                android:src="@drawable/close"
+                                />
+
+                        </TableRow>
+
+
+                    </TableLayout>
+
+                    <TextView
+                        android:id="@+id/add6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:padding="5dp"
+                        android:text="@string/add_open_hours"
+                        android:textColor="@color/logo_color"/>
+                </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1.2dp"
+                    android:background="@color/gray_light"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1.2dp"
+                    android:background="@color/gray_light"/>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:padding="@dimen/size_10">
+                    <ImageView
+                        android:id="@+id/img7"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/clock"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@+id/img7"
+                        android:padding="5dp"
+                        android:text="Sunday"
+                        android:textColor="@color/colorAccent"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:id="@+id/tv7"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toLeftOf="@+id/switchSunday"
+                        android:padding="5dp"
+                        android:text="closed"
+                        android:textColor="@color/Red"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        android:visibility="gone"/>
+
+                    <android.support.v7.widget.SwitchCompat
+                        android:id="@+id/switchSunday"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:checked="true"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textColor="@color/Red"
+                        android:textOff="@string/closed"
+                        android:theme="@style/ColorSwitchStyle"/>
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:id="@+id/sunday_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:orientation="vertical">
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1.2dp"
+                        android:background="@color/gray_light"/>
+
+                    <TableLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <TableRow>
+
+                            <LinearLayout
+                                android:id="@+id/sunday_open1"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical"
+                                android:padding="5dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:gravity="center_vertical"
+                                    android:singleLine="true"
+                                    android:text="@string/opens"
+                                    android:textColor="@color/black"
+                                    android:textSize="14sp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:id="@+id/sunday_openTV1"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/_9_00_am"
+                                    android:textColor="@color/black" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/sunday_close1"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical"
+                                android:padding="5dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:gravity="center_vertical"
+                                    android:singleLine="true"
+                                    android:text="@string/closed"
+                                    android:textColor="@color/black"
+                                    android:textSize="14sp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:id="@+id/sunday_closeTv1"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/_5_00_pm"
+                                    android:textColor="@color/black" />
+
+                            </LinearLayout>
+
+                            <ImageView
+                                android:layout_width="0dp"
+                                android:layout_height="50dp"
+                                android:layout_weight="0.3"
+                                android:padding="10dp"
+                                android:src="@drawable/close"
+                                android:visibility="invisible"
+                                />
+
+                        </TableRow>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1.2dp"
+                            android:background="@color/gray_light"/>
+                        <TableRow
+                            android:id="@+id/sunday_row2"
+                            android:visibility="gone">
+
+                            <LinearLayout
+                                android:id="@+id/sunday_open2"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical"
+                                android:padding="5dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:gravity="center_vertical"
+                                    android:singleLine="true"
+                                    android:text="@string/opens"
+                                    android:textColor="@color/black"
+                                    android:textSize="14sp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:id="@+id/sunday_openTv2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/_9_00_am"
+                                    android:textColor="@color/black" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/sunday_close2"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical"
+                                android:padding="5dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:gravity="center_vertical"
+                                    android:singleLine="true"
+                                    android:text="@string/closed"
+                                    android:textColor="@color/black"
+                                    android:textSize="14sp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:id="@+id/sunday_closeTv2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/_5_00_pm"
+                                    android:textColor="@color/black" />
+
+                            </LinearLayout>
+
+                            <ImageView
+                                android:id="@+id/sunday_close"
+                                android:layout_width="0dp"
+                                android:layout_height="50dp"
+                                android:layout_weight="0.3"
+                                android:padding="10dp"
+                                android:src="@drawable/close"
+                                />
+
+                        </TableRow>
+
+
+                    </TableLayout>
+
+                    <TextView
+                        android:id="@+id/add7"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:padding="5dp"
+                        android:text="@string/add_open_hours"
+                        android:textColor="@color/logo_color"/>
+                </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1.2dp"
+                    android:background="@color/gray_light"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+</LinearLayout>

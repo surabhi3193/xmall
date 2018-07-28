@@ -8,18 +8,19 @@
     android:focusable="true">
 
     <LinearLayout
-
+        android:layout_height="match_parent"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_above="@+id/btn_lay"
         android:background="@drawable/item_shadow_bg"
         android:orientation="vertical"
         android:paddingLeft="10dp"
         android:paddingRight="10dp">
-
         <android.support.v4.widget.NestedScrollView
+            android:layout_height="match_parent"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/size_10"
             android:layout_marginTop="10dp"
+            android:fillViewport="true"
             android:scrollbars="none">
 
                <LinearLayout
@@ -62,7 +63,7 @@
                            android:singleLine="true"
                            android:textColor="@color/black"
                            android:textColorHint="@color/black"
-                           android:textSize="13sp" />
+                           android:textSize="16sp" />
 
                    </android.support.design.widget.TextInputLayout>
 
@@ -84,7 +85,7 @@
                            android:paddingLeft="10dp"
                            android:textColor="@color/black"
                            android:textColorHint="@color/black"
-                           android:textSize="13sp" />
+                           android:textSize="16sp" />
 
                    </android.support.design.widget.TextInputLayout>
                    <LinearLayout
@@ -108,7 +109,7 @@
                            android:gravity="center"
                            android:hint="USD $"
                            android:textColorHint="@color/black"
-                           android:textSize="13sp"/>
+                           android:textSize="16sp"/>
 
                        <android.support.design.widget.TextInputLayout
                            android:layout_width="0dp"
@@ -130,11 +131,10 @@
                                android:singleLine="true"
                                android:textColor="@color/black"
                                android:textColorHint="@color/black"
-                               android:textSize="13sp" />
+                               android:textSize="16sp" />
 
                        </android.support.design.widget.TextInputLayout>
                    </LinearLayout>
-
 
                    <android.support.design.widget.TextInputLayout
                        android:layout_width="match_parent"
@@ -154,7 +154,7 @@
                            android:singleLine="true"
                            android:textColor="@color/black"
                            android:textColorHint="@color/black"
-                           android:textSize="13sp" />
+                           android:textSize="16sp" />
 
                    </android.support.design.widget.TextInputLayout>
 
@@ -176,7 +176,7 @@
                            android:singleLine="true"
                            android:textColor="@color/black"
                            android:textColorHint="@color/black"
-                           android:textSize="13sp" />
+                           android:textSize="16sp" />
 
                    </android.support.design.widget.TextInputLayout>
 
@@ -187,7 +187,6 @@
 
         </LinearLayout>
 
-    <!--Buttom layout-->
     <LinearLayout
         android:id="@+id/btn_lay"
         android:layout_width="match_parent"

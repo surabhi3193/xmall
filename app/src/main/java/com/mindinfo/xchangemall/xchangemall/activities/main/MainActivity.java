@@ -1,22 +1,20 @@
 package com.mindinfo.xchangemall.xchangemall.activities.main;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
-import android.content.pm.ResolveInfo;
-import android.database.Cursor;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AlertDialog;
+import android.support.v4.content.res.ResourcesCompat;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.AdapterView;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -25,27 +23,33 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.api.ResultCallback;
-import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlacePicker;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.crash.FirebaseCrash;
 import com.mindinfo.xchangemall.xchangemall.Fragments.categories.Bussiness_Service_Main;
+import com.mindinfo.xchangemall.xchangemall.Fragments.categories.CommunityFragment;
+import com.mindinfo.xchangemall.xchangemall.Fragments.categories.GamesFragment;
 import com.mindinfo.xchangemall.xchangemall.Fragments.categories.ItemMainFragment;
 import com.mindinfo.xchangemall.xchangemall.Fragments.categories.JobsMainFragment;
+import com.mindinfo.xchangemall.xchangemall.Fragments.categories.NewsFragment;
 import com.mindinfo.xchangemall.xchangemall.Fragments.categories.Property_Rental_Fragment;
 import com.mindinfo.xchangemall.xchangemall.Fragments.categories.Property_Sale_Fragment;
 import com.mindinfo.xchangemall.xchangemall.Fragments.categories.postADD.Postyour2Add;
 import com.mindinfo.xchangemall.xchangemall.R;
+import com.mindinfo.xchangemall.xchangemall.activities.BaseActivity;
 import com.mindinfo.xchangemall.xchangemall.activities.common.FavoritesActivity;
 import com.mindinfo.xchangemall.xchangemall.activities.common.ProfileActivity;
 import com.mindinfo.xchangemall.xchangemall.adapter.CustomList;
 import com.mindinfo.xchangemall.xchangemall.adapter.ExpandableListAdapter;
-import com.squareup.picasso.Picasso;
+import com.mindinfo.xchangemall.xchangemall.intefaces.Consts;
+import com.mindinfo.xchangemall.xchangemall.intefaces.OnBackPressed;
+
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -58,9 +62,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 
 import static com.mindinfo.xchangemall.xchangemall.Constants.NetworkClass.OpenWarning;
@@ -74,21 +76,20 @@ import static com.mindinfo.xchangemall.xchangemall.storage.MySharedPref.getData;
 import static com.mindinfo.xchangemall.xchangemall.storage.MySharedPref.saveData;
 
 public class MainActivity extends BaseActivity implements View.OnClickListener {
-    private static final int PLACE_PICKER_REQUEST = 011;
-    private static final int CAPTURE_IMAGES_FROM_CAMERA = 22;
-    //expandable listview
-    public static boolean ismovedfromHome;
+    @SuppressLint("StaticFieldLeak")
     public static LinearLayout left_nav_view;
-    public static boolean isdogChecked,iscatChecked;
+    
+    public static boolean ismovedfromHome;
+    public static boolean isdogChecked, iscatChecked;
+    private  final int PLACE_PICKER_REQUEST = 1;
     public String str_image_arr[];
     RelativeLayout right_nav_view;
-    TextView category_head_list, user_nameTV, locationTextView, forsale, propertyrenttv, commtv, jobstv, showcasetv, servicetv, socialtv, prop_forsaletv;
+    TextView category_head_list, user_nameTV, locationTextView;
     FragmentManager fm;
     String url = "";
     Intent i;
     ListView list;
-    LinearLayout postImageLay, vdo_cl_lay, share_btn;
-    TextView cancel_btn, cameraIV, galleryIV, addimageHEaderTV;
+    LinearLayout vdo_cl_lay, share_btn;
     ExpandableListAdapter listAdapter;
     ExpandableListView expListView;
     List<String> listDataHeader;
@@ -132,13 +133,20 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             R.drawable.rating,
             R.drawable.share,
             R.drawable.logout_icon
-
     };
     private int image_count_before;
-    private LinearLayout locationLay, open_left_nav_btn, open_right_nav_btn, close_left_nav,
-            forsale_lay, jobs_lay, right_nav_white, log_out, servicesImageView, houseRentalImageView, HouseSaleImageView,
-            personalImageView, ShowcaseImageView, CommutnityImageView;
+    private LinearLayout open_left_nav_btn, open_right_nav_btn, close_left_nav,
+           news_lay, games_lay, right_nav_white, log_out,jobs_lay;
 
+    private LinearLayout  servicesImageView, houseRentalImageView, HouseSaleImageView,
+            personalImageView, ShowcaseImageView, CommutnityImageView, forsale_lay;
+
+    public static void start(Context context, boolean isRunForCall) {
+        Intent intent = new Intent(context, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        intent.putExtra(Consts.EXTRA_IS_STARTED_FOR_CALL, isRunForCall);
+        context.startActivity(intent);
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -156,7 +164,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         user_id = getData(getApplicationContext(), "user_id", "");
 
     }
-
 
     ////OpenProfile
     public void OpenProfile(View view) {
@@ -179,12 +186,14 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         open_right_nav_btn.setOnClickListener(this);
         close_left_nav.setOnClickListener(this);
         right_nav_view.setOnClickListener(this);
-        locationLay.setOnClickListener(this);
+
         share_btn.setOnClickListener(this);
 
         if (!ismovedfromHome) {
             forsale_lay.setOnClickListener(this);
-          jobs_lay.setOnClickListener(this);
+            jobs_lay.setOnClickListener(this);
+            news_lay.setOnClickListener(this);
+            games_lay.setOnClickListener(this);
             servicesImageView.setOnClickListener(this);
             houseRentalImageView.setOnClickListener(this);
             HouseSaleImageView.setOnClickListener(this);
@@ -195,109 +204,97 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
         log_out.setOnClickListener(this);
 
-        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        list.setOnItemClickListener((parent, view, position, id) -> {
+            switch (position) {
+                case 0:
+                    if (user_name.length() > 2)
+                        OpenProfile(view);
+                    else
+                        OpenWarning(MainActivity.this);
+                    break;
+                case 1:
+                    Homeclick(view);
+                    break;
 
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view,
-                                    int position, long id) {
-                switch (position) {
-                    case 0:
-                        if (user_name.length() > 2)
-                            OpenProfile(view);
-                        else
-                            OpenWarning(MainActivity.this);
-                        break;
-                    case 1:
-                        Homeclick(view);
-                        break;
+                case 2:
+                    Toast.makeText(getApplicationContext(), "Under Development", Toast.LENGTH_SHORT).show();
 
-                    case 2:
-                        Toast.makeText(getApplicationContext(), "Under Development", Toast.LENGTH_SHORT).show();
+                    break;
 
-
-//                        PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
-//
-//                        try {
-//                            startActivityForResult(builder.build(MainActivity.this), PLACE_PICKER_REQUEST);
-//                        } catch (Exception e) {
-//                            e.printStackTrace();
-//                        }
-                        break;
-
-                    case 3:
-                        Toast.makeText(getApplicationContext(), "Under Development", Toast.LENGTH_SHORT).show();
+                case 3:
+                    Toast.makeText(getApplicationContext(), "Under Development", Toast.LENGTH_SHORT).show();
 
 
 //                      startActivity(new Intent(getApplicationContext(),FavoritesActivity.class));
 
-                        break;
+                    break;
 
-                    case 4:
-                        Toast.makeText(getApplicationContext(), "Under Development", Toast.LENGTH_SHORT).show();
-
-
-                        ismovedfromHome = true;
-                        startActivity(new Intent(getApplicationContext(), FavoritesActivity.class)
-                                .putExtra("method_name", "my_fav"));
-
-                        break;
-
-                    case 7:
-                        Toast.makeText(getApplicationContext(), "Under Development", Toast.LENGTH_SHORT).show();
+                case 4:
+                    Toast.makeText(getApplicationContext(), "Under Development", Toast.LENGTH_SHORT).show();
 
 
-                        ismovedfromHome = true;
-                        startActivity(new Intent(getApplicationContext(), FavoritesActivity.class)
-                                .putExtra("method_name", "my_post"));
+                    ismovedfromHome = true;
+                    startActivity(new Intent(getApplicationContext(), FavoritesActivity.class)
+                            .putExtra("method_name", "my_fav"));
 
-                        break;
+                    break;
 
-                    case 8:
-                        Toast.makeText(getApplicationContext(), "Under Development", Toast.LENGTH_SHORT).show();
+                case 7:
+                    Toast.makeText(getApplicationContext(), "Under Development", Toast.LENGTH_SHORT).show();
+
+
+                    ismovedfromHome = true;
+                    startActivity(new Intent(getApplicationContext(), FavoritesActivity.class)
+                            .putExtra("method_name", "my_post"));
+
+                    break;
+
+                case 8:
+                    Toast.makeText(getApplicationContext(), "Under Development", Toast.LENGTH_SHORT).show();
 
 //                        right_nav_view.setVisibility(View.GONE);
 //                        if (user_name.length() > 2)
 //                            Addpost(view);
 //                        else
 //                            OpenWarning();
-                        break;
+                    break;
 
 
-                    case 9:
-                        ismovedfromHome = true;
-                        i = new Intent(getApplicationContext(), HtmlActivity.class);
-                        i.putExtra("header_name", "About us");
-                        startActivity(i);
-                        break;
+                case 9:
+                    ismovedfromHome = true;
+                    i = new Intent(getApplicationContext(), HtmlActivity.class);
+                    i.putExtra("header_name", "About us");
+                    startActivity(i);
+                    break;
 
-                    case 10:
-                        ismovedfromHome = true;
-                        i = new Intent(getApplicationContext(), HtmlActivity.class);
-                        i.putExtra("header_name", "Terms and Condition");
-                        startActivity(i);
+                case 10:
+                    ismovedfromHome = true;
+                    i = new Intent(getApplicationContext(), HtmlActivity.class);
+                    i.putExtra("header_name", "Terms and Condition");
+                    startActivity(i);
 
-                        break;
+                    break;
 
-                    case 11:
-                        ismovedfromHome = true;
-                        i = new Intent(getApplicationContext(), HtmlActivity.class);
-                        i.putExtra("header_name", "Privacy Policy");
-                        startActivity(i);
-                        break;
-                    case 13:
-                        shareApplication();
-                        break;
+                case 11:
+                    ismovedfromHome = true;
+                    i = new Intent(getApplicationContext(), HtmlActivity.class);
+                    i.putExtra("header_name", "Privacy Policy");
+                    startActivity(i);
+                    break;
 
-                    case 14:
-                        if (web[14].equals("Login"))
-                            OpenWarning(MainActivity.this);
+                case 13:
+                    shareApplication();
+                    break;
 
-                        else
-                            LogoutAlertDialog();
-                        break;
-                }
+                case 14:
+                    if (web[14].equals("Login"))
+                        OpenWarning(MainActivity.this);
 
+                    else
+                        LogoutAlertDialog();
+                    break;
             }
+
         });
 
 
@@ -313,142 +310,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         });
 
     }
-
-    private void Addpost(View v) {
-
-        postImageLay.setVisibility(View.VISIBLE);
-
-        cancel_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                postImageLay.setVisibility(View.GONE);
-            }
-        });
-
-        cameraIV.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-//                startCameraActivity();
-                Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(cameraIntent, 01);
-            }
-        });
-
-        galleryIV.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivityForResult(new Intent(getApplicationContext(),
-                        MultiPhotoSelectActivity.class), 0X11);
-            }
-        });
-    }
-
-    public void startCameraActivity() {
-
-        Cursor cursor = loadCursor();
-        image_count_before = cursor.getCount();
-
-        cursor.close();
-
-        Intent cameraIntent = new Intent(MediaStore.INTENT_ACTION_STILL_IMAGE_CAMERA);
-
-        List<ResolveInfo> activities = getPackageManager().queryIntentActivities(cameraIntent, 0);
-
-        if (activities.size() > 0)
-            startActivityForResult(cameraIntent, CAPTURE_IMAGES_FROM_CAMERA);
-        else
-            Toast.makeText(getApplicationContext(), "device doesn't have any app", Toast.LENGTH_SHORT).show();
-    }
-
-    public String[] getImagePaths(Cursor cursor, int startPosition) {
-
-        int size = cursor.getCount() - startPosition;
-
-        if (size <= 0) return null;
-
-        String[] paths = new String[size];
-
-        int dataColumnIndex = cursor.getColumnIndex(MediaStore.Images.Media.DATA);
-
-        for (int i = startPosition; i < cursor.getCount(); i++) {
-
-            cursor.moveToPosition(i);
-
-            paths[i - startPosition] = cursor.getString(dataColumnIndex);
-        }
-
-        return paths;
-    }
-
-
-    private void exitingCamera() {
-
-        Cursor cursor = loadCursor();
-
-        //get the paths to newly added images
-        String[] paths = getImagePaths(cursor, image_count_before);
-
-        if (paths.length > 0) {
-
-            if (paths.length > 4) {
-                Toast.makeText(getApplicationContext(), "Maximum 4 pics allowed", Toast.LENGTH_LONG).show();
-            } else {
-
-                List<String> wordList = Arrays.asList(paths);
-
-                for (String e : wordList) {
-                }
-                // process images
-                process(wordList);
-            }
-        }
-        cursor.close();
-
-    }
-
-
-    private void process(List<String> wordList) {
-
-        ismovedfromHome = true;
-        postImageLay.setVisibility(View.GONE);
-        List<String> responseArray = new ArrayList<>();
-        ArrayList<String> imageArray = new ArrayList<>();
-        responseArray = wordList;
-        for (int i = 0; i < responseArray.size(); i++) {
-            Uri uri = Uri.fromFile(new File(responseArray.get(i)));
-
-//            imageArray.add(tempUri.toString());
-//            //Log.e("Path"+i,path);
-//            str_image_arr = new String[]{tempUri.toString()};
-
-            saveData(getApplicationContext(), "item_img", uri.getPath());
-
-            str_image_arr = new String[]{uri.getPath()};
-
-
-        }
-        postImageLay.setVisibility(View.GONE);
-        Bundle bundle = new Bundle();
-        bundle.putStringArray("imagess", str_image_arr);
-        bundle.putStringArrayList("imageSet", imageArray);
-        bundle.putString("MainCatType", "104");
-//                Postyour2Add postyour2Add = new Postyour2Add();
-//                postyour2Add.setArguments(bundle);
-//                fm = getSupportFragmentManager();
-//                fm.beginTransaction().replace(R.id.allCategeries, postyour2Add).commit();
-        startActivity(new Intent(getApplicationContext(), Postyour2Add.class).putExtras(bundle));
-    }
-
-    public Cursor loadCursor() {
-
-        final String[] columns = {MediaStore.Images.Media.DATA, MediaStore.Images.Media._ID};
-
-        final String orderBy = MediaStore.Images.Media.DATE_ADDED;
-
-        return getContentResolver().query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, columns, null, null, orderBy);
-    }
-
 
     private void shareApplication() {
         ApplicationInfo app = getApplicationContext().getApplicationInfo();
@@ -505,48 +366,35 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     }
 
     private void initid() {
-        left_nav_view = (LinearLayout) findViewById(R.id.left_nav_view);
-        share_btn = (LinearLayout) findViewById(R.id.share_btn);
+        left_nav_view =findViewById(R.id.left_nav_view);
+        share_btn =findViewById(R.id.share_btn);
         profile_image = (ImageView) findViewById(R.id.profile_image);
-        user_nameTV = (TextView) findViewById(R.id.user_nameTV);
-        log_out = (LinearLayout) findViewById(R.id.log_out);
-        right_nav_white = (LinearLayout) findViewById(R.id.right_nav_white);
+        user_nameTV =findViewById(R.id.user_nameTV);
+        log_out =findViewById(R.id.log_out);
+        right_nav_white =findViewById(R.id.right_nav_white);
         right_nav_view = (RelativeLayout) findViewById(R.id.right_nav);
-        locationLay = (LinearLayout) findViewById(R.id.location_lay);
-        close_left_nav = (LinearLayout) findViewById(R.id.close_left_nav);
-        open_left_nav_btn = (LinearLayout) findViewById(R.id.openLeftNav);
-        open_right_nav_btn = (LinearLayout) findViewById(R.id.openRightNav);
+        close_left_nav =findViewById(R.id.close_left_nav);
+        open_left_nav_btn =findViewById(R.id.openLeftNav);
+        open_right_nav_btn =findViewById(R.id.openRightNav);
 
-        vdo_cl_lay = (LinearLayout) findViewById(R.id.vdo_cl);
-        postImageLay = (LinearLayout) findViewById(R.id.postImageLay);
-        cancel_btn = (TextView) findViewById(R.id.cancel_btnIV);
-        cameraIV = (TextView) findViewById(R.id.cameraIV);
-        galleryIV = (TextView) findViewById(R.id.gallerIV);
-        addimageHEaderTV = (TextView) findViewById(R.id.addimageheader);
-        forsale_lay = (LinearLayout) findViewById(R.id.For_sele_imageView);
-        jobs_lay = (LinearLayout) findViewById(R.id.imageViewJobS);
-        servicesImageView = (LinearLayout) findViewById(R.id.servicesImageView);
-        houseRentalImageView = (LinearLayout) findViewById(R.id.houseRentalImageView);
-        HouseSaleImageView = (LinearLayout) findViewById(R.id.HouseSaleImageView);
-        personalImageView = (LinearLayout) findViewById(R.id.personalImageView);
-        ShowcaseImageView = (LinearLayout) findViewById(R.id.ShowcaseImageView);
-        CommutnityImageView = (LinearLayout) findViewById(R.id.community_image_lay);
+        vdo_cl_lay =findViewById(R.id.vdo_cl);
+        forsale_lay =findViewById(R.id.For_sele_imageView);
+        jobs_lay =findViewById(R.id.imageViewJobS);
+        news_lay =findViewById(R.id.newsLay);
+        games_lay =findViewById(R.id.gamesLay);
+        servicesImageView =findViewById(R.id.servicesImageView);
+        houseRentalImageView =findViewById(R.id.houseRentalImageView);
+        HouseSaleImageView =findViewById(R.id.HouseSaleImageView);
+        personalImageView =findViewById(R.id.personalImageView);
+        ShowcaseImageView =findViewById(R.id.ShowcaseImageView);
+        CommutnityImageView =findViewById(R.id.community_image_lay);
 
-        locationTextView = (TextView) findViewById(R.id.location_Textview);
-        category_head_list = (TextView) findViewById(R.id.category_head_list);
-        jobstv = (TextView) findViewById(R.id.jobs_text);
-        forsale = (TextView) findViewById(R.id.for_sele_text);
-        showcasetv = (TextView) findViewById(R.id.showcaseTextView);
-        servicetv = (TextView) findViewById(R.id.services_textView);
-        socialtv = (TextView) findViewById(R.id.personalTextView);
-        commtv = (TextView) findViewById(R.id.comm_textView);
-        prop_forsaletv = (TextView) findViewById(R.id.HouseSaleTextView);
-        propertyrenttv = (TextView) findViewById(R.id.houseRentalTextView);
-        ;
-        expListView = (ExpandableListView) findViewById(R.id.nav_categories_lisview);
+        locationTextView =findViewById(R.id.location_Textview);
+        category_head_list =findViewById(R.id.category_head_list);
+
+        expListView =findViewById(R.id.nav_categories_lisview);
         list = (ListView) findViewById(R.id.rightnav_listview);
 
-        postImageLay.setVisibility(View.GONE);
         left_nav_view.setVisibility(View.GONE);
         right_nav_view.setVisibility(View.GONE);
 
@@ -559,23 +407,12 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         System.out.println(city);
 
         locationTextView.setText(city);
-        Typeface face = Typeface.createFromAsset(getAssets(),
-                "fonts/estre.ttf");
+        Typeface face = ResourcesCompat.getFont(MainActivity.this, R.font.estre);
         locationTextView.setTypeface(face);
-        jobstv.setTypeface(face);
-        forsale.setTypeface(face);
-        showcasetv.setTypeface(face);
-        servicetv.setTypeface(face);
-        socialtv.setTypeface(face);
-        commtv.setTypeface(face);
-        prop_forsaletv.setTypeface(face);
-        propertyrenttv.setTypeface(face);
 
         user_nameTV.setTypeface(face);
-        cameraIV.setTypeface(face);
-        galleryIV.setTypeface(face);
         category_head_list.setTypeface(face);
-        addimageHEaderTV.setTypeface(face);
+
         if (user_name.length() > 2) {
             user_nameTV.setText(user_name);
 
@@ -584,13 +421,13 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
 
             if (user_image.equals(DEFAULT_PATH))
-                Picasso.with(getApplicationContext()).load(R.drawable.profile).into(profile_image);
+               Glide.with(getApplicationContext()).load(R.drawable.profile).into(profile_image);
 
             else {
                 try {
-                    Picasso.with(getApplicationContext()).load(user_image).into(profile_image);
+                   Glide.with(getApplicationContext()).load(user_image).apply(RequestOptions.placeholderOf(R.drawable.profile)).into(profile_image);
                 } catch (Exception e) {
-                    Picasso.with(getApplicationContext()).load(R.drawable.profile).into(profile_image);
+                   Glide.with(getApplicationContext()).load(R.drawable.profile).into(profile_image);
 
                 }
             }
@@ -611,77 +448,60 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
         listAdapter = new ExpandableListAdapter(this, listDataHeader, listDataChild, listHeaderImage);
 
-        // setting list adapter
         expListView.setAdapter(listAdapter);
 
 
     }
-
 
     private void prepareListData() {
         listDataHeader = new ArrayList<String>();
         listHeaderImage = new ArrayList<Integer>();
         listDataChild = new HashMap<String, List<String>>();
 
-        listHeaderImage.add(R.drawable.icon_hcm);
-        listHeaderImage.add(R.drawable.humanservicesicon);
-        listHeaderImage.add(R.drawable.houseing);
-        listHeaderImage.add(R.drawable.job);
-        listHeaderImage.add(R.drawable.for_sale);
-        listHeaderImage.add(R.drawable.show);
         listHeaderImage.add(R.drawable.community);
+        listHeaderImage.add(R.drawable.buddies);
+        listHeaderImage.add(R.drawable.event);
+        listHeaderImage.add(R.drawable.humanservicesicon);
+        listHeaderImage.add(R.drawable.icon_personal);
+        listHeaderImage.add(R.drawable.show);
+        listHeaderImage.add(R.drawable.news);
+        listHeaderImage.add(R.drawable.games);
+        listHeaderImage.add(R.drawable.for_sale);
+        listHeaderImage.add(R.drawable.job);
         listHeaderImage.add(R.drawable.propertyforsale_bg);
+        listHeaderImage.add(R.drawable.houseing);
 
 
-        String responseCate = getData(getApplicationContext(), "categoriesdata", "");
+        String responseCate = getData(getApplicationContext(), "categoriesdata_full", "");
+
         try {
 
-            System.out.println(responseCate);
             JSONArray jsonArray = new JSONArray(responseCate);
+            System.out.println("-------- cat response --------");
+            System.out.println(jsonArray);
 
 
             if (jsonArray.length() > 0) {
                 String cat_id = "", cat_name = "";
-                JSONArray jsonArray2 = null;
-                JSONArray jsonArray3 = null;
 
 
-                for (int i = 0; i < jsonArray.length(); i++) {
-
+                for (int i = 0; i < jsonArray.length(); i++)
+                {
+                    List<String> childdata = new ArrayList<String>();
                     JSONObject responseobj2 = jsonArray.getJSONObject(i);
 
-                    Iterator x2 = responseobj2.keys();
-                    jsonArray2 = new JSONArray();
-                    List<String> childdata = new ArrayList<String>();
-                    while (x2.hasNext()) {
-                        String key = (String) x2.next();
-                        jsonArray2.put(responseobj2.get(key));
-                    }
-                    if (jsonArray2.length() > 0) {
-                        cat_id = jsonArray2.getString(0);
-                        cat_name = jsonArray2.getString(1);
-                        for (int j = 2; j < jsonArray.length(); j++) {
-                            JSONObject responseobj3 = jsonArray.getJSONObject(i);
+                    JSONArray childArray = responseobj2.getJSONArray("data");
 
-                            Iterator x3 = responseobj3.keys();
-                            jsonArray3 = new JSONArray();
-                            while (x3.hasNext()) {
-                                String key = (String) x3.next();
-                                jsonArray3.put(responseobj3.get(key));
-                            }
+                    cat_name = responseobj2.getString("title");
+                    cat_id = responseobj2.getString("id");
 
-                            for (int k = 0; k < jsonArray3.length(); k++) {
-                            }
-
-
-                        }
+                    for (int l = 0; l < childArray.length(); l++) {
+                        childdata.add(childArray.getJSONObject(l).getString("title") + "~" + childArray.getJSONObject(l)
+                                .getString("id"));
                     }
                     listDataHeader.add(cat_name);
-                    for (int l = 2; l < jsonArray3.length(); l++) {
-                        childdata.add(jsonArray3.getJSONObject(l).getString("title") + "~" + jsonArray3.getJSONObject(l).getString("id"));
-                    }
+                    System.out.println(childdata);
                     listDataChild.put(cat_name, childdata);
-
                 }
 
             }
@@ -689,12 +509,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
-        // Adding child data
-
-
     }
-
 
     public void Homeclick(View view) {
         if (ismovedfromHome) {
@@ -705,14 +520,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             ismovedfromHome = false;
         }
 
-
-//        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-//        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//        intent.putExtra("EXIT", true);
-//        startActivity(intent);
     }
-
-
 
     @Override
     public void onClick(View v) {
@@ -771,7 +579,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 }
 
             case R.id.For_sele_imageView:
-
                 ismovedfromHome = true;
                 bundle.putString("MainCatType", "104");
                 fragment = new ItemMainFragment();
@@ -794,10 +601,22 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 //              Toast.makeText(getApplicationContext(), "Under Development", Toast.LENGTH_SHORT).show();
                 break;
 
+            case R.id.newsLay:
+                ismovedfromHome = true;
+                fragment = new NewsFragment();
+                saveData(getApplicationContext(), "fragment_name", "News");
+                replaceFragment(fragment, true);
+
+                break;
+
+            case R.id.gamesLay:
+                ismovedfromHome = true;
+                fragment = new GamesFragment();
+                saveData(getApplicationContext(), "fragment_name", "Games");
+                replaceFragment(fragment, true);
+                break;
+
             case R.id.servicesImageView:
-//                Toast.makeText(getApplicationContext(), "Under Development", Toast.LENGTH_SHORT).show();
-
-
                 ismovedfromHome = true;
                 bundle.putString("MainCatType", "101");
                 fragment = new Bussiness_Service_Main();
@@ -806,13 +625,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 saveData(getApplicationContext(), "pcat_id", "101");
 
                 replaceFragment(fragment, true);
-break;
+                break;
 
 
             case R.id.houseRentalImageView:
-//                Toast.makeText(getApplicationContext(), "Under Development", Toast.LENGTH_SHORT).show();
-
-//
                 ismovedfromHome = true;
                 bundle.putString("MainCatType", "102");
                 fragment = new Property_Rental_Fragment();
@@ -831,8 +647,6 @@ break;
                 saveData(getApplicationContext(), "fragment_name", "property sale");
                 saveData(getApplicationContext(), "pcat_id", "272");
                 replaceFragment(fragment, true);
-
-//                Toast.makeText(getApplicationContext(), "Under Development", Toast.LENGTH_SHORT).show();
 
                 break;
 
@@ -863,13 +677,13 @@ break;
             case R.id.community_image_lay:
 
                 Toast.makeText(getApplicationContext(), "Under Development", Toast.LENGTH_SHORT).show();
-//                ismovedfromHome = true;
-//                bundle.putString("MainCatType", "106");
-//                fragment = new CommunityFragment();
-//                fragment.setArguments(bundle);
-//                saveData(getApplicationContext(), "fragment_name", "Community");
-//                saveData(getApplicationContext(), "pcat_id", "106");
-//                replaceFragment(fragment, true);
+                ismovedfromHome = true;
+                bundle.putString("MainCatType", "106");
+                fragment = new CommunityFragment();
+                fragment.setArguments(bundle);
+                saveData(getApplicationContext(), "fragment_name", "Community");
+                saveData(getApplicationContext(), "pcat_id", "106");
+                replaceFragment(fragment, true);
                 break;
 
 
@@ -884,15 +698,13 @@ break;
 
             Place place = PlacePicker.getPlace(data, getApplicationContext());
             LatLng location = place.getLatLng();
-            String toastMsg = String.format("Place: %s", place.getName());
+
             String new_location = getAddressFromLatlng(location, getApplicationContext(), 0);
             locationTextView.setText(new_location);
-            getData(getApplicationContext(), "currentLocation", new_location);
         }
 
         if (requestCode == 17) {
             if (resultCode == 1) {
-
                 ArrayList<String> responseArray = new ArrayList<>();
                 ArrayList<String> imageArray = new ArrayList<>();
                 responseArray = data.getStringArrayListExtra("MESSAGE");
@@ -901,99 +713,54 @@ break;
 
                     Log.e("Uri" + i, uri.getPath());
                     saveData(getApplicationContext(), "item_img", uri.getPath());
-
-                    //In case you need image's absolute path
-                    // String path= getRealPathFromURI(getApplicationContext(), uri);
                     imageArray.add(uri.getPath());
-                    //Log.e("Path"+i,path);
                     str_image_arr = new String[]{uri.getPath()};
-                    //AIzaSyDn243JOuaMA4Sx9uMHf1DFXMPSYQECZ0I
                 }
 
                 ismovedfromHome = true;
-                postImageLay.setVisibility(View.GONE);
                 Bundle bundle = new Bundle();
                 bundle.putStringArray("imagess", str_image_arr);
                 bundle.putStringArrayList("images", imageArray);
                 bundle.putString("MainCatType", "104");
-//                Postyour2Add postyour2Add = new Postyour2Add();
-//                postyour2Add.setArguments(bundle);
-//                fm = getSupportFragmentManager();
-//                fm.beginTransaction().replace(R.id.allCategeries, postyour2Add).commit();
                 startActivity(new Intent(getApplicationContext(), Postyour2Add.class).putExtras(bundle));
             }
         }
-
-        if (requestCode == CAPTURE_IMAGES_FROM_CAMERA) {
-            exitingCamera();
-        }
-
-//        if (requestCode == 01) {
-//
-//
-//
-//            ArrayList<String> imageArray = new ArrayList<>();
-//
-//            Bitmap bmp = (Bitmap) data.getExtras().get("data");
-//            System.out.println("********* capture image from camera item main **********");
-//            System.out.println(bmp);
-//            Uri uri = getImageUri(getApplicationContext(),bmp);
-//            Bundle bundle = new Bundle();
-//            imageArray.add(uri.getPath());
-//            saveData(getApplicationContext(),"item_img",getRealPathFromURI(uri));
-//            bundle.putStringArray("imagess", str_image_arr);
-//            bundle.putStringArrayList("images", imageArray);
-//            bundle.putString("MainCatType", "0");
-////                Postyour2Add postyour2Add = new Postyour2Add();
-////                postyour2Add.setArguments(bundle);
-////                fm = getSupportFragmentManager();
-////                fm.beginTransaction().replace(R.id.allCategeries, postyour2Add).commit();
-//            startActivity(new Intent(getApplicationContext(), Postyour2Add.class).putExtras(bundle));
-//
-//        }
-
     }
-
 
     private void LogoutAlertDialog() {
-        AlertDialog.Builder ab = new AlertDialog.Builder(MainActivity.this, R.style.MyAlertDialogStyle1);
-        //ab.setTitle("Are you shore you want to log out");
-        ab.setMessage("Are you sure you want to log out");
-        ab.setNegativeButton("logout", new DialogInterface.OnClickListener() {
+
+        final android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(MainActivity.this);
+        DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                saveData(getApplicationContext(), "loginData", "empty");
-                NullData(getApplicationContext(), "user_profile_pic");
-                NullData(getApplicationContext(), "user_name");
-                NullData(getApplicationContext(), "user_id");
+                switch (which) {
+                    case DialogInterface.BUTTON_POSITIVE:
+                        saveData(getApplicationContext(), "loginData", "empty");
+                        NullData(getApplicationContext(), "user_profile_pic");
+                        NullData(getApplicationContext(), "user_name");
+                        NullData(getApplicationContext(), "user_id");
 
-                Auth.GoogleSignInApi.signOut(mGoogleApiClient).setResultCallback(
-                        new ResultCallback<Status>() {
-                            @Override
-                            public void onResult(Status status) {
-                                System.out.println("********** logout from g+ ");
-                            }
-                        });
+                        Auth.GoogleSignInApi.signOut(mGoogleApiClient).setResultCallback(
+                                status -> System.out.println("********** logout from g+ "));
 
-                Intent intent = new Intent(getApplicationContext(), EnterLogin.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                intent.putExtra("EXIT", true);
-                startActivity(intent);
-                finish();
-                dialog.dismiss();
+                        Intent intent = new Intent(getApplicationContext(), EnterLogin.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        intent.putExtra("EXIT", true);
+                        startActivity(intent);
+                        finish();
+                        dialog.dismiss();
+                        break;
+
+                    case DialogInterface.BUTTON_NEGATIVE:
+                        dialog.dismiss();
+                        break;
+                }
             }
-        });
+        };
 
-        ab.setPositiveButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        });
-        ab.show();
+        builder.setMessage("Are you sure you want to log out").setPositiveButton("Logout", dialogClickListener)
+                .setNegativeButton("Cancel", dialogClickListener).show();
     }
-
-
     @Override
     protected void onStart() {
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -1008,25 +775,45 @@ break;
 
     @Override
     public void onBackPressed() {
-        System.out.println("*********** is moved from hiome +++ " + ismovedfromHome);
+        System.out.println("*********** is moved from home -->  " + ismovedfromHome);
 
-        if (getIntent().getBooleanExtra("EXIT", false)) {
-            finishAffinity();
-            finish();
-        }
         if (left_nav_view.getVisibility() == View.VISIBLE) {
             left_nav_view.setVisibility(View.GONE);
             ismovedfromHome = false;
+            return;
         }
-        else {
+
+        try {
+            Fragment currentFragment = getSupportFragmentManager().getFragments().get(getSupportFragmentManager()
+                    .getBackStackEntryCount() - 1);
+            System.out.println("============== current fragment ===");
+            System.out.println(currentFragment);
+            if (currentFragment != null && currentFragment instanceof OnBackPressed)
+            {
+                ((OnBackPressed) currentFragment).onBackPressed();
+                System.out.println("------- instance of onbackpressed--- > ");
+            }
+            else
+            {
+                System.out.println("------- no instance of onbackpressed--- > ");
+            }
+        } catch (IndexOutOfBoundsException e)
+        {
+            System.err.println("error iob");
             if (ismovedfromHome) {
                 startActivity(new Intent(this, MainActivity.class));
                 ismovedfromHome = false;
-
             } else {
                 finish();
             }
         }
+
+        if (getIntent().getBooleanExtra("EXIT", false)) {
+            System.out.println("-------finishAffinity onbackpressed--- > ");
+            finishAffinity();
+            finish();
+        }
+
     }
 
     public void replaceFragment(Fragment fragment, boolean addToBackStack) {
@@ -1039,14 +826,13 @@ break;
 
         } else {
             getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-
         }
         transaction.replace(R.id.allCategeries, fragment);
         transaction.setCustomAnimations(R.anim.fragment_slide_right_enter, R.anim.fragment_slide_right_exit);
         transaction.commit();
         overridePendingTransition(R.anim.fragment_slide_left_enter, R.anim.fragment_slide_right_enter);
         getSupportFragmentManager().executePendingTransactions();
-
     }
+
 
 }

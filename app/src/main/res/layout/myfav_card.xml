@@ -24,7 +24,7 @@
                 android:layout_width="70dp"
                 android:layout_height="90dp"
                 android:scaleType="fitCenter"
-                android:src="@drawable/no_img"/>
+                android:src="@drawable/no_img_100"/>
         </LinearLayout>
         <RelativeLayout
             android:layout_width="0dp"
@@ -34,30 +34,39 @@
             android:layout_weight="2"
             android:orientation="vertical">
             <TextView
+                android:layout_alignParentLeft="true"
+                android:layout_toLeftOf="@id/share_btn"
                 android:id="@+id/itemTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
                 android:text="title"
+                android:ellipsize="end"
+                android:singleLine="true"
                 android:textColor="@color/PaleVioletRed"
-                android:textSize="15sp"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/circleImageView2"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
+            <ImageView
+                android:id="@+id/share_btn"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_alignTop="@+id/itemTitle"
                 android:layout_gravity="center"
-                android:layout_marginEnd="27dp"
-                android:layout_marginRight="27dp"
-                android:background="@drawable/ic_share">
-
-            </de.hdodenhof.circleimageview.CircleImageView>
+                android:layout_toLeftOf="@+id/fav_btn"
+                android:padding="5dp"
+                android:src="@drawable/ic_share"/>
+            <ImageView
+                android:id="@+id/fav_btn"
+                android:layout_width="30dp"
+                android:layout_alignParentRight="true"
+                android:layout_height="30dp"
+                android:padding="5dp"
+                android:layout_alignTop="@+id/itemTitle"
+                android:layout_gravity="center"
+                android:src="@drawable/favv"/>
 
 
             <TextView
@@ -66,16 +75,14 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/itemTitle"
                 android:layout_gravity="center"
-                android:layout_marginBottom="20dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 android:ellipsize="end"
                 android:maxLines="2"
                 android:maxWidth="140dp"
                 android:minWidth="140dp"
                 android:text="Wrogan man gray printed slim"
                 android:textColor="@color/black"
-                android:textSize="13sp"
-                android:textStyle="bold" />
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/ItemPriceText"
@@ -90,11 +97,10 @@
                 android:layout_toRightOf="@+id/ItemDescription"
                 android:ellipsize="end"
                 android:textColor="@color/Red"
-                android:textSize="13sp"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/ItemSubTitleText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
@@ -104,7 +110,7 @@
                 android:layout_marginTop="3dp"
                 android:layout_toLeftOf="@+id/buyNow"
                 android:layout_toRightOf="@+id/ratingBar"
-                android:text="4.1 reviews"
+                android:text="4.0 reviews"
                 android:textSize="9dp" />
 
 
@@ -118,7 +124,7 @@
                 android:layout_marginBottom="5dp"
                 android:isIndicator="true"
                 android:numStars="5"
-                android:stepSize="1.0" />
+                android:rating="4" android:stepSize="1.0"/>
 
         </RelativeLayout>
     </LinearLayout>

@@ -33,10 +33,10 @@
                 <TextView
                     android:layout_width="40dp"
                     android:layout_height="wrap_content"
-                    android:fontFamily="est"
+
                     android:text="@string/jobs"
                     android:textColor="@color/white"
-                    android:textSize="13sp" />
+                    android:textSize="16sp" />
 
             </LinearLayout>
 
@@ -58,7 +58,7 @@
                     android:singleLine="true"
                     android:text="@string/for_sale"
                     android:textColor="@color/white"
-                    android:textSize="13sp" />
+                    android:textSize="16sp" />
 
             </LinearLayout>
 
@@ -80,7 +80,7 @@
                     android:singleLine="true"
                     android:text="@string/showcase"
                     android:textColor="@color/white"
-                    android:textSize="13sp" />
+                    android:textSize="16sp" />
 
             </LinearLayout>
 
@@ -97,7 +97,6 @@
                     android:background="@drawable/humanservicesicon" />
 
                 <Button
-                    android:id="@+id/serviceTV"
                     android:layout_width="wrap_content"
                     android:layout_height="20dp"
                     android:layout_marginTop="3dp"
@@ -108,10 +107,53 @@
                     android:text="@string/services"
                     android:textAllCaps="false"
                     android:textColor="@color/white"
-                    android:textSize="13sp"/>
+                    android:textSize="16sp"/>
 
             </LinearLayout>
 
+            <LinearLayout
+                android:id="@+id/news_top"
+                android:layout_width="90dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:background="@drawable/news" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:text="@string/news"
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/games_top"
+                android:layout_width="90dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:background="@drawable/games" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:text="Games"
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
             <LinearLayout
                 android:id="@+id/property_rental_top"
                 android:layout_width="90dp"
@@ -131,7 +173,7 @@
                     android:singleLine="true"
                     android:text="@string/property_rentals"
                     android:textColor="@color/white"
-                    android:textSize="13sp" />
+                    android:textSize="16sp" />
 
             </LinearLayout>
 
@@ -153,7 +195,7 @@
                     android:singleLine="true"
                     android:text="@string/property_for_sale"
                     android:textColor="@color/white"
-                    android:textSize="13sp" />
+                    android:textSize="16sp" />
 
             </LinearLayout>
 
@@ -167,14 +209,14 @@
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:layout_width="32dp"
                     android:layout_height="32dp"
-                    android:background="@drawable/icon_hcm" />
+                    android:background="@drawable/icon_personal" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Social"
                     android:textColor="@color/white"
-                    android:textSize="13sp" />
+                    android:textSize="16sp" />
 
             </LinearLayout>
 
@@ -196,7 +238,7 @@
                     android:singleLine="true"
                     android:text="@string/community"
                     android:textColor="@color/white"
-                    android:textSize="13sp" />
+                    android:textSize="16sp" />
 
             </LinearLayout>
 
@@ -219,7 +261,7 @@
                     android:singleLine="true"
                     android:text="@string/event_calender"
                     android:textColor="@color/white"
-                    android:textSize="13sp" />
+                    android:textSize="16sp" />
 
             </LinearLayout>
 
@@ -259,12 +301,11 @@
         -->
 
         <TextView
-            android:id="@+id/whatAreYouPostTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="left|center"
             android:layout_marginLeft="15dp"
-            android:text="Publish Your Bussiness Service ?"
+            android:text="Publish Your Business Services ?"
             android:textColor="@color/white" />
 
         <LinearLayout
@@ -323,7 +364,7 @@
                 android:paddingLeft="5dp"
                 android:paddingRight="10dp"
                 android:singleLine="true"
-                android:text="Bussiness Rank  "
+                android:text="Business Rank  "
                 android:textColor="@color/current_location"
                 android:textSize="13dp" />
 
@@ -373,12 +414,11 @@
                 android:gravity="center"
                 android:hint="  keywords"
                 android:imeOptions="actionSearch"
-                android:padding="8dp"
                 android:paddingLeft="25dp"
                 android:paddingRight="10dp"
                 android:singleLine="true"
                 android:textColor="@color/current_location"
-                android:textSize="15dp" />
+                android:textSize="18sp" />
 
 
         </LinearLayout>

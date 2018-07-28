@@ -126,7 +126,7 @@
         android:fontFamily="@font/estre"
         android:text="1000 views"
         android:textColor="@color/black"
-        android:textSize="15sp"/>
+        android:textSize="18sp"/>
 
     <TextView
         android:id="@+id/dateTV"
@@ -171,7 +171,7 @@
         android:fontFamily="@font/estre"
         android:text="1,164"
         android:textColor="@color/black"
-        android:textSize="15sp"/>
+        android:textSize="18sp"/>
 
     <ImageView
         android:id="@+id/msg_img"
@@ -193,7 +193,7 @@
         android:fontFamily="@font/estre"
         android:text="1,164"
         android:textColor="@color/black"
-        android:textSize="15sp"/>
+        android:textSize="18sp"/>
 </RelativeLayout>
     
     <View

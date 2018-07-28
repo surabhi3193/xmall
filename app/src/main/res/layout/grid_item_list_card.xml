@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/mainLay"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="210dp"
     android:background="@drawable/item_shadow_bg"
     android:orientation="vertical">
 
@@ -43,7 +43,7 @@
                 android:layout_marginTop="10dp"
                 android:text="@string/price"
                 android:textColor="@color/black"
-                android:textSize="13sp"
+                android:textSize="16sp"
                 android:textStyle="bold" />
             <TextView
                 android:id="@+id/ItemPriceText"
@@ -55,7 +55,7 @@
                 android:layout_toRightOf="@+id/ItemPriceText_head"
                 android:text="$ 100"
                 android:textColor="@color/PaleVioletRed"
-                android:textSize="13sp"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
             <LinearLayout
@@ -122,20 +122,20 @@
                 android:layout_marginTop="8dp"
                 android:text="@string/address"
                 android:textColor="@color/black"
-                android:textSize="13sp"
+                android:textSize="16sp"
                 android:textStyle="bold"  />
             <TextView
                 android:id="@+id/Item_Address"
+                android:layout_toRightOf="@+id/Item_Address_head"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/ItemPriceText"
                 android:layout_gravity="center"
                 android:layout_marginTop="8dp"
-                android:layout_toRightOf="@+id/ItemTitleText_head"
                 android:ellipsize="end"
                 android:singleLine="true"
                 android:textColor="@color/black"
-                android:textSize="15sp"
+                android:textSize="18sp"
                 />
 
             <TextView
@@ -144,9 +144,9 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/Item_Address_head"
                 android:layout_marginTop="8dp"
-                android:text="@string/description"
+                android:text="Description : "
                 android:textColor="@color/black"
-                android:textSize="13sp"
+                android:textSize="16sp"
                 android:textStyle="bold"  />
             <TextView
                 android:id="@+id/ItemTitleText"
@@ -160,7 +160,7 @@
                 android:singleLine="true"
                 android:text="Wrogan man gray printed slim"
                 android:textColor="@color/black"
-                android:textSize="15sp"
+                android:textSize="18sp"
                 />
 
 
@@ -175,11 +175,10 @@
           <!--  // not used-->
 
             <TextView
-                android:id="@+id/ItemSubTitleText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/ratingBar"
-                android:text="4.1 reviews"
+                android:text="4.0 reviews"
                 android:textSize="9dp"
                 android:visibility="gone"/>
 
@@ -193,7 +192,7 @@
                 android:isIndicator="true"
                 android:numStars="5"
                 android:stepSize="1.0"
-                android:visibility="gone" />
+                android:rating="4" android:visibility="gone"/>
 
 
             <Button

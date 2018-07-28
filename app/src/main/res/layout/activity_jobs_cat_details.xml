@@ -3,6 +3,7 @@
     xmlns:custom="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:map="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <RelativeLayout
@@ -11,7 +12,6 @@
         android:layout_height="50dp"
         android:layout_alignParentTop="true"
         android:background="#333333">
-
         <ImageView
             android:id="@+id/back_arrowImage"
             android:layout_width="50dp"
@@ -23,6 +23,8 @@
             android:src="@drawable/ic_arrow_back_white_24px" />
 
         <TextView
+            android:textAllCaps="true"
+            android:textSize="18sp"
             android:id="@+id/title_TV"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -34,7 +36,6 @@
     </RelativeLayout>
 
     <ScrollView
-        android:id="@+id/detail_scrollview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -50,20 +51,21 @@
 
 
             <LinearLayout
+                android:orientation="vertical"
                 android:id="@+id/image_lay"
                 android:layout_width="match_parent"
                 android:layout_height="170dp"
                 android:background="@color/black">
 
+                <android.support.v4.view.ViewPager
+                    android:id="@+id/pager"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent" />
 
-                <com.daimajia.slider.library.SliderLayout
-                    android:id="@+id/slider"
+                <me.relex.circleindicator.CircleIndicator
+                    android:id="@+id/indicator"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    custom:auto_cycle="true"
-                    custom:indicator_visibility="visible"
-                    custom:pager_animation="Accordion"
-                    custom:pager_animation_span="1100" />
+                    android:layout_height="18dp"/>
 
             </LinearLayout>
 
@@ -119,9 +121,10 @@
                         android:paddingTop="15dp"
                         android:text="Antu Patidar"
                         android:textColor="@color/black"
-                        android:textSize="17sp" />
+                        android:textSize="20sp" />
 
                     <TextView
+                        android:layout_toLeftOf="@+id/view_profile_btn"
                         android:id="@+id/post_time"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -160,7 +163,7 @@
                         android:text="@string/apply_for_job"
                         android:textAllCaps="false"
                         android:textColor="@color/white"
-                        android:textSize="13sp" />
+                        android:textSize="15sp" />
 
                 </RelativeLayout>
 
@@ -174,6 +177,7 @@
                     android:padding="10dp">
 
                     <TextView
+                        android:layout_toLeftOf="@+id/share_btn"
                         android:id="@+id/job_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -181,7 +185,7 @@
                         android:text="Job_Name"
                         android:textAllCaps="true"
                         android:textColor="@color/black"
-                        android:textSize="15sp"
+                        android:textSize="18sp"
                         android:textStyle="bold" />
 
                     <TextView
@@ -193,7 +197,7 @@
                         android:layout_marginTop="10dp"
                         android:text="Part time"
                         android:textColor="@color/black"
-                        android:textSize="13sp" />
+                        android:textSize="16sp" />
 
                     <TextView
                         android:id="@+id/salaryTv"
@@ -205,7 +209,7 @@
                         android:layout_toRightOf="@+id/job_typeTV"
                         android:text="$10/hour"
                         android:textColor="@android:color/holo_red_dark"
-                        android:textSize="13sp" />
+                        android:textSize="16sp" />
 
 
                     <ImageView
@@ -221,10 +225,10 @@
                         android:id="@+id/share_btn"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
-                        android:layout_marginRight="4dp"
-                        android:layout_toLeftOf="@+id/fav_btn"
+                        android:layout_alignTop="@+id/job_name"
+                        android:layout_toStartOf="@+id/fav_btn"
                         android:padding="3dp"
-                        android:src="@drawable/share_new" />
+                        android:src="@drawable/share" />
 
                     <ImageView
                         android:id="@+id/report_btn"
@@ -251,7 +255,7 @@
                         android:layout_alignParentStart="true"
                         android:text="@string/address"
                         android:textColor="@color/black"
-                        android:textSize="13sp"
+                        android:textSize="16sp"
                         android:textStyle="bold" />
 
                     <TextView
@@ -264,7 +268,7 @@
                         android:layout_toRightOf="@id/address_head_tv"
                         android:ellipsize="end"
                         android:textColor="@color/black"
-                        android:textSize="13sp" />
+                        android:textSize="15sp" />
 
                     <LinearLayout
                         android:id="@+id/rating_layout"
@@ -285,6 +289,7 @@
                             android:layout_gravity="center"
                             android:isIndicator="true"
                             android:numStars="5"
+                            android:rating="4"
                             android:stepSize="1.0" />
 
                         <TextView
@@ -293,16 +298,16 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="10dp"
                             android:text="@string/_4_1_user_review"
-                            android:textSize="13sp" />
+                            android:textSize="16sp" />
                     </LinearLayout>
 
                     <fragment
-                        android:id="@+id/map"
-                        class="com.google.android.gms.maps.SupportMapFragment"
+                        android:id="@+id/map"                        class="com.google.android.gms.maps.SupportMapFragment"
                         android:layout_width="match_parent"
                         android:layout_height="200dp"
                         android:layout_below="@id/rating_layout"
-                        android:layout_marginTop="10dp" />
+                        android:layout_marginTop="10dp"
+                        map:liteMode="true"/>
 
                     <TextView
                         android:id="@+id/job_desc_head"
@@ -313,7 +318,7 @@
                         android:ellipsize="end"
                         android:text="@string/job_description"
                         android:textColor="@color/action_bar_colour"
-                        android:textSize="15sp"
+                        android:textSize="18sp"
                         android:textStyle="bold" />
 
                     <TextView
@@ -327,7 +332,7 @@
                         android:maxLines="5"
                         android:padding="2dp"
                         android:textColor="@color/black"
-                        android:textSize="13sp" />
+                        android:textSize="16sp" />
                     <TextView
                         android:text="exp"
                         android:id="@+id/exptv"
@@ -339,7 +344,7 @@
                         android:maxLines="5"
                         android:padding="2dp"
                         android:textColor="@color/black"
-                        android:textSize="13sp" />
+                        android:textSize="16sp" />
 
                     <TextView
                         android:visibility="gone"
@@ -353,9 +358,10 @@
                         android:maxLines="5"
                         android:padding="2dp"
                         android:textColor="@color/black"
-                        android:textSize="13sp" />
+                        android:textSize="16sp" />
 
                     <TextView
+                        android:textAllCaps="true"
                         android:visibility="gone"
                         android:text="catTv"
                         android:id="@+id/catTv"
@@ -367,9 +373,10 @@
                         android:maxLines="5"
                         android:padding="2dp"
                         android:textColor="@color/black"
-                        android:textSize="13sp" />
+                        android:textSize="16sp" />
 
                     <TextView
+                        android:textAllCaps="true"
                         android:visibility="gone"
                         android:text="dogtv"
                         android:id="@+id/dogTv"
@@ -381,7 +388,7 @@
                         android:maxLines="5"
                         android:padding="2dp"
                         android:textColor="@color/black"
-                        android:textSize="13sp" />
+                        android:textSize="16sp" />
 
                     <TextView
                         android:text="desc"
@@ -394,7 +401,7 @@
                         android:maxLines="5"
                         android:padding="2dp"
                         android:textColor="@color/black"
-                        android:textSize="13sp" />
+                        android:textSize="16sp" />
 
                 </RelativeLayout>
                 <de.hdodenhof.circleimageview.CircleImageView
@@ -432,27 +439,18 @@
             android:src="@drawable/ic_close_white_24px" />
 
         <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/close_slider"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/owner_fullIV"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/close_slider"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:id="@+id/owner_fullIV"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="10dp"
-                android:padding="@dimen/size_10"
-                android:visibility="gone" />
-
-            <com.daimajia.slider.library.SliderLayout
-                android:id="@+id/slidefullr"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                custom:auto_cycle="true"
-                custom:indicator_visibility="gone"
-                custom:pager_animation="Accordion"
-                custom:pager_animation_span="1100" />
-        </LinearLayout>
+            android:layout_marginTop="10dp"
+            android:padding="@dimen/size_10"
+            android:visibility="gone" />
+    </LinearLayout>
     </RelativeLayout>
 </RelativeLayout>

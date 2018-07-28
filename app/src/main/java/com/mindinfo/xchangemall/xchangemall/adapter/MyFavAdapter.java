@@ -2,6 +2,7 @@ package com.mindinfo.xchangemall.xchangemall.adapter;
 
 import android.app.Activity;
 import android.graphics.Typeface;
+import android.support.v4.content.res.ResourcesCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,9 +10,10 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.mindinfo.xchangemall.xchangemall.R;
 import com.mindinfo.xchangemall.xchangemall.beans.MyfavModel;
-import com.squareup.picasso.Picasso;
+
 
 import java.util.List;
 
@@ -57,18 +59,15 @@ public class MyFavAdapter extends BaseAdapter {
         holder.itemDescription.setText(album.getItem_description());
         holder.ItemTitleText.setText(album.getItem_title());
         holder.ItemPriceText.setText(album.getItem_price());
-        Typeface face = Typeface.createFromAsset(mContext.getAssets(),
-                "fonts/estre.ttf");
+        Typeface face = ResourcesCompat.getFont(mContext, R.font.estre);
 
         holder.ItemTitleText.setTypeface(face);
         holder.itemDescription.setTypeface(face);
         holder.ItemPriceText.setTypeface(face);
-        //   holder.ItemSubTitleText.setText(album.getItem_subtitle());
-        //holder.ItemReviewText.setText(album.getItem_review_text());
-//        holder.itemImageView.setImageResource(Integer.parseInt(album.getItem_image()));
-        Picasso.with(mContext)
+
+
+        Glide.with(mContext)
                 .load(album.getItem_image())
-                .placeholder(R.drawable.no_img)
                 .into(holder.itemImageView);
 
         return rowView;
@@ -79,4 +78,6 @@ public class MyFavAdapter extends BaseAdapter {
         public ImageView itemImageView;
 
     }
+
+
 }

@@ -8,8 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.mindinfo.xchangemall.xchangemall.R;
-import com.squareup.picasso.Picasso;
+
 
 import java.util.ArrayList;
 
@@ -50,7 +51,7 @@ public class SlideImageAdapter extends PagerAdapter {
         ImageView myImage = (ImageView) myImageLayout
                 .findViewById(R.id.image);
 //        myImage.setImageResource(images.get(position));
-      Picasso.with(context).load(uris.get(position)).placeholder(R.drawable.profile_bg).into(myImage);
+     Glide.with(context).load(uris.get(position)).into(myImage);
 //   myImage.setImageURI(uris.get(position));
 
         view.addView(myImageLayout, 0);

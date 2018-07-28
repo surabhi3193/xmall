@@ -65,7 +65,7 @@
             android:gravity="center_horizontal"
             android:text="No Posts Available"
             android:textColor="@color/white"
-            android:textSize="15sp"
+            android:textSize="18sp"
             android:textStyle="bold"
             android:visibility="gone"/>
 
@@ -108,7 +108,7 @@
                     android:src="@drawable/cam_select"
                     android:text="camera"
                     android:textColor="@color/black"
-                    android:textSize="13sp"/>
+                    android:textSize="16sp"/>
                 <View
                     android:layout_width="20dp"
                     android:layout_height="match_parent"
@@ -123,7 +123,7 @@
                     android:src="@drawable/cam_select"
                     android:text="gallery"
                     android:textColor="@color/black"
-                    android:textSize="13sp"/>
+                    android:textSize="16sp"/>
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
@@ -183,7 +183,6 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/cardView2"
             android:layout_width="match_parent"
             android:layout_height="360dp"
             android:layout_below="@+id/cardView"

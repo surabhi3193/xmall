@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
+    android:layout_height="wrap_content"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_marginTop="10dp"
+    android:orientation="vertical">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
     <TextView
         android:id="@+id/day_txt"
         android:layout_width="85dp"
@@ -13,10 +18,11 @@
     <TextView
         android:layout_height="wrap_content"
         android:id="@+id/start_txt"
-        android:layout_width="50dp"
+        android:layout_width="80dp"
         android:layout_marginRight="10dp"
         android:gravity="center_vertical" />
     <TextView
+        android:id="@+id/toTv"
         android:textStyle="bold"
         android:text="To"
         android:layout_width="40dp"
@@ -30,6 +36,40 @@
         android:layout_height="wrap_content"
         android:layout_marginRight="10dp"
         android:gravity="center_vertical" />
+    </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="5dp"
+        android:paddingTop="5dp" >
+        <Space
+            android:layout_width="85dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"/>
+
+        <TextView
+            android:id="@+id/start_txt2"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:gravity="center_vertical" />
+
+        <TextView
+            android:id="@+id/toTv2"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:gravity="center_vertical"
+            android:text="To"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/end_txt2"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:gravity="center_vertical" />
+    </LinearLayout>
 
 </LinearLayout>

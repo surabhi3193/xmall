@@ -15,24 +15,18 @@ import android.widget.Button;
 import android.widget.CheckedTextView;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.daimajia.slider.library.SliderLayout;
-import com.daimajia.slider.library.SliderTypes.BaseSliderView;
-import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.mindinfo.xchangemall.xchangemall.R;
 import com.mindinfo.xchangemall.xchangemall.activities.main.MainActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.File;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import static com.mindinfo.xchangemall.xchangemall.Fragments.categories.postADD.Postyour2Add.cross_imageView;
 import static com.mindinfo.xchangemall.xchangemall.Fragments.categories.postADD.Postyour2Add.pageNo_textView;
@@ -40,23 +34,23 @@ import static com.mindinfo.xchangemall.xchangemall.Fragments.categories.postADD.
 import static com.mindinfo.xchangemall.xchangemall.storage.MySharedPref.getData;
 import static com.mindinfo.xchangemall.xchangemall.storage.MySharedPref.saveData;
 
-public class Postyour5Add extends Fragment implements View.OnClickListener{
+public class Postyour5Add extends Fragment implements View.OnClickListener {
     public static ArrayList<String> selectedData;
-    final boolean[] checkedItems = {false, false, false,false};
+    final boolean[] checkedItems = {false, false, false, false};
     String obj;
     ArrayList<String> imageSet = new ArrayList<String>();
     ArrayList<String> categoryids = new ArrayList<String>();
     String pcat_name;
     Context context;
-     String[]    animals = {"Call", "Video", "Chat","Text"};
+    String[] animals = {"Call", "Video", "Chat", "Text"};
     ListAdapter adapter;
     LinearLayout contact_lay;
-    boolean iscallSelected= false,isVdoselected =false,isChatSelected=false,istextSelected=false;
+    boolean iscallSelected = false, isVdoselected = false, isChatSelected = false, istextSelected = false;
     //next_btn
-    private Button next_btn,ok_btn,cancel_btn;
+    private Button next_btn, ok_btn, cancel_btn;
 
-    private TextView  headercategory, contactByTv;
-    private CheckedTextView callTV,vdoTV,chatTV,textTV;
+    private TextView headercategory, contactByTv;
+    private CheckedTextView callTV, vdoTV, chatTV, textTV;
     private ImageButton back_arrowImage;
     //Fragment Manager
     private FragmentManager fm;
@@ -71,7 +65,7 @@ public class Postyour5Add extends Fragment implements View.OnClickListener{
 
         fm = getActivity().getSupportFragmentManager();
 
-        context = getActivity().getApplicationContext();
+        context = getActivity();
 
 
         findItem(v);
@@ -101,7 +95,7 @@ public class Postyour5Add extends Fragment implements View.OnClickListener{
             }
 
 
-            MainCatType = getData(getActivity().getApplicationContext(), "pcat_id", "");
+            MainCatType = getData(getActivity(), "pcat_id", "");
         }
         return v;
     }
@@ -121,13 +115,13 @@ public class Postyour5Add extends Fragment implements View.OnClickListener{
         next_btn = (Button) v.findViewById(R.id.next_btn);
         ok_btn = (Button) v.findViewById(R.id.ok_btn);
         cancel_btn = (Button) v.findViewById(R.id.cancel_btn);
-         contact_lay =(LinearLayout)v.findViewById(R.id.contact_lay);
+        contact_lay = (LinearLayout) v.findViewById(R.id.contact_lay);
 
 
-         callTV =(CheckedTextView)v.findViewById(R.id.callTV);
-         chatTV =(CheckedTextView)v.findViewById(R.id.chatTV);
-         vdoTV =(CheckedTextView)v.findViewById(R.id.vdoTV);
-        textTV =(CheckedTextView)v.findViewById(R.id.textTV);
+        callTV = (CheckedTextView) v.findViewById(R.id.callTV);
+        chatTV = (CheckedTextView) v.findViewById(R.id.chatTV);
+        vdoTV = (CheckedTextView) v.findViewById(R.id.vdoTV);
+        textTV = (CheckedTextView) v.findViewById(R.id.textTV);
 
         pageNo_textView.setText("5 of 7");
 
@@ -147,17 +141,14 @@ public class Postyour5Add extends Fragment implements View.OnClickListener{
         cancel_btn.setTypeface(face);
 
 
-
         headercategory.setText(pcat_name);
 
 
-        if (getData(getActivity().getApplicationContext(), "first_entry_contact", "") != null)
-        {
-            String getData = getData(getActivity().getApplicationContext(), "first_entry_contact", "");
+        if (getData(getActivity(), "first_entry_contact", "") != null) {
+            String getData = getData(getActivity(), "first_entry_contact", "");
 
             System.out.println("********* new data length ******* " + getData.length());
-            if (getData.length()>0)
-            {
+            if (getData.length() > 0) {
                 try {
                     JSONObject contact_obj = new JSONObject(getData);
 
@@ -167,16 +158,13 @@ public class Postyour5Add extends Fragment implements View.OnClickListener{
                     spinnerLanguage.setSelection(Integer.parseInt(contact_obj.getString("lang")));
                     contactByTv.setText(contact_obj.getString("contact_by"));
                 } catch (JSONException e) {
-e.printStackTrace();
+                    e.printStackTrace();
                 }
-            }
-            else
-            {
-                selectedData=null;
+            } else {
+                selectedData = null;
             }
 
         }
-
 
 
     }
@@ -194,19 +182,19 @@ e.printStackTrace();
 
         try {
 
-            String contact_by =contactByTv.getText().toString();
+            String contact_by = contactByTv.getText().toString();
             String phone = phoneNumberEditText.getText().toString();
             String extension = ExtensionEditText.getText().toString();
-            String contact_name=contactNameEditText.getText().toString();
-            String lang= String.valueOf(spinnerLanguage.getSelectedItemPosition());
+            String contact_name = contactNameEditText.getText().toString();
+            String lang = String.valueOf(spinnerLanguage.getSelectedItemPosition());
 
 
-            contact_obj.put("contact_by",contact_by);
-            contact_obj.put("phone_data",phone);
-            contact_obj.put("extension_data",extension);
-            contact_obj.put("contact_name",contact_name);
-            contact_obj.put("lang",lang);
-            saveData(getActivity().getApplicationContext(), "first_entry_contact", contact_obj.toString());
+            contact_obj.put("contact_by", contact_by);
+            contact_obj.put("phone_data", phone);
+            contact_obj.put("extension_data", extension);
+            contact_obj.put("contact_name", contact_name);
+            contact_obj.put("lang", lang);
+            saveData(getActivity(), "first_entry_contact", contact_obj.toString());
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -249,29 +237,22 @@ e.printStackTrace();
 
             if (selectedData.size() > 0) {
                 for (int k = 0; k < selectedData.size(); k++) {
-                    if(selectedData.get(k).equals("Call"))
-                    {
+                    if (selectedData.get(k).equals("Call")) {
                         checkedItems[0] = true;
-                        iscallSelected=true;
+                        iscallSelected = true;
                         callTV.setChecked(true);
 
-                    }
-                    else if (selectedData.get(k).equals("Video"))
-                    {
+                    } else if (selectedData.get(k).equals("Video")) {
                         checkedItems[1] = true;
-                        isVdoselected=true;
+                        isVdoselected = true;
                         vdoTV.setChecked(true);
-                    }
-
-                    else if (selectedData.get(k).equals("Chat")) {
+                    } else if (selectedData.get(k).equals("Chat")) {
                         checkedItems[2] = true;
-                        isChatSelected=true;
+                        isChatSelected = true;
                         chatTV.setChecked(true);
-                    }
-
-                    else if (selectedData.get(k).equals("Text")) {
+                    } else if (selectedData.get(k).equals("Text")) {
                         checkedItems[3] = true;
-                        istextSelected=true;
+                        istextSelected = true;
                         textTV.setChecked(true);
                     }
                 }
@@ -280,7 +261,7 @@ e.printStackTrace();
 
 
         contact_lay.setVisibility(View.VISIBLE);
-        InputMethodManager imm = (InputMethodManager)context.getSystemService(Context.INPUT_METHOD_SERVICE);
+        InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
         if (imm != null) {
             System.out.println("************* imm is null ");
             imm.hideSoftInputFromWindow(contact_lay.getWindowToken(), 0);
@@ -289,59 +270,48 @@ e.printStackTrace();
         callTV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!iscallSelected)
-                {
+                if (!iscallSelected) {
                     callTV.setChecked(true);
-                    checkedItems[0]=true;
-                    iscallSelected=true;
-                }
-                else
-                {
+                    checkedItems[0] = true;
+                    iscallSelected = true;
+                } else {
                     callTV.setChecked(false);
-                    checkedItems[0]=false;
-                    iscallSelected=false;
+                    checkedItems[0] = false;
+                    iscallSelected = false;
                 }
 
             }
         });
-
 
 
         vdoTV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!isVdoselected)
-                {
+                if (!isVdoselected) {
                     vdoTV.setChecked(true);
-                    checkedItems[1]=true;
-                    isVdoselected=true;
-                }
-                else
-                {
+                    checkedItems[1] = true;
+                    isVdoselected = true;
+                } else {
                     vdoTV.setChecked(false);
-                    checkedItems[1]=false;
-                    isVdoselected=false;
+                    checkedItems[1] = false;
+                    isVdoselected = false;
                 }
 
             }
         });
 
 
-
         chatTV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!isChatSelected)
-                {
+                if (!isChatSelected) {
                     chatTV.setChecked(true);
-                    checkedItems[2]=true;
-                    isChatSelected=true;
-                }
-                else
-                {
+                    checkedItems[2] = true;
+                    isChatSelected = true;
+                } else {
                     chatTV.setChecked(false);
-                    checkedItems[2]=false;
-                    isChatSelected=false;
+                    checkedItems[2] = false;
+                    isChatSelected = false;
                 }
 
             }
@@ -349,24 +319,18 @@ e.printStackTrace();
         textTV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!istextSelected)
-                {
+                if (!istextSelected) {
                     textTV.setChecked(true);
-                    checkedItems[3]=true;
-                    istextSelected=true;
-                }
-                else
-                {
+                    checkedItems[3] = true;
+                    istextSelected = true;
+                } else {
                     textTV.setChecked(false);
-                    checkedItems[3]=false;
-                    istextSelected=false;
+                    checkedItems[3] = false;
+                    istextSelected = false;
                 }
 
             }
         });
-
-
-
 
 
         ok_btn.setOnClickListener(new View.OnClickListener() {
@@ -390,76 +354,62 @@ e.printStackTrace();
                 System.out.println("************** selected contact option *******");
                 System.out.println(selectedData.toString());
                 contactByTv.setText(csv);
-                saveData(getActivity().getApplicationContext(), "contact_by", csv);
+                saveData(getActivity(), "contact_by", csv);
                 contact_lay.setVisibility(View.GONE);
             }
         });
 
-cancel_btn.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View view) {
-        contact_lay.setVisibility(View.GONE);
+        cancel_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                contact_lay.setVisibility(View.GONE);
 
-        System.out.println("** on cancel ******");
+                System.out.println("** on cancel ******");
 
-        if (selectedData!=null)
-        {
-            if (selectedData.size() > 0) {
-                System.out.println(selectedData.size());
-                for (int k = 0; k < selectedData.size(); k++)
-                {
-                    if (selectedData.get(k).equals("Call")) {
-                        checkedItems[0] = false;
+                if (selectedData != null) {
+                    if (selectedData.size() > 0) {
+                        System.out.println(selectedData.size());
+                        for (int k = 0; k < selectedData.size(); k++) {
+                            if (selectedData.get(k).equals("Call")) {
+                                checkedItems[0] = false;
+
+                            } else if (selectedData.get(k).equals("Video")) {
+                                checkedItems[1] = false;
+
+
+                            } else if (selectedData.get(k).equals("Chat")) {
+                                checkedItems[2] = false;
+
+
+                            } else if (selectedData.get(k).equals("Text")) {
+                                checkedItems[3] = false;
+
+
+                            }
+                        }
+                        for (int i = 0; i < checkedItems.length; i++) {
+                            if (checkedItems[i]) {
+                                selectedData.add(animals[i]);
+                            }
+                        }
+
+                        String csv = selectedData.toString().replace("[", "").replace("]", "")
+                                .replace(", ", ",");
+
+                        System.out.println("************** selected contact option *******");
+                        System.out.println(selectedData.toString());
+                        contactByTv.setText(csv);
 
                     }
 
-                    else if (selectedData.get(k).equals("Video")) {
-                        checkedItems[1] = false;
+                } else {
+                    contact_lay.setVisibility(View.GONE);
 
 
-                    }
-
-                    else if (selectedData.get(k).equals("Chat")) {
-                        checkedItems[2] = false;
-
-
-                    }
-
-                    else if (selectedData.get(k).equals("Text")) {
-                        checkedItems[3] = false;
-
-
-                    }
+                    contactByTv.setText("Select");
                 }
-                for (int i = 0; i < checkedItems.length; i++) {
-                    if (checkedItems[i]) {
-                        selectedData.add(animals[i]);
-                    }
-                }
-
-                String csv = selectedData.toString().replace("[", "").replace("]", "")
-                        .replace(", ", ",");
-
-                System.out.println("************** selected contact option *******");
-                System.out.println(selectedData.toString());
-                contactByTv.setText(csv);
-
             }
-
-        }
-        else
-        {        contact_lay.setVisibility(View.GONE);
-
-
-            contactByTv.setText("Select");
-        }
-    }
-});
-
-
-
-
-
+        });
 
     }
 
@@ -504,13 +454,10 @@ cancel_btn.setOnClickListener(new View.OnClickListener() {
 
         if (MainCatType.equals("101")) {
             bundle.putString("bussinessobj", obj);
-        }
-
-            else if (MainCatType.equals("102") || MainCatType.equals("272")) {
+        } else if (MainCatType.equals("102") || MainCatType.equals("272")) {
 
             bundle.putString("prop_obj", obj);
-        }
-        else {
+        } else {
             bundle.putStringArrayList("selectedcategories", categoryids);
             bundle.putString("postTitle", postTitle);
             bundle.putString("postDes", postDes);
@@ -520,7 +467,7 @@ cancel_btn.setOnClickListener(new View.OnClickListener() {
 
         }
 
-        saveData(getActivity().getApplicationContext(),"pcat_id",MainCatType);
+        saveData(getActivity(), "pcat_id", MainCatType);
         Postyour6Add postyour6add = new Postyour6Add();
         postyour6add.setArguments(bundle);
         fm.beginTransaction().replace(R.id.allCategeriesIN, postyour6add).addToBackStack(null).commit();

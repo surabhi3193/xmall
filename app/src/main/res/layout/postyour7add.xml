@@ -40,14 +40,30 @@
             android:paddingRight="20dp"
             android:shrinkColumns="*"
             android:stretchColumns="*" >
-
-
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" >
 
                 <TextView
-                    android:text="Free For 7 Day"
+                    android:text="Free photo post for 30 days"
+                    android:textColor="@color/black"
+                    android:textStyle="bold" >
+                </TextView>
+
+                <CheckBox
+                    android:id="@+id/checkboxFreepic"
+                    android:checked="true"
+                    />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp" >
+
+                <TextView
+                    android:text="Free video post for 7 days"
                     android:textColor="@color/black"
                     android:textStyle="bold" >
                 </TextView>
@@ -63,7 +79,7 @@
                 android:layout_marginTop="30dp" >
 
                 <TextView
-                    android:text="$10 Per Post Per 30 Days"
+                    android:text="$10.00 per video post per 30 days"
                     android:textColor="@color/black"
                     android:textStyle="bold" >
                 </TextView>
@@ -80,7 +96,7 @@
                 android:layout_marginTop="30dp" >
 
                 <TextView
-                    android:text="AUTO RENEW EVERY  30 DAYS"
+                    android:text="Auto Renew every 30 days"
                     android:textColor="@color/black"
                     android:textStyle="bold" >
                 </TextView>

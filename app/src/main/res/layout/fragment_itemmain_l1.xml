@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/snackbarPosition"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -29,9 +29,7 @@
             android:layout_height="wrap_content" />
     </LinearLayout>
 
-
     <RelativeLayout
-        android:layout_marginTop="5dp"
         android:layout_below="@id/scrollLay"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -42,7 +40,9 @@
             android:id="@+id/refreshLay"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-        <ListView
+
+
+        <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerViewItem"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -52,7 +52,14 @@
             android:paddingTop="10dp"
             android:scrollbars="none"
             android:splitMotionEvents="false"
-            android:visibility="visible" />
+            android:visibility="visible"
+           app:fastScrollEnabled="true"
+            app:fastScrollHorizontalThumbDrawable="@drawable/thumb_drawable"
+            app:fastScrollHorizontalTrackDrawable="@drawable/line_drawable"
+            app:fastScrollVerticalThumbDrawable="@drawable/thumb_drawable"
+            app:fastScrollVerticalTrackDrawable="@drawable/line_drawable"
+
+            />
         </com.baoyz.widget.PullRefreshLayout>
         <TextView
             android:id="@+id/noPostTv"
@@ -64,7 +71,7 @@
             android:gravity="center"
             android:text="No Posts Available"
             android:textColor="@color/white"
-            android:textSize="15sp"
+            android:textSize="18sp"
             android:textStyle="bold"
             android:visibility="gone" />
 
@@ -112,7 +119,7 @@
                     android:src="@drawable/cam_select"
                     android:text="camera"
                     android:textColor="@color/black"
-                    android:textSize="15sp" />
+                    android:textSize="18sp" />
 
                 <View
                     android:layout_width="20dp"
@@ -128,7 +135,7 @@
                     android:src="@drawable/cam_select"
                     android:text="gallery"
                     android:textColor="@color/black"
-                    android:textSize="15sp" />
+                    android:textSize="18sp" />
             </LinearLayout>
 
             <View
@@ -160,7 +167,6 @@
         android:visibility="gone"/>
 
     <RelativeLayout
-
         android:id="@+id/catlog"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -199,7 +205,6 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/cardView2"
             android:layout_width="match_parent"
             android:layout_height="360dp"
             android:layout_below="@+id/cardView"
@@ -212,7 +217,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
-
                 <ListView
                     android:id="@+id/cat_sub_list_view"
                     android:layout_width="match_parent"
@@ -249,8 +253,7 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
                         android:layout_weight="1"
-                        android:background="@drawable/custom_item_layout"
-                        android:backgroundTint="@color/action_bar_colour"
+                        android:background="@color/colorPrimaryDark"
                         android:text="Confirm"
                         android:textAllCaps="true"
                         android:textColor="@color/white" />

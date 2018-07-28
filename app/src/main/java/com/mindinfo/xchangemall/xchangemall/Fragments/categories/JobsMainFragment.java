@@ -6,8 +6,6 @@ import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.ResolveInfo;
-import android.database.Cursor;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
@@ -15,6 +13,9 @@ import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.content.res.ResourcesCompat;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -49,6 +50,8 @@ import com.mindinfo.xchangemall.xchangemall.adapter.ForJobAdapter;
 import com.mindinfo.xchangemall.xchangemall.adapter.MULTIPLEsELECTIONcATEGORY;
 import com.mindinfo.xchangemall.xchangemall.beans.ItemsMain;
 import com.mindinfo.xchangemall.xchangemall.beans.categories;
+import com.mindinfo.xchangemall.xchangemall.intefaces.OnBackPressed;
+import com.mindinfo.xchangemall.xchangemall.other.GPSTracker;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -56,17 +59,16 @@ import org.json.JSONObject;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 import cz.msebera.android.httpclient.Header;
 
 import static com.mindinfo.xchangemall.xchangemall.Constants.NetworkClass.OpenWarning;
 import static com.mindinfo.xchangemall.xchangemall.Constants.NetworkClass.getRealPathFromURI;
 import static com.mindinfo.xchangemall.xchangemall.Constants.NetworkClass.resetData;
-import static com.mindinfo.xchangemall.xchangemall.activities.main.BaseActivity.BASE_URL_NEW;
+import static com.mindinfo.xchangemall.xchangemall.activities.BaseActivity.BASE_URL_NEW;
 import static com.mindinfo.xchangemall.xchangemall.adapter.MULTIPLEsELECTIONcATEGORY.idarray;
-import static com.mindinfo.xchangemall.xchangemall.other.GeocodingLocation.getAddressFromLatlng;
 import static com.mindinfo.xchangemall.xchangemall.storage.MySharedPref.getData;
 import static com.mindinfo.xchangemall.xchangemall.storage.MySharedPref.saveData;
 
@@ -74,10 +76,9 @@ import static com.mindinfo.xchangemall.xchangemall.storage.MySharedPref.saveData
  * Created by Mind Info- Android on 17-Nov-17.
  */
 
-public class JobsMainFragment extends Fragment implements View.OnClickListener {
+public class JobsMainFragment extends Fragment implements View.OnClickListener,OnBackPressed{
 
-    private static final int PLACE_PICKER_REQUEST = 23;
-    private static final int CAPTURE_IMAGES_FROM_CAMERA = 22;
+    private  final int PLACE_PICKER_REQUEST = 23;
     public String str_image_arr[];
     Typeface face;
     String csv ="";
@@ -100,7 +101,15 @@ public class JobsMainFragment extends Fragment implements View.OnClickListener {
     private ForJobAdapter itemlistAdapter;
     private List<ItemsMain> itemList;
     private LinearLayout Post_camera_icon;
-    private LinearLayout property_rental, property_rentalsale, jobs, for_sale, buisness, personel, community, showcase;
+    private LinearLayout property_rental;
+    private LinearLayout property_rentalsale;
+    private LinearLayout news_top;
+    private LinearLayout for_sale;
+    private LinearLayout games_top;
+    private LinearLayout buisness;
+    private LinearLayout personel;
+    private LinearLayout community;
+    private LinearLayout showcase;
     private RelativeLayout catlog;
     private TextView currentLocation, jobtypeTV, industryTV;
     private int image_count_before;
@@ -110,8 +119,7 @@ public class JobsMainFragment extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_job_main, null);
 
-        face = Typeface.createFromAsset(getActivity().getApplicationContext().getAssets(),
-                "fonts/estre.ttf");
+        face = ResourcesCompat.getFont(Objects.requireNonNull(getActivity()), R.font.estre);
         fm = getActivity().getSupportFragmentManager();
         bundle = new Bundle();
         findbyview(v);
@@ -123,18 +131,13 @@ public class JobsMainFragment extends Fragment implements View.OnClickListener {
         Bundle bundle = getArguments();
         if (bundle != null) {
 
-            for_sale.setBackgroundResource(R.color.trans);
-            showcase.setBackgroundResource(R.color.trans);
-            buisness.setBackgroundResource(R.color.trans);
-            property_rentalsale.setBackgroundResource(R.color.trans);
-            property_rental.setBackgroundResource(R.color.trans);
-            personel.setBackgroundResource(R.color.trans);
-            community.setBackgroundResource(R.color.trans);
 
             for_sale.setOnClickListener(this);
+            games_top.setOnClickListener(this);
             buisness.setOnClickListener(this);
             property_rental.setOnClickListener(this);
             property_rentalsale.setOnClickListener(this);
+            news_top.setOnClickListener(this);
             buisness.setOnClickListener(this);
             personel.setOnClickListener(this);
             showcase.setOnClickListener(this);
@@ -177,56 +180,45 @@ public class JobsMainFragment extends Fragment implements View.OnClickListener {
             }
         });
 
-
-//
-//        recyclerViewItem.setOnScrollListener(new LazyLoader() {
-//
-//            @Override
-//            public void loadMore(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-////                recyclerViewItem.addFooterView(new ProgressBar(getActivity().getApplicationContext()));
-//
-//      loadItems(itemlistAdapter,posts);
-//            }
-//        });
-
-
         return v;
 
     }
 
 
     private void findbyview(View v) {
-        refreshLayout = (PullRefreshLayout) v.findViewById(R.id.refreshLay);
+        refreshLayout =v.findViewById(R.id.refreshLay);
 
-        recyclerViewItem = (RecyclerView) v.findViewById(R.id.recyclerViewItem);
-        noPostTv = (TextView) v.findViewById(R.id.noPostTv);
-        catlog = (RelativeLayout) v.findViewById(R.id.catlog);
+        recyclerViewItem =v.findViewById(R.id.recyclerViewItem);
+        noPostTv =v.findViewById(R.id.noPostTv);
+        catlog = v.findViewById(R.id.catlog);
         //Post_camera_icon find
-        Post_camera_icon = (LinearLayout) v.findViewById(R.id.Post_camera_icon);
-        postImageLay = (LinearLayout) v.findViewById(R.id.postImageLay);
-        property_rental = (LinearLayout) v.findViewById(R.id.property_rental_top);
-        property_rentalsale = (LinearLayout) v.findViewById(R.id.property_rentalsale_top);
-        jobs = (LinearLayout) v.findViewById(R.id.jobs_top);
-        for_sale = (LinearLayout) v.findViewById(R.id.forsale_top);
-        buisness = (LinearLayout) v.findViewById(R.id.buisness_top);
-        personel = (LinearLayout) v.findViewById(R.id.personal_top);
-        community = (LinearLayout) v.findViewById(R.id.community_top);
-        showcase = (LinearLayout) v.findViewById(R.id.showcase_top);
-        progressbar = (ProgressBar) v.findViewById(R.id.progressbar);
+        Post_camera_icon =v.findViewById(R.id.Post_camera_icon);
+        postImageLay =v.findViewById(R.id.postImageLay);
+        property_rental =v.findViewById(R.id.property_rental_top);
+        property_rentalsale =v.findViewById(R.id.property_rentalsale_top);
+        news_top =v.findViewById(R.id.news_top);
+        LinearLayout jobs = v.findViewById(R.id.jobs_top);
+        for_sale =v.findViewById(R.id.forsale_top);
+        buisness =v.findViewById(R.id.buisness_top);
+        games_top =v.findViewById(R.id.games_top);
+        personel =v.findViewById(R.id.personal_top);
+        community =v.findViewById(R.id.community_top);
+        showcase =v.findViewById(R.id.showcase_top);
+        progressbar = v.findViewById(R.id.progressbar);
 
-        cat_sub_list_view = (ListView) v.findViewById(R.id.cat_sub_list_view);
-        cancel_button = (Button) v.findViewById(R.id.cancel_button);
-        confirm_btn = (Button) v.findViewById(R.id.confirm_btn);
-        cancel_btn = (TextView) v.findViewById(R.id.cancel_btnIV);
-        cameraIV = (TextView) v.findViewById(R.id.cameraIV);
-        galleryIV = (TextView) v.findViewById(R.id.gallerIV);
-        addimageHEaderTV = (TextView) v.findViewById(R.id.addimageheader);
-        currentLocation = (TextView) v.findViewById(R.id.currentLocation);
-        title_cat = (TextView) v.findViewById(R.id.title_cat);
+        cat_sub_list_view = v.findViewById(R.id.cat_sub_list_view);
+        cancel_button =v.findViewById(R.id.cancel_button);
+        confirm_btn =v.findViewById(R.id.confirm_btn);
+        cancel_btn =v.findViewById(R.id.cancel_btnIV);
+        cameraIV =v.findViewById(R.id.cameraIV);
+        galleryIV =v.findViewById(R.id.gallerIV);
+        addimageHEaderTV =v.findViewById(R.id.addimageheader);
+        currentLocation =v.findViewById(R.id.currentLocation);
+        title_cat =v.findViewById(R.id.title_cat);
 
-        snackbarPosition = (RelativeLayout) v.findViewById(R.id.snackbarPosition);
-        jobtypeTV = (TextView) v.findViewById(R.id.jobtypeTV);
-        industryTV = (TextView) v.findViewById(R.id.industryTV);
+        snackbarPosition = v.findViewById(R.id.snackbarPosition);
+        jobtypeTV =v.findViewById(R.id.jobtypeTV);
+        industryTV =v.findViewById(R.id.industryTV);
         searchbox = (EditText) v.findViewById(R.id.msearch);
 
         jobs.getParent().requestChildFocus(jobs, jobs);
@@ -242,7 +234,29 @@ public class JobsMainFragment extends Fragment implements View.OnClickListener {
         galleryIV.setTypeface(face);
         addimageHEaderTV.setTypeface(face);
 
-        saveData(getActivity().getApplicationContext(), "MainCatType", "103");
+        saveData(getActivity(), "MainCatType", "103");
+
+
+
+        recyclerViewItem.setHasFixedSize(true);
+
+        // vertical RecyclerView
+        // keep movie_list_row.xml width to `match_parent`
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
+
+        // horizontal RecyclerView
+        // keep movie_list_row.xml width to `wrap_content`
+        // RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
+
+        recyclerViewItem.setLayoutManager(mLayoutManager);
+
+        // adding inbuilt divider line
+        recyclerViewItem.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
+
+        // adding custom divider line with padding 16dp
+        // recyclerView.addItemDecoration(new MyDividerItemDecoration(this, LinearLayoutManager.VERTICAL, 16));
+        recyclerViewItem.setItemAnimator(new DefaultItemAnimator());
+
 
     }
 
@@ -271,7 +285,7 @@ public class JobsMainFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.Post_camera_icon:
-                String username = getData(getActivity().getApplicationContext(), "user_name", "");
+                String username = getData(getActivity(), "user_name", "");
                 if (username.length() > 2) {
                     AddJob();
                 } else
@@ -290,13 +304,6 @@ public class JobsMainFragment extends Fragment implements View.OnClickListener {
                 break;
 
             case R.id.personal_top:
-
-//                bundle.putString("MainCatType", "100");
-//                SocialFragment personal_main = new SocialFragment();
-//                personal_main.setArguments(bundle);
-//                fm = getFragmentManager();
-//                fm.beginTransaction().replace(R.id.allCategeries, personal_main).addToBackStack(null).commit();
-
                 break;
 
             case R.id.buisness_top:
@@ -359,12 +366,26 @@ public class JobsMainFragment extends Fragment implements View.OnClickListener {
                 fm.beginTransaction().replace(R.id.allCategeries, property_sale).addToBackStack(null).commit();
 
                 break;
+            case R.id.news_top:
+                bundle.putString("MainCatType", "309");
+                NewsFragment news_top = new NewsFragment();
+                news_top.setArguments(bundle);
+                fm = getFragmentManager();
+                fm.beginTransaction().replace(R.id.allCategeries, news_top).addToBackStack(null).commit();
+                break;
 
+            case R.id.games_top:
+                bundle.putString("MainCatType", "373");
+                GamesFragment games = new GamesFragment();
+                games.setArguments(bundle);
+                fm = getFragmentManager();
+                fm.beginTransaction().replace(R.id.allCategeries, games).addToBackStack(null).commit();
+                break;
         }
     }
 
     private void AddJob() {
-        resetData(getActivity().getApplicationContext());
+        resetData(getActivity());
         catlog.setVisibility(View.GONE);
         postImageLay.setVisibility(View.VISIBLE);
 
@@ -432,7 +453,7 @@ public class JobsMainFragment extends Fragment implements View.OnClickListener {
         cat_sub_list_view.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
         cat_sub_list_view.setAdapter(postadapter);
 
-        NetworkClass.getListData("103", arrayList, getActivity().getApplicationContext());
+        NetworkClass.getListData("103", arrayList, getActivity());
         postadapter.notifyDataSetChanged();
 
         cat_sub_list_view.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -488,7 +509,7 @@ public class JobsMainFragment extends Fragment implements View.OnClickListener {
         System.err.println(longitude);
         System.err.println(job_type);
 
-        String user_id = getData(getActivity().getApplicationContext(), "user_id", "");
+        String user_id = getData(getActivity(), "user_id", "");
 
         params.put("user_id", user_id);
         params.put("val", search_key);
@@ -524,10 +545,6 @@ public class JobsMainFragment extends Fragment implements View.OnClickListener {
                             {
                                 recyclerViewItem.setVisibility(View.VISIBLE);
                                 noPostTv.setVisibility(View.GONE);
-
-                                    LinearLayoutManager llm = new LinearLayoutManager(getActivity().getApplicationContext());
-                                    llm.setOrientation(LinearLayoutManager.VERTICAL);
-                                    recyclerViewItem.setLayoutManager(llm);
                                     itemlistAdapter = new ForJobAdapter(getActivity(), posts, "job");
                                     recyclerViewItem.setAdapter(itemlistAdapter);
                                     System.gc();
@@ -560,112 +577,22 @@ public class JobsMainFragment extends Fragment implements View.OnClickListener {
     }
 
     private void ShowSnakforCurrent() {
-        PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
+        GPSTracker gpsTracker = new GPSTracker(getActivity());
+        if (gpsTracker.isGpsConnected()) {
+            PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
 
-        try {
-            startActivityForResult(builder.build(getActivity()), PLACE_PICKER_REQUEST);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-    }
-
-
-    public void startCameraActivity() {
-
-        Cursor cursor = loadCursor();
-        image_count_before = cursor.getCount();
-
-        cursor.close();
-
-        Intent cameraIntent = new Intent(MediaStore.INTENT_ACTION_STILL_IMAGE_CAMERA);
-
-        List<ResolveInfo> activities = getActivity().getApplicationContext().getPackageManager().queryIntentActivities(cameraIntent, 0);
-
-        if (activities.size() > 0)
-            startActivityForResult(cameraIntent, CAPTURE_IMAGES_FROM_CAMERA);
-        else
-            Toast.makeText(getActivity().getApplicationContext(), "device doesn't have any app", Toast.LENGTH_SHORT).show();
-    }
-
-    public String[] getImagePaths(Cursor cursor, int startPosition) {
-
-        int size = cursor.getCount() - startPosition;
-
-        if (size <= 0) return null;
-
-        String[] paths = new String[size];
-
-        int dataColumnIndex = cursor.getColumnIndex(MediaStore.Images.Media.DATA);
-
-        for (int i = startPosition; i < cursor.getCount(); i++) {
-
-            cursor.moveToPosition(i);
-
-            paths[i - startPosition] = cursor.getString(dataColumnIndex);
-        }
-
-        return paths;
-    }
-
-
-    private void exitingCamera() {
-
-        Cursor cursor = loadCursor();
-
-        //get the paths to newly added images
-        String[] paths = getImagePaths(cursor, image_count_before);
-
-        if (paths.length > 0) {
-            List<String> wordList = Arrays.asList(paths);
-
-            for (String e : wordList) {
+            try {
+                startActivityForResult(builder.build(getActivity()), PLACE_PICKER_REQUEST);
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-
-            // process images
-            process(wordList);
         }
-        cursor.close();
 
     }
-
-    private void process(List<String> wordList) {
-
-
-        List<String> responseArray = new ArrayList<>();
-        ArrayList<String> imageArray = new ArrayList<>();
-        responseArray = wordList;
-        for (int i = 0; i < responseArray.size(); i++) {
-            Uri tempUri = Uri.fromFile(new File(responseArray.get(i)));
-            imageArray.add(tempUri.toString());
-            //Log.e("Path"+i,path);
-            str_image_arr = new String[]{tempUri.toString()};
-        }
-        Bundle bundle = new Bundle();
-        bundle.putStringArrayList("images", imageArray);
-        bundle.putString("MainCatType", pcat_id);
-//        Postyour2Add postyour2Add = new Postyour2Add();
-//        postyour2Add.setArguments(bundle);
-//        fm = getFragmentManager();
-//        fm.beginTransaction().replace(R.id.allCategeries, postyour2Add).addToBackStack(null).commit();
-
-        startActivity(new Intent(getActivity().getApplicationContext(), Postyour2Add.class).putExtras(bundle));
-    }
-
-
-    public Cursor loadCursor() {
-
-        final String[] columns = {MediaStore.Images.Media.DATA, MediaStore.Images.Media._ID};
-
-        final String orderBy = MediaStore.Images.Media.DATE_ADDED;
-
-        return getActivity().getApplicationContext().getContentResolver().query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, columns, null, null, orderBy);
-    }
-
-
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         postImageLay.setVisibility(View.GONE);
 
+        int CAPTURE_IMAGES_FROM_CAMERA = 22;
         if (requestCode == CAPTURE_IMAGES_FROM_CAMERA) {
 //          exitingCamera();
         }
@@ -675,13 +602,10 @@ public class JobsMainFragment extends Fragment implements View.OnClickListener {
                 progressbar.setVisibility(View.GONE);
 
                 Place place = PlacePicker.getPlace(data, getActivity());
-                LatLng location = place.getLatLng();
-
-                latitude = String.valueOf(location.latitude);
-                longitude = String.valueOf(location.longitude);
-
-                String toastMsg = String.format("Place: %s", place.getName());
-                String new_location = getAddressFromLatlng(location, getActivity().getApplicationContext(), 0);
+                LatLng latLng = place.getLatLng();
+                latitude= String.valueOf(latLng.latitude);
+                longitude= String.valueOf(latLng.longitude);
+                String new_location = place.getName().toString();
                 currentLocation.setText("  " + new_location);
                 loadPost(search_key, jobtype, sortby, pcat_id, csv, latitude, longitude);
 
@@ -691,14 +615,14 @@ public class JobsMainFragment extends Fragment implements View.OnClickListener {
         if (requestCode == 01) {
             if (resultCode== -1) {
                 ArrayList<String> imageArray = new ArrayList<>();
+                ArrayList<Uri> uriimageArray = new ArrayList<>();
                 System.out.println("********** image uri ****");
                 System.out.println(imageUri);
 
-                imageArray.add(getRealPathFromURI(imageUri, getActivity().getApplicationContext()));
-                saveData(getActivity().getApplicationContext(), "item_img0", getRealPathFromURI(imageUri, getActivity().getApplicationContext()));
-
-                nextFragment(imageArray, str_image_arr);
-
+                uriimageArray.add(imageUri);
+                imageArray.add(getRealPathFromURI(imageUri, getActivity()));
+                saveData(getActivity(), "item_img0", getRealPathFromURI(imageUri, getActivity()));
+                nextFragment(uriimageArray, str_image_arr);
             }
         }
 
@@ -706,52 +630,62 @@ public class JobsMainFragment extends Fragment implements View.OnClickListener {
         {
             if (resultCode == 1) {
 
-                saveData(getActivity().getApplicationContext(), "language", "select");
-                saveData(getActivity().getApplicationContext(), "first_entry", "true");
-                saveData(getActivity().getApplicationContext(), "first_entry_contact", "");
-                saveData(getActivity().getApplicationContext(), "first_entry_cat", "true");
+                saveData(getActivity(), "language", "select");
+                saveData(getActivity(), "first_entry", "true");
+                saveData(getActivity(), "first_entry_contact", "");
+                saveData(getActivity(), "first_entry_cat", "true");
                 ArrayList<String> responseArray = new ArrayList<>();
                 ArrayList<String> newimageArray = new ArrayList<>();
+                ArrayList<Uri> uriimageArray = new ArrayList<>();
                 responseArray = data.getStringArrayListExtra("MESSAGE");
+                if (responseArray.size()==0)
+                {
+                    Toast.makeText(getActivity(), "Select Min 1 image to proceed",
+                            Toast.LENGTH_LONG).show();
+                    return;
+                }
+
+
                 if (responseArray.size() > 4) {
-                    Toast.makeText(getActivity().getApplicationContext(), "Maximum 4 pics allowed", Toast.LENGTH_LONG).show();
-                } else {
+                    Toast.makeText(getActivity(), "Maximum 4 pics allowed", Toast.LENGTH_LONG).show();
+
+               return;
+                }
                     for (int i = 0; i < responseArray.size(); i++) {
                         Uri uri = Uri.fromFile(new File(responseArray.get(i)));
 
                         Log.e("Uri" + i, uri.toString());
-                        saveData(getActivity().getApplicationContext(), "item_img" + i, uri.getPath());
+                        saveData(getActivity(), "item_img" + i, uri.getPath());
 
                         newimageArray.add(uri.getPath());
+                        uriimageArray.add(uri);
                         //Log.e("Path"+i,path);
                         str_image_arr = new String[]{uri.toString()};
                         //AIzaSyDn243JOuaMA4Sx9uMHf1DFXMPSYQECZ0I
                     }
                     Bundle bundle = new Bundle();
                     bundle.putStringArray("imagess", str_image_arr);
-                    bundle.putStringArrayList("imageSet", newimageArray);
+                    bundle.putParcelableArrayList("imageSet", uriimageArray);
                     bundle.putString("MainCatType", "103");
 
-                    startActivity(new Intent(getActivity().getApplicationContext(), Postyour2Add.class).putExtras(bundle));
+                    startActivity(new Intent(getActivity(), Postyour2Add.class).putExtras(bundle));
 
-
-                }
             }
         }
     }
 
-    public void nextFragment(ArrayList<String> newimageArray, String[] str_image_arr)
+    public void nextFragment(ArrayList<Uri> newimageArray, String[] str_image_arr)
     {
-        saveData(getActivity().getApplicationContext(), "language", "select");
-        saveData(getActivity().getApplicationContext(), "first_entry", "true");
-        saveData(getActivity().getApplicationContext(), "first_entry_contact", "");
-        saveData(getActivity().getApplicationContext(), "first_entry_cat", "true");
+        saveData(getActivity(), "language", "select");
+        saveData(getActivity(), "first_entry", "true");
+        saveData(getActivity(), "first_entry_contact", "");
+        saveData(getActivity(), "first_entry_cat", "true");
 
         Bundle bundle = new Bundle();
         bundle.putStringArray("imagess",str_image_arr);
-        bundle.putStringArrayList("imageSet", newimageArray);
+        bundle.putParcelableArrayList("imageSet", newimageArray);
         bundle.putString("MainCatType", "103");
-        startActivity(new Intent(getActivity().getApplicationContext(), Postyour2Add.class).putExtras(bundle));
+        startActivity(new Intent(getActivity(), Postyour2Add.class).putExtras(bundle));
     }
 
     private void openJobTypes() {
@@ -788,7 +722,7 @@ public class JobsMainFragment extends Fragment implements View.OnClickListener {
 
     }
     public void onBackPressed() {
-        startActivity(new Intent(getActivity().getApplicationContext(),
+        startActivity(new Intent(getActivity(),
                 MainActivity.class).putExtra("EXIT", true));
 
     }

@@ -15,7 +15,6 @@
         card_view:cardElevation="0.01dp">
 
         <RelativeLayout
-            android:id="@+id/top_layout"
             android:layout_width="match_parent"
             android:layout_height="160dp">
 

@@ -1,5 +1,6 @@
 package com.mindinfo.xchangemall.xchangemall.activities.property;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -26,7 +27,6 @@ import com.loopj.android.http.RequestParams;
 import com.mindinfo.xchangemall.xchangemall.R;
 import com.mindinfo.xchangemall.xchangemall.activities.main.MainActivity;
 import com.mynameismidori.currencypicker.CurrencyPicker;
-import com.mynameismidori.currencypicker.CurrencyPickerListener;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -38,25 +38,36 @@ import java.util.TimeZone;
 import cz.msebera.android.httpclient.Header;
 
 import static com.mindinfo.xchangemall.xchangemall.Constants.NetworkClass.isMatch;
-import static com.mindinfo.xchangemall.xchangemall.activities.main.BaseActivity.BASE_URL_NEW;
+import static com.mindinfo.xchangemall.xchangemall.activities.BaseActivity.BASE_URL_NEW;
 import static com.mindinfo.xchangemall.xchangemall.activities.main.SplashScreen.face;
 import static com.mindinfo.xchangemall.xchangemall.storage.MySharedPref.getData;
 import static com.mindinfo.xchangemall.xchangemall.storage.MySharedPref.saveData;
 
-public class ApplyForRental extends AppCompatActivity
-{
+public class ApplyForRental extends AppCompatActivity {
 
     private TextView tvfullname, tvphone, tvemail, tvrenatlhead, tvsettinghead, tvmovein, tvrenters, tvpets, tvsmokers, tvincome, tvcredit, tvmovingFrom,
-            tvworkplace, tvjobtitle, tvalways,currencyTV,rightTV;
+            tvworkplace, tvjobtitle, tvalways, currencyTV, rightTV;
     private EditText etfullname, etphone, etemail, etmovein, etrenters, etpets, etsmokers, etincome, etcredit, etmovingFrom, etworkplace, etjobtitle;
-    private String fullname="", phone="", email="", movein="", renters="", pets="",
-            smokers="", income="", credit="", movingFrom="", workplace="",
-            jobtitle="",post_id="",savedApp = "";;
+    private String fullname = "";
+    private String phone = "";
+    private String email = "";
+    private String movein = "";
+    private String renters = "";
+    private String pets = "";
+    private String smokers = "";
+    private String income = "";
+    private String credit = "";
+    private String movingFrom = "";
+    private String workplace = "";
+    private String jobtitle = "";
+    private String post_id = "";
+    ;
     private Button requesst_btn;
     private ImageView back_btn;
     private ScrollView scrollview;
     private LinearLayout formLay;
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,7 +101,7 @@ public class ApplyForRental extends AppCompatActivity
             public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
                     System.out.println("=========== action done ==========");
-                    InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(tvalways.getWindowToken(), 0);
 
 
@@ -103,41 +114,27 @@ public class ApplyForRental extends AppCompatActivity
             }
 
         });
-        currencyTV.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final CurrencyPicker picker = CurrencyPicker.newInstance("Select Currency");  // dialog title
-                picker.setListener(new CurrencyPickerListener() {
-                    @Override
-                    public void onSelectCurrency(String name, String mcode, String symbol, int flagDrawableResID) {
-                        System.out.println("*************Selected currency is ******");
-                        System.out.println(name + " name");
-                        System.out.println(mcode + " code");
-                        System.out.println(symbol + " symbol");
-                        System.out.println(flagDrawableResID + " flag");
+        currencyTV.setOnClickListener(v -> {
+            final CurrencyPicker picker = CurrencyPicker.newInstance("Select Currency");  // dialog title
+            picker.setListener((name, mcode, symbol, flagDrawableResID) -> {
+                System.out.println("*************Selected currency is ******");
+                System.out.println(name + " name");
+                System.out.println(mcode + " code");
+                System.out.println(symbol + " symbol");
+                System.out.println(flagDrawableResID + " flag");
 
-                        if (symbol.equals("0")) {
-                            symbol = "₹";
-                        }
+                if (symbol.equals("0")) {
+                    symbol = "₹";
+                }
 
-                        currencyTV.setText(mcode + symbol);
+                currencyTV.setText(mcode + symbol);
 
-                        picker.dismiss();
-                    }
-                });
-                picker.show(getSupportFragmentManager(), "CURRENCY_PICKER");
-            }
+                picker.dismiss();
+            });
+            picker.show(getSupportFragmentManager(), "CURRENCY_PICKER");
         });
-
-
-        rightTV.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                saveAppliation();
-
-            }
-        });
-        savedApp = getData(getApplicationContext(), "saved_sale_application", "");
+        rightTV.setOnClickListener(v -> saveAppliation());
+        String savedApp = getData(getApplicationContext(), "saved_sale_application", "");
         System.out.println("=================== saved data ==============");
         System.out.println(savedApp);
         if (savedApp != null && savedApp.length() > 0)
@@ -146,43 +143,43 @@ public class ApplyForRental extends AppCompatActivity
     }
 
 
+    @SuppressLint("SetTextI18n")
     private void initui() {
-        currencyTV = (TextView)findViewById(R.id.currencyTV);
-        rightTV = (TextView) findViewById(R.id.rightTV);
+        currencyTV =findViewById(R.id.currencyTV);
+        rightTV =findViewById(R.id.rightTV);
+        tvfullname =findViewById(R.id.fullname_header);
+        tvphone =findViewById(R.id.phone_header);
+        tvemail =findViewById(R.id.email_header);
+        tvrenatlhead =findViewById(R.id.rental_header);
+        tvmovein =findViewById(R.id.TVmovein);
+        tvrenters =findViewById(R.id.Tvrenter);
+        tvpets =findViewById(R.id.TVpets);
+        tvsmokers =findViewById(R.id.TVsmokers);
+        tvincome =findViewById(R.id.Tvincome);
+        tvcredit =findViewById(R.id.TVcredit);
+        tvmovingFrom =findViewById(R.id.TVmoingfrom);
+        tvworkplace =findViewById(R.id.TVworkplace);
+        tvjobtitle =findViewById(R.id.TVjobtitle);
+        tvsettinghead =findViewById(R.id.setting_header);
+        tvalways =findViewById(R.id.alwaystv);
+        TextView pageTitleTV =findViewById(R.id.pageTitleTV);
+        etfullname =findViewById(R.id.fullnameEt);
+        etphone =findViewById(R.id.phoneET);
+        etemail =findViewById(R.id.emailET);
+        etmovein =findViewById(R.id.Etmovein);
+        etrenters =findViewById(R.id.Etrenter);
+        etpets =findViewById(R.id.Etpets);
+        etincome =findViewById(R.id.Etincome);
+        etcredit =findViewById(R.id.Etcredit);
+        etsmokers =findViewById(R.id.Etsmokers);
+        etworkplace =findViewById(R.id.Etworkplace);
+        etjobtitle =findViewById(R.id.Etjobtitle);
+        etmovingFrom =findViewById(R.id.Etmovingfrom);
+        requesst_btn =findViewById(R.id.send_Request_btn);
+        back_btn =findViewById(R.id.back_btn);
+        scrollview =findViewById(R.id.scrollview);
 
-        tvfullname = (TextView) findViewById(R.id.fullname_header);
-        tvphone = (TextView) findViewById(R.id.phone_header);
-        tvemail = (TextView) findViewById(R.id.email_header);
-        tvrenatlhead = (TextView) findViewById(R.id.rental_header);
-        tvmovein = (TextView) findViewById(R.id.TVmovein);
-        tvrenters = (TextView) findViewById(R.id.Tvrenter);
-        tvpets = (TextView) findViewById(R.id.TVpets);
-        tvsmokers = (TextView) findViewById(R.id.TVsmokers);
-        tvincome = (TextView) findViewById(R.id.Tvincome);
-        tvcredit = (TextView) findViewById(R.id.TVcredit);
-        tvmovingFrom = (TextView) findViewById(R.id.TVmoingfrom);
-        tvworkplace = (TextView) findViewById(R.id.TVworkplace);
-        tvjobtitle = (TextView) findViewById(R.id.TVjobtitle);
-        tvsettinghead = (TextView) findViewById(R.id.setting_header);
-        tvalways = (TextView) findViewById(R.id.alwaystv);
-     TextView   pageTitleTV = (TextView) findViewById(R.id.pageTitleTV);
-
-        etfullname = (EditText) findViewById(R.id.fullnameEt);
-        etphone = (EditText) findViewById(R.id.phoneET);
-        etemail = (EditText) findViewById(R.id.emailET);
-        etmovein = (EditText) findViewById(R.id.Etmovein);
-        etrenters = (EditText) findViewById(R.id.Etrenter);
-        etpets = (EditText) findViewById(R.id.Etpets);
-        etincome = (EditText) findViewById(R.id.Etincome);
-        etcredit = (EditText) findViewById(R.id.Etcredit);
-        etsmokers = (EditText) findViewById(R.id.Etsmokers);
-        etworkplace = (EditText) findViewById(R.id.Etworkplace);
-        etjobtitle = (EditText) findViewById(R.id.Etjobtitle);
-        etmovingFrom = (EditText) findViewById(R.id.Etmovingfrom);
-        requesst_btn = (Button) findViewById(R.id.send_Request_btn);
-        back_btn = (ImageView) findViewById(R.id.back_btn);
-        scrollview=(ScrollView)findViewById(R.id.scrollview);
-        formLay=(LinearLayout) findViewById(R.id.formLay);
+        formLay =findViewById(R.id.formLay);
 
 
         pageTitleTV.setText("Application Form");
@@ -190,7 +187,7 @@ public class ApplyForRental extends AppCompatActivity
         currencyTV.setTypeface(face);
 
         Locale locale = Locale.getDefault();
-        Log.d("IssuesEtc","the local is " + locale);
+        Log.d("IssuesEtc", "the local is " + locale);
 
         Currency currency = Currency.getInstance(locale);
 
@@ -198,10 +195,10 @@ public class ApplyForRental extends AppCompatActivity
         System.out.println(currency.getCurrencyCode());
         System.out.println(currency.getSymbol());
 
-        String code,symbol;
-        code=currency.getCurrencyCode();
+        String code, symbol;
+        code = currency.getCurrencyCode();
         symbol = currency.getSymbol();
-        currencyTV.setText(code+symbol);
+        currencyTV.setText(code + symbol);
 
     }
 
@@ -246,68 +243,48 @@ public class ApplyForRental extends AppCompatActivity
     private void validateForm() {
 
         String em = etemail.getText().toString();
-        email=em;
-        String empatt =  "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+        email = em;
+        String empatt = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
         boolean b4 = isMatch(em, empatt);
 
         if (fullname.length() == 0) {
             etfullname.setError("Name Required");
             etfullname.requestFocus();
 
-        }
-
-       else if (phone.length() == 0) {
+        } else if (phone.length() == 0) {
             etphone.setError("Mobile Required");
             etphone.requestFocus();
-        }
-
-        else if (em.length() == 0 || !b4) {
+        } else if (em.length() == 0 || !b4) {
             etemail.setError("Invalid Email");
             etemail.requestFocus();
-        }
-        else  if (movein.length() == 0) {
+        } else if (movein.length() == 0) {
             etmovein.setError("Field Required");
             etmovein.requestFocus();
-        }
-        else if (renters.length() == 0) {
+        } else if (renters.length() == 0) {
             etrenters.setError("Field Required");
             etrenters.requestFocus();
-        }
-        else if (pets.length() == 0) {
+        } else if (pets.length() == 0) {
             etpets.setError("Field Required");
             etpets.requestFocus();
-        }
-
-        else if (smokers.length() == 0) {
+        } else if (smokers.length() == 0) {
             etsmokers.setError("Field Required");
             etsmokers.requestFocus();
-        }
-
-        else if (income.length() == 0) {
+        } else if (income.length() == 0) {
             etincome.setError("Field Required");
             etincome.requestFocus();
-        }
-        else if (credit.length() == 0) {
+        } else if (credit.length() == 0) {
             etcredit.setError("Field Required");
             etcredit.requestFocus();
-        }
-
-        else if (movingFrom.length() == 0) {
+        } else if (movingFrom.length() == 0) {
             etmovingFrom.setError("Field Required");
             etmovingFrom.requestFocus();
-        }
-
-        else if (workplace.length() == 0) {
+        } else if (workplace.length() == 0) {
             etworkplace.setError("Field Required");
             etworkplace.requestFocus();
-        }
-
-        else if (jobtitle.length() == 0) {
+        } else if (jobtitle.length() == 0) {
             etjobtitle.setError("Field Required");
             etjobtitle.requestFocus();
-        }
-
-        else {
+        } else {
             String user_id = getData(getApplicationContext(), "user_id", "");
             requestRental(user_id, post_id);
         }
@@ -326,8 +303,6 @@ public class ApplyForRental extends AppCompatActivity
 
         ringProgressDialog = ProgressDialog.show(ApplyForRental.this, "Please wait ...", "Applying...", true);
         ringProgressDialog.setCancelable(false);
-
-
         category.put("user_id", user_id);
         category.put("post_id", post_id);
         category.put("full_name", fullname);
@@ -385,7 +360,7 @@ public class ApplyForRental extends AppCompatActivity
     private void saveAppliation() {
         Context context = getApplicationContext();
         getEntereData();
-        email=etemail.getText().toString();
+        email = etemail.getText().toString();
 
         JSONObject resumeObj = new JSONObject();
 
@@ -408,7 +383,7 @@ public class ApplyForRental extends AppCompatActivity
             System.out.println(resumeObj);
             saveData(context, "saved_sale_application", resumeObj.toString());
 
-            Toast.makeText(getApplicationContext(),"Saved",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Saved", Toast.LENGTH_SHORT).show();
             rightTV.setTextColor(getResources().getColor(R.color.green_shade));
             rightTV.setText("Save/Edit");
         } catch (JSONException e) {
@@ -468,7 +443,6 @@ public class ApplyForRental extends AppCompatActivity
         etfullname.setText(fullname);
         etphone.setText(phone);
         etemail.setText(email);
-
         etmovein.setText(movein);
         etrenters.setText(renters);
         etpets.setText(pets);
@@ -478,9 +452,5 @@ public class ApplyForRental extends AppCompatActivity
         etmovingFrom.setText(movingFrom);
         etworkplace.setText(workplace);
         etjobtitle.setText(jobtitle);
-
-
     }
-
-
 }

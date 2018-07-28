@@ -23,7 +23,7 @@
         android:paddingStart="15dp"
         android:text="Recorded  Video"
         android:textColor="@color/black"
-        android:textSize="17sp" />
+        android:textSize="20sp" />
 
     <RadioButton
         android:layout_width="0dp"

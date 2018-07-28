@@ -42,13 +42,6 @@ public class EnterLogin extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-//
-//        if (getIntent().getBooleanExtra("EXIT", false)) {
-//            finishAffinity();
-//            finish();
-//        }
-
         finishAffinity();
-        finish();
     }
 }

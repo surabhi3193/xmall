@@ -2,122 +2,96 @@ package com.mindinfo.xchangemall.xchangemall.adapter;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.Intent;
-import android.graphics.Typeface;
-import android.support.v4.app.FragmentManager;
+import android.support.annotation.NonNull;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.LinearLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.mindinfo.xchangemall.xchangemall.R;
-import com.mindinfo.xchangemall.xchangemall.activities.communityActivities.MessageBoxActivity;
-import com.mindinfo.xchangemall.xchangemall.beans.ItemsMain;
+import com.mindinfo.xchangemall.xchangemall.beans.Message;
 
-import org.json.JSONArray;
+import java.util.ArrayList;
 
-import java.util.List;
+public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHolder> {
 
-import de.hdodenhof.circleimageview.CircleImageView;
+    private Activity mContext;
+    private String act_name;
+    private ArrayList<Message> dataSet;
 
-
-/**
- * Created by Mind Info- Android on 09-Nov-17.
- */
-
-public class MessageAdapter extends BaseAdapter {
-
-    FragmentManager fm;
-    String user_id;
-    private Activity context;
-
-    public MessageAdapter(Activity context, List<ItemsMain> albumList, JSONArray jobj, String fragment_name) {
-        this.context = context;
+    public MessageAdapter(ArrayList<Message> data, Activity context) {
+        this.dataSet = data;
+        this.mContext = context;
     }
 
+    @NonNull
+    @Override
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View itemView = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.message_row, parent, false);
 
-    public MessageAdapter(Activity context) {
-        this.context = context;
+        return new ViewHolder(itemView);
+    }
+
+    @SuppressLint("SetTextI18n")
+    @Override
+    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
+
+        final Message message = dataSet.get(position);
+
+        System.out.println("---- data at position ---  " + position);
+        System.out.println("----msg ---  " + message.getmessage_text());
+        System.out.println("----id---  " + message.getId());
+        System.out.println("----sender---  " + message.isMine());
+
+//        System.out.println(message.isMine());
+
+        if (message.isMine()) {
+            viewHolder.view_mine.setVisibility(View.VISIBLE);
+            viewHolder.view_incoming.setVisibility(View.GONE);
+            viewHolder.textview_mine.setText(message.getmessage_text());
+            Glide.with(mContext).load(message.getsender_pic()).apply(RequestOptions
+                    .placeholderOf(R.drawable.profile_bg)).into(viewHolder.iv_mine);
+
+        } else if (!message.isMine()) {
+            viewHolder.view_incoming.setVisibility(View.VISIBLE);
+            viewHolder.view_mine.setVisibility(View.GONE);
+            viewHolder.textview_incoming.setText(message.getmessage_text());
+
+            Glide.with(mContext).load(message.getsender_pic()).apply(RequestOptions
+                    .placeholderOf(R.drawable.car_image)).into(viewHolder.iv_incoming);
+        }
+
+
     }
 
     @Override
-    public int getCount() {
-        return 6;
+    public int getItemCount() {
+        System.out.println("--- msg length --- " + dataSet.size());
+        return dataSet.size();
     }
 
-    @Override
-    public Object getItem(int i) {
-        return null;
+    class ViewHolder extends RecyclerView.ViewHolder {
+        private TextView textview_mine, textview_incoming;
+        private ImageView iv_mine, iv_incoming;
+        private View view_mine, view_incoming;
+
+
+        private ViewHolder(View convertView) {
+            super(convertView);
+
+            view_mine = convertView.findViewById(R.id.layout_mine);
+            view_incoming = convertView.findViewById(R.id.layout_incoming);
+
+            textview_mine = view_mine.findViewById(R.id.textview_mine);
+            iv_mine = view_mine.findViewById(R.id.iv_mine);
+            textview_incoming = view_incoming.findViewById(R.id.textview_incoming);
+            iv_incoming = view_incoming.findViewById(R.id.iv_incoming);
+
+        }
     }
-
-    @Override
-    public long getItemId(int i) {
-        return 0;
-    }
-
-    @SuppressLint("ResourceAsColor")
-    @Override
-    public View getView(int position, View view, ViewGroup parent) {
-        LayoutInflater inflater = context.getLayoutInflater();
-        @SuppressLint("ViewHolder") View rowView = inflater.inflate(R.layout.itemlist_message, null, true);
-        final ViewHolder holder = new ViewHolder();
-
-
-        holder.ItemPriceText = (TextView) rowView.findViewById(R.id.ItemPriceText);
-        holder.ItemTitleText = (TextView) rowView.findViewById(R.id.ItemTitleText);
-        holder.time_TV = (TextView) rowView.findViewById(R.id.time_TV);
-        holder.itemImageView = (CircleImageView) rowView.findViewById(R.id.itemImageView);
-        holder.mainLay = (LinearLayout) rowView.findViewById(R.id.mainLay);
-
-
-        Typeface face = Typeface.createFromAsset(context.getAssets(),
-                "fonts/estre.ttf");
-        holder.ItemPriceText.setTypeface(face);
-        holder.ItemTitleText.setTypeface(face);
-        holder.time_TV.setTypeface(face);
-//        String address = "";
-//        try {
-//            double lat = Double.parseDouble(responseobj.getString("latitude"));
-//            double lng = Double.parseDouble(responseobj.getString("longitude"));
-//
-//            address = getAddressFromLatlng(new LatLng(lat, lng), context, 0);
-//
-//            String jobtype = responseobj.getString("job_type");
-//            String salary = responseobj.getString("salary_as_per");
-//            String job_cat = responseobj.getString("category_name");
-//
-//            holder.ItemPriceText.setText(address);
-//            holder.ItemTitleText.setText(job_cat);
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//        }
-//
-//        String[] image_array = album.getItem_image().split("~");
-//        System.out.println("********* item image *******");
-//        System.out.println(image_array[0]);
-//
-//        Picasso.with(context)
-//                .load(image_array[0])
-//                .placeholder(R.drawable.no_img)
-//                .into(holder.itemImageView);
-
-
-        holder.mainLay.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                context.startActivity(new Intent(context, MessageBoxActivity.class));
-
-            }
-        });
-
-        return rowView;
-    }
-    class ViewHolder {
-        public TextView ItemPriceText, ItemTitleText, time_TV;
-        public CircleImageView itemImageView;
-        LinearLayout mainLay;
-    }
-
 }

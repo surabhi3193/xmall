@@ -19,6 +19,6 @@
         android:paddingRight="15dp"
         android:text="household"
         android:textColor="@color/black"
-        android:textSize="17sp" />
+        android:textSize="20sp" />
 
 </LinearLayout>

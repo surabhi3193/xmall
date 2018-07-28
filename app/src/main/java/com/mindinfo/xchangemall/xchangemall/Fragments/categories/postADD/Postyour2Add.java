@@ -2,9 +2,11 @@ package com.mindinfo.xchangemall.xchangemall.Fragments.categories.postADD;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -13,30 +15,27 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.daimajia.slider.library.SliderLayout;
-import com.daimajia.slider.library.SliderTypes.BaseSliderView;
-import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.mindinfo.xchangemall.xchangemall.Fragments.categories.postBussiness.PostyouBusiness;
 import com.mindinfo.xchangemall.xchangemall.Fragments.categories.postJob.PostyourJob;
 import com.mindinfo.xchangemall.xchangemall.R;
-import com.mindinfo.xchangemall.xchangemall.activities.main.BaseActivity;
+import com.mindinfo.xchangemall.xchangemall.activities.BaseActivity;
 import com.mindinfo.xchangemall.xchangemall.activities.main.MainActivity;
+import com.mindinfo.xchangemall.xchangemall.adapter.SliderAdapter2;
 
-import java.io.File;
 import java.util.ArrayList;
-import java.util.HashMap;
+
+import me.relex.circleindicator.CircleIndicator;
 
 import static com.mindinfo.xchangemall.xchangemall.storage.MySharedPref.saveData;
 
-public class Postyour2Add extends BaseActivity implements View.OnClickListener, BaseSliderView.OnSliderClickListener {
+public class Postyour2Add extends BaseActivity implements View.OnClickListener{
 
 
     public static ImageView cross_imageView;
     public static TextView pageNo_textView;
     String id;
     ArrayList<String> postarr;
-    ArrayList<String> imageSet;
+    ArrayList<Uri> imageSet;
     //next_btn
     private Button next_btn;
     //Fragment Manager
@@ -46,7 +45,9 @@ public class Postyour2Add extends BaseActivity implements View.OnClickListener, 
             ShowcaseImageView, personalImageView, CommImageView, houseRentalImageView, propertySaleImageView;
     private Fragment fragment;
 
-    private SliderLayout imageSlider;
+
+    private ViewPager mPager;
+    private CircleIndicator indicator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,8 +63,8 @@ public class Postyour2Add extends BaseActivity implements View.OnClickListener, 
 
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
-            imageSet = new ArrayList<String>();
-            imageSet = bundle.getStringArrayList("imageSet");
+            imageSet = new ArrayList<Uri>();
+            imageSet = bundle.getParcelableArrayList("imageSet");
             id = bundle.getString("MainCatType");
 
             System.out.println(" ************* Image Set ***********");
@@ -74,33 +75,45 @@ public class Postyour2Add extends BaseActivity implements View.OnClickListener, 
             setBackgroundId(id);
         }
 
-        HashMap<String, File> url_maps = new HashMap<String, File>();
 
-        for (int i = 0; i < imageSet.size(); i++) {
-            url_maps.put("image" + i, new File(imageSet.get(i)));
-
+        ArrayList<Uri> imageArray = new ArrayList<>();
+        for (int i = 0; i < imageSet.size(); i++)
+        {
+//            url_maps.put("image" + i, new File(imageSet.get(i)));
+            imageArray.add(imageSet.get(i));
         }
-        for (String name : url_maps.keySet()) {
-            TextSliderView textSliderView = new TextSliderView(this);
-            // initialize a SliderLayout
-            textSliderView
-                    .description(name)
-                    .image(url_maps.get(name))
-                    .setScaleType(BaseSliderView.ScaleType.CenterInside)
-                    .setOnSliderClickListener(this);
+        mPager.setAdapter(new SliderAdapter2(Postyour2Add.this, imageArray));
 
-            //add your extra information
-            textSliderView.bundle(new Bundle());
-            textSliderView.getBundle()
-                    .putString("extra", name);
-            imageSlider.stopAutoCycle();
-            imageSlider.clearAnimation();
-            imageSlider.addSlider(textSliderView);
-        }
+        mPager.setBackgroundColor(getResources().getColor(R.color.black));
+        indicator.setViewPager(mPager);
+
+//        for (String name : url_maps.keySet()) {
+//            TextSliderView textSliderView = new TextSliderView(this);
+//            // initialize a SliderLayout
+//            textSliderView
+//                    .description(name)
+//                    .image(url_maps.get(name))
+//                    .setScaleType(BaseSliderView.ScaleType.CenterInside)
+//                    .setOnSliderClickListener(this);
+//
+//
+//
+////            //add your extra information
+////            textSliderView.bundle(new Bundle());
+////            textSliderView.getBundle()
+////                    .putString("extra", name);
+////            imageSlider.stopAutoCycle();
+////            imageSlider.clearAnimation();
+////            imageSlider.addSlider(textSliderView);
+//        }
 
 
     }
-
+//
+//    @Override
+//    protected View getSnackbarAnchorView() {
+//        return null;
+//    }
     private void setBackgroundId(String id) {
         switch (id) {
             case "101":
@@ -126,7 +139,7 @@ public class Postyour2Add extends BaseActivity implements View.OnClickListener, 
 
     // find item
     private void findItem() {
-        imageSlider = (SliderLayout) findViewById(R.id.slider);
+//        imageSlider = (SliderLayout) findViewById(R.id.slider);
         next_btn = (Button) findViewById(R.id.next_btn);
         //  Home_ImageView = (ImageView) v.findViewById(R.id.Home_ImageView);
         cross_imageView = (ImageView) findViewById(R.id.cross_imageView);
@@ -135,6 +148,9 @@ public class Postyour2Add extends BaseActivity implements View.OnClickListener, 
 //        postCatMRecyclerView = (RecyclerView) v.findViewById(R.id.postCatMRecyclerView);
         pageNo_textView.setText("2of7");
 
+
+        mPager = findViewById(R.id.pager);
+        indicator = findViewById(R.id.indicator);
         imageViewJobS = findViewById(R.id.imageViewJobS);
         For_sele_imageView = findViewById(R.id.For_sele_imageView);
         servicesImageView = findViewById(R.id.servicesImageView);
@@ -266,7 +282,7 @@ public class Postyour2Add extends BaseActivity implements View.OnClickListener, 
             if (fragment != null) {
                 Bundle bundle = new Bundle();
                 bundle.putString("MainCatType", str);
-                bundle.putStringArrayList("imageSet", imageSet);
+                bundle.putParcelableArrayList("imageSet", imageSet);
                 fragment.setArguments(bundle);
 
                 fm.beginTransaction().replace(R.id.allCategeriesIN, fragment).addToBackStack(null)
@@ -274,23 +290,6 @@ public class Postyour2Add extends BaseActivity implements View.OnClickListener, 
                         .commit();
             }
         }
-    }
-
-    @Override
-    public void onSliderClick(BaseSliderView slider) {
-
-//        final RelativeLayout open = (RelativeLayout)findViewById(R.id.fullsliderlay);
-//        ImageView close = (ImageView) findViewById(R.id.close_slider);
-//
-//        open.setVisibility(View.VISIBLE);
-//
-//        close.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                open.setVisibility(View.GONE);
-//            }
-//        });
-
     }
 
 

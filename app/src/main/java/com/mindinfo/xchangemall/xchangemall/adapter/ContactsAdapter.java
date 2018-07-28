@@ -4,7 +4,10 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.content.res.ResourcesCompat;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,28 +15,28 @@ import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.mindinfo.xchangemall.xchangemall.R;
-import com.mindinfo.xchangemall.xchangemall.activities.communityActivities.MessageBoxActivity;
+import com.mindinfo.xchangemall.xchangemall.beans.Contact;
 import com.mindinfo.xchangemall.xchangemall.beans.ItemsMain;
 
 import org.json.JSONArray;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
+public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHolder> {
 
-/**
- * Created by Mind Info- Android on 09-Nov-17.
- */
-
-public class ContactsAdapter extends BaseAdapter {
-
-    FragmentManager fm;
-    String user_id;
     private Activity context;
+    private String act_name;
+    private ArrayList<Contact> dataSet;
 
-    public ContactsAdapter(Activity context, List<ItemsMain> albumList, JSONArray jobj, String fragment_name) {
+    public ContactsAdapter(ArrayList<Contact> data, Activity context) {
+        this.dataSet = data;
         this.context = context;
     }
 
@@ -42,14 +45,27 @@ public class ContactsAdapter extends BaseAdapter {
         this.context = context;
     }
 
+    @NonNull
     @Override
-    public int getCount() {
-        return 6;
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View itemView = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.itemlist_contact, parent, false);
+
+        return new ViewHolder(itemView);
+        
     }
 
     @Override
-    public Object getItem(int i) {
-        return null;
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        final Contact contact = dataSet.get(position);
+
+
+        holder.textview_name.setText(contact.getFriend_name());
+        holder.textview_place.setText(contact.getFriend_place());
+
+        Glide.with(context).load(contact.getfriend_pic()).apply(RequestOptions
+                .placeholderOf(R.drawable.profile_bg)).into(holder.iv_friend_pic);
+
     }
 
     @Override
@@ -57,69 +73,24 @@ public class ContactsAdapter extends BaseAdapter {
         return 0;
     }
 
-    @SuppressLint("ResourceAsColor")
     @Override
-    public View getView(int position, View view, ViewGroup parent) {
-        LayoutInflater inflater = context.getLayoutInflater();
-        @SuppressLint("ViewHolder") View rowView = inflater.inflate(R.layout.itemlist_contact, null, true);
-        final ViewHolder holder = new ViewHolder();
-
-
-        holder.ItemPriceText = (TextView) rowView.findViewById(R.id.ItemPriceText);
-        holder.ItemTitleText = (TextView) rowView.findViewById(R.id.ItemTitleText);
-
-        holder.itemImageView = (CircleImageView) rowView.findViewById(R.id.itemImageView);
-        holder.mainLay = (LinearLayout) rowView.findViewById(R.id.mainLay);
-
-
-        Typeface face = Typeface.createFromAsset(context.getAssets(),
-                "fonts/estre.ttf");
-        holder.ItemPriceText.setTypeface(face);
-        holder.ItemTitleText.setTypeface(face);
-
-//        String address = "";
-//        try {
-//            double lat = Double.parseDouble(responseobj.getString("latitude"));
-//            double lng = Double.parseDouble(responseobj.getString("longitude"));
-//
-//            address = getAddressFromLatlng(new LatLng(lat, lng), context, 0);
-//
-//            String jobtype = responseobj.getString("job_type");
-//            String salary = responseobj.getString("salary_as_per");
-//            String job_cat = responseobj.getString("category_name");
-//
-//            holder.ItemPriceText.setText(address);
-//            holder.ItemTitleText.setText(job_cat);
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//        }
-//
-//        String[] image_array = album.getItem_image().split("~");
-//        System.out.println("********* item image *******");
-//        System.out.println(image_array[0]);
-//
-//        Picasso.with(context)
-//                .load(image_array[0])
-//                .placeholder(R.drawable.no_img)
-//                .into(holder.itemImageView);
-
-
-        holder.mainLay.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                context.startActivity(new Intent(context, MessageBoxActivity.class));
-
-            }
-        });
-
-        return rowView;
+    public int getItemCount() {
+            return dataSet.size();
     }
 
 
-    class ViewHolder {
-        public TextView ItemPriceText, ItemTitleText;
-        public CircleImageView itemImageView;
-        LinearLayout mainLay;
+    class ViewHolder extends RecyclerView.ViewHolder {
+        public TextView textview_name, textview_place;
+        public CircleImageView iv_friend_pic;
+        
+
+        public ViewHolder(View rowView) {
+            super(rowView);
+            textview_name = rowView.findViewById(R.id.textview_name);
+            iv_friend_pic = rowView.findViewById(R.id.iv_friend_pic);
+            textview_place = rowView.findViewById(R.id.textview_place);
+        }
     }
+
 
 }

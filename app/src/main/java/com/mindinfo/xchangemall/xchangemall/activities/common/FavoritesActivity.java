@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -25,7 +26,7 @@ import java.util.ArrayList;
 
 import cz.msebera.android.httpclient.Header;
 
-import static com.mindinfo.xchangemall.xchangemall.activities.main.BaseActivity.BASE_URL_NEW;
+import static com.mindinfo.xchangemall.xchangemall.activities.BaseActivity.BASE_URL_NEW;
 import static com.mindinfo.xchangemall.xchangemall.storage.MySharedPref.getData;
 
 public class FavoritesActivity extends AppCompatActivity implements View.OnClickListener {
@@ -43,12 +44,11 @@ public class FavoritesActivity extends AppCompatActivity implements View.OnClick
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favorites);
-        lvMyFav = (ListView) findViewById(R.id.favlist);
-        back_btn = (LinearLayout) findViewById(R.id.back_arrowImage);
-        headerTv = (TextView) findViewById(R.id.headerTv);
+        lvMyFav =findViewById(R.id.favlist);
+        back_btn =findViewById(R.id.back_arrowImage);
+        headerTv =findViewById(R.id.headerTv);
 
-        Typeface face = Typeface.createFromAsset(getAssets(),
-                "fonts/estre.ttf");
+        Typeface face = ResourcesCompat.getFont(FavoritesActivity.this, R.font.estre);
         headerTv.setTypeface(face);
         userid = getData(getApplicationContext(), "user_id", "");
 
@@ -56,7 +56,8 @@ public class FavoritesActivity extends AppCompatActivity implements View.OnClick
         if (bundle != null)
             mehodname = bundle.getString("method_name");
 
-        if (mehodname.equals("my_fav")) {
+        assert mehodname != null;
+        if (mehodname.equalsIgnoreCase("my_fav")) {
             headerTv.setText("Favorites");
            getUserFav(userid,"get_favorite_post");
         } else if (mehodname.equals("my_post")) {
@@ -70,70 +71,15 @@ public class FavoritesActivity extends AppCompatActivity implements View.OnClick
     }
 
 
-
-//    @SuppressLint("StaticFieldLeak")
-//    private void getUserFav1(final String user_id) {
-//        ringProgressDialog = ProgressDialog.show(FavoritesActivity.this, "", "Please wait ...", true);
-//        ringProgressDialog.setCancelable(false);
-//        new AsyncTask<String, Void, String>() {
-//            @Override
-//            protected String doInBackground(String... params) {
-//                OkHttpClient client = new OkHttpClient();
-//                String response = "";
-//                try {
-//                    response = NetworkClass.POST_New(client, "show_favorites_by_user", NetworkClass.getMyFav(user_id));
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-//                return response;
-//            }
-//
-//            @Override
-//            protected void onPostExecute(String s) {
-//                super.onPostExecute(s);
-//                ringProgressDialog.cancel();
-//
-//                try {
-//                    JSONObject jsonObject = new JSONObject(s);
-//                    JSONArray jsonArray = jsonObject.getJSONArray("result");
-//
-//
-//                    for (int i = 0; i < jsonArray.length(); i++) {
-//
-//                        JSONObject jsonObject1 = jsonArray.getJSONObject(i);
-//                        String id = jsonObject1.getString("post_id");
-//                        String price = jsonObject1.getString("price");
-//
-//                        String etitle = jsonObject1.getString("title");
-//
-//                        String desc = jsonObject1.getString("description");
-//                        String image = jsonObject1.getString("featured_img");
-//
-//                        itemList.add(new MyfavModel(image, etitle, desc, price));
-//                        adapter.notifyDataSetChanged();
-//                    }
-//
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        }.execute();
-//    }
-
-
-
-    public  void getUserFav(final String user_id,  String method_name){
+    public  void getUserFav(final String user_id,  final String method_name){
 
         final AsyncHttpClient client = new AsyncHttpClient();
         final RequestParams params = new RequestParams();
 
         ringProgressDialog = ProgressDialog.show(FavoritesActivity.this, "", "Please wait ...", true);
       ringProgressDialog.setCancelable(false);
-
-
-      String method =method_name;
         params.put("user_id", user_id);
-        client.post(BASE_URL_NEW + method, params, new JsonHttpResponseHandler() {
+        client.post(BASE_URL_NEW + method_name, params, new JsonHttpResponseHandler() {
 
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 try {

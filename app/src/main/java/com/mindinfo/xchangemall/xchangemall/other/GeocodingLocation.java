@@ -18,60 +18,15 @@ import static java.util.Locale.getDefault;
 
 public class GeocodingLocation {
 
-    private static final String TAG = "GeocodingLocation";
+    private   String TAG = "GeocodingLocation";
 
-    public static LatLng getLatLngFromAddress(final String locationAddress,
-                                              final Context context, final Handler handler) {
-        LatLng retResult = null;
-        Geocoder geocoder = new Geocoder(context, getDefault());
-        String result = null;
-        try {
-            List addressList = geocoder.getFromLocationName(locationAddress, 1);
-            if (addressList != null && addressList.size() > 0) {
-                Address address = (Address) addressList.get(0);
-                retResult = new LatLng(address.getLatitude(),
-                        address.getLongitude());
-                StringBuilder sb = new StringBuilder();
-                sb.append(address.getLatitude()).append("\n");
-                sb.append(address.getLongitude()).append("\n");
-                result = sb.toString();
-
-
-            }
-        } catch (IOException e) {
-            Log.e(TAG, "Unable to connect to Geocoder", e);
-
-        } finally {
-            Message message = Message.obtain();
-            message.setTarget(handler);
-            if (result != null) {
-                message.what = 1;
-                Bundle bundle = new Bundle();
-                result = "Address: " + locationAddress +
-                        "\n\nLatitude and Longitude :\n" + result;
-                bundle.putString("address", result);
-                message.setData(bundle);
-
-            } else {
-                message.what = 1;
-                Bundle bundle = new Bundle();
-                result = "Address: " + locationAddress +
-                        "\n Unable to get Latitude and Longitude for this address location.";
-                bundle.putString("address", result);
-                message.setData(bundle);
-            }
-            message.sendToTarget();
-
-        }
-
-        return retResult;
-    }
 
     public static String getAddressFromLatlng(LatLng latLng, Context context, int select) {
         Geocoder geocoder;
         List<Address> addresses;
         String city = "";
-        String address = "";
+        String country = "";
+        String colony = "";
         String fulladdress = "";
         geocoder = new Geocoder(context, Locale.getDefault());
 
@@ -84,16 +39,19 @@ public class GeocodingLocation {
             double lng = latLng.longitude;
 
             if (lat != 0 && lng != 0) {
-                addresses = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1); // Here 1 represent max location result to returned, by documents it recommended 1 to 5
+                addresses = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1);
+                // Here 1 represent max location result to returned, by documents it recommended 1 to 5
 
                 if (addresses.size() > 0) {
                     city = addresses.get(0).getLocality();
                     String state = addresses.get(0).getAdminArea();
-                    String country = addresses.get(0).getCountryName();
+                     country = addresses.get(0).getCountryName();
                     String postalCode = addresses.get(0).getPostalCode();
-                    String knownName = addresses.get(0).getFeatureName();
+                   String  knownName = addresses.get(0).getFeatureName();
                     fulladdress = knownName + ", " + postalCode + ", " + city + ", " + state + ", " + country;
-
+                    System.out.println(addresses.get(0).getAddressLine(0));
+                    System.out.println(addresses.get(0).getAddressLine(0).split(",")[1]);
+                    colony = addresses.get(0).getAddressLine(0).split(",")[1];
                 } else
                     fulladdress = "N/A";
             }
@@ -102,9 +60,16 @@ public class GeocodingLocation {
         }
         if (select == 0) {
             return city;
-        } else {
+        } else if (select==2)
+        {
+            return country;
+        }
+        else if (select==3)
+        {
+            return colony;
+        }
+            else {
             return fulladdress;
         }
-
     }
 }

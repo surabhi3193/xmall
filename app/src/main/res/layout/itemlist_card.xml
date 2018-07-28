@@ -12,7 +12,6 @@
         android:background="@color/white">
 
         <LinearLayout
-            android:id="@+id/imlay"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -24,7 +23,7 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/no_img" />
+                android:src="@drawable/no_img_100" />
         </LinearLayout>
 
         <RelativeLayout
@@ -129,11 +128,10 @@
                 android:maxLines="2"
                 android:text="Wrogan man gray printed slim"
                 android:textColor="@color/black"
-                android:textSize="15sp"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/ItemSubTitleText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
@@ -143,7 +141,7 @@
                 android:layout_marginTop="3dp"
                 android:layout_toLeftOf="@+id/buyNow"
                 android:layout_toRightOf="@+id/ratingBar"
-                android:text="4.1 reviews"
+                android:text="4.0 reviews"
                 android:textSize="9dp" />
 
 
@@ -157,7 +155,7 @@
                 android:layout_marginBottom="5dp"
                 android:isIndicator="true"
                 android:numStars="5"
-                android:stepSize="1.0" />
+                android:rating="4" android:stepSize="1.0"/>
 
             <Button
                 android:id="@+id/buyNow"

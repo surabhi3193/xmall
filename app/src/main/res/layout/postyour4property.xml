@@ -75,7 +75,7 @@
                             android:paddingLeft="10dp"
                             android:textColor="@color/black"
                             android:textColorHint="@color/black"
-                            android:textSize="13sp" />
+                            android:textSize="16sp" />
 
                     </android.support.design.widget.TextInputLayout>
 
@@ -98,7 +98,7 @@
                             android:singleLine="true"
                             android:textColor="@color/black"
                             android:textColorHint="@color/black"
-                            android:textSize="13sp" />
+                            android:textSize="16sp" />
 
                     </android.support.design.widget.TextInputLayout>
 
@@ -122,7 +122,7 @@
                             android:gravity="center_vertical"
                             android:hint="USD $"
                             android:textColorHint="@color/black"
-                            android:textSize="13sp"/>
+                            android:textSize="16sp"/>
 
                         <EditText
                             android:backgroundTint="@color/black"
@@ -133,7 +133,7 @@
                             android:gravity="center"
                             android:hint="Price"
                             android:inputType="number"
-                            android:textSize="15sp" />
+                            android:textSize="18sp" />
 
 
                         <android.support.v7.widget.AppCompatSpinner
@@ -165,7 +165,7 @@
                             android:singleLine="true"
                             android:textColor="@color/black"
                             android:textColorHint="@color/black"
-                            android:textSize="13sp" />
+                            android:textSize="16sp" />
 
                     </android.support.design.widget.TextInputLayout>
 
@@ -187,7 +187,7 @@
                             android:singleLine="true"
                             android:textColor="@color/black"
                             android:textColorHint="@color/black"
-                            android:textSize="13sp" />
+                            android:textSize="16sp" />
 
                     </android.support.design.widget.TextInputLayout>
 
@@ -201,7 +201,6 @@
                         android:paddingRight="@dimen/size_10">
 
                         <TextView
-                            android:id="@+id/tvDogFriendly"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -229,7 +228,6 @@
                         android:paddingRight="@dimen/size_10">
 
                         <TextView
-                            android:id="@+id/tvcatFriendlyFriendly"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"

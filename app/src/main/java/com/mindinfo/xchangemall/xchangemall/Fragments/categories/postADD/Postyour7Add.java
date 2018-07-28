@@ -50,7 +50,7 @@ public class Postyour7Add extends Fragment implements View.OnClickListener {
     private String sub_cat_id = "", MainCatType, postTitle = "", postDes = "", postPrice = "",
             postSize = "", postCondition, privacy_str, phone_str = "",
             Existence_str, contName_str = "", language_str = "", lat = "", lng = "", zipcode = "";
-    private CheckBox checkboxFree, checkboxPaid, checkboxAutoRenew;
+    private CheckBox checkboxFree, checkboxPaid, checkboxAutoRenew,chechBoxPicFree;
     private ImageView back_arrowImage;
 
     private String pcat_name;
@@ -62,7 +62,7 @@ public class Postyour7Add extends Fragment implements View.OnClickListener {
 
         //Get fm
         fm = getActivity().getSupportFragmentManager();
-        MainCatType = getData(getActivity().getApplicationContext(), "MainCatType", "");
+        MainCatType = getData(getActivity(), "MainCatType", "");
 
 
         System.out.println("**** **** Main Cat at post time ******* " + MainCatType);
@@ -117,7 +117,7 @@ public class Postyour7Add extends Fragment implements View.OnClickListener {
                 } catch (JSONException e) {
 
                 }
-                saveData(getActivity().getApplicationContext(), "MainCatType", "101");
+                saveData(getActivity(), "MainCatType", "101");
             }
 
 
@@ -141,6 +141,7 @@ public class Postyour7Add extends Fragment implements View.OnClickListener {
     private void finditem(View v) {
         next_btn = (TextView) v.findViewById(R.id.next_btn);
         checkboxFree = (CheckBox) v.findViewById(R.id.checkboxFree);
+        chechBoxPicFree = (CheckBox) v.findViewById(R.id.checkboxFreepic);
         checkboxPaid = (CheckBox) v.findViewById(R.id.checkboxPaid);
         checkboxAutoRenew = (CheckBox) v.findViewById(R.id.checkboxAutoRenew);
 
@@ -152,6 +153,7 @@ public class Postyour7Add extends Fragment implements View.OnClickListener {
     private void OnClick(View view) {
         next_btn.setOnClickListener(this);
         checkboxFree.setOnClickListener(this);
+
         checkboxPaid.setOnClickListener(this);
         checkboxAutoRenew.setOnClickListener(this);
         back_arrowImage.setOnClickListener(this);
@@ -202,19 +204,20 @@ public class Postyour7Add extends Fragment implements View.OnClickListener {
 
     private void PostAddbutonClick(String mainCatType) {
 
-        if (checkboxFree.isChecked()) {
+        if (checkboxFree.isChecked()||chechBoxPicFree.isChecked())
+        {
 
             System.out.println(categoryids);
             System.out.println(mainCatType);
 
 
-            String user_id = getData(getActivity().getApplicationContext(), "user_id", "");
+            String user_id = getData(getActivity(), "user_id", "");
             String jobtype = "";
 
             switch (mainCatType) {
                 case "103":
 
-                    jobtype = getData(getActivity().getApplicationContext(), "job_type", "");
+                    jobtype = getData(getActivity(), "job_type", "");
 
                     if (jobtype.equals("Full time"))
                         jobtype = "2";
@@ -243,7 +246,7 @@ public class Postyour7Add extends Fragment implements View.OnClickListener {
 
                 case "102":
                     try {
-                        String val = getData(getActivity().getApplicationContext(), "prop_obj", "");
+                        String val = getData(getActivity(), "prop_obj", "");
                         postOBj = new JSONObject(val);
 
                         String roomUnit = postOBj.getString("room_unit");
@@ -265,7 +268,7 @@ public class Postyour7Add extends Fragment implements View.OnClickListener {
                     break;
                 case "272":
                     try {
-                        String val = getData(getActivity().getApplicationContext(), "prop_obj", "");
+                        String val = getData(getActivity(), "prop_obj", "");
                         postOBj = new JSONObject(val);
 
                         String roomUnit = postOBj.getString("room_unit");
